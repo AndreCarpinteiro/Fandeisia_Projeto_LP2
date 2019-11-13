@@ -9,6 +9,8 @@ public class FandeisiaGameManager {
 
     public String[][] getCreatureTypes() {
 
+        String texto = "321321312";
+
         String[][] array2dtemporario = new String[5][5];
         /*
         Deve retornar os tipos de criatura que
@@ -60,8 +62,8 @@ public class FandeisiaGameManager {
          * Inclui o movimento das criaturas. */
     }
 
-    public List<Creature> getCreatures(){
-        Creature criaturasTemp = new List<Creature>();
+    public List<Creatures> getCreatures(){
+        Creatures criaturasTemp = new List<>();
         /*Devolve uma lista com todos os objectos
          * Creature ​que existem no jogo.
          * */
