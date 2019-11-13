@@ -13,6 +13,10 @@ public class FandeisiaGameManager {
     public String[][] getCreatureTypes() {
 
         String[][] array2dtemporario = new String[5][5];
+
+
+        int x = 4;
+
         /*
         Deve retornar os tipos de criatura que
         existem no jogo e que podem ser
