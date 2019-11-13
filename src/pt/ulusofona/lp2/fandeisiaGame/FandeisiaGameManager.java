@@ -18,6 +18,7 @@ public class FandeisiaGameManager {
         int x = 4;
 
         x = 3;
+        x=2;
         /*
         Deve retornar os tipos de criatura que
         existem no jogo e que podem ser
