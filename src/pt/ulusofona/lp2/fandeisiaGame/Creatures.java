@@ -16,7 +16,7 @@ public class Creatures {
 
     public int getId(){
         /* Deve devolver o ID da criatura.*/
-        return 997;
+        return 9947;
     }
 
     public String getImagePNG(){
