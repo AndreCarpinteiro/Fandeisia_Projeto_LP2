@@ -68,31 +68,32 @@ public class FandeisiaGameManager {
         /*Deve processar um turno do jogo considerando a equipa actual.
          * Inclui o movimento das criaturas. */
     }
-
+/*
     public List<Creature> getCreatures(){
         Creature criaturasTemp = new List<Creature>();
         /*Devolve uma lista com todos os objectos
          * Creature ​que existem no jogo.
-         * */
+         *
     }
-
+*/
 
     public boolean gameIsOver(){
         /*Deve devolver ​true​ caso já tenha sido
          * alcançada uma das condições de paragem
          * do jogo e ​false​ em caso contrário.
          * */
+        return true;
     }
-
+/*
     public List<String> getAuthors(){
         /*Devolve uma lista de ​Strings​ com os
          * nomes dos autores do projecto.
          * Esta informação será usada para mostrar o
          * conteúdo da janela que aparece ao
          * carregar no botão de “Créditos”.
-         */
-    }
 
+    }*/
+/*
     public List<String> getResults(){
         /*Devolve uma lista de ​Strings​ que
          * representem os resultados do jogo,
@@ -102,8 +103,8 @@ public class FandeisiaGameManager {
          * Este método não pode devolver ​null​.
          * Caso não calculem a informação
          * respectiva, devem devolver ​uma lista vazia​.
-         * */
-    }
+         *
+    }*/
 
     public int getElementId(int x, int y){
         /*Deve devolver o ID do objecto/elemento
@@ -116,15 +117,18 @@ public class FandeisiaGameManager {
          * tesouro na posição indicada, o método
          * deve devolver o valor 0 (zero) que representa o vazio.
          */
+        return 1;
     }
 
     public int getCurrentTeamId(){
         /*Deve devolver o ​ID​ da ​equipa​ que está
          * activa​ no turno actual.  */
+        return 1;
     }
 
     public int getCurrentScore(int teamID){
         /*Deve devolver o número actual de pontos
          * da equipa que tem o ID teamID. */
+        return 1;
     }
 }

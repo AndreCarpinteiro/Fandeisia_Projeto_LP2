@@ -6,11 +6,11 @@ public class Creatures {
     String tipo;
     int posX;
     int posY;
-    String orientação;
+    String orientacao;
 
-    public Creatures(int id, String tipo, String orientação){
+    public Creatures(int id, String tipo, String orientacao){
         this.id = id;
-        this.orientação = orientação;
+        this.orientacao = orientacao;
         this.tipo = tipo;
     }
 
