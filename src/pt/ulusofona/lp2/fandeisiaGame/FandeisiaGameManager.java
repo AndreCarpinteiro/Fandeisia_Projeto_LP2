@@ -5,6 +5,9 @@ import java.util.List;
 public class FandeisiaGameManager {
 
     FandeisiaGameManager() {
+
+
+        //OLAAAAAAAAAAAA
     }
 
     public String[][] getCreatureTypes() {
@@ -12,6 +15,12 @@ public class FandeisiaGameManager {
         String texto = "32132131321312";
 
         String[][] array2dtemporario = new String[5][5];
+
+
+        int x = 4;
+
+        x = 3;
+        x=2;
         /*
         Deve retornar os tipos de criatura que
         existem no jogo e que podem ser
