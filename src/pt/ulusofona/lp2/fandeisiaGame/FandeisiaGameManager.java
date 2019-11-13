@@ -1,24 +1,18 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class FandeisiaGameManager {
 
     FandeisiaGameManager() {
 
-
-        //OLAAAAAAAAAAAA
     }
 
     public String[][] getCreatureTypes() {
 
         String[][] array2dtemporario = new String[5][5];
 
-
-        int x = 4;
-
-        x = 3;
-        x=2;
         /*
         Deve retornar os tipos de criatura que
         existem no jogo e que podem ser
@@ -59,41 +53,52 @@ public class FandeisiaGameManager {
          * */
     }
 
-    public void setInitialTeam(int teamId){
+    public void setInitialTeam(int teamId) {
         /*Indica qual das equipas vai jogar no
          * primeiro turno do jogo. */
     }
 
-    public void processTurn(){
+    public void processTurn() {
         /*Deve processar um turno do jogo considerando a equipa actual.
          * Inclui o movimento das criaturas. */
     }
 
-    public List<Creature> getCreatures(){
-        Creature criaturasTemp = new List<Creature>();
+    public List<Creature> getCreatures() {
+        Creature ola = new Creature(1, "sdf", "df");
+        List<Creature> mylist = new ArrayList<Creature>();
+
+
         /*Devolve uma lista com todos os objectos
          * Creature ​que existem no jogo.
+         *
          * */
+        return mylist;
     }
 
 
-    public boolean gameIsOver(){
+    public boolean gameIsOver() {
         /*Deve devolver ​true​ caso já tenha sido
          * alcançada uma das condições de paragem
          * do jogo e ​false​ em caso contrário.
          * */
+        return true;
     }
 
-    public List<String> getAuthors(){
+    public List<String> getAuthors() {
+        List<String> mylist = new ArrayList<String>();
+
         /*Devolve uma lista de ​Strings​ com os
          * nomes dos autores do projecto.
          * Esta informação será usada para mostrar o
          * conteúdo da janela que aparece ao
          * carregar no botão de “Créditos”.
          */
+        return mylist;
     }
 
-    public List<String> getResults(){
+    public List<String> getResults() {
+
+        List<String> mylist = new ArrayList<String>();
         /*Devolve uma lista de ​Strings​ que
          * representem os resultados do jogo,
          * conforme descrito na secção dos
@@ -103,9 +108,11 @@ public class FandeisiaGameManager {
          * Caso não calculem a informação
          * respectiva, devem devolver ​uma lista vazia​.
          * */
+
+        return mylist;
     }
 
-    public int getElementId(int x, int y){
+    public int getElementId(int x, int y) {
         /*Deve devolver o ID do objecto/elemento
          * que se encontra na posição indicada pelas
          * coordenadas (x,y) passadas por
@@ -116,15 +123,18 @@ public class FandeisiaGameManager {
          * tesouro na posição indicada, o método
          * deve devolver o valor 0 (zero) que representa o vazio.
          */
+        return 1;
     }
 
-    public int getCurrentTeamId(){
+    public int getCurrentTeamId() {
         /*Deve devolver o ​ID​ da ​equipa​ que está
          * activa​ no turno actual.  */
+        return 1;
     }
 
-    public int getCurrentScore(int teamID){
+    public int getCurrentScore(int teamID) {
         /*Deve devolver o número actual de pontos
          * da equipa que tem o ID teamID. */
+        return 1;
     }
 }

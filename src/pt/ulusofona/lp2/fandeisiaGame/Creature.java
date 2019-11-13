@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
-public class Creatures {
+public class Creature {
 
     int id;
     String tipo;
@@ -8,7 +8,7 @@ public class Creatures {
     int posY;
     String orientacao;
 
-    public Creatures(int id, String tipo, String orientacao){
+    public Creature(int id, String tipo, String orientacao){
         this.id = id;
         this.orientacao = orientacao;
         this.tipo = tipo;
