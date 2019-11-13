@@ -9,7 +9,7 @@ public class FandeisiaGameManager {
 
     public String[][] getCreatureTypes() {
 
-        String texto = "321321312";
+        String texto = "32132131321312";
 
         String[][] array2dtemporario = new String[5][5];
         /*
