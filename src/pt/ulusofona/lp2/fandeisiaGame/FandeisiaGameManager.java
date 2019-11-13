@@ -5,6 +5,9 @@ import java.util.List;
 public class FandeisiaGameManager {
 
     FandeisiaGameManager() {
+
+
+        //OLAAAAAAAAAAAA
     }
 
     public String[][] getCreatureTypes() {
