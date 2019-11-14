@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class FandeisiaGameManager {
 
-
     //--------------------Metodos Obrigratorios--------------------------
     public String[][] getCreatureTypes() {
 
@@ -31,8 +30,7 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
-        /*
-         * Deve inicializar as estruturas de dados
+        /* Deve inicializar as estruturas de dados
          * relevantes para processar um jogo.
          * O ​array content​ irá descrever o conteúdo inicial do mundo (criaturas e
          * tesouros), tendo para isso várias Strings.
@@ -52,28 +50,25 @@ public class FandeisiaGameManager {
          * */
     }
 
-    public void setInitialTeam(int teamId) {
-        /*Indica qual das equipas vai jogar no
+    public void setInitialTeam(int teamId) {//Supostamente Done
+        /* Indica qual das equipas vai jogar no
          * primeiro turno do jogo. */
-
         teamId = 0;
     }
 
     public void processTurn() {
-        /*Deve processar um turno do jogo considerando a equipa actual.
+        /* Deve processar um turno do jogo considerando a equipa actual.
          * Inclui o movimento das criaturas. */
     }
 
     public List<Creature> getCreatures() {
-
         Creature ola = new Creature(1, 0,"Dragao"
                 ,0 , 0,0, Creature.Orientacao.Norte);
         List<Creature> mylist = new ArrayList<Creature>();
 
 
-        /*Devolve uma lista com todos os objectos
+        /* Devolve uma lista com todos os objectos
          * Creature ​que existem no jogo.
-         *
          * */
         return mylist;
     }
@@ -88,6 +83,7 @@ public class FandeisiaGameManager {
     }
 
     public List<String> getAuthors() {
+        List<String> mylist = new ArrayList<String>();
 
         /*Devolve uma lista de ​Strings​ com os
          * nomes dos autores do projecto.
@@ -95,11 +91,6 @@ public class FandeisiaGameManager {
          * conteúdo da janela que aparece ao
          * carregar no botão de “Créditos”.
          */
-        List<String> mylist = new ArrayList<>();
-
-        mylist.add("André Carpinteiro");
-        mylist.add("David Silva");
-
         return mylist;
     }
 
@@ -136,7 +127,7 @@ public class FandeisiaGameManager {
     public int getCurrentTeamId() {
         /*Deve devolver o ​ID​ da ​equipa​ que está
          * activa​ no turno actual.  */
-        return 0;
+        return 1;
     }
 
     public int getCurrentScore(int teamID) {
