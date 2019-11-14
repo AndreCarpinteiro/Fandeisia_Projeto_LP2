@@ -1,7 +1,9 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
+//Provavelmente ainda falta alguns metodos para gerir a criatura
 public class Creature {
-
+    //enum é otimo para valores conhecidos finitos
+    enum Orientacao { Norte, Este, Sul, Oeste }
     int id;
     int idEquipa;
 
@@ -10,18 +12,22 @@ public class Creature {
 
     int posX;
     int posY;
-    String orientacao;
+    Orientacao orientacao ;
 
-    public Creature(int id, String tipo, String orientacao){
-        //ainda nao adicionei o resto das variaveis no construtor -david
+    public Creature(int id,int idEquipa, String tipo,int pontos,int posX,int posY, Orientacao orient){
+        //Done
         this.id = id;
-        this.orientacao = orientacao;
+        this.idEquipa = idEquipa;
         this.tipo = tipo;
+        this.pontos = pontos;
+        this.posX = posX;
+        this.posY = posY;
+        this.orientacao = orient;
     }
 
-    public int getId(){
+    public int getId(){//Done
         /* Deve devolver o ID da criatura.*/
-        return 9947;
+        return id;
     }
 
     public String getImagePNG(){
@@ -42,7 +48,7 @@ public class Creature {
         return "incompleto";
     }
 
-    public String toString(){
+    public String toString(){//Done
         /*Retorna uma ​String​ com a informação sobre a criatura.
          * Sintaxe​:
          * “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>”
