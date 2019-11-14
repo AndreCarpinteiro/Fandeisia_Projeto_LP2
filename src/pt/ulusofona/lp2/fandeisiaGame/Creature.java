@@ -3,12 +3,17 @@ package pt.ulusofona.lp2.fandeisiaGame;
 public class Creature {
 
     int id;
+    int idEquipa;
+
     String tipo;
+    int pontos; //Numero de tesouros (1 tesouro = 1 ponto)
+
     int posX;
     int posY;
     String orientacao;
 
     public Creature(int id, String tipo, String orientacao){
+        //ainda nao adicionei o resto das variaveis no construtor -david
         this.id = id;
         this.orientacao = orientacao;
         this.tipo = tipo;
@@ -38,15 +43,10 @@ public class Creature {
     }
 
     public String toString(){
-        /*
-         * Retorna uma ​String​ com a informação sobre a criatura.
-         *
+        /*Retorna uma ​String​ com a informação sobre a criatura.
          * Sintaxe​:
          * “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>”
-         *
-         * Onde <Nr Pontos> corresponde a quantidade
-         * de Tesouros encontrados pela criatura.
-         * */
-        return "toString incompleto";
+         */
+        return id + " | " + tipo + " | " + idEquipa + " | " + pontos + " @ (" + posX + "," + posY + ") " + orientacao;
     }
 }
