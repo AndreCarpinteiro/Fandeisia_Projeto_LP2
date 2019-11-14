@@ -1,3 +1,4 @@
+
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import java.util.List;
@@ -6,12 +7,7 @@ import java.util.ArrayList;
 public class FandeisiaGameManager {
 
 
-
-
-    FandeisiaGameManager() {
-
-    }
-
+    //--------------------Metodos Obrigratorios--------------------------
     public String[][] getCreatureTypes() {
 
         String[][] array2dtemporario = new String[5][5];
@@ -67,7 +63,8 @@ public class FandeisiaGameManager {
     }
 
     public List<Creature> getCreatures() {
-        Creature ola = new Creature(1, "sdf", "df");
+        Creature ola = new Creature(1, 0,"Dragao"
+                ,0 , 0,0, Creature.Orientacao.Norte);
         List<Creature> mylist = new ArrayList<Creature>();
 
 
@@ -140,4 +137,11 @@ public class FandeisiaGameManager {
          * da equipa que tem o ID teamID. */
         return 1;
     }
+
+//--------------------Metodos Nao Obrigratorios--------------------------
+
+    //public String getIcon(String iconName) {
+        /*Deve devolver o icon??? do que? nao sei. */
+      //  return "bird.png";
+    //}
 }
