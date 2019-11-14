@@ -55,6 +55,8 @@ public class FandeisiaGameManager {
     public void setInitialTeam(int teamId) {
         /*Indica qual das equipas vai jogar no
          * primeiro turno do jogo. */
+
+        teamId = 0;
     }
 
     public void processTurn() {
@@ -63,6 +65,7 @@ public class FandeisiaGameManager {
     }
 
     public List<Creature> getCreatures() {
+
         Creature ola = new Creature(1, 0,"Dragao"
                 ,0 , 0,0, Creature.Orientacao.Norte);
         List<Creature> mylist = new ArrayList<Creature>();
@@ -85,7 +88,6 @@ public class FandeisiaGameManager {
     }
 
     public List<String> getAuthors() {
-        List<String> mylist = new ArrayList<String>();
 
         /*Devolve uma lista de ​Strings​ com os
          * nomes dos autores do projecto.
@@ -93,6 +95,11 @@ public class FandeisiaGameManager {
          * conteúdo da janela que aparece ao
          * carregar no botão de “Créditos”.
          */
+        List<String> mylist = new ArrayList<>();
+
+        mylist.add("André Carpinteiro");
+        mylist.add("David Silva");
+
         return mylist;
     }
 
@@ -129,7 +136,7 @@ public class FandeisiaGameManager {
     public int getCurrentTeamId() {
         /*Deve devolver o ​ID​ da ​equipa​ que está
          * activa​ no turno actual.  */
-        return 1;
+        return 0;
     }
 
     public int getCurrentScore(int teamID) {
