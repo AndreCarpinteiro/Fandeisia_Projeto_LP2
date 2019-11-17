@@ -1,10 +1,16 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
+import pt.ulusofona.lp2.guiSimulator.DefaultTreasure;
 
 import java.util.List;
 import java.util.ArrayList;
 
 public class FandeisiaGameManager {
+
+    int[][] mapStartGame;
+
+    List<Creature> listaCreatures = new ArrayList<>();
+    List<DefaultTreasure> listaTreasures = new ArrayList<>();
 
     //--------------------Metodos Obrigratorios---------------------
     public String[][] getCreatureTypes() {//Done mas...-------------
@@ -23,7 +29,7 @@ public class FandeisiaGameManager {
 
         String[][] creatureTypeOptions = new String[3][4];
 
-        creatureTypeOptions[0] = new String[]{"Skeleton", "bird.png", "Descrição textual", "5"};
+        creatureTypeOptions[0] = new String[]{"Skeleton", "skeleton.png", "Descrição textual", "5"};
         creatureTypeOptions[1] = new String[]{"Dwarf", "crazy_emoji_white.png", "Descrição textual", "10"};
         creatureTypeOptions[2] = new String[]{"Chimera", "simba.png", "Descrição textual", "15"};
 
@@ -49,8 +55,30 @@ public class FandeisiaGameManager {
 
         rows = 6;
         columns = 8;
-
-
+        String typeTemp;
+        int idTemp;
+        int xTemp;
+        int yTemp;
+        for (String elemento : content) {
+            if(elemento.contains("treasure")){
+                //DefaultTreasure tesouroTemp = new DefaultTreasure(,,);
+                String[] dados = elemento.split(" ");
+                for (String d: dados) {
+                    System.out.println("uma iteração");
+                    String[] dados2 = d.split(",");
+                    //if (dados2[0].equals("id:")) {
+                    //    idTemp = Integer.parseInt(dados2[1]);
+                    //}
+                    int k = 0 ;
+                    for (String d2:dados2) {
+                        System.out.println(d2+ "é " + k);
+                        k++;
+                    }
+                }
+                //int idAdd = elemento.
+                //listaTreasures.add()
+            }
+        }
 
         /* Deve inicializar as estruturas de dados
          * relevantes para processar um jogo.
@@ -69,19 +97,20 @@ public class FandeisiaGameManager {
          * “id: <id>, type: treasure, x:<x>, y: <y>”
          *
          * Os argumentos ​rows e columns vão-nos indicar
-         * as dimensões dotabuleiro.
+         * as dimensões do tabuleiro.
          * */
     }
 
-    public void setInitialTeam(int teamId) {//Supostamente Done--------------
+    public void setInitialTeam(int teamId) {//Done----------------
         /* Indica qual das equipas vai jogar no
          * primeiro turno do jogo. */
-        teamId = 0;
+        teamId = 0;//É sempre a equipa LDR, como indicado no enunciado
     }
 
     public void processTurn() {
         /* Deve processar um turno do jogo considerando a equipa actual.
          * Inclui o movimento das criaturas. */
+
     }
 
     public List<Creature> getCreatures() {
@@ -97,6 +126,8 @@ public class FandeisiaGameManager {
 
 
     public boolean gameIsOver() {
+
+
         /*Deve devolver ​true​ caso já tenha sido
          * alcançada uma das condições de paragem
          * do jogo e ​false​ em caso contrário.
@@ -139,8 +170,15 @@ public class FandeisiaGameManager {
     public int getElementId(int x, int y) {
 
 
+        /*for(int i = 0;i < mapStartGame.length;i++){
+            for(int j = 0;i < mapStartGame[i].length;j++){
+                if (x == i && y == j){
 
-        /* Deve devolver o ID do objecto/elemento
+                }
+            }
+        }*/
+
+         /*Deve devolver o ID do objecto/elemento
          * que se encontra na posição indicada pelas
          * coordenadas (x,y) passadas por
          * argumento.

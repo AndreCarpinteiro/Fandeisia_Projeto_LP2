@@ -8,7 +8,7 @@ public class Creature {
     int idEquipa;
 
     String tipo;
-    int pontos; //Numero de tesouros (1 tesouro = 1 ponto)
+    int pontos; //Numero de tesouros apanhados (1 tesouro = 1 ponto)
 
     int posX;
     int posY;
