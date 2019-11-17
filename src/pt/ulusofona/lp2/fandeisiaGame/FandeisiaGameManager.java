@@ -6,8 +6,20 @@ import java.util.ArrayList;
 
 public class FandeisiaGameManager {
 
-    //--------------------Metodos Obrigratorios--------------------------
-    public String[][] getCreatureTypes() {
+    //--------------------Metodos Obrigratorios---------------------
+    public String[][] getCreatureTypes() {//Done mas...-------------
+
+         /*(As imagens a usar devem ser colocadas na pasta
+         * src/images e devem ter tamanho 50x50. As imagens
+         * devem ter fundo transparente para que se consiga
+         * ver se estão num quadrado branco ou preto).
+         *
+         * Caso os alunos não pretendam definir
+         * nenhuma imagem, a função pode
+         * simplesmente retornar ​null​. Isto fará com
+         * que o visualizador use uma imagem
+         * pré-definida por omissão.
+         */
 
         String[][] creatureTypeOptions = new String[3][4];
 
@@ -16,20 +28,20 @@ public class FandeisiaGameManager {
         creatureTypeOptions[2] = new String[]{"Chimera", "simba.png", "Descrição textual", "15"};
 
         /*
-        Deve retornar os tipos de criatura que
-        existem no jogo e que podem ser
-        escolhidos para os exércitos dos dois
-        jogadores.
-
-        O retorno deve ser um ​array 2d de
-        String​, em que cada “linha” tem a
-        seguinte informação:
-        -Nome do tipo (posição 0)
-        -Imagem PNG (posição 1)
-        -Descrição textual (posição 2)
-        -Custo (posição 3) (O valor do “Custo” não será
-         usado nesta P1).
-         */
+        * Deve retornar os tipos de criatura que
+        * existem no jogo e que podem ser
+        * escolhidos para os exércitos dos dois
+        * jogadores.
+        *
+        * O retorno deve ser um ​array 2d de
+        * String​, em que cada “linha” tem a
+        * seguinte informação:
+        * -Nome do tipo (posição 0)
+        * -Imagem PNG (posição 1)
+        * -Descrição textual (posição 2)
+        * -Custo (posição 3) (O valor do “Custo” não será
+        * usado nesta P1).
+        */
         return creatureTypeOptions;
     }
 
@@ -37,6 +49,7 @@ public class FandeisiaGameManager {
 
         rows = 6;
         columns = 8;
+
 
 
         /* Deve inicializar as estruturas de dados
@@ -60,7 +73,7 @@ public class FandeisiaGameManager {
          * */
     }
 
-    public void setInitialTeam(int teamId) {//Supostamente Done
+    public void setInitialTeam(int teamId) {//Supostamente Done--------------
         /* Indica qual das equipas vai jogar no
          * primeiro turno do jogo. */
         teamId = 0;
@@ -72,10 +85,8 @@ public class FandeisiaGameManager {
     }
 
     public List<Creature> getCreatures() {
-        Creature ola = new Creature(1, 0,"Dragao"
-                ,0 , 0,0, Creature.Orientacao.Norte);
-        List<Creature> mylist = new ArrayList<Creature>();
 
+        List<Creature> mylist = new ArrayList<>();
 
         /* Devolve uma lista com todos os objectos
          * "Creature" ​que existem no jogo.
@@ -92,7 +103,7 @@ public class FandeisiaGameManager {
         return true;
     }
 
-    public List<String> getAuthors() {//Done
+    public List<String> getAuthors() {//Done----------------
 
         /*Devolve uma lista de ​Strings​ com os
          * nomes dos autores do projecto.
@@ -111,7 +122,7 @@ public class FandeisiaGameManager {
     public List<String> getResults() {
 
         List<String> mylist = new ArrayList<String>();
-        /*Devolve uma lista de ​Strings​ que
+        /* Devolve uma lista de ​Strings​ que
          * representem os resultados do jogo,
          * conforme descrito na secção dos
          * “Resultados da execução …”.
@@ -125,7 +136,10 @@ public class FandeisiaGameManager {
     }
 
     public int getElementId(int x, int y) {
-        /*Deve devolver o ID do objecto/elemento
+
+
+
+        /* Deve devolver o ID do objecto/elemento
          * que se encontra na posição indicada pelas
          * coordenadas (x,y) passadas por
          * argumento.
@@ -145,6 +159,7 @@ public class FandeisiaGameManager {
     }
 
     public int getCurrentScore(int teamID) {
+
         /*Deve devolver o número actual de pontos
          * da equipa que tem o ID teamID. */
         return 1;

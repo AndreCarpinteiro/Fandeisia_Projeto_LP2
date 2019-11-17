@@ -25,13 +25,13 @@ public class Creature {
         this.orientacao = orient;
     }
 
-    public int getId(){//Done
+    public int getId(){//Done---------------------------------
         /* Deve devolver o ID da criatura.*/
-        return id;
+        return id;// usar this.id??
     }
 
-    public String getImagePNG(){
-        /*Deve devolver o nome do ficheiro de imagem
+    public String getImagePNG(){//Incompleto------------------------------
+        /* Deve devolver o nome do ficheiro de imagem
          * (formato PNG) que representa a criatura.
          *
          * (As imagens a usar devem ser colocadas na pasta
@@ -45,10 +45,10 @@ public class Creature {
          * que o visualizador use uma imagem
          * pré-definida por omissão.
          * */
-        return "incompleto";
+        return this.tipo + ".png";// talvez tirar o this
     }
 
-    public String toString(){//Done
+    public String toString(){//Done------------------------------------
         /*Retorna uma ​String​ com a informação sobre a criatura.
          * Sintaxe​:
          * “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>”
