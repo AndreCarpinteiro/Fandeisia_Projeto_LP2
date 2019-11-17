@@ -1,6 +1,6 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
-
+import pt.ulusofona.lp2.guiSimulator.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -87,6 +87,7 @@ public class FandeisiaGameManager {
     public List<Creature> getCreatures() {
 
         List<Creature> mylist = new ArrayList<>();
+
 
         /* Devolve uma lista com todos os objectos
          * "Creature" ​que existem no jogo.
