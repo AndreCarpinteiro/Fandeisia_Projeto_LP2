@@ -1,6 +1,6 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
-import pt.ulusofona.lp2.guiSimulator.*;
+
 import java.util.List;
 import java.util.ArrayList;
 
