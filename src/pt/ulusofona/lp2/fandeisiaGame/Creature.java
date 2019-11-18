@@ -93,7 +93,7 @@ public class Creature {
          * que o visualizador use uma imagem
          * pré-definida por omissão.
          * */
-/*
+
         if (orientacao.equals("Sul")) {
             if (tipo.equals("Dwarf")) {
                 return "crazy_emoji_White_DOWN.png";
@@ -124,15 +124,15 @@ public class Creature {
             } else if (tipo.equals("Chimera")) {
                 return "chimera_oeste.png";
             }
-        }*/
+        }
 
-        /*if (tipo.equals("Skeleton")) {
+        if (tipo.equals("Skeleton")) {
             return "skeleton.png";
         }
 
         if (tipo.equals("Super Dragão")) {
             return "crazy_emoji_White.png";
-        }*/
+        }
         return null;
     }
 
