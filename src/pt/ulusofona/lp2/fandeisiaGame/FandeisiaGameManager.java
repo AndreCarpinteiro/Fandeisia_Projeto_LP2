@@ -252,6 +252,7 @@ public class FandeisiaGameManager {
          * da equipa que tem o ID teamID. */
         if(tLDR.idTeam == teamID){
             return tLDR.pontosTeam;
+
         }else{
             return tRST.pontosTeam;
         }
