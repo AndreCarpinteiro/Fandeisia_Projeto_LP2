@@ -69,7 +69,7 @@ public class FandeisiaGameManager {
                 }
                 System.out.println(tesouroTemp.toString());
                 listaTreasures.add(tesouroTemp);
-             //   mapStartGame[xTemp][yTemp] = 2;
+                mapStartGame[xTemp][yTemp] = 2;
 
             }else{
                 Creature creatureTemp = new Creature();
@@ -105,9 +105,9 @@ public class FandeisiaGameManager {
                 }
                 System.out.println(creatureTemp.toString());
                 listaCreatures.add(creatureTemp);
-//                mapStartGame[xTemp][yTemp] = 1;
             }
         }
+        mapStartGame[xTemp][yTemp] = 1;
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
