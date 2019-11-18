@@ -7,6 +7,15 @@ public class Team {
     int idTeam;
     List<Creature> teamCreatures = new ArrayList<>();
     int pontosTeam;
+    boolean ativo;
+    Team(){
 
+    }
 
+    Team(int idTeam,int pontosTeam,boolean ativo){
+        this.idTeam = idTeam;
+        //this.teamCreatures = teamCreatures;
+        this.pontosTeam = pontosTeam;
+        this.ativo = ativo;
+    }
 }

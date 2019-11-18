@@ -7,6 +7,10 @@ public class Tesouro {
     int posX;
     int posY;
 
+
+    Tesouro(){
+
+    }
     public Tesouro(int id, String tipo, int posX, int posY){
         this.id = id;
         this.tipo = tipo;

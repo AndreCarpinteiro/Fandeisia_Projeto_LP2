@@ -14,6 +14,9 @@ public class Creature {
     int posY;
     Orientacao orientacao ;
 
+    Creature(){
+
+    }
     public Creature(int id,int idEquipa, String tipo,int pontos,int posX,int posY, Orientacao orient){
         //Done
         this.id = id;

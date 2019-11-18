@@ -1,6 +1,7 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -8,6 +9,9 @@ public class FandeisiaGameManager {
 
     int[][] mapStartGame;
     int countTurnos;
+
+    Team LDR = new Team(0,0,true);
+    Team RST = new Team(1,0,false);
 
     List<Creature> listaCreatures = new ArrayList<>();
     List<Tesouro> listaTreasures = new ArrayList<>();
@@ -19,12 +23,6 @@ public class FandeisiaGameManager {
          * src/images e devem ter tamanho 50x50. As imagens
          * devem ter fundo transparente para que se consiga
          * ver se estão num quadrado branco ou preto).
-         *
-         * Caso os alunos não pretendam definir
-         * nenhuma imagem, a função pode
-         * simplesmente retornar ​null​. Isto fará com
-         * que o visualizador use uma imagem
-         * pré-definida por omissão.
          */
 
         String[][] creatureTypeOptions = new String[3][4];
@@ -53,31 +51,79 @@ public class FandeisiaGameManager {
 
     public void startGame(String[] content, int rows, int columns) {
 
-        rows = 6;
-        columns = 8;
-        String typeTemp;
+        //TODO NAO SEI O PROPOSITO ESPECIFICO DOS PARAMETROS ROWS E COLLUMNS
+
+        mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
+
         int idTemp;
+        String typeTemp;
         int xTemp;
         int yTemp;
 
+        int teamIdTemp;
+        String orientTemp;
+        //Dissecação do parametro "content" para objetos creatures e treasures----
         for (String elemento : content) {
-            if(elemento.contains("Tesouro")){
-                //DefaultTreasure tesouroTemp = new DefaultTreasure(,,);
-                String[] dados = elemento.split(" ");
+            if(elemento.contains("treasure")){
+                Tesouro tesouroTemp = new Tesouro();
+
+                String[] dados = elemento.split(",");
+
                 for (String d: dados) {
-                    System.out.println("uma iteração");
-                    String[] dados2 = d.split(",");
-                    //if (dados2[0].equals("id:")) {
-                    //    idTemp = Integer.parseInt(dados2[1]);
-                    //}
-                    int k = 0 ;
-                    for (String d2:dados2) {
-                        System.out.println(d2+ "é " + k);
-                        k++;
+                    if (d.startsWith("id:")) {
+                        idTemp = Integer.parseInt(d.substring(4));
+                        tesouroTemp.id = idTemp;
+
+                    } else if (d.startsWith(" type:")) {
+                        typeTemp = d.substring(7);
+                        tesouroTemp.tipo = typeTemp;
+
+                    }else if(d.startsWith(" x:")){
+                        xTemp = Integer.parseInt(d.substring(4));
+                        tesouroTemp.posX = xTemp;
+
+                    }else if(d.startsWith(" y:")){
+                        yTemp = Integer.parseInt(d.substring(4));
+                        tesouroTemp.posY = yTemp;
                     }
                 }
-                //int idAdd = elemento.
-                //listaTreasures.add()
+                System.out.println(tesouroTemp.toString());
+                listaTreasures.add(tesouroTemp);
+
+            }else{
+                Creature creatureTemp = new Creature();
+
+                String[] dados = elemento.split(",");
+
+                for (String d: dados) {
+                    if (d.startsWith("id:")) {
+                        idTemp = Integer.parseInt(d.substring(4));
+                        creatureTemp.id = idTemp;
+
+                    } else if (d.startsWith(" type:")) {
+                        typeTemp = d.substring(7);
+                        creatureTemp.tipo = typeTemp;
+
+                    } else if (d.startsWith(" teamId:")) {
+                        teamIdTemp = Integer.parseInt(d.substring(9));
+                        creatureTemp.idEquipa = teamIdTemp;
+
+                    }else if(d.startsWith(" x:")){
+                        xTemp = Integer.parseInt(d.substring(4));
+                        creatureTemp.posX = xTemp;
+
+                    }else if(d.startsWith(" y:")){
+                        yTemp = Integer.parseInt(d.substring(4));
+                        creatureTemp.posY = yTemp;
+
+                    }else if(d.startsWith(" orientation:")){
+                        orientTemp = d.substring(14);
+                        creatureTemp.orientacao = Creature.Orientacao.valueOf(orientTemp);
+
+                    }
+                }
+                System.out.println(creatureTemp.toString());
+                listaCreatures.add(creatureTemp);
             }
         }
 
@@ -87,18 +133,12 @@ public class FandeisiaGameManager {
          * (criaturas e tesouros), tendo para isso várias Strings.
          *
          * Cada String vai representar um objecto do
-         * mundo. As Strings vão ter um dos
-         * seguintes formatos:
-         *
+         * mundo. As Strings vão ter um dos seguintes formatos.
          * Para criaturas:
-         * “id: <id>, type: <type>,teamId: <teamId>,
-         * x: <x>, y:<y>, orientation: <orientation>”
-         *
+         * “id: <id>, type: <type>,teamId: <teamId>, x: <x>, y:<y>, orientation: <orientation>”
          * Para tesouros:
-         * “id: <id>, type: treasure, x:<x>, y: <y>”
-         *
-         * Os argumentos ​rows e columns vão-nos indicar
-         * as dimensões dotabuleiro.
+         * “id: <id>, type: treasure, x: <x>, y: <y>”
+         * Os argumentos ​rows e columns vão-nos indicar as dimensões do tabuleiro.
          * */
     }
 
@@ -113,15 +153,13 @@ public class FandeisiaGameManager {
          * Inclui o movimento das criaturas. */
     }
 
-    public List<Creature> getCreatures() {
-
-        List<Creature> mylist = new ArrayList<>();
-
-
+    public List<Creature> getCreatures() {//Quase Done--------------------------
+                                          /*TODO esta incompleto, falta as criaturas
+                                           *TODO do adversario */
         /* Devolve uma lista com todos os objectos
          * "Creature" ​que existem no jogo.
          * */
-        return mylist;
+        return listaCreatures;
     }
 
 
@@ -170,17 +208,19 @@ public class FandeisiaGameManager {
         return mylist;
     }
 
-    public int getElementId(int x, int y) {
+    public int getElementId(int x, int y) {//Done-------------------
 
-
-        /*for(int i = 0;i < mapStartGame.length;i++){
-            for(int j = 0;i < mapStartGame[i].length;j++){
-                if (x == i && y == j){
-
-                }
+        for (Creature creatureTemp : listaCreatures) {
+            if(creatureTemp.posX == x && creatureTemp.posY == y){
+                return creatureTemp.id;
             }
-        }*/
+        }
 
+        for (Tesouro tesouroTemp : listaTreasures){
+            if(tesouroTemp.posX == x && tesouroTemp.posY == y){
+                return tesouroTemp.id;
+            }
+        }
          /*Deve devolver o ID do objecto/elemento
          * que se encontra na posição indicada pelas
          * coordenadas (x,y) passadas por
@@ -191,20 +231,28 @@ public class FandeisiaGameManager {
          * tesouro na posição indicada, o método
          * deve devolver o valor 0 (zero) que representa o vazio.
          */
-        return 2;
-    }
-
-    public int getCurrentTeamId() {
-        /*Deve devolver o ​ID​ da ​equipa​ que está
-         * activa​ no turno actual.  */
         return 0;
     }
 
-    public int getCurrentScore(int teamID) {
+    public int getCurrentTeamId() {//Done(mas falta mudar a equipa ativa no processTurn ou noutra qualquer)------
+        /*Deve devolver o ​ID​ da ​equipa​ que está
+         * activa​ no turno actual.  */
+        if(LDR.ativo){
+            return 0;
+        }else if(RST.ativo){
+            return 1;
+        }
+        return 2;
+    }
 
+    public int getCurrentScore(int teamID) {///Done(mas falta atualizar os pontos no processTurn ou noutra qualquer)---
         /*Deve devolver o número actual de pontos
          * da equipa que tem o ID teamID. */
-        return 1;
+        if(LDR.idTeam == teamID){
+            return LDR.pontosTeam;
+        }else{
+            return RST.pontosTeam;
+        }
     }
 
 //--------------------Metodos Nao Obrigratorios--------------------------
