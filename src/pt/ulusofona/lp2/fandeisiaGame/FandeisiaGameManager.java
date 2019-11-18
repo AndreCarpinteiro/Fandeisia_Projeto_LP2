@@ -17,7 +17,7 @@ public class FandeisiaGameManager {
     List<Tesouro> listaTreasures = new ArrayList<>();
 
     //--------------------Metodos Obrigratorios---------------------
-    public String[][] getCreatureTypes() {//Done mas...-------------
+    public String[][] getCreatureTypes() {//Done mas....-------------
 
         String[][] creatureTypeOptions = new String[4][4];
 
@@ -33,7 +33,7 @@ public class FandeisiaGameManager {
 
         //TODO NAO SEI O PROPOSITO ESPECIFICO DOS PARAMETROS ROWS E COLLUMNS
 
-        mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
+        mapStartGame = new int[columns][rows];//vamos usar isto nas outras funcoes
 
         int idTemp;
         String typeTemp;
@@ -134,7 +134,7 @@ public class FandeisiaGameManager {
                        // listaCreatures.get(j+1).id = aux;
                     //}
                // }
-                System.out.println("IDDDDD " + listaCreatures.get(i).id);
+                System.out.println("Id a mover " + listaCreatures.get(i).id);
                 listaCreatures.get(i).moveCriatura(listaCreatures.get(i).orientacao.toString(), mapStartGame);
 
 

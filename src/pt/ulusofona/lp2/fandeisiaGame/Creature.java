@@ -44,36 +44,51 @@ public class Creature {
 
     public void moveCriatura(String orientacao, int[][] mapa) {
 
+        int yMax = mapa.length;
+        int xMax = mapa[0].length;
+
+        System.out.println("rows" + yMax);
+        System.out.println("columns" + xMax);
+
         if (orientacao.equals("Norte")) {
-            if (mapa[posX][posY - 1] != 1) {
-                posY--;
-            } else {
-                orientacao = "Oeste";
-
-            }
-        }
-
-        if (orientacao.equals("Sul")) {
-            if (mapa[posX][posY + 1] == 0) {
-                posY++;
-            }else{
+            if(posY == 0){
                 orientacao = "Este";
+            }else if(mapa[posX ][posY - 1] == 1) {
+                orientacao = "Este";
+            } else {
+                mapa[posX][posY] = 0;
+                posY--;
+                mapa[posX][posY] = 1;
             }
-        }
-
-        if (orientacao.equals("Oeste")) {
-            if (mapa[posX - 1][posY] == 0) {
-                posX--;
+        }else if (orientacao.equals("Sul")) {
+            if(posY == yMax){
+                orientacao = "Oeste";
+            }else if(mapa[posX][posY+ 1] == 1) {
+                orientacao = "Oeste";
             }else{
-                orientacao = "Sul";
+                mapa[posX][posY] = 0;
+                posY++;
+                mapa[posX][posY] = 1;
             }
-        }
-
-        if (orientacao.equals("Este")) {
-            if (mapa[posX + 1][posY] == 0) {
-                posX++;
-            } else{
+        }else if (orientacao.equals("Oeste")) {
+            if (posX == 0) {
                 orientacao = "Norte";
+            }else if(mapa[posX - 1][posY] == 1){
+                orientacao = "Norte";
+            } else{
+                mapa[posX][posY] = 0;
+                posX--;
+                mapa[posX][posY] = 1;
+            }
+        }else if (orientacao.equals("Este")) {
+            if(posX == xMax){
+                orientacao = "Sul";
+            }else if (mapa[posX + 1][posY] == 1) {
+                orientacao = "Sul";
+            } else{
+                mapa[posX][posY] = 0;
+                posX++;
+                mapa[posX][posY] = 1;
             }
         }
     }
@@ -124,7 +139,7 @@ public class Creature {
                 return "chimera_oeste.png";
             }
             if(tipo.equals("Skeleton")){
-                return "";
+                return "skeleton_oeste.png";
             }
         }
 
