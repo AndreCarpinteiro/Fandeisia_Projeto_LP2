@@ -22,9 +22,9 @@ public class FandeisiaGameManager {
         String[][] creatureTypeOptions = new String[4][4];
 
         creatureTypeOptions[0] = new String[]{"Skeleton", "skeleton.png", "Descrição textual", "5"};
-        creatureTypeOptions[1] = new String[]{"Dwarf", "crazy_emoji_white.png", "Descrição textual", "10"};
-        creatureTypeOptions[2] = new String[]{"Chimera", "Chimera.png", "Descrição textual", "15"};
-        creatureTypeOptions[3] = new String[]{"Super Dragão", "crazy_emoji_black.png", "Descrição textual", "11"};
+        creatureTypeOptions[1] = new String[]{"Dwarf", "crazy_emoji_white.png", "Dá cabeçadas", "10"};
+        creatureTypeOptions[2] = new String[]{"Chimera", "Chimera.png", "Morde cenas", "15"};
+        creatureTypeOptions[3] = new String[]{"Super Dragão", "crazy_emoji_black.png", "Comandado pelo Macaco Lider", "11"};
 
         return creatureTypeOptions;
     }
