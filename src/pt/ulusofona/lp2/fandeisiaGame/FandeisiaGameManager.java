@@ -126,9 +126,7 @@ public class FandeisiaGameManager {
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
-        /* Indica qual das equipas vai jogar no
-         * primeiro turno do jogo. */
-
+        /* Indica qual das equipas vai jogar no primeiro turno do jogo. */
         teamId = 0;//É sempre a equipa LDR, como indicado no enunciado
     }
 
@@ -136,18 +134,9 @@ public class FandeisiaGameManager {
         /* Deve processar um turno do jogo considerando a equipa actual.
          * Inclui o movimento das criaturas. */
 
-        int aux;
-
         if(getCurrentTeamId() == 0){
             //Ordenar IDs
             for(int i=0; i < listaCreatures.size(); i++){
-                // for (int j = 0; j < listaCreatures.size() - 1; j++) {
-                //   if (listaCreatures.get(j).getId() > listaCreatures.get(j+1).getId()) {
-                //     aux = listaCreatures.get(j).getId();
-                //   listaCreatures.get(j).id = listaCreatures.get(j+1).getId();
-                // listaCreatures.get(j+1).id = aux;
-                //}
-                // }
                 System.out.println("Id a mover " + listaCreatures.get(i).id);
                 listaCreatures.get(i).moveCriatura(mapStartGame);
             }
@@ -162,11 +151,6 @@ public class FandeisiaGameManager {
     }
 
     public List<Creature> getCreatures() {//Quase Done--------------------------
-        /*TODO esta incompleto, falta as criaturas
-         *TODO do adversario */
-        /* Devolve uma lista com todos os objectos
-         * "Creature" ​que existem no jogo.
-         * */
         return listaCreatures;
     }
 
@@ -223,22 +207,15 @@ public class FandeisiaGameManager {
                 return tesouroTemp.id;
             }
         }
-        /*Deve devolver o ID do objecto/elemento
-         * que se encontra na posição indicada pelas
-         * coordenadas (x,y) passadas por
-         * argumento.
-         *
-         * Por objecto/elemento entende-se: criatura ou tesouro.
-         * Caso não exista nenhuma criatura ou
+         /* Caso não exista nenhuma criatura ou
          * tesouro na posição indicada, o método
          * deve devolver o valor 0 (zero) que representa o vazio.
          */
         return 0;
     }
 
-    public int getCurrentTeamId() {//Done(mas falta mudar a equipa ativa no processTurn ou noutra qualquer)------
-        /*Deve devolver o ​ID​ da ​equipa​ que está
-         * activa​ no turno actual.  */
+    public int getCurrentTeamId() {
+        /*Deve devolver o ​ID​ da ​equipa​ que está activa​ no turno actual.  */
         if(tLDR.ativo){
             return 0;
         }else if(tRST.ativo){
@@ -247,9 +224,8 @@ public class FandeisiaGameManager {
         return 2;
     }
 
-    public int getCurrentScore(int teamID) {///Done(mas falta atualizar os pontos no processTurn ou noutra qualquer)---
-        /*Deve devolver o número actual de pontos
-         * da equipa que tem o ID teamID. */
+    public int getCurrentScore(int teamID) {
+        /*Deve devolver o número actual de pontos da equipa que tem o ID teamID. */
         if(tLDR.idTeam == teamID){
             return tLDR.pontosTeam;
 
