@@ -82,7 +82,7 @@ public class Creature {
 
         if (orientacao.toString().equals("Sul")) {
             if (tipo.equals("Dwarf")) {
-                return "crazy_emoji_White_DOWN.png";
+                return "crazy_emoji_white_DOWN.png";
             }
             if (tipo.equals("Chimera")) {
                 return "chimera_sul2.png";
@@ -94,7 +94,7 @@ public class Creature {
 
         if (orientacao.toString().equals("Norte")) {
             if (tipo.equals("Dwarf")) {
-                return "crazy_emoji_White_UP.png";
+                return "crazy_emoji_white_UP.png";
             }
             if (tipo.equals("Chimera")) {
                 return "chimera_norte2.png";
@@ -106,7 +106,7 @@ public class Creature {
 
         if (orientacao.toString().equals("Este")) {
             if (tipo.equals("Dwarf")) {
-                return "crazy_emoji_White_LEFT.png";
+                return "crazy_emoji_white_LEFT.png";
             }
             if (tipo.equals("Chimera")) {
                 return "chimera_este2.png";
@@ -118,13 +118,13 @@ public class Creature {
 
         if (orientacao.toString().equals("Oeste")) {
             if (tipo.equals("Dwarf")) {
-                return "crazy_emoji_White_RIGHT.png";
+                return "crazy_emoji_white_RIGHT.png";
             }
             if (tipo.equals("Chimera")) {
                 return "chimera_oeste.png";
             }
             if(tipo.equals("Skeleton")){
-                return "skeleton_oeste.png";
+                return "";
             }
         }
 
@@ -133,7 +133,7 @@ public class Creature {
         }
 
         if (tipo.equals("Super Dragão")) {
-            return "crazy_emoji_White.png";
+            return "super_dragonn.png";
         }
         return null;
     }
