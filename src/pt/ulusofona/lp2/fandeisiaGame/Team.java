@@ -9,7 +9,6 @@ public class Team {
     int pontosTeam;
     boolean ativo;
 
-
     Team(int idTeam,int pontosTeam,boolean ativo){
         this.idTeam = idTeam;
         //this.teamCreatures = teamCreatures;

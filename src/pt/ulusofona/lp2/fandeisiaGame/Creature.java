@@ -42,10 +42,11 @@ public class Creature {
 
     }
 
-    public void moveCriatura(int[][] mapa) {
+    public boolean moveCriatura(int[][] mapa) {
 
         int yMax = mapa.length - 1;
         int xMax = mapa[0].length - 1;
+        boolean encontrou = false;
 
         System.out.println("rows" + yMax);
         System.out.println("columns" + xMax);
@@ -59,6 +60,9 @@ public class Creature {
                 mapa[posY][posX] = 0;
                 posY--;
                 mapa[posY][posX] = 1;
+                pontos++;
+                encontrou = true;
+
             } else {
                 mapa[posY][posX] = 0;
                 posY--;
@@ -69,6 +73,12 @@ public class Creature {
                 orientacao = Orientacao.Oeste;
             } else if (mapa[posY + 1][posX] == 1) {
                 orientacao = Orientacao.Oeste;
+            } else if (mapa[posY + 1][posX] == 2) {
+                mapa[posY][posX] = 0;
+                posY++;
+                mapa[posY][posX] = 1;
+                pontos++;
+                encontrou = true;
             } else {
                 mapa[posY][posX] = 0;
                 posY++;
@@ -79,6 +89,12 @@ public class Creature {
                 orientacao = Orientacao.Norte;
             } else if (mapa[posY][posX - 1] == 1) {
                 orientacao = Orientacao.Norte;
+            } else if (mapa[posY][posX - 1] == 2) {
+                mapa[posY][posX] = 0;
+                posX--;
+                mapa[posY][posX] = 1;
+                pontos++;
+                encontrou = true;
             } else {
                 mapa[posY][posX] = 0;
                 posX--;
@@ -89,12 +105,19 @@ public class Creature {
                 orientacao = Orientacao.Sul;
             } else if (mapa[posY][posX + 1] == 1) {
                 orientacao = Orientacao.Sul;
+            } else if (mapa[posY][posX + 1] == 2) {
+                mapa[posY][posX] = 0;
+                posX++;
+                mapa[posY][posX] = 1;
+                pontos++;
+                encontrou = true;
             } else {
                 mapa[posY][posX] = 0;
                 posX++;
                 mapa[posY][posX] = 1;
             }
         }
+        return encontrou;
     }
 
     public String getImagePNG() {//Done---------------------
@@ -161,6 +184,14 @@ public class Creature {
         return null;
     }
 
+    public int getY(){
+        return posY;
+    }
+
+    public int getX(){
+        return posX;
+    }
+
     public String toString() {//Done------------------------------------
         /*Retorna uma ​String​ com a informação sobre a criatura.
          * Sintaxe​:
@@ -168,4 +199,5 @@ public class Creature {
          */
         return id + " | " + tipo + " | " + idEquipa + " | " + pontos + " @ (" + posX + ", " + posY + ") " + orientacao;
     }
+
 }

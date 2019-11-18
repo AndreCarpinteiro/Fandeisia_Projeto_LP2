@@ -7,14 +7,19 @@ import java.util.ArrayList;
 
 public class FandeisiaGameManager {
 
-    int[][] mapStartGame;
-    int countTurnos;
+    private int[][] mapStartGame;
+    private int countTurnos;
+    private int turn15GameOver;
+    private int tesourosTotais;
 
-    Team tLDR = new Team(0,0,true);
-    Team tRST = new Team(1,0,false);
+    private int pontosLDR;
+    private int pontosRST;
 
-    List<Creature> listaCreatures = new ArrayList<>();
-    List<Tesouro> listaTreasures = new ArrayList<>();
+    private Team tLDR;
+    private Team tRST;
+
+    private List<Creature> listaCreatures = new ArrayList<>();
+    private List<Tesouro> listaTreasures = new ArrayList<>();
 
     //--------------------Metodos Obrigratorios---------------------
     public String[][] getCreatureTypes() {//Done mas...-------------
@@ -32,7 +37,16 @@ public class FandeisiaGameManager {
     public void startGame(String[] content, int rows, int columns) {
 
         //TODO NAO SEI O PROPOSITO ESPECIFICO DOS PARAMETROS ROWS E COLLUMNS
-
+        System.out.println(1/2);
+        System.out.println(2/2);
+        System.out.println(3/2);
+        tLDR = new Team(0,0,true);
+        tRST = new Team(1,0,false);
+        countTurnos = 0;
+        turn15GameOver = 0;
+        tesourosTotais = 0;
+        pontosLDR = 0;
+        pontosRST = 0;
         mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
 
         for(int i = 0; i < mapStartGame.length; i++){
@@ -113,13 +127,14 @@ public class FandeisiaGameManager {
                 }
                 System.out.println(creatureTemp.toString());
                 listaCreatures.add(creatureTemp);
+                mapStartGame[yTemp][xTemp] = 1;
             }
         }
-        mapStartGame[yTemp][xTemp] = 1;
+        tesourosTotais = listaTreasures.size();
 
         for(int i = 0; i < mapStartGame.length; i++){
             for(int j = 0; j < mapStartGame[i].length; j++){
-                System.out.print(mapStartGame[i][j]);
+                System.out.print(mapStartGame[i][j] + " ");
             }
             System.out.println();
         }
@@ -136,11 +151,33 @@ public class FandeisiaGameManager {
 
         if(getCurrentTeamId() == 0){
             //Ordenar IDs
+            boolean encontrou;
+
             for(int i=0; i < listaCreatures.size(); i++){
                 System.out.println("Id a mover " + listaCreatures.get(i).id);
-                listaCreatures.get(i).moveCriatura(mapStartGame);
+                encontrou = listaCreatures.get(i).moveCriatura(mapStartGame);
+
+                if(encontrou){
+                    turn15GameOver = 0;
+                    for (int j = 0; j < listaTreasures.size(); j++) {
+                        if (listaTreasures.get(i).posY == listaCreatures.get(i).getY() && listaTreasures.get(i).posX == listaCreatures.get(i).getX()) {
+                            listaTreasures.remove(listaTreasures.get(i));
+                        }
+                    }
+                }
             }
         }
+
+        for(Creature creature: listaCreatures){
+            if(creature.idEquipa == 0){
+                pontosLDR += creature.pontos;
+            }else{
+                pontosRST+= creature.pontos;
+            }
+        }
+        turn15GameOver++;
+        countTurnos++;
+
         if(tLDR.ativo){
             tLDR.ativo = false;
             tRST.ativo = true;
@@ -148,6 +185,7 @@ public class FandeisiaGameManager {
             tLDR.ativo = true;
             tRST.ativo = false;
         }
+
     }
 
     public List<Creature> getCreatures() {//Quase Done--------------------------
@@ -156,13 +194,21 @@ public class FandeisiaGameManager {
 
 
     public boolean gameIsOver() {
-        /*Deve devolver ​true​ caso já tenha sido
+        /* Deve devolver ​true​ caso já tenha sido
          * alcançada uma das condições de paragem
          * do jogo e ​false​ em caso contrário.
-         * */
-
-        if(listaTreasures.size() == 0) { //não está completo
-            return false;
+         *
+         * O jogo termina quando for atingida uma das seguintes três condições:
+         * Não existirem mais Tesouros para apanhar/capturar no mundo;
+         * Terem passado 15 turnos sem que nenhuma criatura tenha encontrado
+         * um tesouro;
+         * O número de tesouros/pontos que existem no mundo já não
+         * permitirem que a equipa que com menos pontos apanhe (iguale)
+         * a equipa com mais pontos
+         */
+        // Verificação de gameIsOver
+        if(pontosLDR > tesourosTotais / 2 || pontosRST > tesourosTotais / 2 || listaTreasures.size() == 0 || turn15GameOver == 15){
+            return true;
         }
 
         return false;
