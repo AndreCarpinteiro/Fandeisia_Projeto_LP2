@@ -1,6 +1,5 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
-import pt.ulusofona.lp2.guiSimulator.DefaultTreasure;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class FandeisiaGameManager {
     int countTurnos;
 
     List<Creature> listaCreatures = new ArrayList<>();
-    List<DefaultTreasure> listaTreasures = new ArrayList<>();
+    List<Tesouro> listaTreasures = new ArrayList<>();
 
     //--------------------Metodos Obrigratorios---------------------
     public String[][] getCreatureTypes() {//Done mas...-------------
@@ -62,7 +61,7 @@ public class FandeisiaGameManager {
         int yTemp;
 
         for (String elemento : content) {
-            if(elemento.contains("treasure")){
+            if(elemento.contains("Tesouro")){
                 //DefaultTreasure tesouroTemp = new DefaultTreasure(,,);
                 String[] dados = elemento.split(" ");
                 for (String d: dados) {
