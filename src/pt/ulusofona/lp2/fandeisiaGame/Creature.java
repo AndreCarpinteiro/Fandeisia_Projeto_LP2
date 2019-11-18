@@ -37,58 +37,63 @@ public class Creature {
         return id;// usar this.id??
     }
 
-    public void capturaPonto(){
+    public void capturaPonto() {
         pontos++;
 
     }
 
-    public void moveCriatura(String orientacao, int[][] mapa) {
+    public void moveCriatura(int[][] mapa) {
 
-        int yMax = mapa.length;
-        int xMax = mapa[0].length;
+        int yMax = mapa.length - 1;
+        int xMax = mapa[0].length - 1;
 
         System.out.println("rows" + yMax);
         System.out.println("columns" + xMax);
 
-        if (orientacao.equals("Norte")) {
-            if(posY == 0){
-                orientacao = "Este";
-            }else if(mapa[posX ][posY - 1] == 1) {
-                orientacao = "Este";
-            } else {
-                mapa[posX][posY] = 0;
+        if (orientacao == Orientacao.Norte) {
+            if (posY == 0) {
+                orientacao = Orientacao.Este;
+            } else if (mapa[posY - 1][posX] == 1) {
+                orientacao = Orientacao.Este;
+            } else if (mapa[posY - 1][posX] == 2) {
+                mapa[posY][posX] = 0;
                 posY--;
-                mapa[posX][posY] = 1;
+                mapa[posY][posX] = 1;
+
+            } else {
+                mapa[posY][posX] = 0;
+                posY--;
+                mapa[posY][posX] = 1;
             }
-        }else if (orientacao.equals("Sul")) {
-            if(posY == yMax){
-                orientacao = "Oeste";
-            }else if(mapa[posX][posY+ 1] == 1) {
-                orientacao = "Oeste";
-            }else{
-                mapa[posX][posY] = 0;
+        } else if (orientacao == Orientacao.Sul) {
+            if (posY == yMax) {
+                orientacao = Orientacao.Oeste;
+            } else if (mapa[posY + 1][posX] == 1) {
+                orientacao = Orientacao.Oeste;
+            } else {
+                mapa[posY][posX] = 0;
                 posY++;
-                mapa[posX][posY] = 1;
+                mapa[posY][posX] = 1;
             }
-        }else if (orientacao.equals("Oeste")) {
+        } else if (orientacao == Orientacao.Oeste) {
             if (posX == 0) {
-                orientacao = "Norte";
-            }else if(mapa[posX - 1][posY] == 1){
-                orientacao = "Norte";
-            } else{
-                mapa[posX][posY] = 0;
+                orientacao = Orientacao.Norte;
+            } else if (mapa[posY][posX - 1] == 1) {
+                orientacao = Orientacao.Norte;
+            } else {
+                mapa[posY][posX] = 0;
                 posX--;
-                mapa[posX][posY] = 1;
+                mapa[posY][posX] = 1;
             }
-        }else if (orientacao.equals("Este")) {
-            if(posX == xMax){
-                orientacao = "Sul";
-            }else if (mapa[posX + 1][posY] == 1) {
-                orientacao = "Sul";
-            } else{
-                mapa[posX][posY] = 0;
+        } else if (orientacao == Orientacao.Este) {
+            if (posX == xMax) {
+                orientacao = Orientacao.Sul;
+            } else if (mapa[posY][posX + 1] == 1) {
+                orientacao = Orientacao.Sul;
+            } else {
+                mapa[posY][posX] = 0;
                 posX++;
-                mapa[posX][posY] = 1;
+                mapa[posY][posX] = 1;
             }
         }
     }
@@ -102,7 +107,7 @@ public class Creature {
             if (tipo.equals("Chimera")) {
                 return "chimera_sul2.png";
             }
-            if(tipo.equals("Skeleton")){
+            if (tipo.equals("Skeleton")) {
                 return "skeleton_sul.png";
             }
         }
@@ -114,7 +119,7 @@ public class Creature {
             if (tipo.equals("Chimera")) {
                 return "chimera_norte2.png";
             }
-            if(tipo.equals("Skeleton")){
+            if (tipo.equals("Skeleton")) {
                 return "skeleton_norte.png";
             }
         }
@@ -126,7 +131,7 @@ public class Creature {
             if (tipo.equals("Chimera")) {
                 return "chimera_este2.png";
             }
-            if(tipo.equals("Skeleton")){
+            if (tipo.equals("Skeleton")) {
                 return "skeleton_este.png";
             }
         }
@@ -138,7 +143,7 @@ public class Creature {
             if (tipo.equals("Chimera")) {
                 return "chimera_oeste.png";
             }
-            if(tipo.equals("Skeleton")){
+            if (tipo.equals("Skeleton")) {
                 return "skeleton_oeste.png";
             }
         }

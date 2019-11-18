@@ -33,8 +33,9 @@ public class FandeisiaGameManager {
 
         //TODO NAO SEI O PROPOSITO ESPECIFICO DOS PARAMETROS ROWS E COLLUMNS
 
-        mapStartGame = new int[columns][rows];//vamos usar isto nas outras funcoes
-
+        mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
+        //rows = y
+        // columns = x
         int idTemp;
         String typeTemp;
         int xTemp = 0;
@@ -44,6 +45,7 @@ public class FandeisiaGameManager {
         String orientTemp;
         //Dissecação do parametro "content" para objetos creatures e treasures----
         for (String elemento : content) {
+
             if(elemento.contains("treasure")){
                 Tesouro tesouroTemp = new Tesouro();
 
@@ -69,7 +71,7 @@ public class FandeisiaGameManager {
                 }
                 System.out.println(tesouroTemp.toString());
                 listaTreasures.add(tesouroTemp);
-                mapStartGame[xTemp][yTemp] = 2;
+                mapStartGame[yTemp][xTemp] = 2;
 
             }else{
                 Creature creatureTemp = new Creature();
@@ -100,14 +102,22 @@ public class FandeisiaGameManager {
                     }else if(d.startsWith(" orientation:")){
                         orientTemp = d.substring(14);
                         creatureTemp.orientacao = Creature.Orientacao.valueOf(orientTemp);
-
                     }
                 }
                 System.out.println(creatureTemp.toString());
                 listaCreatures.add(creatureTemp);
+                mapStartGame[yTemp][xTemp] = 1;
             }
         }
-        mapStartGame[xTemp][yTemp] = 1;
+
+        for(int i = 0 ; i < mapStartGame.length; i++){
+            for(int j = 0; j < mapStartGame[i].length; j++){
+                System.out.print(mapStartGame[i][j] + " ");
+            }
+            System.out.println();
+        }
+        //TODO o que é isto ---> mapStartGame[xTemp][yTemp] = 1;
+
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
@@ -135,7 +145,7 @@ public class FandeisiaGameManager {
                     //}
                // }
                 System.out.println("Id a mover " + listaCreatures.get(i).id);
-                listaCreatures.get(i).moveCriatura(listaCreatures.get(i).orientacao.toString(), mapStartGame);
+                listaCreatures.get(i).moveCriatura( mapStartGame);
 
 
 
@@ -163,10 +173,10 @@ public class FandeisiaGameManager {
          * */
 
         if(listaTreasures.size() == 0) { //não está completo
-            return true;
+            return false;
         }
 
-        return true;
+        return false;
     }
 
     public List<String> getAuthors() {//Done----------------
@@ -249,6 +259,10 @@ public class FandeisiaGameManager {
         return mapStartGame;
     }
 
+    public List<Tesouro> getTesourosLista(){
+                //Devolve o lista tesouros para ter acesso em outras classes
+        return listaTreasures;
+    }
     //public String getIcon(String iconName) {
         /*Deve devolver o icon??? do que? nao sei. */
       //  return "bird.png";
