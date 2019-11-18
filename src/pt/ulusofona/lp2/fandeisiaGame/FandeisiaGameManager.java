@@ -19,34 +19,13 @@ public class FandeisiaGameManager {
     //--------------------Metodos Obrigratorios---------------------
     public String[][] getCreatureTypes() {//Done mas...-------------
 
-         /*(As imagens a usar devem ser colocadas na pasta
-         * src/images e devem ter tamanho 50x50. As imagens
-         * devem ter fundo transparente para que se consiga
-         * ver se estão num quadrado branco ou preto).
-         */
-
         String[][] creatureTypeOptions = new String[4][4];
 
         creatureTypeOptions[0] = new String[]{"Skeleton", "skeleton.png", "Descrição textual", "5"};
         creatureTypeOptions[1] = new String[]{"Dwarf", "crazy_emoji_white.png", "Descrição textual", "10"};
-        creatureTypeOptions[2] = new String[]{"Chimera", "simba.png", "Descrição textual", "15"};
+        creatureTypeOptions[2] = new String[]{"Chimera", "Chimera.png", "Descrição textual", "15"};
         creatureTypeOptions[3] = new String[]{"Super Dragão", "crazy_emoji_black.png", "Descrição textual", "11"};
 
-        /*
-        * Deve retornar os tipos de criatura que
-        * existem no jogo e que podem ser
-        * escolhidos para os exércitos dos dois
-        * jogadores.
-        *
-        * O retorno deve ser um ​array 2d de
-        * String​, em que cada “linha” tem a
-        * seguinte informação:
-        * -Nome do tipo (posição 0)
-        * -Imagem PNG (posição 1)
-        * -Descrição textual (posição 2)
-        * -Custo (posição 3) (O valor do “Custo” não será
-        * usado nesta P1).
-        */
         return creatureTypeOptions;
     }
 
@@ -58,8 +37,8 @@ public class FandeisiaGameManager {
 
         int idTemp;
         String typeTemp;
-        int xTemp;
-        int yTemp;
+        int xTemp = 0;
+        int yTemp = 0;
 
         int teamIdTemp;
         String orientTemp;
@@ -90,6 +69,7 @@ public class FandeisiaGameManager {
                 }
                 System.out.println(tesouroTemp.toString());
                 listaTreasures.add(tesouroTemp);
+             //   mapStartGame[xTemp][yTemp] = 2;
 
             }else{
                 Creature creatureTemp = new Creature();
@@ -125,22 +105,9 @@ public class FandeisiaGameManager {
                 }
                 System.out.println(creatureTemp.toString());
                 listaCreatures.add(creatureTemp);
+//                mapStartGame[xTemp][yTemp] = 1;
             }
         }
-
-        /* Deve inicializar as estruturas de dados
-         * relevantes para processar um jogo.
-         * O ​array content​ irá descrever o conteúdo inicial do mundo
-         * (criaturas e tesouros), tendo para isso várias Strings.
-         *
-         * Cada String vai representar um objecto do
-         * mundo. As Strings vão ter um dos seguintes formatos.
-         * Para criaturas:
-         * “id: <id>, type: <type>,teamId: <teamId>, x: <x>, y:<y>, orientation: <orientation>”
-         * Para tesouros:
-         * “id: <id>, type: treasure, x: <x>, y: <y>”
-         * Os argumentos ​rows e columns vão-nos indicar as dimensões do tabuleiro.
-         * */
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
@@ -168,7 +135,7 @@ public class FandeisiaGameManager {
                     //}
                // }
                 System.out.println("IDDDDD " + listaCreatures.get(i).id);
-                listaCreatures.get(i).moveCriatura(listaCreatures.get(i).orientacao.toString());
+                listaCreatures.get(i).moveCriatura(listaCreatures.get(i).orientacao.toString(), mapStartGame);
 
 
 

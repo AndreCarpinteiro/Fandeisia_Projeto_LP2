@@ -37,26 +37,48 @@ public class Creature {
         return id;// usar this.id??
     }
 
-    public void moveCriatura(String orientacao) {
+    public void capturaPonto(){
+        pontos++;
+
+    }
+
+    public void moveCriatura(String orientacao, int[][] mapa) {
 
         if (orientacao.equals("Norte")) {
-            posY--;
+            if (mapa[posX][posY - 1] != 1) {
+                posY--;
+            } else {
+                orientacao = "Oeste";
+
+            }
         }
 
         if (orientacao.equals("Sul")) {
-            posY++;
+            if (mapa[posX][posY + 1] == 0) {
+                posY++;
+            }else{
+                orientacao = "Este";
+            }
         }
 
         if (orientacao.equals("Oeste")) {
-            posX--;
+            if (mapa[posX - 1][posY] == 0) {
+                posX--;
+            }else{
+                orientacao = "Sul";
+            }
         }
 
         if (orientacao.equals("Este")) {
-            posX++;
+            if (mapa[posX + 1][posY] == 0) {
+                posX++;
+            } else{
+                orientacao = "Norte";
+            }
         }
     }
 
-    public String getImagePNG() {//Incompleto------------------------------
+    public String getImagePNG(String orientacao) {//Incompleto------------------------------
         /* Deve devolver o nome do ficheiro de imagem
          * (formato PNG) que representa a criatura.
          *
@@ -71,27 +93,47 @@ public class Creature {
          * que o visualizador use uma imagem
          * pré-definida por omissão.
          * */
-
-        if(orientacao.equals("Sul")) {
+/*
+        if (orientacao.equals("Sul")) {
             if (tipo.equals("Dwarf")) {
                 return "crazy_emoji_White_DOWN.png";
-            }else if(tipo.equals("Chimera")){
-                return "crazy_emoji_White_DOWN.png";
+            } else if (tipo.equals("Chimera")) {
+                return "chimera_sul2.png";
             }
         }
 
-        if(tipo.equals("Skeleton")){
-            return "Skeleton.png";
+        if (orientacao.equals("Norte")) {
+            if (tipo.equals("Dwarf")) {
+                return "crazy_emoji_White_UP.png";
+            } else if (tipo.equals("Chimera")) {
+                return "chimera_norte2.png";
+            }
         }
 
-        if(tipo.equals("Chimera")){
-            return "Chimera.png";
+        if (orientacao.equals("Este")) {
+            if (tipo.equals("Dwarf")) {
+                return "crazy_emoji_White_LEFT.png";
+            } else if (tipo.equals("Chimera")) {
+                return "chimera_este2.png";
+            }
         }
 
-        if(tipo.equals("Super Dragão")){
+        if (orientacao.equals("Oeste")) {
+            if (tipo.equals("Dwarf")) {
+                return "crazy_emoji_White_RIGHT.png";
+            } else if (tipo.equals("Chimera")) {
+                return "chimera_oeste.png";
+            }
+        }*/
+
+        /*if (tipo.equals("Skeleton")) {
+            return "skeleton.png";
+        }
+
+        if (tipo.equals("Super Dragão")) {
             return "crazy_emoji_White.png";
-        }
-        return "Chimera.png";
+        }*/
+        return null;
     }
 
     public String toString() {//Done------------------------------------

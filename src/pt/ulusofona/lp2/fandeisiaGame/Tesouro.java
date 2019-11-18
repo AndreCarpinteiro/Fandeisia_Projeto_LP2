@@ -6,11 +6,12 @@ public class Tesouro {
     String tipo;
     int posX;
     int posY;
-
+    boolean capturado = false;
 
     Tesouro(){
 
     }
+
     public Tesouro(int id, String tipo, int posX, int posY){
         this.id = id;
         this.tipo = tipo;
