@@ -12,8 +12,8 @@ public class FandeisiaGameManager {
     int[][] mapStartGame;
     int countTurnos;
 
-    Team LDR = new Team(0,0,true);
-    Team RST = new Team(1,0,false);
+    Team tLDR = new Team(0,0,true);
+    Team tRST = new Team(1,0,false);
 
     List<Creature> listaCreatures = new ArrayList<>();
     List<Tesouro> listaTreasures = new ArrayList<>();
@@ -257,9 +257,9 @@ public class FandeisiaGameManager {
     public int getCurrentTeamId() {//Done(mas falta mudar a equipa ativa no processTurn ou noutra qualquer)------
         /*Deve devolver o ​ID​ da ​equipa​ que está
          * activa​ no turno actual.  */
-        if(LDR.ativo){
+        if(tLDR.ativo){
             return 0;
-        }else if(RST.ativo){
+        }else if(tRST.ativo){
             return 1;
         }
         return 2;
@@ -268,10 +268,10 @@ public class FandeisiaGameManager {
     public int getCurrentScore(int teamID) {///Done(mas falta atualizar os pontos no processTurn ou noutra qualquer)---
         /*Deve devolver o número actual de pontos
          * da equipa que tem o ID teamID. */
-        if(LDR.idTeam == teamID){
-            return LDR.pontosTeam;
+        if(tLDR.idTeam == teamID){
+            return tLDR.pontosTeam;
         }else{
-            return RST.pontosTeam;
+            return tRST.pontosTeam;
         }
     }
 
