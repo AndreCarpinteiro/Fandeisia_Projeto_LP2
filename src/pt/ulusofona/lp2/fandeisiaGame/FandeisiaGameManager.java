@@ -17,7 +17,7 @@ public class FandeisiaGameManager {
     List<Tesouro> listaTreasures = new ArrayList<>();
 
     //--------------------Metodos Obrigratorios---------------------
-    public String[][] getCreatureTypes() {//Done mas....-------------
+    public String[][] getCreatureTypes() {//Done mas...-------------
 
         String[][] creatureTypeOptions = new String[4][4];
 
@@ -34,8 +34,15 @@ public class FandeisiaGameManager {
         //TODO NAO SEI O PROPOSITO ESPECIFICO DOS PARAMETROS ROWS E COLLUMNS
 
         mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
-        //rows = y
-        // columns = x
+
+        for(int i = 0; i < mapStartGame.length; i++){
+            for(int j = 0; j < mapStartGame[i].length; j++){
+                mapStartGame[i][j] = 0;
+                System.out.print(mapStartGame[i][j]);
+            }
+            System.out.println();
+        }
+
         int idTemp;
         String typeTemp;
         int xTemp = 0;
@@ -45,7 +52,6 @@ public class FandeisiaGameManager {
         String orientTemp;
         //Dissecação do parametro "content" para objetos creatures e treasures----
         for (String elemento : content) {
-
             if(elemento.contains("treasure")){
                 Tesouro tesouroTemp = new Tesouro();
 
@@ -102,22 +108,21 @@ public class FandeisiaGameManager {
                     }else if(d.startsWith(" orientation:")){
                         orientTemp = d.substring(14);
                         creatureTemp.orientacao = Creature.Orientacao.valueOf(orientTemp);
+
                     }
                 }
                 System.out.println(creatureTemp.toString());
                 listaCreatures.add(creatureTemp);
-                mapStartGame[yTemp][xTemp] = 1;
             }
         }
+        mapStartGame[yTemp][xTemp] = 1;
 
-        for(int i = 0 ; i < mapStartGame.length; i++){
+        for(int i = 0; i < mapStartGame.length; i++){
             for(int j = 0; j < mapStartGame[i].length; j++){
-                System.out.print(mapStartGame[i][j] + " ");
+                System.out.print(mapStartGame[i][j]);
             }
             System.out.println();
         }
-        //TODO o que é isto ---> mapStartGame[xTemp][yTemp] = 1;
-
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
@@ -137,15 +142,15 @@ public class FandeisiaGameManager {
 
             //Ordenar IDs
             for(int i=0; i < listaCreatures.size(); i++){
-               // for (int j = 0; j < listaCreatures.size() - 1; j++) {
-                 //   if (listaCreatures.get(j).getId() > listaCreatures.get(j+1).getId()) {
-                   //     aux = listaCreatures.get(j).getId();
-                     //   listaCreatures.get(j).id = listaCreatures.get(j+1).getId();
-                       // listaCreatures.get(j+1).id = aux;
-                    //}
-               // }
+                // for (int j = 0; j < listaCreatures.size() - 1; j++) {
+                //   if (listaCreatures.get(j).getId() > listaCreatures.get(j+1).getId()) {
+                //     aux = listaCreatures.get(j).getId();
+                //   listaCreatures.get(j).id = listaCreatures.get(j+1).getId();
+                // listaCreatures.get(j+1).id = aux;
+                //}
+                // }
                 System.out.println("Id a mover " + listaCreatures.get(i).id);
-                listaCreatures.get(i).moveCriatura( mapStartGame);
+                listaCreatures.get(i).moveCriatura(listaCreatures.get(i).orientacao.toString(), mapStartGame);
 
 
 
@@ -157,8 +162,8 @@ public class FandeisiaGameManager {
     }
 
     public List<Creature> getCreatures() {//Quase Done--------------------------
-                                          /*TODO esta incompleto, falta as criaturas
-                                           *TODO do adversario */
+        /*TODO esta incompleto, falta as criaturas
+         *TODO do adversario */
         /* Devolve uma lista com todos os objectos
          * "Creature" ​que existem no jogo.
          * */
@@ -173,10 +178,10 @@ public class FandeisiaGameManager {
          * */
 
         if(listaTreasures.size() == 0) { //não está completo
-            return false;
+            return true;
         }
 
-        return false;
+        return true;
     }
 
     public List<String> getAuthors() {//Done----------------
@@ -218,7 +223,7 @@ public class FandeisiaGameManager {
                 return tesouroTemp.id;
             }
         }
-         /*Deve devolver o ID do objecto/elemento
+        /*Deve devolver o ID do objecto/elemento
          * que se encontra na posição indicada pelas
          * coordenadas (x,y) passadas por
          * argumento.
@@ -259,12 +264,8 @@ public class FandeisiaGameManager {
         return mapStartGame;
     }
 
-    public List<Tesouro> getTesourosLista(){
-                //Devolve o lista tesouros para ter acesso em outras classes
-        return listaTreasures;
-    }
     //public String getIcon(String iconName) {
-        /*Deve devolver o icon??? do que? nao sei. */
-      //  return "bird.png";
+    /*Deve devolver o icon??? do que? nao sei. */
+    //  return "bird.png";
     //}
 }
