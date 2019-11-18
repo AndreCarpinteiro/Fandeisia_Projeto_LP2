@@ -1,8 +1,6 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
 
-import javafx.stage.Screen;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
@@ -171,6 +169,8 @@ public class FandeisiaGameManager {
                // }
                 System.out.println("IDDDDD " + listaCreatures.get(i).id);
                 listaCreatures.get(i).moveCriatura(listaCreatures.get(i).orientacao.toString());
+
+
 
             }
 
