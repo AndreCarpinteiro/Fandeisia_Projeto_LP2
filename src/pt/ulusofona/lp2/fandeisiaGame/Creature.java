@@ -56,6 +56,6 @@ public class Creature {
          * Sintaxe​:
          * “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>”
          */
-        return id + " | " + tipo + " | " + idEquipa + " | " + pontos + " @ (" + posX + "," + posY + ") " + orientacao;
+        return id + " | " + tipo + " | " + idEquipa + " | " + pontos + " @ (" + posX + ", " + posY + ") " + orientacao;
     }
 }
