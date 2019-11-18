@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class FandeisiaGameManager {
 
     int[][] mapStartGame;
+    int countTurnos;
 
     List<Creature> listaCreatures = new ArrayList<>();
     List<DefaultTreasure> listaTreasures = new ArrayList<>();
@@ -59,6 +60,7 @@ public class FandeisiaGameManager {
         int idTemp;
         int xTemp;
         int yTemp;
+
         for (String elemento : content) {
             if(elemento.contains("treasure")){
                 //DefaultTreasure tesouroTemp = new DefaultTreasure(,,);
@@ -97,7 +99,7 @@ public class FandeisiaGameManager {
          * “id: <id>, type: treasure, x:<x>, y: <y>”
          *
          * Os argumentos ​rows e columns vão-nos indicar
-         * as dimensões do tabuleiro.
+         * as dimensões dotabuleiro.
          * */
     }
 
@@ -110,7 +112,6 @@ public class FandeisiaGameManager {
     public void processTurn() {
         /* Deve processar um turno do jogo considerando a equipa actual.
          * Inclui o movimento das criaturas. */
-
     }
 
     public List<Creature> getCreatures() {
@@ -126,12 +127,15 @@ public class FandeisiaGameManager {
 
 
     public boolean gameIsOver() {
-
-
         /*Deve devolver ​true​ caso já tenha sido
          * alcançada uma das condições de paragem
          * do jogo e ​false​ em caso contrário.
          * */
+
+        if(listaTreasures.size() == 0) {
+            return true;
+        }
+
         return true;
     }
 
@@ -188,7 +192,7 @@ public class FandeisiaGameManager {
          * tesouro na posição indicada, o método
          * deve devolver o valor 0 (zero) que representa o vazio.
          */
-        return 1;
+        return 2;
     }
 
     public int getCurrentTeamId() {
