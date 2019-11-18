@@ -3,7 +3,10 @@ package pt.ulusofona.lp2.fandeisiaGame;
 //Provavelmente ainda falta alguns metodos para gerir a criatura
 public class Creature {
     //enum é otimo para valores conhecidos finitos
-    enum Orientacao { Norte, Este, Sul, Oeste }
+    enum Orientacao {
+        Norte, Este, Sul, Oeste
+    }
+
     int id;
     int idEquipa;
 
@@ -12,12 +15,13 @@ public class Creature {
 
     int posX;
     int posY;
-    Orientacao orientacao ;
+    Orientacao orientacao;
 
-    Creature(){
+    Creature() {
 
     }
-    public Creature(int id,int idEquipa, String tipo,int pontos,int posX,int posY, Orientacao orient){
+
+    public Creature(int id, int idEquipa, String tipo, int pontos, int posX, int posY, Orientacao orient) {
         //Done
         this.id = id;
         this.idEquipa = idEquipa;
@@ -28,12 +32,31 @@ public class Creature {
         this.orientacao = orient;
     }
 
-    public int getId(){//Done---------------------------------
+    public int getId() {//Done---------------------------------
         /* Deve devolver o ID da criatura.*/
         return id;// usar this.id??
     }
 
-    public String getImagePNG(){//Incompleto------------------------------
+    public void moveCriatura(String orientacao) {
+
+        if (orientacao.equals("Norte")) {
+            posY--;
+        }
+
+        if (orientacao.equals("Sul")) {
+            posY++;
+        }
+
+        if (orientacao.equals("Oeste")) {
+            posX--;
+        }
+
+        if (orientacao.equals("Este")) {
+            posX++;
+        }
+    }
+
+    public String getImagePNG() {//Incompleto------------------------------
         /* Deve devolver o nome do ficheiro de imagem
          * (formato PNG) que representa a criatura.
          *
@@ -48,10 +71,30 @@ public class Creature {
          * que o visualizador use uma imagem
          * pré-definida por omissão.
          * */
-        return this.tipo + ".png";// talvez tirar o this
+
+        if(orientacao.equals("Sul")) {
+            if (tipo.equals("Dwarf")) {
+                return "crazy_emoji_White_DOWN.png";
+            }else if(tipo.equals("Chimera")){
+                return "crazy_emoji_White_DOWN.png";
+            }
+        }
+
+        if(tipo.equals("Skeleton")){
+            return "Skeleton.png";
+        }
+
+        if(tipo.equals("Chimera")){
+            return "Chimera.png";
+        }
+
+        if(tipo.equals("Super Dragão")){
+            return "crazy_emoji_White.png";
+        }
+        return "Chimera.png";
     }
 
-    public String toString(){//Done------------------------------------
+    public String toString() {//Done------------------------------------
         /*Retorna uma ​String​ com a informação sobre a criatura.
          * Sintaxe​:
          * “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>”

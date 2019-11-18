@@ -8,9 +8,7 @@ public class Team {
     List<Creature> teamCreatures = new ArrayList<>();
     int pontosTeam;
     boolean ativo;
-    Team(){
 
-    }
 
     Team(int idTeam,int pontosTeam,boolean ativo){
         this.idTeam = idTeam;

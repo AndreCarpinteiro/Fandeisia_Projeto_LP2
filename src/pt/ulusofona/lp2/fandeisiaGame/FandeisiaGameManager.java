@@ -1,6 +1,8 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import javafx.stage.Screen;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
@@ -25,11 +27,12 @@ public class FandeisiaGameManager {
          * ver se estão num quadrado branco ou preto).
          */
 
-        String[][] creatureTypeOptions = new String[3][4];
+        String[][] creatureTypeOptions = new String[4][4];
 
         creatureTypeOptions[0] = new String[]{"Skeleton", "skeleton.png", "Descrição textual", "5"};
         creatureTypeOptions[1] = new String[]{"Dwarf", "crazy_emoji_white.png", "Descrição textual", "10"};
         creatureTypeOptions[2] = new String[]{"Chimera", "simba.png", "Descrição textual", "15"};
+        creatureTypeOptions[3] = new String[]{"Super Dragão", "crazy_emoji_black.png", "Descrição textual", "11"};
 
         /*
         * Deve retornar os tipos de criatura que
@@ -145,12 +148,35 @@ public class FandeisiaGameManager {
     public void setInitialTeam(int teamId) {//Done----------------
         /* Indica qual das equipas vai jogar no
          * primeiro turno do jogo. */
+
         teamId = 0;//É sempre a equipa LDR, como indicado no enunciado
     }
 
     public void processTurn() {
         /* Deve processar um turno do jogo considerando a equipa actual.
          * Inclui o movimento das criaturas. */
+
+        int aux;
+
+        if(getCurrentTeamId() == 0){
+
+            //Ordenar IDs
+            for(int i=0; i < listaCreatures.size(); i++){
+               // for (int j = 0; j < listaCreatures.size() - 1; j++) {
+                 //   if (listaCreatures.get(j).getId() > listaCreatures.get(j+1).getId()) {
+                   //     aux = listaCreatures.get(j).getId();
+                     //   listaCreatures.get(j).id = listaCreatures.get(j+1).getId();
+                       // listaCreatures.get(j+1).id = aux;
+                    //}
+               // }
+                System.out.println("IDDDDD " + listaCreatures.get(i).id);
+                listaCreatures.get(i).moveCriatura(listaCreatures.get(i).orientacao.toString());
+
+            }
+
+
+        }
+
     }
 
     public List<Creature> getCreatures() {//Quase Done--------------------------
@@ -169,7 +195,7 @@ public class FandeisiaGameManager {
          * do jogo e ​false​ em caso contrário.
          * */
 
-        if(listaTreasures.size() == 0) {
+        if(listaTreasures.size() == 0) { //não está completo
             return true;
         }
 
@@ -178,12 +204,6 @@ public class FandeisiaGameManager {
 
     public List<String> getAuthors() {//Done----------------
 
-        /*Devolve uma lista de ​Strings​ com os
-         * nomes dos autores do projecto.
-         * Esta informação será usada para mostrar o
-         * conteúdo da janela que aparece ao
-         * carregar no botão de “Créditos”.
-         */
         List<String> mylist = new ArrayList<>();
 
         mylist.add("André Carpinteiro");
@@ -256,6 +276,11 @@ public class FandeisiaGameManager {
     }
 
 //--------------------Metodos Nao Obrigratorios--------------------------
+
+
+    public int[][] getMapa(){ //Devolve o mapa para ter acesso em outras classes
+        return mapStartGame;
+    }
 
     //public String getIcon(String iconName) {
         /*Deve devolver o icon??? do que? nao sei. */
