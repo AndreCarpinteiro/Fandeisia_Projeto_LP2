@@ -139,7 +139,6 @@ public class FandeisiaGameManager {
         int aux;
 
         if(getCurrentTeamId() == 0){
-
             //Ordenar IDs
             for(int i=0; i < listaCreatures.size(); i++){
                 // for (int j = 0; j < listaCreatures.size() - 1; j++) {
@@ -150,15 +149,16 @@ public class FandeisiaGameManager {
                 //}
                 // }
                 System.out.println("Id a mover " + listaCreatures.get(i).id);
-                listaCreatures.get(i).moveCriatura(listaCreatures.get(i).orientacao.toString(), mapStartGame);
-
-
-
+                listaCreatures.get(i).moveCriatura(mapStartGame);
             }
-
-
         }
-
+        if(tLDR.ativo){
+            tLDR.ativo = false;
+            tRST.ativo = true;
+        }else{
+            tLDR.ativo = true;
+            tRST.ativo = false;
+        }
     }
 
     public List<Creature> getCreatures() {//Quase Done--------------------------
@@ -178,10 +178,10 @@ public class FandeisiaGameManager {
          * */
 
         if(listaTreasures.size() == 0) { //não está completo
-            return true;
+            return false;
         }
 
-        return true;
+        return false;
     }
 
     public List<String> getAuthors() {//Done----------------
@@ -260,13 +260,11 @@ public class FandeisiaGameManager {
 
 //--------------------Metodos Nao Obrigratorios--------------------------
 
-
     public int[][] getMapa(){ //Devolve o mapa para ter acesso em outras classes
         return mapStartGame;
     }
 
-    //public String getIcon(String iconName) {
-    /*Deve devolver o icon??? do que? nao sei. */
-    //  return "bird.png";
-    //}
+    public List<Tesouro> getTesouros(){ //Devolve o mapa para ter acesso em outras classes
+        return listaTreasures;
+    }
 }

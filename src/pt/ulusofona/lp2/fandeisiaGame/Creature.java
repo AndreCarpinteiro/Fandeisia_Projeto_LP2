@@ -59,7 +59,6 @@ public class Creature {
                 mapa[posY][posX] = 0;
                 posY--;
                 mapa[posY][posX] = 1;
-
             } else {
                 mapa[posY][posX] = 0;
                 posY--;
@@ -98,7 +97,7 @@ public class Creature {
         }
     }
 
-    public String getImagePNG() {//Incompleto---------------------
+    public String getImagePNG() {//Done---------------------
 
         if (orientacao.toString().equals("Sul")) {
             if (tipo.equals("Dwarf")) {
@@ -109,6 +108,9 @@ public class Creature {
             }
             if (tipo.equals("Skeleton")) {
                 return "skeleton_sul.png";
+            }
+            if (tipo.equals("Super Dragão")) {
+                return "super_dragon_sul.png";
             }
         }
 
@@ -122,6 +124,9 @@ public class Creature {
             if (tipo.equals("Skeleton")) {
                 return "skeleton_norte.png";
             }
+            if (tipo.equals("Super Dragão")) {
+                return "super_dragon_norte.png";
+            }
         }
 
         if (orientacao.toString().equals("Este")) {
@@ -133,6 +138,9 @@ public class Creature {
             }
             if (tipo.equals("Skeleton")) {
                 return "skeleton_este.png";
+            }
+            if (tipo.equals("Super Dragão")) {
+                return "super_dragon_este.png";
             }
         }
 
@@ -146,14 +154,9 @@ public class Creature {
             if (tipo.equals("Skeleton")) {
                 return "skeleton_oeste.png";
             }
-        }
-
-        if (tipo.equals("Skeleton")) {
-            return "skeleton.png";
-        }
-
-        if (tipo.equals("Super Dragão")) {
-            return "super_dragonn.png";
+            if (tipo.equals("Super Dragão")) {
+                return "super_dragon_oeste.png";
+            }
         }
         return null;
     }
