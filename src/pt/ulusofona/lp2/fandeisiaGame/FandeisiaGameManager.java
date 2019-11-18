@@ -37,11 +37,11 @@ public class FandeisiaGameManager {
     public void startGame(String[] content, int rows, int columns) {
 
         //TODO NAO SEI O PROPOSITO ESPECIFICO DOS PARAMETROS ROWS E COLLUMNS
-        System.out.println(1/2);
-        System.out.println(2/2);
-        System.out.println(3/2);
-        tLDR = new Team(0,0,true);
-        tRST = new Team(1,0,false);
+        System.out.println(1 / 2);
+        System.out.println(2 / 2);
+        System.out.println(3 / 2);
+        tLDR = new Team(0, 0, true);
+        tRST = new Team(1, 0, false);
         countTurnos = 0;
         turn15GameOver = 0;
         tesourosTotais = 0;
@@ -49,8 +49,8 @@ public class FandeisiaGameManager {
         pontosRST = 0;
         mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
 
-        for(int i = 0; i < mapStartGame.length; i++){
-            for(int j = 0; j < mapStartGame[i].length; j++){
+        for (int i = 0; i < mapStartGame.length; i++) {
+            for (int j = 0; j < mapStartGame[i].length; j++) {
                 mapStartGame[i][j] = 0;
                 System.out.print(mapStartGame[i][j]);
             }
@@ -66,12 +66,12 @@ public class FandeisiaGameManager {
         String orientTemp;
         //Dissecação do parametro "content" para objetos creatures e treasures----
         for (String elemento : content) {
-            if(elemento.contains("treasure")){
+            if (elemento.contains("treasure")) {
                 Tesouro tesouroTemp = new Tesouro();
 
                 String[] dados = elemento.split(",");
 
-                for (String d: dados) {
+                for (String d : dados) {
                     if (d.startsWith("id:")) {
                         idTemp = Integer.parseInt(d.substring(4));
                         tesouroTemp.id = idTemp;
@@ -80,11 +80,11 @@ public class FandeisiaGameManager {
                         typeTemp = d.substring(7);
                         tesouroTemp.tipo = typeTemp;
 
-                    }else if(d.startsWith(" x:")){
+                    } else if (d.startsWith(" x:")) {
                         xTemp = Integer.parseInt(d.substring(4));
                         tesouroTemp.posX = xTemp;
 
-                    }else if(d.startsWith(" y:")){
+                    } else if (d.startsWith(" y:")) {
                         yTemp = Integer.parseInt(d.substring(4));
                         tesouroTemp.posY = yTemp;
                     }
@@ -93,12 +93,12 @@ public class FandeisiaGameManager {
                 listaTreasures.add(tesouroTemp);
                 mapStartGame[yTemp][xTemp] = 2;
 
-            }else{
+            } else {
                 Creature creatureTemp = new Creature();
 
                 String[] dados = elemento.split(",");
 
-                for (String d: dados) {
+                for (String d : dados) {
                     if (d.startsWith("id:")) {
                         idTemp = Integer.parseInt(d.substring(4));
                         creatureTemp.id = idTemp;
@@ -111,15 +111,15 @@ public class FandeisiaGameManager {
                         teamIdTemp = Integer.parseInt(d.substring(9));
                         creatureTemp.idEquipa = teamIdTemp;
 
-                    }else if(d.startsWith(" x:")){
+                    } else if (d.startsWith(" x:")) {
                         xTemp = Integer.parseInt(d.substring(4));
                         creatureTemp.posX = xTemp;
 
-                    }else if(d.startsWith(" y:")){
+                    } else if (d.startsWith(" y:")) {
                         yTemp = Integer.parseInt(d.substring(4));
                         creatureTemp.posY = yTemp;
 
-                    }else if(d.startsWith(" orientation:")){
+                    } else if (d.startsWith(" orientation:")) {
                         orientTemp = d.substring(14);
                         creatureTemp.orientacao = Creature.Orientacao.valueOf(orientTemp);
 
@@ -132,8 +132,8 @@ public class FandeisiaGameManager {
         }
         tesourosTotais = listaTreasures.size();
 
-        for(int i = 0; i < mapStartGame.length; i++){
-            for(int j = 0; j < mapStartGame[i].length; j++){
+        for (int i = 0; i < mapStartGame.length; i++) {
+            for (int j = 0; j < mapStartGame[i].length; j++) {
                 System.out.print(mapStartGame[i][j] + " ");
             }
             System.out.println();
@@ -149,39 +149,38 @@ public class FandeisiaGameManager {
         /* Deve processar um turno do jogo considerando a equipa actual.
          * Inclui o movimento das criaturas. */
 
-        if(getCurrentTeamId() == 0){
+        if (getCurrentTeamId() == 0) {
             //Ordenar IDs
             boolean encontrou;
 
-            for(int i=0; i < listaCreatures.size(); i++){
+            for (int i = 0; i < listaCreatures.size(); i++) {
                 System.out.println("Id a mover " + listaCreatures.get(i).id);
                 encontrou = listaCreatures.get(i).moveCriatura(mapStartGame);
 
-                if(encontrou){
+                if (encontrou) {
                     turn15GameOver = 0;
                     for (int j = 0; j < listaTreasures.size(); j++) {
-                        if (listaTreasures.get(i).posY == listaCreatures.get(i).getY() && listaTreasures.get(i).posX == listaCreatures.get(i).getX()) {
-                            listaTreasures.remove(listaTreasures.get(i));
+                        if (listaTreasures.get(j).posY == listaCreatures.get(i).getY() && listaTreasures.get(j).posX == listaCreatures.get(i).getX()) {
+                            listaTreasures.remove(listaTreasures.get(j));
                         }
+                    }
+
+                    if (listaCreatures.get(i).getIdEquipa() == 0) {
+                        pontosLDR += listaCreatures.get(i).getPontos();
+                    } else {
+                        pontosRST += listaCreatures.get(i).getPontos();
                     }
                 }
             }
         }
 
-        for(Creature creature: listaCreatures){
-            if(creature.idEquipa == 0){
-                pontosLDR += creature.pontos;
-            }else{
-                pontosRST+= creature.pontos;
-            }
-        }
         turn15GameOver++;
         countTurnos++;
 
-        if(tLDR.ativo){
+        if (tLDR.ativo) {
             tLDR.ativo = false;
             tRST.ativo = true;
-        }else{
+        } else {
             tLDR.ativo = true;
             tRST.ativo = false;
         }
@@ -207,7 +206,30 @@ public class FandeisiaGameManager {
          * a equipa com mais pontos
          */
         // Verificação de gameIsOver
-        if(pontosLDR > tesourosTotais / 2 || pontosRST > tesourosTotais / 2 || listaTreasures.size() == 0 || turn15GameOver == 15){
+
+        if (pontosLDR == (tesourosTotais / 2) + 1) {
+            System.out.println("pontos do vencedor:" + pontosLDR);
+            System.out.println("necessarios:" + (tesourosTotais / 2) + 1);
+            System.out.println("totais:" + tesourosTotais);
+            System.out.println(1);
+            return true;
+        }
+
+        if (pontosRST == (tesourosTotais / 2) + 1) {
+            System.out.println("pontos do vencedor:" + pontosRST);
+            System.out.println("necessarios:" + (tesourosTotais / 2) + 1);
+            System.out.println("totais:" + tesourosTotais);
+            System.out.println(2);
+            return true;
+        }
+
+        if (listaTreasures.size() == 0) {
+            System.out.println(3);
+            return true;
+        }
+
+        if (turn15GameOver == 15) {
+            System.out.println(4);
             return true;
         }
 
@@ -243,17 +265,17 @@ public class FandeisiaGameManager {
     public int getElementId(int x, int y) {//Done-------------------
 
         for (Creature creatureTemp : listaCreatures) {
-            if(creatureTemp.posX == x && creatureTemp.posY == y){
+            if (creatureTemp.posX == x && creatureTemp.posY == y) {
                 return creatureTemp.id;
             }
         }
 
-        for (Tesouro tesouroTemp : listaTreasures){
-            if(tesouroTemp.posX == x && tesouroTemp.posY == y){
+        for (Tesouro tesouroTemp : listaTreasures) {
+            if (tesouroTemp.posX == x && tesouroTemp.posY == y) {
                 return tesouroTemp.id;
             }
         }
-         /* Caso não exista nenhuma criatura ou
+        /* Caso não exista nenhuma criatura ou
          * tesouro na posição indicada, o método
          * deve devolver o valor 0 (zero) que representa o vazio.
          */
@@ -262,9 +284,9 @@ public class FandeisiaGameManager {
 
     public int getCurrentTeamId() {
         /*Deve devolver o ​ID​ da ​equipa​ que está activa​ no turno actual.  */
-        if(tLDR.ativo){
+        if (tLDR.ativo) {
             return 0;
-        }else if(tRST.ativo){
+        } else if (tRST.ativo) {
             return 1;
         }
         return 2;
@@ -272,21 +294,21 @@ public class FandeisiaGameManager {
 
     public int getCurrentScore(int teamID) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID. */
-        if(tLDR.idTeam == teamID){
+        if (tLDR.idTeam == teamID) {
             return tLDR.pontosTeam;
 
-        }else{
+        } else {
             return tRST.pontosTeam;
         }
     }
 
 //--------------------Metodos Nao Obrigratorios--------------------------
 
-    public int[][] getMapa(){ //Devolve o mapa para ter acesso em outras classes
+    public int[][] getMapa() { //Devolve o mapa para ter acesso em outras classes
         return mapStartGame;
     }
 
-    public List<Tesouro> getTesouros(){ //Devolve o mapa para ter acesso em outras classes
+    public List<Tesouro> getTesouros() { //Devolve o mapa para ter acesso em outras classes
         return listaTreasures;
     }
 }

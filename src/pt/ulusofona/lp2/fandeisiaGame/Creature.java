@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 //Provavelmente ainda falta alguns metodos para gerir a criatura
 public class Creature {
     //enum é otimo para valores conhecidos finitos
@@ -190,6 +192,14 @@ public class Creature {
 
     public int getX(){
         return posX;
+    }
+
+    public int getPontos(){
+        return pontos;
+    }
+
+    public int getIdEquipa(){
+        return idEquipa;
     }
 
     public String toString() {//Done------------------------------------
