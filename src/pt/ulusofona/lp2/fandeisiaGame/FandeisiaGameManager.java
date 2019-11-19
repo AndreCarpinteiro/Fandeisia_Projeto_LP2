@@ -40,7 +40,7 @@ public class FandeisiaGameManager {
         System.out.println(1 / 2);
         System.out.println(2 / 2);
         System.out.println(3 / 2);
-        tLDR = new Team(0, 0, true);
+        tLDR = new Team(0, 0, false);
         tRST = new Team(1, 0, false);
         countTurnos = 0;
         turn15GameOver = 0;
@@ -52,7 +52,7 @@ public class FandeisiaGameManager {
         for (int i = 0; i < mapStartGame.length; i++) {
             for (int j = 0; j < mapStartGame[i].length; j++) {
                 mapStartGame[i][j] = 0;
-                System.out.print(mapStartGame[i][j]);
+                System.out.print(mapStartGame[i][j] + " ");
             }
             System.out.println();
         }
@@ -145,6 +145,7 @@ public class FandeisiaGameManager {
     public void setInitialTeam(int teamId) {//Done----------------
 
         teamId = 0; //É sempre a equipa LDR, como indicado no enunciado
+        tLDR.setEstado(true);
     }
 
     public void processTurn() {
@@ -152,7 +153,7 @@ public class FandeisiaGameManager {
         boolean encontrou = false;
 
         for (int i = 0; i < listaCreatures.size(); i++) {
-            System.out.println("Id a mover " + listaCreatures.get(i).getIdEquipa());
+         //   System.out.println("Id a mover " + listaCreatures.get(i).getIdEquipa());
 
             if (getCurrentTeamId() == listaCreatures.get(i).getIdEquipa()) {
                 encontrou = listaCreatures.get(i).moveCriatura(mapStartGame);
@@ -167,9 +168,9 @@ public class FandeisiaGameManager {
                 }
 
                 if (listaCreatures.get(i).getIdEquipa() == 0) {
-                    pontosLDR += listaCreatures.get(i).getPontos();
+                    pontosLDR++;
                 } else {
-                    pontosRST += listaCreatures.get(i).getPontos();
+                    pontosRST++;
                 }
             }
         }
@@ -185,6 +186,21 @@ public class FandeisiaGameManager {
             tLDR.setEstado(true);
             tRST.setEstado(false);
         }
+
+        for (int j = 0; j < listaTreasures.size(); j++) {
+            System.out.println(listaTreasures.get(j).toString());
+        }
+
+        for (int j = 0; j < listaCreatures.size(); j++) {
+            System.out.println(listaCreatures.get(j).toString());
+        }
+
+        for (int i = 0; i < mapStartGame.length; i++) {
+            for (int j = 0; j < mapStartGame[i].length; j++) {
+                System.out.print(mapStartGame[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
     public List<Creature> getCreatures() {//Quase Done--------------------------
@@ -195,21 +211,21 @@ public class FandeisiaGameManager {
     public boolean gameIsOver() {
         // Verificação de gameIsOver
 
-        float conta_manhosa = (tesourosTotais / 2);
+        int conta = tesourosTotais / 2 + 1;
 
-        if (pontosLDR == (tesourosTotais / 2) + 1) {
+        if (pontosLDR >= conta) {
             System.out.println();
             System.out.println("pontos do vencedor:" + pontosLDR);
-            System.out.println("necessarios:" + (tesourosTotais / 2) + 1);
+            System.out.println("necessarios:" + conta);
             System.out.println("totais:" + tesourosTotais);
             System.out.println(1);
             return true;
         }
 
-        if (pontosRST == (tesourosTotais / 2) + 1) {
+        if (pontosRST >= conta) {
             System.out.println();
             System.out.println("pontos do vencedor:" + pontosRST);
-            System.out.println("necessarios:" + (tesourosTotais / 2) + 1);
+            System.out.println("necessarios:" + conta);
             System.out.println("totais:" + tesourosTotais);
             System.out.println(2);
             return true;

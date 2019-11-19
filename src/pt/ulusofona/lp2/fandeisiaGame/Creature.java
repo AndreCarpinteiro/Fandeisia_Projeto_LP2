@@ -43,8 +43,8 @@ public class Creature {
         int xMax = mapa[0].length - 1;
         boolean encontrou = false;
 
-        System.out.println("rows" + yMax);
-        System.out.println("columns" + xMax);
+      //  System.out.println("rows" + yMax);
+        //System.out.println("columns" + xMax);
 
         if (orientacao == Orientacao.Norte) {
             if (posY == 0) {
@@ -149,7 +149,7 @@ public class Creature {
 
         if (orientacao.toString().equals("Este")) {
             if (tipo.equals("Dwarf")) {
-                return "crazy_emoji_white_LEFT.png";
+                return "crazy_emoji_white_RIGHT.png";
             }
             if (tipo.equals("Chimera")) {
                 return "chimera_este2.png";
@@ -164,7 +164,7 @@ public class Creature {
 
         if (orientacao.toString().equals("Oeste")) {
             if (tipo.equals("Dwarf")) {
-                return "crazy_emoji_white_RIGHT.png";
+                return "crazy_emoji_white_LEFT.png";
             }
             if (tipo.equals("Chimera")) {
                 return "chimera_oeste.png";
