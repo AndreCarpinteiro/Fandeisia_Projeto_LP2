@@ -36,11 +36,7 @@ public class FandeisiaGameManager {
 
     public void startGame(String[] content, int rows, int columns) {
 
-        //TODO NAO SEI O PROPOSITO ESPECIFICO DOS PARAMETROS ROWS E COLLUMNS
-        System.out.println(1 / 2);
-        System.out.println(2 / 2);
-        System.out.println(3 / 2);
-        tLDR = new Team(0, 0, false);
+        tLDR = new Team(0, 0, true);
         tRST = new Team(1, 0, false);
         countTurnos = 0;
         turn15GameOver = 0;
@@ -145,7 +141,7 @@ public class FandeisiaGameManager {
     public void setInitialTeam(int teamId) {//Done----------------
 
         teamId = 0; //É sempre a equipa LDR, como indicado no enunciado
-        tLDR.setEstado(true);
+        //tLDR.setEstado(true);
     }
 
     public void processTurn() {
@@ -155,9 +151,9 @@ public class FandeisiaGameManager {
         for (int i = 0; i < listaCreatures.size(); i++) {
          //   System.out.println("Id a mover " + listaCreatures.get(i).getIdEquipa());
 
-            if (getCurrentTeamId() == listaCreatures.get(i).getIdEquipa()) {
+            //if (getCurrentTeamId() == listaCreatures.get(i).getIdEquipa()) {
                 encontrou = listaCreatures.get(i).moveCriatura(mapStartGame);
-            }
+            //}
 
             if (encontrou) {
                 turn15GameOver = 0;

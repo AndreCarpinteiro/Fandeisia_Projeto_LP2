@@ -43,7 +43,7 @@ public class Creature {
         int xMax = mapa[0].length - 1;
         boolean encontrou = false;
 
-      //  System.out.println("rows" + yMax);
+        //System.out.println("rows" + yMax);
         //System.out.println("columns" + xMax);
 
         if (orientacao == Orientacao.Norte) {
