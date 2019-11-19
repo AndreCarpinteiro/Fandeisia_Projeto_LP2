@@ -1,9 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
-import com.sun.org.apache.regexp.internal.RE;
-
-//Provavelmente ainda falta alguns metodos para gerir a criatura
 public class Creature {
+
     //enum é otimo para valores conhecidos finitos
     enum Orientacao {
         Norte, Este, Sul, Oeste
@@ -34,14 +32,9 @@ public class Creature {
         this.orientacao = orient;
     }
 
-    public int getId() {//Done---------------------------------
+    public int getId() {//Done------------
         /* Deve devolver o ID da criatura.*/
         return id;// usar this.id??
-    }
-
-    public void capturaPonto() {
-        pontos++;
-
     }
 
     public boolean moveCriatura(int[][] mapa) {
@@ -202,6 +195,10 @@ public class Creature {
         return idEquipa;
     }
 
+    public String getTipo(){
+        return tipo;
+    }
+
     public void setId(int id){
         this.id = id;
     }
@@ -226,11 +223,8 @@ public class Creature {
         this.orientacao = orientacao;
     }
 
-    public String toString() {//Done------------------------------------
-        /*Retorna uma ​String​ com a informação sobre a criatura.
-         * Sintaxe​:
-         * “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>”
-         */
+    public String toString() {//Done--------------------
+
         return id + " | " + tipo + " | " + idEquipa + " | " + pontos + " @ (" + posX + ", " + posY + ") " + orientacao;
     }
 

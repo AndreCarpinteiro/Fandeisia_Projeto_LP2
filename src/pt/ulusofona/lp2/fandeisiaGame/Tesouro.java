@@ -6,7 +6,6 @@ public class Tesouro {
     String tipo;
     int posX;
     int posY;
-    boolean capturado = false;
 
     Tesouro(){
 
@@ -48,6 +47,7 @@ public class Tesouro {
     }
 
     public String toString(){ //NÃO SEI SE É ASSIM
+
         return "id: " + id + ", type: " + tipo + " | " + " (" + posX + "," + posY + ") ";
     }
 }

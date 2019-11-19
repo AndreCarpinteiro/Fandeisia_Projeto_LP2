@@ -1,7 +1,6 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -65,7 +64,9 @@ public class FandeisiaGameManager {
 
         int teamIdTemp;
         String orientTemp;
+
         //Dissecação do parametro "content" para objetos creatures e treasures----
+
         for (String elemento : content) {
             if (elemento.contains("treasure")) {
                 Tesouro tesouroTemp = new Tesouro();
@@ -142,8 +143,8 @@ public class FandeisiaGameManager {
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
-        /* Indica qual das equipas vai jogar no primeiro turno do jogo. */
-        teamId = 0;//É sempre a equipa LDR, como indicado no enunciado
+
+        teamId = 0; //É sempre a equipa LDR, como indicado no enunciado
     }
 
     public void processTurn() {
@@ -178,7 +179,7 @@ public class FandeisiaGameManager {
         turn15GameOver++;
         countTurnos++;
 
-        if (tLDR.ativo) {
+        if (tLDR.getEstado()) {
             tLDR.setEstado(false);
             tRST.setEstado(true);
         } else {
@@ -233,17 +234,17 @@ public class FandeisiaGameManager {
 
     public List<String> getAuthors() {//Done----------------
 
-        List<String> mylist = new ArrayList<>();
+        List<String> listaAuthors = new ArrayList<>();
 
-        mylist.add("André Carpinteiro");
-        mylist.add("David Silva");
+        listaAuthors.add("André Carpinteiro");
+        listaAuthors.add("David Silva");
 
-        return mylist;
+        return listaAuthors;
     }
 
-    public List<String> getResults() {
+    public List<String> getResults() {//Done---------------
 
-        List<String> resultado = new ArrayList<String>();
+        List<String> resultado = new ArrayList<>();
 
         resultado.add("Welcome to FANDEISIA");
 
@@ -254,7 +255,7 @@ public class FandeisiaGameManager {
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
             for(int i = 0; i < listaCreatures.size(); i++) {
-                resultado.add(listaCreatures.get(i).toString());
+                resultado.add(listaCreatures.get(i).getId() + " : " + listaCreatures.get(i).getTipo() + " : " + listaCreatures.get(i).getPontos());
             }
         }
 
@@ -265,7 +266,7 @@ public class FandeisiaGameManager {
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
             for(int i = 0; i < listaCreatures.size(); i++) {
-                resultado.add(listaCreatures.get(i).toString());
+                resultado.add(listaCreatures.get(i).getId() + " : " + listaCreatures.get(i).getTipo() + " : " + listaCreatures.get(i).getPontos());
             }
         }
 
@@ -276,7 +277,7 @@ public class FandeisiaGameManager {
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
             for(int i = 0; i < listaCreatures.size(); i++) {
-                resultado.add(listaCreatures.get(i).toString());
+                resultado.add(listaCreatures.get(i).getId() + " : " + listaCreatures.get(i).getTipo() + " : " + listaCreatures.get(i).getPontos());
             }
         }
         return resultado;
@@ -295,10 +296,6 @@ public class FandeisiaGameManager {
                 return tesouroTemp.getId();
             }
         }
-        /* Caso não exista nenhuma criatura ou
-         * tesouro na posição indicada, o método
-         * deve devolver o valor 0 (zero) que representa o vazio.
-         */
         return 0;
     }
 
