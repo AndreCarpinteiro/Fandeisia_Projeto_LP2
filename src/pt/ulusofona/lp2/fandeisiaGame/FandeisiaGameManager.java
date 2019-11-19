@@ -148,36 +148,35 @@ public class FandeisiaGameManager {
     }
 
     public void processTurn() {
-        /* Deve processar um turno do jogo considerando a equipa actual.
-         * Inclui o movimento das criaturas. */
 
-        if (getCurrentTeamId() == 0) {
-            //Ordenar IDs
-            boolean encontrou;
+        boolean encontrou = false;
 
-            for (int i = 0; i < listaCreatures.size(); i++) {
-                System.out.println("Id a mover " + listaCreatures.get(i).getIdEquipa());
+        for (int i = 0; i < listaCreatures.size(); i++) {
+            System.out.println("Id a mover " + listaCreatures.get(i).getIdEquipa());
+
+            if (getCurrentTeamId() == listaCreatures.get(i).getIdEquipa()) {
                 encontrou = listaCreatures.get(i).moveCriatura(mapStartGame);
+            }
 
-                if (encontrou) {
-                    turn15GameOver = 0;
-                    for (int j = 0; j < listaTreasures.size(); j++) {
-                        if (listaTreasures.get(j).getPosY() == listaCreatures.get(i).getPosY() && listaTreasures.get(j).getPosX() == listaCreatures.get(i).getPosX()) {
-                            listaTreasures.remove(listaTreasures.get(j));
-                        }
+            if (encontrou) {
+                turn15GameOver = 0;
+                for (int j = 0; j < listaTreasures.size(); j++) {
+                    if (listaTreasures.get(j).getPosY() == listaCreatures.get(i).getPosY() && listaTreasures.get(j).getPosX() == listaCreatures.get(i).getPosX()) {
+                        listaTreasures.remove(listaTreasures.get(j));
                     }
+                }
 
-                    if (listaCreatures.get(i).getIdEquipa() == 0) {
-                        pontosLDR += listaCreatures.get(i).getPontos();
-                    } else {
-                        pontosRST += listaCreatures.get(i).getPontos();
-                    }
+                if (listaCreatures.get(i).getIdEquipa() == 0) {
+                    pontosLDR += listaCreatures.get(i).getPontos();
+                } else {
+                    pontosRST += listaCreatures.get(i).getPontos();
                 }
             }
         }
 
         turn15GameOver++;
         countTurnos++;
+
 
         if (tLDR.getEstado()) {
             tLDR.setEstado(false);
@@ -186,7 +185,6 @@ public class FandeisiaGameManager {
             tLDR.setEstado(true);
             tRST.setEstado(false);
         }
-
     }
 
     public List<Creature> getCreatures() {//Quase Done--------------------------
@@ -254,7 +252,7 @@ public class FandeisiaGameManager {
             resultado.add("RESISTENCIA: " + pontosRST);
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
-            for(int i = 0; i < listaCreatures.size(); i++) {
+            for (int i = 0; i < listaCreatures.size(); i++) {
                 resultado.add(listaCreatures.get(i).getId() + " : " + listaCreatures.get(i).getTipo() + " : " + listaCreatures.get(i).getPontos());
             }
         }
@@ -265,7 +263,7 @@ public class FandeisiaGameManager {
             resultado.add("RESISTENCIA: " + pontosRST);
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
-            for(int i = 0; i < listaCreatures.size(); i++) {
+            for (int i = 0; i < listaCreatures.size(); i++) {
                 resultado.add(listaCreatures.get(i).getId() + " : " + listaCreatures.get(i).getTipo() + " : " + listaCreatures.get(i).getPontos());
             }
         }
@@ -276,7 +274,7 @@ public class FandeisiaGameManager {
             resultado.add("LDR: " + pontosLDR);
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
-            for(int i = 0; i < listaCreatures.size(); i++) {
+            for (int i = 0; i < listaCreatures.size(); i++) {
                 resultado.add(listaCreatures.get(i).getId() + " : " + listaCreatures.get(i).getTipo() + " : " + listaCreatures.get(i).getPontos());
             }
         }

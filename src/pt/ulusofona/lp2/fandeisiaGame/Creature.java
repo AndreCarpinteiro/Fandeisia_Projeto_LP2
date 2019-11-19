@@ -179,47 +179,47 @@ public class Creature {
         return null;
     }
 
-    public int getPosY(){
+    public int getPosY() {
         return posY;
     }
 
-    public int getPosX(){
+    public int getPosX() {
         return posX;
     }
 
-    public int getPontos(){
+    public int getPontos() {
         return pontos;
     }
 
-    public int getIdEquipa(){
+    public int getIdEquipa() {
         return idEquipa;
     }
 
-    public String getTipo(){
+    public String getTipo() {
         return tipo;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
-    public void setTipo(String tipo){
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
-    public void setIdEquipa(int idEquipa){
+    public void setIdEquipa(int idEquipa) {
         this.idEquipa = idEquipa;
     }
 
-    public void setPosX(int posX){
+    public void setPosX(int posX) {
         this.posX = posX;
     }
 
-    public void setPosY(int posY){
+    public void setPosY(int posY) {
         this.posY = posY;
     }
 
-    public void setOrientacao(Orientacao orientacao){
+    public void setOrientacao(Orientacao orientacao) {
         this.orientacao = orientacao;
     }
 
