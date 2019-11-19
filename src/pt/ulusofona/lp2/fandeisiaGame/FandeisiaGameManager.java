@@ -74,19 +74,19 @@ public class FandeisiaGameManager {
                 for (String d : dados) {
                     if (d.startsWith("id:")) {
                         idTemp = Integer.parseInt(d.substring(4));
-                        tesouroTemp.id = idTemp;
+                        tesouroTemp.setId(idTemp);
 
                     } else if (d.startsWith(" type:")) {
                         typeTemp = d.substring(7);
-                        tesouroTemp.tipo = typeTemp;
+                        tesouroTemp.setTipo(typeTemp);
 
                     } else if (d.startsWith(" x:")) {
                         xTemp = Integer.parseInt(d.substring(4));
-                        tesouroTemp.posX = xTemp;
+                        tesouroTemp.setPosX(xTemp);
 
                     } else if (d.startsWith(" y:")) {
                         yTemp = Integer.parseInt(d.substring(4));
-                        tesouroTemp.posY = yTemp;
+                        tesouroTemp.setPosY(yTemp);
                     }
                 }
                 System.out.println(tesouroTemp.toString());
@@ -101,27 +101,27 @@ public class FandeisiaGameManager {
                 for (String d : dados) {
                     if (d.startsWith("id:")) {
                         idTemp = Integer.parseInt(d.substring(4));
-                        creatureTemp.id = idTemp;
+                        creatureTemp.setId(idTemp);
 
                     } else if (d.startsWith(" type:")) {
                         typeTemp = d.substring(7);
-                        creatureTemp.tipo = typeTemp;
+                        creatureTemp.setTipo(typeTemp);
 
                     } else if (d.startsWith(" teamId:")) {
                         teamIdTemp = Integer.parseInt(d.substring(9));
-                        creatureTemp.idEquipa = teamIdTemp;
+                        creatureTemp.setIdEquipa(teamIdTemp);
 
                     } else if (d.startsWith(" x:")) {
                         xTemp = Integer.parseInt(d.substring(4));
-                        creatureTemp.posX = xTemp;
+                        creatureTemp.setPosX(xTemp);
 
                     } else if (d.startsWith(" y:")) {
                         yTemp = Integer.parseInt(d.substring(4));
-                        creatureTemp.posY = yTemp;
+                        creatureTemp.setPosY(yTemp);
 
                     } else if (d.startsWith(" orientation:")) {
                         orientTemp = d.substring(14);
-                        creatureTemp.orientacao = Creature.Orientacao.valueOf(orientTemp);
+                        creatureTemp.setOrientacao(Creature.Orientacao.valueOf(orientTemp));
 
                     }
                 }
@@ -154,13 +154,13 @@ public class FandeisiaGameManager {
             boolean encontrou;
 
             for (int i = 0; i < listaCreatures.size(); i++) {
-                System.out.println("Id a mover " + listaCreatures.get(i).id);
+                System.out.println("Id a mover " + listaCreatures.get(i).getIdEquipa());
                 encontrou = listaCreatures.get(i).moveCriatura(mapStartGame);
 
                 if (encontrou) {
                     turn15GameOver = 0;
                     for (int j = 0; j < listaTreasures.size(); j++) {
-                        if (listaTreasures.get(j).posY == listaCreatures.get(i).getY() && listaTreasures.get(j).posX == listaCreatures.get(i).getX()) {
+                        if (listaTreasures.get(j).getPosY() == listaCreatures.get(i).getPosY() && listaTreasures.get(j).getPosX() == listaCreatures.get(i).getPosX()) {
                             listaTreasures.remove(listaTreasures.get(j));
                         }
                     }
@@ -178,11 +178,11 @@ public class FandeisiaGameManager {
         countTurnos++;
 
         if (tLDR.ativo) {
-            tLDR.ativo = false;
-            tRST.ativo = true;
+            tLDR.setEstado(false);
+            tRST.setEstado(true);
         } else {
-            tLDR.ativo = true;
-            tRST.ativo = false;
+            tLDR.setEstado(true);
+            tRST.setEstado(false);
         }
 
     }
@@ -265,14 +265,14 @@ public class FandeisiaGameManager {
     public int getElementId(int x, int y) {//Done-------------------
 
         for (Creature creatureTemp : listaCreatures) {
-            if (creatureTemp.posX == x && creatureTemp.posY == y) {
-                return creatureTemp.id;
+            if (creatureTemp.getPosX() == x && creatureTemp.getPosY() == y) {
+                return creatureTemp.getId();
             }
         }
 
         for (Tesouro tesouroTemp : listaTreasures) {
-            if (tesouroTemp.posX == x && tesouroTemp.posY == y) {
-                return tesouroTemp.id;
+            if (tesouroTemp.getPosX() == x && tesouroTemp.getPosY() == y) {
+                return tesouroTemp.getId();
             }
         }
         /* Caso não exista nenhuma criatura ou
@@ -284,9 +284,9 @@ public class FandeisiaGameManager {
 
     public int getCurrentTeamId() {
         /*Deve devolver o ​ID​ da ​equipa​ que está activa​ no turno actual.  */
-        if (tLDR.ativo) {
+        if (tLDR.getEstado()) {
             return 0;
-        } else if (tRST.ativo) {
+        } else if (tRST.getEstado()) {
             return 1;
         }
         return 2;
@@ -294,21 +294,11 @@ public class FandeisiaGameManager {
 
     public int getCurrentScore(int teamID) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID. */
-        if (tLDR.idTeam == teamID) {
-            return tLDR.pontosTeam;
+        if (tLDR.getIdTeam() == teamID) {
+            return tLDR.getTeamPontos();
 
         } else {
-            return tRST.pontosTeam;
+            return tRST.getTeamPontos();
         }
-    }
-
-//--------------------Metodos Nao Obrigratorios--------------------------
-
-    public int[][] getMapa() { //Devolve o mapa para ter acesso em outras classes
-        return mapStartGame;
-    }
-
-    public List<Tesouro> getTesouros() { //Devolve o mapa para ter acesso em outras classes
-        return listaTreasures;
     }
 }

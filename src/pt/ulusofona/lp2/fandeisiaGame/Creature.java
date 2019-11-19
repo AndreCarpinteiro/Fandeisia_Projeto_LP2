@@ -186,11 +186,11 @@ public class Creature {
         return null;
     }
 
-    public int getY(){
+    public int getPosY(){
         return posY;
     }
 
-    public int getX(){
+    public int getPosX(){
         return posX;
     }
 
@@ -200,6 +200,30 @@ public class Creature {
 
     public int getIdEquipa(){
         return idEquipa;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+
+    public void setIdEquipa(int idEquipa){
+        this.idEquipa = idEquipa;
+    }
+
+    public void setPosX(int posX){
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY){
+        this.posY = posY;
+    }
+
+    public void setOrientacao(Orientacao orientacao){
+        this.orientacao = orientacao;
     }
 
     public String toString() {//Done------------------------------------

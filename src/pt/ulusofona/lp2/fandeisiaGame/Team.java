@@ -15,4 +15,20 @@ public class Team {
         this.pontosTeam = pontosTeam;
         this.ativo = ativo;
     }
+
+    public void setEstado(boolean ativo){
+        this.ativo = ativo;
+    }
+
+    public boolean getEstado(){
+        return ativo;
+    }
+
+    public int getTeamPontos(){
+        return pontosTeam;
+    }
+
+    public int getIdTeam(){
+        return idTeam;
+    }
 }
