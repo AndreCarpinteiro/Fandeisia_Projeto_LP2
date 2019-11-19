@@ -22,6 +22,7 @@ public class FandeisiaGameManager {
     private List<Tesouro> listaTreasures = new ArrayList<>();
 
     //--------------------Metodos Obrigratorios---------------------
+
     public String[][] getCreatureTypes() {//Done mas...-------------
 
         String[][] creatureTypeOptions = new String[4][4];
@@ -193,21 +194,12 @@ public class FandeisiaGameManager {
 
 
     public boolean gameIsOver() {
-        /* Deve devolver ​true​ caso já tenha sido
-         * alcançada uma das condições de paragem
-         * do jogo e ​false​ em caso contrário.
-         *
-         * O jogo termina quando for atingida uma das seguintes três condições:
-         * Não existirem mais Tesouros para apanhar/capturar no mundo;
-         * Terem passado 15 turnos sem que nenhuma criatura tenha encontrado
-         * um tesouro;
-         * O número de tesouros/pontos que existem no mundo já não
-         * permitirem que a equipa que com menos pontos apanhe (iguale)
-         * a equipa com mais pontos
-         */
         // Verificação de gameIsOver
 
+        float conta_manhosa = (tesourosTotais / 2);
+
         if (pontosLDR == (tesourosTotais / 2) + 1) {
+            System.out.println();
             System.out.println("pontos do vencedor:" + pontosLDR);
             System.out.println("necessarios:" + (tesourosTotais / 2) + 1);
             System.out.println("totais:" + tesourosTotais);
@@ -216,6 +208,7 @@ public class FandeisiaGameManager {
         }
 
         if (pontosRST == (tesourosTotais / 2) + 1) {
+            System.out.println();
             System.out.println("pontos do vencedor:" + pontosRST);
             System.out.println("necessarios:" + (tesourosTotais / 2) + 1);
             System.out.println("totais:" + tesourosTotais);
@@ -224,11 +217,13 @@ public class FandeisiaGameManager {
         }
 
         if (listaTreasures.size() == 0) {
+            System.out.println();
             System.out.println(3);
             return true;
         }
 
         if (turn15GameOver == 15) {
+            System.out.println();
             System.out.println(4);
             return true;
         }
@@ -248,18 +243,43 @@ public class FandeisiaGameManager {
 
     public List<String> getResults() {
 
-        List<String> mylist = new ArrayList<String>();
-        /* Devolve uma lista de ​Strings​ que
-         * representem os resultados do jogo,
-         * conforme descrito na secção dos
-         * “Resultados da execução …”.
-         *
-         * Este método não pode devolver ​null​.
-         * Caso não calculem a informação
-         * respectiva, devem devolver ​uma lista vazia​.
-         * */
+        List<String> resultado = new ArrayList<String>();
 
-        return mylist;
+        resultado.add("Welcome to FANDEISIA");
+
+        if (pontosLDR == pontosRST) {
+            resultado.add("Resultado: EMPATE");
+            resultado.add("LDR: " + pontosLDR);
+            resultado.add("RESISTENCIA: " + pontosRST);
+            resultado.add("Nr. de Turnos jogados: " + countTurnos);
+            resultado.add("-----");
+            for(int i = 0; i < listaCreatures.size(); i++) {
+                resultado.add(listaCreatures.get(i).toString());
+            }
+        }
+
+        if (pontosLDR > pontosRST) {
+            resultado.add("Resultado: Vitória da equipa LDR");
+            resultado.add("LDR: " + pontosLDR);
+            resultado.add("RESISTENCIA: " + pontosRST);
+            resultado.add("Nr. de Turnos jogados: " + countTurnos);
+            resultado.add("-----");
+            for(int i = 0; i < listaCreatures.size(); i++) {
+                resultado.add(listaCreatures.get(i).toString());
+            }
+        }
+
+        if (pontosLDR < pontosRST) {
+            resultado.add("Resultado: Vitória da equipa RESISTENCIA");
+            resultado.add("RESISTENCIA: " + pontosRST);
+            resultado.add("LDR: " + pontosLDR);
+            resultado.add("Nr. de Turnos jogados: " + countTurnos);
+            resultado.add("-----");
+            for(int i = 0; i < listaCreatures.size(); i++) {
+                resultado.add(listaCreatures.get(i).toString());
+            }
+        }
+        return resultado;
     }
 
     public int getElementId(int x, int y) {//Done-------------------
