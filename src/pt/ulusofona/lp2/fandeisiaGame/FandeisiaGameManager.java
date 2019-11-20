@@ -11,9 +11,6 @@ public class FandeisiaGameManager {
     private int turn15GameOver;
     private int tesourosTotais;
 
-   // private int pontosLDR;
-   // private int pontosRST;
-
     private Team tLDR;
     private Team tRST;
 
@@ -55,9 +52,9 @@ public class FandeisiaGameManager {
         for (int i = 0; i < mapStartGame.length; i++) {
             for (int j = 0; j < mapStartGame[i].length; j++) {
                 mapStartGame[i][j] = 0;
-                System.out.print(mapStartGame[i][j] + " ");
+              //  System.out.print(mapStartGame[i][j] + " ");
             }
-            System.out.println();
+           // System.out.println();
         }
 
         int idTemp;
@@ -94,7 +91,7 @@ public class FandeisiaGameManager {
                         tesouroTemp.setPosY(yTemp);
                     }
                 }
-                System.out.println(tesouroTemp.toString());
+              //  System.out.println(tesouroTemp.toString());
                 listaTreasures.add(tesouroTemp);
                 mapStartGame[yTemp][xTemp] = 2;
 
@@ -130,19 +127,12 @@ public class FandeisiaGameManager {
 
                     }
                 }
-                System.out.println(creatureTemp.toString());
+            //    System.out.println(creatureTemp.toString());
                 listaCreatures.add(creatureTemp);
                 mapStartGame[yTemp][xTemp] = 1;
             }
         }
         tesourosTotais = listaTreasures.size();
-
-        for (int i = 0; i < mapStartGame.length; i++) {
-            for (int j = 0; j < mapStartGame[i].length; j++) {
-                System.out.print(mapStartGame[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
@@ -153,7 +143,7 @@ public class FandeisiaGameManager {
 
     public void processTurn() {
 
-        boolean encontrou = false;
+        boolean encontrou;
 
         for (int i = 0; i < listaCreatures.size(); i++) {
 
@@ -313,5 +303,9 @@ public class FandeisiaGameManager {
         } else {
             return tRST.getTeamPontos();
         }
+    }
+
+    public String toString(){
+        return listaCreatures.get(2).getOrientacao().toString();
     }
 }

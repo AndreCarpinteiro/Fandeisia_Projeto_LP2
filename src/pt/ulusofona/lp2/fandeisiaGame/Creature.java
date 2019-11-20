@@ -224,6 +224,10 @@ public class Creature {
         this.orientacao = orientacao;
     }
 
+    public Orientacao getOrientacao(){
+        return orientacao;
+    }
+
     public String toString() {//Done--------------------
 
         return id + " | " + tipo + " | " + idEquipa + " | " + pontos + " @ (" + posX + ", " + posY + ") " + orientacao;
