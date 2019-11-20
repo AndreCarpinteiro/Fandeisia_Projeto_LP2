@@ -1,8 +1,6 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import org.junit.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;

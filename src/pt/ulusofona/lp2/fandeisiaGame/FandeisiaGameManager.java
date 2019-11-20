@@ -304,8 +304,4 @@ public class FandeisiaGameManager {
             return tRST.getTeamPontos();
         }
     }
-
-    public String toString(){
-        return listaCreatures.get(2).getOrientacao().toString();
-    }
 }
