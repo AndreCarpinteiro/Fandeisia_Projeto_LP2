@@ -38,6 +38,8 @@ public class FandeisiaGameManager {
 
         tLDR = new Team(0, 0, true);
         tRST = new Team(1, 0, false);
+        listaCreatures.clear();
+        listaTreasures.clear();
         countTurnos = 0;
         turn15GameOver = 0;
         tesourosTotais = 0;
@@ -149,11 +151,8 @@ public class FandeisiaGameManager {
         boolean encontrou = false;
 
         for (int i = 0; i < listaCreatures.size(); i++) {
-         //   System.out.println("Id a mover " + listaCreatures.get(i).getIdEquipa());
 
-            //if (getCurrentTeamId() == listaCreatures.get(i).getIdEquipa()) {
                 encontrou = listaCreatures.get(i).moveCriatura();
-            //}
 
             if (encontrou) {
                 turn15GameOver = 0;
@@ -204,39 +203,20 @@ public class FandeisiaGameManager {
     }
 
     public boolean gameIsOver() {
-        // Verificação de gameIsOver
 
         int conta = tesourosTotais / 2 + 1;
 
         if (pontosLDR >= conta) {
-            System.out.println();
-            System.out.println("pontos do vencedor:" + pontosLDR);
-            System.out.println("necessarios:" + conta);
-            System.out.println("totais:" + tesourosTotais);
-            System.out.println(1);
-            return true;
-        }
+            return true; }
 
         if (pontosRST >= conta) {
-            System.out.println();
-            System.out.println("pontos do vencedor:" + pontosRST);
-            System.out.println("necessarios:" + conta);
-            System.out.println("totais:" + tesourosTotais);
-            System.out.println(2);
-            return true;
-        }
+            return true; }
 
         if (listaTreasures.size() == 0) {
-            System.out.println();
-            System.out.println(3);
-            return true;
-        }
+            return true; }
 
         if (turn15GameOver == 15) {
-            System.out.println();
-            System.out.println(4);
-            return true;
-        }
+            return true; }
 
         return false;
     }
@@ -309,7 +289,7 @@ public class FandeisiaGameManager {
     }
 
     public int getCurrentTeamId() {
-        /*Deve devolver o ​ID​ da ​equipa​ que está activa​ no turno actual.  */
+
         if (tLDR.getEstado()) {
             return 0;
         } else if (tRST.getEstado()) {
@@ -319,7 +299,7 @@ public class FandeisiaGameManager {
     }
 
     public int getCurrentScore(int teamID) {
-        /*Deve devolver o número actual de pontos da equipa que tem o ID teamID. */
+
         if (0 == teamID) {
             return tLDR.getTeamPontos();
 
