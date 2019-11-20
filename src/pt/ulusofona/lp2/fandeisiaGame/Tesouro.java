@@ -11,12 +11,6 @@ public class Tesouro {
 
     }
 
-    public Tesouro(int id, String tipo, int posX, int posY){
-        this.id = id;
-        this.tipo = tipo;
-        this.posX = posX;
-        this.posY = posY;
-    }
 
     public int getPosY(){
         return posY;
@@ -44,10 +38,5 @@ public class Tesouro {
 
     public void setPosY(int posY){
         this.posY = posY;
-    }
-
-    public String toString(){ //NÃO SEI SE É ASSIM
-
-        return "id: " + id + ", type: " + tipo + " | " + " (" + posX + "," + posY + ") ";
     }
 }

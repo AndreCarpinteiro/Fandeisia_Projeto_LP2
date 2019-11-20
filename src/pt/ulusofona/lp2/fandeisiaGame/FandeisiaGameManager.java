@@ -11,8 +11,8 @@ public class FandeisiaGameManager {
     private int turn15GameOver;
     private int tesourosTotais;
 
-    private int pontosLDR;
-    private int pontosRST;
+   // private int pontosLDR;
+   // private int pontosRST;
 
     private Team tLDR;
     private Team tRST;
@@ -43,8 +43,13 @@ public class FandeisiaGameManager {
         countTurnos = 0;
         turn15GameOver = 0;
         tesourosTotais = 0;
-        pontosLDR = 0;
-        pontosRST = 0;
+
+       // pontosLDR = 0;
+       // pontosRST = 0;
+
+        tLDR.setPontos(0);
+        tRST.setPontos(0);
+
         mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
 
         for (int i = 0; i < mapStartGame.length; i++) {
@@ -163,9 +168,11 @@ public class FandeisiaGameManager {
                 }
 
                 if (listaCreatures.get(i).getIdEquipa() == 0) {
-                    pontosLDR++;
+                    tLDR.somaPontos();
+                    //pontosLDR++;
                 } else {
-                    pontosRST++;
+                    tRST.somaPontos();
+                    //pontosRST++;
                 }
             }
         }
@@ -206,10 +213,10 @@ public class FandeisiaGameManager {
 
         int conta = tesourosTotais / 2 + 1;
 
-        if (pontosLDR >= conta) {
+        if (tLDR.getTeamPontos() >= conta) {
             return true; }
 
-        if (pontosRST >= conta) {
+        if (tRST.getTeamPontos() >= conta) {
             return true; }
 
         if (listaTreasures.size() == 0) {
@@ -237,10 +244,10 @@ public class FandeisiaGameManager {
 
         resultado.add("Welcome to FANDEISIA");
 
-        if (pontosLDR == pontosRST) {
+        if (tLDR.getTeamPontos() == tRST.getTeamPontos()) {
             resultado.add("Resultado: EMPATE");
-            resultado.add("LDR: " + pontosLDR);
-            resultado.add("RESISTENCIA: " + pontosRST);
+            resultado.add("LDR: " + tLDR.getTeamPontos());
+            resultado.add("RESISTENCIA: " + tRST.getTeamPontos());
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
             for (int i = 0; i < listaCreatures.size(); i++) {
@@ -248,10 +255,10 @@ public class FandeisiaGameManager {
             }
         }
 
-        if (pontosLDR > pontosRST) {
+        if (tLDR.getTeamPontos() > tRST.getTeamPontos()) {
             resultado.add("Resultado: Vitória da equipa LDR");
-            resultado.add("LDR: " + pontosLDR);
-            resultado.add("RESISTENCIA: " + pontosRST);
+            resultado.add("LDR: " + tLDR.getTeamPontos());
+            resultado.add("RESISTENCIA: " + tRST.getTeamPontos());
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
             for (int i = 0; i < listaCreatures.size(); i++) {
@@ -259,10 +266,10 @@ public class FandeisiaGameManager {
             }
         }
 
-        if (pontosLDR < pontosRST) {
+        if (tLDR.getTeamPontos() < tRST.getTeamPontos()) {
             resultado.add("Resultado: Vitória da equipa RESISTENCIA");
-            resultado.add("RESISTENCIA: " + pontosRST);
-            resultado.add("LDR: " + pontosLDR);
+            resultado.add("RESISTENCIA: " + tRST.getTeamPontos());
+            resultado.add("LDR: " + tLDR.getTeamPontos());
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
             for (int i = 0; i < listaCreatures.size(); i++) {

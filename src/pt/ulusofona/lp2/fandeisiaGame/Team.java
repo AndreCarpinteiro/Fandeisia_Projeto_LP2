@@ -23,7 +23,11 @@ public class Team {
         return pontosTeam;
     }
 
-    public int getIdTeam(){
-        return idTeam;
+    public void setPontos(int pontos){
+        this.pontosTeam = pontos;
+    }
+
+    public void somaPontos(){
+        this.pontosTeam++;
     }
 }
