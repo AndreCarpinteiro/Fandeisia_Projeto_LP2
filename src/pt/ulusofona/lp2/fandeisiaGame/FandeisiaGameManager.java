@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class FandeisiaGameManager {
 
-    private int[][] mapStartGame;
+    static int[][] mapStartGame;
     private int countTurnos;
     private int turn15GameOver;
     private int tesourosTotais;
@@ -152,7 +152,7 @@ public class FandeisiaGameManager {
          //   System.out.println("Id a mover " + listaCreatures.get(i).getIdEquipa());
 
             //if (getCurrentTeamId() == listaCreatures.get(i).getIdEquipa()) {
-                encontrou = listaCreatures.get(i).moveCriatura(mapStartGame);
+                encontrou = listaCreatures.get(i).moveCriatura();
             //}
 
             if (encontrou) {
@@ -202,7 +202,6 @@ public class FandeisiaGameManager {
     public List<Creature> getCreatures() {//Quase Done--------------------------
         return listaCreatures;
     }
-
 
     public boolean gameIsOver() {
         // Verificação de gameIsOver
@@ -321,7 +320,7 @@ public class FandeisiaGameManager {
 
     public int getCurrentScore(int teamID) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID. */
-        if (tLDR.getIdTeam() == teamID) {
+        if (0 == teamID) {
             return tLDR.getTeamPontos();
 
         } else {

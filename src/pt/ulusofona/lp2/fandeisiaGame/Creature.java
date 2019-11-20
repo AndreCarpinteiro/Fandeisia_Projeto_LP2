@@ -37,8 +37,9 @@ public class Creature {
         return id;// usar this.id??
     }
 
-    public boolean moveCriatura(int[][] mapa) {
+    public boolean moveCriatura() {
 
+        int[][] mapa = FandeisiaGameManager.mapStartGame;
         int yMax = mapa.length - 1;
         int xMax = mapa[0].length - 1;
         boolean encontrou = false;

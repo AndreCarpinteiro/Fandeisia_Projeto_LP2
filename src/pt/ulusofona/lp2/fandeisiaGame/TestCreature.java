@@ -19,7 +19,7 @@ public class TestCreature {
         }
 
         Creature ola = new Creature(1, 1,"Super Dragão",0,3,5, Creature.Orientacao.Norte);
-        ola.moveCriatura(mapStartGame);
+        ola.moveCriatura();
         System.out.println(ola.toString());
        // String expect = "1 | Super Dragão | 1 | 0 @ (posX, \" + posY + \") \" + orientacao;";
     }
