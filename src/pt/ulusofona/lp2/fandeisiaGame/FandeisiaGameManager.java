@@ -41,9 +41,6 @@ public class FandeisiaGameManager {
         turn15GameOver = 0;
         tesourosTotais = 0;
 
-       // pontosLDR = 0;
-       // pontosRST = 0;
-
         tLDR.setPontos(0);
         tRST.setPontos(0);
 
@@ -52,9 +49,7 @@ public class FandeisiaGameManager {
         for (int i = 0; i < mapStartGame.length; i++) {
             for (int j = 0; j < mapStartGame[i].length; j++) {
                 mapStartGame[i][j] = 0;
-              //  System.out.print(mapStartGame[i][j] + " ");
             }
-           // System.out.println();
         }
 
         int idTemp;
