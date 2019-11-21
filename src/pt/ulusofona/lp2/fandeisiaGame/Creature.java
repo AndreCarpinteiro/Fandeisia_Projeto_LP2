@@ -120,7 +120,7 @@ public class Creature {
 
         if (orientacao.toString().equals("Sul")) {
             if (tipo.equals("Dwarf")) {
-                return "crazy_emoji_white_DOWN.png";
+                return "dwarf_sul.png";
             }
             if (tipo.equals("Chimera")) {
                 return "chimera_sul2.png";
@@ -135,7 +135,7 @@ public class Creature {
 
         if (orientacao.toString().equals("Norte")) {
             if (tipo.equals("Dwarf")) {
-                return "crazy_emoji_white_UP.png";
+                return "dwarf_norte.png";
             }
             if (tipo.equals("Chimera")) {
                 return "chimera_norte2.png";
@@ -150,7 +150,7 @@ public class Creature {
 
         if (orientacao.toString().equals("Este")) {
             if (tipo.equals("Dwarf")) {
-                return "crazy_emoji_white_RIGHT.png";
+                return "dwarf_este.png";
             }
             if (tipo.equals("Chimera")) {
                 return "chimera_este2.png";
@@ -165,7 +165,7 @@ public class Creature {
 
         if (orientacao.toString().equals("Oeste")) {
             if (tipo.equals("Dwarf")) {
-                return "crazy_emoji_white_LEFT.png";
+                return "dwarf_oeste.png";
             }
             if (tipo.equals("Chimera")) {
                 return "chimera_oeste.png";
