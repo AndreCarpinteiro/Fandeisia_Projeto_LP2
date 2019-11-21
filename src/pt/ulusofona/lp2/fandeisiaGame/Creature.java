@@ -33,8 +33,7 @@ public class Creature {
     }
 
     public int getId() {//Done------------
-        /* Deve devolver o ID da criatura.*/
-        return id;// usar this.id??
+        return id;
     }
 
     public boolean moveCriatura() {
@@ -232,5 +231,4 @@ public class Creature {
 
         return id + " | " + tipo + " | " + idEquipa + " | " + pontos + " @ (" + posX + ", " + posY + ") " + orientacao;
     }
-
 }
