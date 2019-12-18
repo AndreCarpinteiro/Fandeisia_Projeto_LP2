@@ -1,6 +1,7 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ public class FandeisiaGameManager {
 
     private Team tLDR;
     private Team tRST;
+
+    private File save;
 
     private List<Creature> listaCreatures = new ArrayList<>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
@@ -31,7 +34,9 @@ public class FandeisiaGameManager {
         return creatureTypeOptions;
     }
 
-    public void startGame(String[] content, int rows, int columns) {
+    public int startGame(String[] content, int rows, int columns) {
+
+        //TODO: buracos, cenas..
 
         tLDR = new Team(0, 0, true);
         tRST = new Team(1, 0, false);
@@ -128,6 +133,8 @@ public class FandeisiaGameManager {
             }
         }
         tesourosTotais = listaTreasures.size();
+
+        return 2; //TEMPORÁRIO
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
@@ -181,16 +188,9 @@ public class FandeisiaGameManager {
         for (int j = 0; j < listaCreatures.size(); j++) {
             System.out.println(listaCreatures.get(j).toString());
         }
-
-        for (int i = 0; i < mapStartGame.length; i++) {
-            for (int j = 0; j < mapStartGame[i].length; j++) {
-                System.out.print(mapStartGame[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 
-    public List<Creature> getCreatures() {//Quase Done--------------------------
+    public List<Creature> getCreatures() {//Quase Done--------------
         return listaCreatures;
     }
 
@@ -298,5 +298,35 @@ public class FandeisiaGameManager {
         } else {
             return tRST.getTeamPontos();
         }
+    }
+
+    public boolean enchant(int x, int y, String spellName){
+      //TODO:
+        return true;
+    }
+
+    public String getSpell(int x, int y){
+        //TODO:
+        return "";
+    }
+
+    public int getCoinTotal(int teamID){
+        //TODO:
+        return 2;
+    }
+
+    public boolean saveGame(File fich){
+        //TODO:
+        return true;
+    }
+
+    public boolean loadGame(File fich){
+        //TODO:
+        return true;
+    }
+
+    public String whoIsLordEder(){
+        //TODO:
+        return "Éder Lopes";
     }
 }
