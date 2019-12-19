@@ -1,14 +1,15 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
-public class Creature {
+public abstract class Creature {
 
     //enum é otimo para valores conhecidos finitos
     enum Orientacao {
-        Norte, Este, Sul, Oeste
+        Norte, Nordeste, Este, Sul, Sudeste, Oeste, Noroeste, Sudoeste
     }
 
     int id;
     int idEquipa;
+    int[][] mapa = FandeisiaGameManager.mapStartGame;
 
     String tipo;
     int pontos; //Numero de tesouros apanhados (1 tesouro = 1 ponto)
@@ -36,84 +37,7 @@ public class Creature {
         return id;
     }
 
-    public boolean moveCriatura() {
-
-        int[][] mapa = FandeisiaGameManager.mapStartGame;
-        int yMax = mapa.length - 1;
-        int xMax = mapa[0].length - 1;
-        boolean encontrou = false;
-
-        //System.out.println("rows" + yMax);
-        //System.out.println("columns" + xMax);
-
-        if (orientacao == Orientacao.Norte) {
-            if (posY == 0) {
-                orientacao = Orientacao.Este;
-            } else if (mapa[posY - 1][posX] == 1) {
-                orientacao = Orientacao.Este;
-            } else if (mapa[posY - 1][posX] == 2) {
-                mapa[posY][posX] = 0;
-                posY--;
-                mapa[posY][posX] = 1;
-                pontos++;
-                encontrou = true;
-
-            } else {
-                mapa[posY][posX] = 0;
-                posY--;
-                mapa[posY][posX] = 1;
-            }
-        } else if (orientacao == Orientacao.Sul) {
-            if (posY == yMax) {
-                orientacao = Orientacao.Oeste;
-            } else if (mapa[posY + 1][posX] == 1) {
-                orientacao = Orientacao.Oeste;
-            } else if (mapa[posY + 1][posX] == 2) {
-                mapa[posY][posX] = 0;
-                posY++;
-                mapa[posY][posX] = 1;
-                pontos++;
-                encontrou = true;
-            } else {
-                mapa[posY][posX] = 0;
-                posY++;
-                mapa[posY][posX] = 1;
-            }
-        } else if (orientacao == Orientacao.Oeste) {
-            if (posX == 0) {
-                orientacao = Orientacao.Norte;
-            } else if (mapa[posY][posX - 1] == 1) {
-                orientacao = Orientacao.Norte;
-            } else if (mapa[posY][posX - 1] == 2) {
-                mapa[posY][posX] = 0;
-                posX--;
-                mapa[posY][posX] = 1;
-                pontos++;
-                encontrou = true;
-            } else {
-                mapa[posY][posX] = 0;
-                posX--;
-                mapa[posY][posX] = 1;
-            }
-        } else if (orientacao == Orientacao.Este) {
-            if (posX == xMax) {
-                orientacao = Orientacao.Sul;
-            } else if (mapa[posY][posX + 1] == 1) {
-                orientacao = Orientacao.Sul;
-            } else if (mapa[posY][posX + 1] == 2) {
-                mapa[posY][posX] = 0;
-                posX++;
-                mapa[posY][posX] = 1;
-                pontos++;
-                encontrou = true;
-            } else {
-                mapa[posY][posX] = 0;
-                posX++;
-                mapa[posY][posX] = 1;
-            }
-        }
-        return encontrou;
-    }
+    public abstract boolean moveCriatura();
 
     public String getImagePNG() {//Done---------------------
 

@@ -96,7 +96,12 @@ public class FandeisiaGameManager {
                 mapStartGame[yTemp][xTemp] = 2;
 
             } else {
-                Creature creatureTemp = new Creature();
+                Creature creatureTemp = new Creature() {
+                    @Override//Temporário
+                    public boolean moveCriatura() {
+                        return false;
+                    }
+                };
 
                 String[] dados = elemento.split(",");
 
@@ -298,6 +303,16 @@ public class FandeisiaGameManager {
         } else {
             return tRST.getTeamPontos();
         }
+    }
+
+    public String[][] getSpellTypes(){
+        String[][] ola;
+        return ola;
+    }
+
+    public Map<String, Integer> createComputerArmy(){
+
+        return [][];
     }
 
     public boolean enchant(int x, int y, String spellName){

@@ -5,7 +5,7 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 public class TestCreature {
-
+/*
     @Test
     public void test01IdCriatura(){//Done------
 
@@ -31,5 +31,5 @@ public class TestCreature {
 
         //Verifica o toString
         assertEquals("4 | Canelas 2010 | 0 | 0 @ (1, 2) Norte", criatura.toString());
-    }
+    }*/
 }
