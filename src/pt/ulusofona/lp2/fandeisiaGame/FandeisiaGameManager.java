@@ -305,15 +305,15 @@ public class FandeisiaGameManager {
         }
     }
 
-    public String[][] getSpellTypes(){
+    /*public String[][] getSpellTypes(){
         String[][] ola;
         return ola;
-    }
+    }*/
 
-    public Map<String, Integer> createComputerArmy(){
+   /* public Map<String, Integer> createComputerArmy(){
 
         return [][];
-    }
+    }*/
 
     public boolean enchant(int x, int y, String spellName){
       //TODO:
