@@ -2,8 +2,10 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class FandeisiaGameManager {
 
@@ -305,15 +307,18 @@ public class FandeisiaGameManager {
         }
     }
 
-    /*public String[][] getSpellTypes(){
-        String[][] ola;
-        return ola;
-    }*/
+    public String[][] getSpellTypes(){
+        String[][] array = new String[10][10];
+        return array;
+    }
 
-   /* public Map<String, Integer> createComputerArmy(){
+    public Map<String, Integer> createComputerArmy(){
 
-        return [][];
-    }*/
+        Map<String, Integer> mapa = new HashMap<String, Integer>();
+        mapa.put("João", 1);
+
+        return mapa;
+    }
 
     public boolean enchant(int x, int y, String spellName){
       //TODO:
