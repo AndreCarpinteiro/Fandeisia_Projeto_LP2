@@ -39,4 +39,8 @@ public class Tesouro {
     public void setPosY(int posY){
         this.posY = posY;
     }
+
+    public String getTipo(){
+        return tipo;
+    }
 }

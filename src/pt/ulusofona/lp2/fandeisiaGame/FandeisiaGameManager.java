@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 public class FandeisiaGameManager {
 
@@ -40,8 +41,8 @@ public class FandeisiaGameManager {
 
         //TODO: buracos, cenas..
 
-        tLDR = new Team(0, 0, true);
-        tRST = new Team(1, 0, false);
+        tLDR = new Team(10, 0);
+        tRST = new Team(20, 0);
         listaCreatures.clear();
         listaTreasures.clear();
         countTurnos = 0;
@@ -60,7 +61,7 @@ public class FandeisiaGameManager {
         }
 
         int idTemp;
-        String typeTemp;
+        String typeTemp = "";
         int xTemp = 0;
         int yTemp = 0;
         int custoTotal = 0;
@@ -96,7 +97,15 @@ public class FandeisiaGameManager {
                 }
               //  System.out.println(tesouroTemp.toString());
                 listaTreasures.add(tesouroTemp);
-                mapStartGame[yTemp][xTemp] = 2;
+                    if (typeTemp.equals("silver")){
+                        mapStartGame[yTemp][xTemp] = 3;
+                    }
+                if (typeTemp.equals("gold")){
+                    mapStartGame[yTemp][xTemp] = 4;
+                }
+                if (typeTemp.equals("bronze")){
+                    mapStartGame[yTemp][xTemp] = 2;
+                }
 
             } else {
                 Creature creatureTemp = new Creature() {
@@ -156,13 +165,23 @@ public class FandeisiaGameManager {
             }
         }
 
+
         return 0; //Tudo válido
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
+        Random random = new Random();
+        teamId = random.nextInt(3-1) + 1;
 
-        teamId = 0; //É sempre a equipa LDR, como indicado no enunciado
-        //tLDR.setEstado(true);
+        if(teamId == 1) { //Acho que funciona, no debug está bem
+            teamId = 10;
+            tLDR.setEstado(true);
+            tRST.setEstado(false);
+        }else {
+            teamId = 20;
+            tLDR.setEstado(false);
+            tRST.setEstado(true);
+        }
     }
 
     public void processTurn() {
@@ -353,9 +372,9 @@ public class FandeisiaGameManager {
 
     public int getCoinTotal(int teamID){
         if(tLDR.idTeam == teamID){
-            return tLDR.getTeamPontos();
+            return tLDR.getPlafond();
         }else{
-            tRST.getTeamPontos();
+            tRST.getPlafond();
         }
         return 2;
     }
