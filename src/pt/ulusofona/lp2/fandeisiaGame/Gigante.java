@@ -2,6 +2,11 @@ package pt.ulusofona.lp2.fandeisiaGame;
 
 public class Gigante extends Creature {
 
+    Gigante(int id, int idEquipa, String tipo, int pontos, int posX, int posY, Orientacao orient) {
+        super(id, idEquipa, tipo, pontos, posX, posY, orient);
+        this.custo = 4;
+    }
+
     @Override
     public boolean moveCriatura() {
 

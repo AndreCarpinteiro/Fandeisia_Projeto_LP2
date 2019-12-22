@@ -28,10 +28,10 @@ public class FandeisiaGameManager {
 
         String[][] creatureTypeOptions = new String[4][4];
 
-        creatureTypeOptions[0] = new String[]{"Skeleton", "skeleton.png", "Lança flechas", "5"};
-        creatureTypeOptions[1] = new String[]{"Dwarf", "dwarf.png", "Dá cabeçadas", "10"};
-        creatureTypeOptions[2] = new String[]{"Chimera", "chimera.png", "Morde cenas", "15"};
-        creatureTypeOptions[3] = new String[]{"Super Dragão", "super_dragon.png", "Comandado pelo Macaco Lider", "11"};
+        creatureTypeOptions[0] = new String[]{"Skeleton", "skeleton.png", "Lança flechas", "2"};
+        creatureTypeOptions[1] = new String[]{"Dwarf", "dwarf.png", "Dá cabeçadas", "3"};
+        creatureTypeOptions[2] = new String[]{"Chimera", "chimera.png", "Morde cenas", "1"};
+        creatureTypeOptions[3] = new String[]{"Super Dragão", "super_dragon.png", "Comandado pelo Macaco Lider", "5"};
 
         return creatureTypeOptions;
     }
@@ -63,6 +63,7 @@ public class FandeisiaGameManager {
         String typeTemp;
         int xTemp = 0;
         int yTemp = 0;
+        int custoTotal = 0;
 
         int teamIdTemp;
         String orientTemp;
@@ -131,7 +132,6 @@ public class FandeisiaGameManager {
                     } else if (d.startsWith(" orientation:")) {
                         orientTemp = d.substring(14);
                         creatureTemp.setOrientacao(Creature.Orientacao.valueOf(orientTemp));
-
                     }
                 }
             //    System.out.println(creatureTemp.toString());
@@ -141,7 +141,22 @@ public class FandeisiaGameManager {
         }
         tesourosTotais = listaTreasures.size();
 
-        return 2; //TEMPORÁRIO
+        //Validar plafond
+        for(int i = 0; i < listaCreatures.size(); i++){
+            custoTotal += listaCreatures.get(i).getCusto();
+
+            if(custoTotal > tLDR.getPlafond() && custoTotal > tRST.getPlafond()){
+                return 1;
+            }
+            if(custoTotal > tLDR.getPlafond()){
+                return 2;
+            }
+            if(custoTotal > tRST.getPlafond()){
+                return 3;
+            }
+        }
+
+        return 0; //Tudo válido
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
@@ -290,9 +305,9 @@ public class FandeisiaGameManager {
     public int getCurrentTeamId() {
 
         if (tLDR.getEstado()) {
-            return 0;
+            return 10; //mudei!!!!
         } else if (tRST.getEstado()) {
-            return 1;
+            return 20;
         }
         return 2;
     }
@@ -308,14 +323,20 @@ public class FandeisiaGameManager {
     }
 
     public String[][] getSpellTypes(){
-        String[][] array = new String[10][10];
-        return array;
+        String[][] spell = new String[10][10];
+
+        spell[0] = new String[]{"Força", "Fica bue bruto", "2"};
+        spell[1] = new String[]{"Velocidade", "Bue rápido sócio", "1"};
+        spell[2] = new String[]{"Água Benta", "Lá di bairro", "3"};
+
+        return spell;
     }
 
     public Map<String, Integer> createComputerArmy(){
 
         Map<String, Integer> mapa = new HashMap<String, Integer>();
-        mapa.put("João", 1);
+        mapa.put("Super Dragão", 2);
+        mapa.put("Skeleton", 1);
 
         return mapa;
     }
@@ -331,7 +352,11 @@ public class FandeisiaGameManager {
     }
 
     public int getCoinTotal(int teamID){
-        //TODO:
+        if(tLDR.idTeam == teamID){
+            return tLDR.getTeamPontos();
+        }else{
+            tRST.getTeamPontos();
+        }
         return 2;
     }
 
@@ -347,6 +372,6 @@ public class FandeisiaGameManager {
 
     public String whoIsLordEder(){
         //TODO:
-        return "Éder Lopes";
+        return "Éderzito António Macedo Lopes";
     }
 }

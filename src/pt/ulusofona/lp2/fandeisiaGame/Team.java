@@ -3,9 +3,10 @@ package pt.ulusofona.lp2.fandeisiaGame;
 public class Team {
     int idTeam;
     int pontosTeam;
+    int plafond = 50;
     boolean ativo;
 
-    Team(int idTeam,int pontosTeam,boolean ativo){
+    Team(int idTeam,int pontosTeam, boolean ativo){
         this.idTeam = idTeam;
         this.pontosTeam = pontosTeam;
         this.ativo = ativo;
@@ -29,5 +30,13 @@ public class Team {
 
     public void somaPontos(){
         this.pontosTeam++;
+    }
+
+    public int getPlafond(){
+        return plafond;
+    }
+
+    public void setPlafond(int plafond){
+        this.plafond = plafond;
     }
 }

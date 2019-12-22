@@ -9,6 +9,7 @@ public abstract class Creature {
 
     int id;
     int idEquipa;
+    int custo;
     int[][] mapa = FandeisiaGameManager.mapStartGame;
 
     String tipo;
@@ -154,5 +155,9 @@ public abstract class Creature {
     public String toString() {//Done--------------------
 
         return id + " | " + tipo + " | " + idEquipa + " | " + pontos + " @ (" + posX + ", " + posY + ") " + orientacao;
+    }
+
+    public int getCusto(){
+        return custo;
     }
 }

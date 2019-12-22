@@ -2,11 +2,9 @@ package pt.ulusofona.lp2.fandeisiaGame;
 
 public class Dragão extends Creature {
 
-    int custo = 9;
-
-    Dragão(int custo) {
-        super();
-        this.custo = custo;
+    Dragão(int id, int idEquipa, String tipo, int pontos, int posX, int posY, Orientacao orient) {
+        super(id, idEquipa, tipo, pontos, posX, posY, orient);
+        this.custo = 5;
     }
 
     @Override
