@@ -3,7 +3,7 @@ package pt.ulusofona.lp2.fandeisiaGame;
 public class Team {
     int idTeam;
     int pontosTeam;
-    int plafond = 3;
+    int plafond = 50;
     boolean ativo;
 
     Team(int idTeam,int pontosTeam){
@@ -37,5 +37,9 @@ public class Team {
 
     public void setPlafond(int plafond){
         this.plafond = plafond;
+    }
+
+    public int getId(){
+        return idTeam;
     }
 }

@@ -324,11 +324,10 @@ public class FandeisiaGameManager {
     public int getCurrentTeamId() {
 
         if (tLDR.getEstado()) {
-            return 10; //mudei!!!!
-        } else if (tRST.getEstado()) {
+            return 10;
+        } else{
             return 20;
         }
-        return 2;
     }
 
     public int getCurrentScore(int teamID) {
@@ -341,13 +340,18 @@ public class FandeisiaGameManager {
         }
     }
 
-    public String[][] getSpellTypes(){
-        String[][] spell = new String[10][10];
+    public String[][] getSpellTypes(){ //Done-------------
+        String[][] spell = new String[9][3];
 
-        spell[0] = new String[]{"Força", "Fica bue bruto", "2"};
-        spell[1] = new String[]{"Velocidade", "Bue rápido sócio", "1"};
-        spell[2] = new String[]{"Água Benta", "Lá di bairro", "3"};
-
+        spell[0] = new String[]{"EmpurraParaNorte", "Move a criatura 1 unidade para Norte", "1"};
+        spell[1] = new String[]{"EmpurraParaEste", "Move a criatura 1 unidade para Este", "1"};
+        spell[2] = new String[]{"EmpurraParaSul", "Move a criatura 1 unidade para Sul", "1"};
+        spell[3] = new String[]{"EmpurraParaOeste", "Move a criatura 1 unidade para Oeste", "1"};
+        spell[4] = new String[]{"ReduzAlcance", "Reduz o alcance da criatura para: MIN (alcance original, 1)", "2"};
+        spell[5] = new String[]{"DuplicaAlcance", "Aumenta o alcance da criatura para o dobro", "3"};
+        spell[6] = new String[]{"Congela", "A criatura alvo não se move neste turno", "3"};
+        spell[7] = new String[]{"Congela4Ever", "A criatura alvo não se move mais até ao final do jogo", "10"};
+        spell[8] = new String[]{"Descongela", "Inverte a aplicação de um Feitiço Congela4Ever", "8"};
         return spell;
     }
 
@@ -371,12 +375,11 @@ public class FandeisiaGameManager {
     }
 
     public int getCoinTotal(int teamID){
-        if(tLDR.idTeam == teamID){
+        if(tLDR.getId() == teamID){
             return tLDR.getPlafond();
         }else{
-            tRST.getPlafond();
+            return tRST.getPlafond();
         }
-        return 2;
     }
 
     public boolean saveGame(File fich){
@@ -391,6 +394,6 @@ public class FandeisiaGameManager {
 
     public String whoIsLordEder(){
         //TODO:
-        return "Éderzito António Macedo Lopes";
+        return "Ederzito Antonio Macedo Lopes";
     }
 }
