@@ -1,13 +1,13 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
-public class Dragão extends Creature {
+public class Anao extends Creature {
 
-    Dragão(int id, int idEquipa, String tipo, int pontos, int posX, int posY, Orientacao orient) {
+    Anao(int id, int idEquipa, String tipo, int pontos, int posX, int posY, Orientacao orient) {
         super(id, idEquipa, tipo, pontos, posX, posY, orient);
-        this.custo = 5;
+        this.custo = 2;
     }
 
-    @Override
+    @Override //Falta contagem tesouros....
     public boolean moveCriatura() {
 
         int yMax = mapa.length - 1;
@@ -18,16 +18,14 @@ public class Dragão extends Creature {
         //System.out.println("columns" + xMax);
 
         if (orientacao == Orientacao.Norte) {
-            if (posY - 3 == 0 || mapa[posY - 4][posX] == 1) {
-                orientacao = Orientacao.Nordeste;
+            if (posY == 0 || mapa[posY - 1][posX] == 1) {
+                orientacao = Orientacao.Este;
             }
-
             mapa[posY][posX] = 0;
             posY--;
             mapa[posY][posX] = 1;
-
             if (mapa[posY - 1][posX] == 2) {
-                pontos++; //MUDAR!!!
+                pontos++;
                 encontrou = true;
             }
         } else if (orientacao == Orientacao.Sul) {
@@ -66,5 +64,4 @@ public class Dragão extends Creature {
         }
         return encontrou;
     }
-
 }
