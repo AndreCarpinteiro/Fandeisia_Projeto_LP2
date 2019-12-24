@@ -2,7 +2,6 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -16,8 +15,6 @@ public class FandeisiaGameManager {
 
     private Team tLDR;
     private Team tRST;
-
-    private File save;
 
     private List<Creature> listaCreatures = new ArrayList<>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
@@ -38,7 +35,7 @@ public class FandeisiaGameManager {
 
     public int startGame(String[] content, int rows, int columns) {
 
-        //TODO: Encontrei problema, o conteudo esta todo a ir para a lista das criaturas, tesouros e buracos....
+        //TODO: Falta receber buraco para a classe, de resto tudo ok...
 
         tLDR = new Team(10, 0);
         tRST = new Team(20, 0);
@@ -410,7 +407,7 @@ public class FandeisiaGameManager {
             }
 
             for (int i = 0; i < listaTreasures.size(); i++) {
-                //   gravarArq.println(listaTreasures.get(i).posX + listaTreasures.get(i).posY + listaTreasures.get(i).tipo);
+                gravarArq.println(listaTreasures.get(i).posX + listaTreasures.get(i).posY + listaTreasures.get(i).tipo);
             }
 
             gravarArq.printf("Mapa: " + "\n");
