@@ -155,9 +155,12 @@ public class FandeisiaGameManager {
                 mapStartGame[yTemp][xTemp] = 1;
             }
         }
+
+        //Só para visualizar
         for(int i = 0;i < listaCreatures.size(); i++) {
             System.out.println(listaCreatures.get(i).toString());
         }
+
         tesourosTotais = listaTreasures.size();
 
         //Validar plafond
