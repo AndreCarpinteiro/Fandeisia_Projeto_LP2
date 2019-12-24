@@ -2,11 +2,10 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Random;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
 
 public class FandeisiaGameManager {
 
@@ -39,7 +38,7 @@ public class FandeisiaGameManager {
 
     public int startGame(String[] content, int rows, int columns) {
 
-        //TODO: buracos, cenas..
+        //TODO: Encontrei problema, o conteudo esta todo a ir para a lista das criaturas, tesouros e buracos....
 
         tLDR = new Team(10, 0);
         tRST = new Team(20, 0);
@@ -95,15 +94,15 @@ public class FandeisiaGameManager {
                         tesouroTemp.setPosY(yTemp);
                     }
                 }
-              //  System.out.println(tesouroTemp.toString());
+                //  System.out.println(tesouroTemp.toString());
                 listaTreasures.add(tesouroTemp);
-                    if (typeTemp.equals("silver")){
-                        mapStartGame[yTemp][xTemp] = 3;
-                    }
-                if (typeTemp.equals("gold")){
+                if (typeTemp.equals("silver")) {
+                    mapStartGame[yTemp][xTemp] = 3;
+                }
+                if (typeTemp.equals("gold")) {
                     mapStartGame[yTemp][xTemp] = 4;
                 }
-                if (typeTemp.equals("bronze")){
+                if (typeTemp.equals("bronze")) {
                     mapStartGame[yTemp][xTemp] = 2;
                 }
 
@@ -143,7 +142,7 @@ public class FandeisiaGameManager {
                         creatureTemp.setOrientacao(Creature.Orientacao.valueOf(orientTemp));
                     }
                 }
-            //    System.out.println(creatureTemp.toString());
+                //    System.out.println(creatureTemp.toString());
                 listaCreatures.add(creatureTemp);
                 mapStartGame[yTemp][xTemp] = 1;
             }
@@ -151,16 +150,16 @@ public class FandeisiaGameManager {
         tesourosTotais = listaTreasures.size();
 
         //Validar plafond
-        for(int i = 0; i < listaCreatures.size(); i++){
+        for (int i = 0; i < listaCreatures.size(); i++) {
             custoTotal += listaCreatures.get(i).getCusto();
 
-            if(custoTotal > tLDR.getPlafond() && custoTotal > tRST.getPlafond()){
+            if (custoTotal > tLDR.getPlafond() && custoTotal > tRST.getPlafond()) {
                 return 1;
             }
-            if(custoTotal > tLDR.getPlafond()){
+            if (custoTotal > tLDR.getPlafond()) {
                 return 2;
             }
-            if(custoTotal > tRST.getPlafond()){
+            if (custoTotal > tRST.getPlafond()) {
                 return 3;
             }
         }
@@ -171,13 +170,13 @@ public class FandeisiaGameManager {
 
     public void setInitialTeam(int teamId) {//Done----------------
         Random random = new Random();
-        teamId = random.nextInt(3-1) + 1;
+        teamId = random.nextInt(3 - 1) + 1;
 
-        if(teamId == 1) { //Acho que funciona, no debug está bem
+        if (teamId == 1) { //Acho que funciona, no debug está bem
             teamId = 10;
             tLDR.setEstado(true);
             tRST.setEstado(false);
-        }else {
+        } else {
             teamId = 20;
             tLDR.setEstado(false);
             tRST.setEstado(true);
@@ -190,7 +189,7 @@ public class FandeisiaGameManager {
 
         for (int i = 0; i < listaCreatures.size(); i++) {
 
-                encontrou = listaCreatures.get(i).moveCriatura();
+            encontrou = listaCreatures.get(i).moveCriatura();
 
             if (encontrou) {
                 turn15GameOver = 0;
@@ -240,16 +239,20 @@ public class FandeisiaGameManager {
         int conta = tesourosTotais / 2 + 1;
 
         if (tLDR.getTeamPontos() >= conta) {
-            return true; }
+            return true;
+        }
 
         if (tRST.getTeamPontos() >= conta) {
-            return true; }
+            return true;
+        }
 
         if (listaTreasures.size() == 0) {
-            return true; }
+            return true;
+        }
 
         if (turn15GameOver == 15) {
-            return true; }
+            return true;
+        }
 
         return false;
     }
@@ -325,7 +328,7 @@ public class FandeisiaGameManager {
 
         if (tLDR.getEstado()) {
             return 10;
-        } else{
+        } else {
             return 20;
         }
     }
@@ -340,7 +343,7 @@ public class FandeisiaGameManager {
         }
     }
 
-    public String[][] getSpellTypes(){ //Done-------------
+    public String[][] getSpellTypes() { //Done-------------
         String[][] spell = new String[9][3];
 
         spell[0] = new String[]{"EmpurraParaNorte", "Move a criatura 1 unidade para Norte", "1"};
@@ -355,7 +358,7 @@ public class FandeisiaGameManager {
         return spell;
     }
 
-    public Map<String, Integer> createComputerArmy(){
+    public Map<String, Integer> createComputerArmy() {
 
         Map<String, Integer> mapa = new HashMap<String, Integer>();
         mapa.put("Super Dragão", 2);
@@ -364,35 +367,64 @@ public class FandeisiaGameManager {
         return mapa;
     }
 
-    public boolean enchant(int x, int y, String spellName){
-      //TODO:
+    public boolean enchant(int x, int y, String spellName) {
+        //TODO:
         return true;
     }
 
-    public String getSpell(int x, int y){
+    public String getSpell(int x, int y) {
         //TODO:
         return "";
     }
 
-    public int getCoinTotal(int teamID){
-        if(tLDR.getId() == teamID){
+    public int getCoinTotal(int teamID) {
+        if (tLDR.getId() == teamID) {
             return tLDR.getPlafond();
-        }else{
+        } else {
             return tRST.getPlafond();
         }
     }
 
     public boolean saveGame(File fich){
+
+        try {
+            PrintWriter gravarArq = new PrintWriter(fich);
+
+            gravarArq.printf("LDR: " + tLDR.getTeamPontos() + " / " + tLDR.getPlafond() + " / " + tLDR.getEstado() + "\n");
+            gravarArq.printf("RST: " + tRST.getTeamPontos() + " / " + tRST.getPlafond() + " / " + tRST.getEstado() + "\n");
+
+            for(int i = 0; i < listaCreatures.size(); i++) {
+                gravarArq.println(listaCreatures.get(i).toString());
+            }
+
+            for(int i = 0; i < listaTreasures.size(); i++) {
+             //   gravarArq.println(listaTreasures.get(i).posX + listaTreasures.get(i).posY + listaTreasures.get(i).tipo);
+            }
+
+            gravarArq.printf("Mapa: " + "\n");
+
+            for(int i = 0; i < mapStartGame.length; i++){ //Só teste, não vai gravar assim
+                for(int j = 0; j < mapStartGame[i].length; j++){
+                    gravarArq.print(mapStartGame[i][j]);
+                }
+                gravarArq.println();
+            }
+
+            gravarArq.close();
+            return true;
+
+        } catch (IOException e) {
+            e.printStackTrace(); //Temporário
+            return false;
+        }
+    }
+
+    public boolean loadGame(File fich) {
         //TODO:
         return true;
     }
 
-    public boolean loadGame(File fich){
-        //TODO:
-        return true;
-    }
-
-    public String whoIsLordEder(){
+    public String whoIsLordEder() {
         //TODO:
         return "Ederzito Antonio Macedo Lopes";
     }
