@@ -437,7 +437,6 @@ public class FandeisiaGameManager {
     }
 
     public String whoIsLordEder() {
-        //TODO:
-        return "Ederzito Antonio Macedo Lopes";
+        return "Éderzito António Macedo Lopes";
     }
 }
