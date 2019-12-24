@@ -59,19 +59,18 @@ public class FandeisiaGameManager {
             }
         }
 
-        int idTemp;
+        int idTemp = 0;
         String typeTemp = "";
         int xTemp = 0;
         int yTemp = 0;
         int custoTotal = 0;
-
-        int teamIdTemp;
-        String orientTemp;
+        int teamIdTemp = 0;
+        String orientTemp = "Norte";
 
         //Dissecação do parametro "content" para objetos creatures e treasures----
 
         for (String elemento : content) {
-            if (elemento.contains("treasure")) {
+            if (elemento.contains("silver") || elemento.contains("gold") || elemento.contains("bronze")) {
                 Tesouro tesouroTemp = new Tesouro();
 
                 String[] dados = elemento.split(",");
@@ -94,58 +93,70 @@ public class FandeisiaGameManager {
                         tesouroTemp.setPosY(yTemp);
                     }
                 }
-                //  System.out.println(tesouroTemp.toString());
+                //System.out.println(tesouroTemp.toString());
                 listaTreasures.add(tesouroTemp);
+
+                //Truque, se houver tempo fazer melhor
+                if (typeTemp.equals("gold")) {
+                    mapStartGame[yTemp][xTemp] = 2;
+                }
                 if (typeTemp.equals("silver")) {
                     mapStartGame[yTemp][xTemp] = 3;
                 }
-                if (typeTemp.equals("gold")) {
-                    mapStartGame[yTemp][xTemp] = 4;
-                }
                 if (typeTemp.equals("bronze")) {
-                    mapStartGame[yTemp][xTemp] = 2;
+                    mapStartGame[yTemp][xTemp] = 4;
                 }
 
             } else {
-                Creature creatureTemp = new Creature() {
-                    @Override//Temporário
-                    public boolean moveCriatura() {
-                        return false;
-                    }
-                };
 
                 String[] dados = elemento.split(",");
 
                 for (String d : dados) {
                     if (d.startsWith("id:")) {
                         idTemp = Integer.parseInt(d.substring(4));
-                        creatureTemp.setId(idTemp);
 
                     } else if (d.startsWith(" type:")) {
                         typeTemp = d.substring(7);
-                        creatureTemp.setTipo(typeTemp);
 
                     } else if (d.startsWith(" teamId:")) {
                         teamIdTemp = Integer.parseInt(d.substring(9));
-                        creatureTemp.setIdEquipa(teamIdTemp);
 
                     } else if (d.startsWith(" x:")) {
                         xTemp = Integer.parseInt(d.substring(4));
-                        creatureTemp.setPosX(xTemp);
 
                     } else if (d.startsWith(" y:")) {
                         yTemp = Integer.parseInt(d.substring(4));
-                        creatureTemp.setPosY(yTemp);
 
                     } else if (d.startsWith(" orientation:")) {
                         orientTemp = d.substring(14);
-                        creatureTemp.setOrientacao(Creature.Orientacao.valueOf(orientTemp));
                     }
                 }
-                //    System.out.println(creatureTemp.toString());
-                listaCreatures.add(creatureTemp);
+
+                if (typeTemp.equals("Dwarf")) {
+                    Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                    listaCreatures.add(anao);
+                }
+                if (typeTemp.equals("Super Dragão")) {
+                    Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                    listaCreatures.add(dragao);
+                }
+                if (typeTemp.equals("Humano")) {//Falta criar na interface...
+                    Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                    listaCreatures.add(humano);
+                }
+                if (typeTemp.equals("Elfo")) {//Falta criar na interface...
+                    Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                    listaCreatures.add(elfo);
+                }
+                if (typeTemp.equals("Gigante")) {//Falta criar na interface...
+                    Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                    listaCreatures.add(gigante);
+                }
                 mapStartGame[yTemp][xTemp] = 1;
             }
+        }
+        for(int i = 0;i < listaCreatures.size(); i++) {
+            System.out.println(listaCreatures.get(i).toString());
         }
         tesourosTotais = listaTreasures.size();
 
@@ -163,8 +174,6 @@ public class FandeisiaGameManager {
                 return 3;
             }
         }
-
-
         return 0; //Tudo válido
     }
 
@@ -362,7 +371,7 @@ public class FandeisiaGameManager {
 
         Map<String, Integer> mapa = new HashMap<String, Integer>();
         mapa.put("Super Dragão", 2);
-        mapa.put("Skeleton", 1);
+        mapa.put("Dwarf", 1);
 
         return mapa;
     }
@@ -385,7 +394,7 @@ public class FandeisiaGameManager {
         }
     }
 
-    public boolean saveGame(File fich){
+    public boolean saveGame(File fich) {
 
         try {
             PrintWriter gravarArq = new PrintWriter(fich);
@@ -393,18 +402,18 @@ public class FandeisiaGameManager {
             gravarArq.printf("LDR: " + tLDR.getTeamPontos() + " / " + tLDR.getPlafond() + " / " + tLDR.getEstado() + "\n");
             gravarArq.printf("RST: " + tRST.getTeamPontos() + " / " + tRST.getPlafond() + " / " + tRST.getEstado() + "\n");
 
-            for(int i = 0; i < listaCreatures.size(); i++) {
+            for (int i = 0; i < listaCreatures.size(); i++) {
                 gravarArq.println(listaCreatures.get(i).toString());
             }
 
-            for(int i = 0; i < listaTreasures.size(); i++) {
-             //   gravarArq.println(listaTreasures.get(i).posX + listaTreasures.get(i).posY + listaTreasures.get(i).tipo);
+            for (int i = 0; i < listaTreasures.size(); i++) {
+                //   gravarArq.println(listaTreasures.get(i).posX + listaTreasures.get(i).posY + listaTreasures.get(i).tipo);
             }
 
             gravarArq.printf("Mapa: " + "\n");
 
-            for(int i = 0; i < mapStartGame.length; i++){ //Só teste, não vai gravar assim
-                for(int j = 0; j < mapStartGame[i].length; j++){
+            for (int i = 0; i < mapStartGame.length; i++) { //Só teste, não vai gravar assim
+                for (int j = 0; j < mapStartGame[i].length; j++) {
                     gravarArq.print(mapStartGame[i][j]);
                 }
                 gravarArq.println();

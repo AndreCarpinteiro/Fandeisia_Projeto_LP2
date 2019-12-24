@@ -23,12 +23,11 @@ public abstract class Creature {
 
     }
 
-    public Creature(int id, int idEquipa, String tipo, int pontos, int posX, int posY, Orientacao orient) {
+    public Creature(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         //Done
         this.id = id;
         this.idEquipa = idEquipa;
         this.tipo = tipo;
-        this.pontos = pontos;
         this.posX = posX;
         this.posY = posY;
         this.orientacao = orient;

@@ -11,7 +11,6 @@ public class Tesouro {
 
     }
 
-
     public int getPosY(){
         return posY;
     }
@@ -42,5 +41,10 @@ public class Tesouro {
 
     public String getTipo(){
         return tipo;
+    }
+
+    //Só para efeitos de teste
+    public String toString() {
+        return "Tesouro{" + "id=" + id + ", tipo='" + tipo + '\'' + ", posX=" + posX + ", posY=" + posY + '}';
     }
 }
