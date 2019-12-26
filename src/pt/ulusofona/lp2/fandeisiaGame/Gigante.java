@@ -15,7 +15,7 @@ public class Gigante extends Creature {
         int xMax = mapa[0].length - 1;
         int encontrou = 0;
 
-        for(int i = 0; i < listaCreatures.size(); i++)
+        for(int i = 0; i < listaCreatures.size(); i++){}
         if (orientacao == Orientacao.Norte && (posY - 3) > 0) {
             if (mapa[posY - 3][posX] != 1 || mapa[posY - 3][posX] != 5) {
                 if (mapa[posY - 3][posX] == 1 || mapa[posY - 3][posX] == 2 || mapa[posY - 3][posX] == 3) {

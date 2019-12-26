@@ -15,7 +15,6 @@ public class FandeisiaGameManager {
     // 3 = tesouro gold
     // 4 = creatura
     // 5 = buraco
-    // 7 = gigante
 
     private int countTurnos;
     private int turn15GameOver;
@@ -24,10 +23,11 @@ public class FandeisiaGameManager {
     private Team tLDR;
     private Team tRST;
 
-     static List<Creature> listaCreatures = new ArrayList<>();
+    static List<Creature> listaCreatures = new ArrayList<>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
+    private List<Buraco> listaHoles = new ArrayList<>();
 
-    //Criei isto para saber o conteudo de cada posicao
+    //Criei isto para saber o conteudo de cada posicao TESTE
     //static HashMap<Integer, String> mapa = new HashMap<Integer, String>();
 
     //--------------------Metodos Obrigratorios---------------------
@@ -44,7 +44,7 @@ public class FandeisiaGameManager {
         return creatureTypeOptions;
     }
 
-    public int  startGame(String[] content, int rows, int columns) {
+    public int startGame(String[] content, int rows, int columns) {
 
         //TODO: Falta receber buraco para a classe, de resto tudo ok...
 
@@ -52,11 +52,12 @@ public class FandeisiaGameManager {
         tRST = new Team(20, 0);
         listaCreatures.clear();
         listaTreasures.clear();
+
         countTurnos = 0;
         turn15GameOver = 0;
         tesourosTotais = 0;
 
-       // tLDR.setPontos(0); //Estava aqui na primeira parte
+        // tLDR.setPontos(0); //Estava aqui na primeira parte
         // tRST.setPontos(0);
 
         mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
@@ -120,6 +121,29 @@ public class FandeisiaGameManager {
                     //mapa.put(mapStartGame[yTemp][xTemp], "bronze");
                 }
 
+            }
+            if (elemento.contains("hole")) {
+
+                Buraco buracoTemp = new Buraco();
+
+                String[] dados = elemento.split(",");
+
+                for (String d : dados) {
+                    if (d.startsWith("id:")) {
+                        idTemp = Integer.parseInt(d.substring(4));
+                        buracoTemp.setId(idTemp);
+
+                    } else if (d.startsWith(" x:")) {
+                        xTemp = Integer.parseInt(d.substring(4));
+                        buracoTemp.setPosX(xTemp);
+
+                    } else if (d.startsWith(" y:")) {
+                        yTemp = Integer.parseInt(d.substring(4));
+                        buracoTemp.setPosY(yTemp);
+                    }
+                }
+                mapStartGame[yTemp][xTemp] = 5;
+                listaHoles.add(buracoTemp);
             } else {
 
                 String[] dados = elemento.split(",");
@@ -171,11 +195,13 @@ public class FandeisiaGameManager {
         }
 
         //Só para visualizar
-        for(int i = 0;i < listaCreatures.size(); i++) {
+        for (int i = 0; i < listaCreatures.size(); i++) {
             System.out.println(listaCreatures.get(i).toString());
         }
+        for(int i = 0; i < listaHoles.size(); i++){
+            System.out.println(listaHoles.get(i).toString());
+        }
 
-        //buraco = new Buraco(0,2,4); //TEMPORÁRIO!!!!!!
         tesourosTotais = listaTreasures.size();
 
         //Validar plafond
@@ -397,17 +423,17 @@ public class FandeisiaGameManager {
     public boolean enchant(int x, int y, String spellName) {
         //TODO: Aplicar efeito
 
-        for(int i = 0; i < listaCreatures.size(); i++){
-            if(listaCreatures.get(i).posX == x && listaCreatures.get(i).posY == y) {
-                 listaCreatures.get(i).setFeitico(spellName);
+        for (int i = 0; i < listaCreatures.size(); i++) {
+            if (listaCreatures.get(i).posX == x && listaCreatures.get(i).posY == y) {
+                listaCreatures.get(i).setFeitico(spellName);
             }
         }
         return true;
     }
 
     public String getSpell(int x, int y) {
-        for(int i = 0; i < listaCreatures.size(); i++){
-            if(listaCreatures.get(i).posX == x && listaCreatures.get(i).posY == y) {
+        for (int i = 0; i < listaCreatures.size(); i++) {
+            if (listaCreatures.get(i).posX == x && listaCreatures.get(i).posY == y) {
                 return listaCreatures.get(i).getFeitico();
             }
         }
