@@ -9,6 +9,14 @@ import java.util.*;
 public class FandeisiaGameManager {
 
     static int[][] mapStartGame;
+    // 0 = vazio
+    // 1 = tesouro bronze
+    // 2 = tesouro silver
+    // 3 = tesouro gold
+    // 4 = creatura
+    // 5 = buraco
+    // 7 = gigante
+
     private int countTurnos;
     private int turn15GameOver;
     private int tesourosTotais;
@@ -16,7 +24,7 @@ public class FandeisiaGameManager {
     private Team tLDR;
     private Team tRST;
 
-    private List<Creature> listaCreatures = new ArrayList<>();
+     static List<Creature> listaCreatures = new ArrayList<>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
 
     //Criei isto para saber o conteudo de cada posicao
@@ -48,8 +56,8 @@ public class FandeisiaGameManager {
         turn15GameOver = 0;
         tesourosTotais = 0;
 
-        tLDR.setPontos(0);
-        tRST.setPontos(0);
+       // tLDR.setPontos(0); //Estava aqui na primeira parte
+        // tRST.setPontos(0);
 
         mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
 
@@ -204,13 +212,13 @@ public class FandeisiaGameManager {
 
     public void processTurn() {
 
-        boolean encontrou;
+        int encontrou;
 
         for (int i = 0; i < listaCreatures.size(); i++) {
 
             encontrou = listaCreatures.get(i).moveCriatura();
 
-            if (encontrou) {
+            if (encontrou == 1 || encontrou == 2 || encontrou == 3) {
                 turn15GameOver = 0;
                 for (int j = 0; j < listaTreasures.size(); j++) {
                     if (listaTreasures.get(j).getPosY() == listaCreatures.get(i).getPosY() && listaTreasures.get(j).getPosX() == listaCreatures.get(i).getPosX()) {
@@ -219,11 +227,11 @@ public class FandeisiaGameManager {
                 }
 
                 if (listaCreatures.get(i).getIdEquipa() == 0) {
-                    tLDR.somaPontos();
-                    //pontosLDR++;
+                    tLDR.somaPontos(encontrou);
+                    listaCreatures.get(i).setPontos(encontrou);
                 } else {
-                    tRST.somaPontos();
-                    //pontosRST++;
+                    tRST.somaPontos(encontrou);
+                    listaCreatures.get(i).setPontos(encontrou);
                 }
             }
         }

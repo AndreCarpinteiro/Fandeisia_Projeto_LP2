@@ -4,62 +4,59 @@ public class Anao extends Creature {
 
     Anao(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         super(id, idEquipa, tipo, posX, posY, orient);
-        this.custo = 2;
+        this.custo = 1;
     }
 
-    @Override //Falta contagem tesouros....
-    public boolean moveCriatura() {
+    @Override //Done--------------
+    public int moveCriatura() {
 
         int yMax = mapa.length - 1;
         int xMax = mapa[0].length - 1;
-        boolean encontrou = false;
-
-        //System.out.println("rows" + yMax);
-        //System.out.println("columns" + xMax);
+        int encontrou = 0;
 
         if (orientacao == Orientacao.Norte) {
-            if (posY == 0 || mapa[posY - 1][posX] == 1) {
+            if (posY == 0 || mapa[posY - 1][posX] == 4 || mapa[posY - 1][posX] == 5) {
                 orientacao = Orientacao.Este;
-            }
-            mapa[posY][posX] = 0;
-            posY--;
-            mapa[posY][posX] = 1;
-            if (mapa[posY - 1][posX] == 2) {
-                pontos++;
-                encontrou = true;
+            }else {
+                if (mapa[posY - 1][posX] == 1 || mapa[posY - 1][posX] == 2 || mapa[posY - 1][posX] == 3) {
+                    encontrou = mapa[posY - 1][posX];
+                }
+                mapa[posY][posX] = 0;
+                posY--;
+                mapa[posY][posX] = 4;
             }
         } else if (orientacao == Orientacao.Sul) {
-            if (posY == yMax || mapa[posY + 1][posX] == 1) {
+            if (posY == yMax || mapa[posY + 1][posX] == 4 || mapa[posY - 1][posX] == 5) {
                 orientacao = Orientacao.Oeste;
-            }
-            mapa[posY][posX] = 0;
-            posY++;
-            mapa[posY][posX] = 1;
-            if (mapa[posY + 1][posX] == 2) {
-                pontos++;
-                encontrou = true;
+            }else {
+                if (mapa[posY + 1][posX] == 1 || mapa[posY + 1][posX] == 2 || mapa[posY + 1][posX] == 3) {
+                    encontrou = mapa[posY + 1][posX];
+                }
+                mapa[posY][posX] = 0;
+                posY++;
+                mapa[posY][posX] = 4;
             }
         } else if (orientacao == Orientacao.Oeste) {
-            if (posX == 0 || mapa[posY][posX - 1] == 1) {
+            if (posX == 0 || mapa[posY][posX - 1] == 4 || mapa[posY - 1][posX] == 5) {
                 orientacao = Orientacao.Norte;
-            }
-            mapa[posY][posX] = 0;
-            posX--;
-            mapa[posY][posX] = 1;
-            if (mapa[posY][posX - 1] == 2) {
-                pontos++;
-                encontrou = true;
+            }else {
+                if (mapa[posY][posX - 1] == 1 || mapa[posY][posX - 1] == 2 || mapa[posY][posX - 1] == 3) {
+                    encontrou = mapa[posY][posX - 1];
+                }
+                mapa[posY][posX] = 0;
+                posX--;
+                mapa[posY][posX] = 4;
             }
         } else if (orientacao == Orientacao.Este) {
-            if (posX == xMax || mapa[posY][posX + 1] == 1) {
+            if (posX == xMax || mapa[posY][posX + 1] == 4 || mapa[posY - 1][posX] == 5) {
                 orientacao = Orientacao.Sul;
-            }
-            mapa[posY][posX] = 0;
-            posX++;
-            mapa[posY][posX] = 1;
-            if (mapa[posY][posX + 1] == 2) {
-                pontos++;
-                encontrou = true;
+            }else {
+                if (mapa[posY][posX + 1] == 1 || mapa[posY][posX + 1] == 2 || mapa[posY][posX + 1] == 3) {
+                    encontrou = mapa[posY - 1][posX];
+                }
+                mapa[posY][posX] = 0;
+                posX++;
+                mapa[posY][posX] = 4;
             }
         }
         return encontrou;

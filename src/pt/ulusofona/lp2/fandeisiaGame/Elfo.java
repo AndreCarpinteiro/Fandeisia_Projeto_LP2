@@ -4,15 +4,15 @@ public class Elfo extends Creature {
 
     Elfo(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         super(id, idEquipa, tipo, posX, posY, orient);
-        this.custo = 3;
+        this.custo = 5;
     }
 
     @Override
-    public boolean moveCriatura() {
+    public int moveCriatura() {
 
         int yMax = mapa.length - 1;
         int xMax = mapa[0].length - 1;
-        boolean encontrou = false;
+        int encontrou = 0;
 
         //System.out.println("rows" + yMax);
         //System.out.println("columns" + xMax);
@@ -28,7 +28,7 @@ public class Elfo extends Creature {
 
             if (mapa[posY - 1][posX] == 2) {
                 pontos++; //MUDAR!!!
-                encontrou = true;
+                encontrou = 1;
             }
         }
 
@@ -42,7 +42,7 @@ public class Elfo extends Creature {
             mapa[posY][posX] = 1;
             if (mapa[posY + 1][posX] == 2) {
                 pontos++;
-                encontrou = true;
+                encontrou = 1;
             }
         } else if (orientacao == Orientacao.Oeste) {
             if (posX == 0 || mapa[posY][posX - 1] == 1) {
@@ -53,7 +53,7 @@ public class Elfo extends Creature {
             mapa[posY][posX] = 1;
             if (mapa[posY][posX - 1] == 2) {
                 pontos++;
-                encontrou = true;
+                encontrou = 1;
             }
         } else if (orientacao == Orientacao.Este) {
             if (posX == xMax || mapa[posY][posX + 1] == 1) {
@@ -64,7 +64,7 @@ public class Elfo extends Creature {
             mapa[posY][posX] = 1;
             if (mapa[posY][posX + 1] == 2) {
                 pontos++;
-                encontrou = true;
+                encontrou = 1;
             }
         }
         return encontrou;

@@ -40,7 +40,7 @@ public abstract class Creature {
         return id;
     }
 
-    public abstract boolean moveCriatura();
+    public abstract int moveCriatura();
 
     public String getImagePNG() {//Done---------------------
 
@@ -169,5 +169,9 @@ public abstract class Creature {
 
     public void setFeitico(String feitico) {
         this.feitico = feitico;
+    }
+
+    public void setPontos(int pontos){
+        this.pontos = pontos;
     }
 }

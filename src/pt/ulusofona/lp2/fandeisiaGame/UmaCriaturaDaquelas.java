@@ -3,11 +3,11 @@ package pt.ulusofona.lp2.fandeisiaGame;
 public class UmaCriaturaDaquelas extends Creature {
 
     @Override
-    public boolean moveCriatura() {
+    public int moveCriatura() {
 
         int yMax = mapa.length - 1;
         int xMax = mapa[0].length - 1;
-        boolean encontrou = false;
+        int encontrou = 1;
 
         //System.out.println("rows" + yMax);
         //System.out.println("columns" + xMax);
@@ -23,7 +23,7 @@ public class UmaCriaturaDaquelas extends Creature {
 
             if (mapa[posY - 1][posX] == 2) {
                 pontos++; //MUDAR!!!
-                encontrou = true;
+                encontrou = 1;
             }
         }
 
@@ -37,7 +37,7 @@ public class UmaCriaturaDaquelas extends Creature {
             mapa[posY][posX] = 1;
             if (mapa[posY + 1][posX] == 2) {
                 pontos++;
-                encontrou = true;
+                encontrou = 1;
             }
         } else if (orientacao == Orientacao.Oeste) {
             if (posX == 0 || mapa[posY][posX - 1] == 1) {
@@ -48,7 +48,7 @@ public class UmaCriaturaDaquelas extends Creature {
             mapa[posY][posX] = 1;
             if (mapa[posY][posX - 1] == 2) {
                 pontos++;
-                encontrou = true;
+                encontrou = 1;
             }
         } else if (orientacao == Orientacao.Este) {
             if (posX == xMax || mapa[posY][posX + 1] == 1) {
@@ -59,7 +59,7 @@ public class UmaCriaturaDaquelas extends Creature {
             mapa[posY][posX] = 1;
             if (mapa[posY][posX + 1] == 2) {
                 pontos++;
-                encontrou = true;
+                encontrou = 1;
             }
         }
         return encontrou;
