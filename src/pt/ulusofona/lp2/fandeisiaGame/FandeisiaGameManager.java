@@ -19,6 +19,9 @@ public class FandeisiaGameManager {
     private List<Creature> listaCreatures = new ArrayList<>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
 
+    //Criei isto para saber o conteudo de cada posicao
+    //static HashMap<Integer, String> mapa = new HashMap<Integer, String>();
+
     //--------------------Metodos Obrigratorios---------------------
 
     public String[][] getCreatureTypes() {//Done mas...-------------
@@ -33,7 +36,7 @@ public class FandeisiaGameManager {
         return creatureTypeOptions;
     }
 
-    public int startGame(String[] content, int rows, int columns) {
+    public int  startGame(String[] content, int rows, int columns) {
 
         //TODO: Falta receber buraco para a classe, de resto tudo ok...
 
@@ -53,8 +56,10 @@ public class FandeisiaGameManager {
         for (int i = 0; i < mapStartGame.length; i++) {
             for (int j = 0; j < mapStartGame[i].length; j++) {
                 mapStartGame[i][j] = 0;
+                //mapa.put(mapStartGame[i][j], "vazio");
             }
         }
+        //mapa.containsValue("vazio");
 
         int idTemp = 0;
         String typeTemp = "";
@@ -96,12 +101,15 @@ public class FandeisiaGameManager {
                 //Truque, se houver tempo fazer melhor
                 if (typeTemp.equals("gold")) {
                     mapStartGame[yTemp][xTemp] = 2;
+                    //mapa.put(mapStartGame[yTemp][xTemp], "gold");
                 }
                 if (typeTemp.equals("silver")) {
                     mapStartGame[yTemp][xTemp] = 3;
+                    //mapa.put(mapStartGame[yTemp][xTemp], "silver");
                 }
                 if (typeTemp.equals("bronze")) {
                     mapStartGame[yTemp][xTemp] = 4;
+                    //mapa.put(mapStartGame[yTemp][xTemp], "bronze");
                 }
 
             } else {
@@ -150,6 +158,7 @@ public class FandeisiaGameManager {
                     listaCreatures.add(gigante);
                 }
                 mapStartGame[yTemp][xTemp] = 1;
+                //mapa.put(mapStartGame[yTemp][xTemp], typeTemp);
             }
         }
 
@@ -158,6 +167,7 @@ public class FandeisiaGameManager {
             System.out.println(listaCreatures.get(i).toString());
         }
 
+        //buraco = new Buraco(0,2,4); //TEMPORÁRIO!!!!!!
         tesourosTotais = listaTreasures.size();
 
         //Validar plafond
@@ -377,13 +387,23 @@ public class FandeisiaGameManager {
     }
 
     public boolean enchant(int x, int y, String spellName) {
-        //TODO:
+        //TODO: Aplicar efeito
+
+        for(int i = 0; i < listaCreatures.size(); i++){
+            if(listaCreatures.get(i).posX == x && listaCreatures.get(i).posY == y) {
+                 listaCreatures.get(i).setFeitico(spellName);
+            }
+        }
         return true;
     }
 
     public String getSpell(int x, int y) {
-        //TODO:
-        return "";
+        for(int i = 0; i < listaCreatures.size(); i++){
+            if(listaCreatures.get(i).posX == x && listaCreatures.get(i).posY == y) {
+                return listaCreatures.get(i).getFeitico();
+            }
+        }
+        return null;
     }
 
     public int getCoinTotal(int teamID) {
@@ -434,6 +454,6 @@ public class FandeisiaGameManager {
     }
 
     public String whoIsLordEder() {
-        return "Éderzito António Macedo Lopes";
+        return "Ederzito António Macedo Lopes";
     }
 }

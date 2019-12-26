@@ -18,9 +18,9 @@ public class Dragao extends Creature {
         //System.out.println("columns" + xMax);
 
         if (orientacao == Orientacao.Norte) {
-            if (posY - 3 == 0 || mapa[posY - 4][posX] == 1) {
+           // if (posY - 3 == 0 || posY-4 != buraco.posY) {
                 orientacao = Orientacao.Nordeste;
-            }
+            //}
 
             mapa[posY][posX] = 0;
             posY--;
@@ -53,9 +53,9 @@ public class Dragao extends Creature {
                 encontrou = true;
             }
         } else if (orientacao == Orientacao.Este) {
-            if (posX == xMax || mapa[posY][posX + 1] == 1) {
+         //   if (posX == xMax || mapa[posY][posX + 1] == mapa.containsValue("vazio")) {
                 orientacao = Orientacao.Sul;
-            }
+            //}
             mapa[posY][posX] = 0;
             posX++;
             mapa[posY][posX] = 1;

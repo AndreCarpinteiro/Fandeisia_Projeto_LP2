@@ -5,6 +5,21 @@ public class Buraco {
     int posX;
     int posY;
 
-    Buraco(){
+    public Buraco(int id, int posX, int posy) {
+        this.id = id;
+        this.posX = posX;
+        this.posY = posy;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
     }
 }

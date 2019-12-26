@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
+
 public abstract class Creature {
 
     //enum é otimo para valores conhecidos finitos
@@ -10,7 +12,8 @@ public abstract class Creature {
     int id;
     int idEquipa;
     int custo;
-    int[][] mapa = FandeisiaGameManager.mapStartGame;
+    String feitico = null;
+    int[][] mapa = mapStartGame;
 
     String tipo;
     int pontos; //Numero de tesouros apanhados (1 tesouro = 1 ponto)
@@ -158,5 +161,13 @@ public abstract class Creature {
 
     public int getCusto(){
         return custo;
+    }
+
+    public String getFeitico(){
+        return feitico;
+    }
+
+    public void setFeitico(String feitico) {
+        this.feitico = feitico;
     }
 }
