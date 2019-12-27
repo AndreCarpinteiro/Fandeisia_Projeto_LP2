@@ -23,6 +23,7 @@ public class Elfo extends Creature {
                 if (mapa[posY - 2][posX] != 1 || mapa[posY - 2][posX] != 5) {
                     if (mapa[posY - 2][posX] == 1 || mapa[posY - 2][posX] == 2 || mapa[posY - 2][posX] == 3) {
                         encontrou = mapa[posY - 2][posX];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posY -= 2;
@@ -36,6 +37,7 @@ public class Elfo extends Creature {
                 if (mapa[posY - 2][posX + 2] != 1 || mapa[posY - 2][posX + 2] != 5) {
                     if (mapa[posY - 2][posX + 2] == 1 || mapa[posY - 2][posX + 2] == 2 || mapa[posY - 2][posX + 2] == 3) {
                         encontrou = mapa[posY - 2][posX + 2];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posY -= 2;
@@ -50,6 +52,7 @@ public class Elfo extends Creature {
                 if (mapa[posY][posX + 2] != 1 || mapa[posY][posX + 2] != 5) {
                     if (mapa[posY][posX + 2] == 1 || mapa[posY][posX + 2] == 2 || mapa[posY][posX + 2] == 3) {
                         encontrou = mapa[posY][posX + 2];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posX += 2;
@@ -63,6 +66,7 @@ public class Elfo extends Creature {
                 if (mapa[posY + 2][posX + 2] != 1 || mapa[posY + 2][posX + 2] != 5) {
                     if (mapa[posY + 2][posX + 2] == 1 || mapa[posY + 2][posX + 2] == 2 || mapa[posY + 2][posX + 2] == 3) {
                         encontrou = mapa[posY + 2][posX + 2];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posX += 2;
@@ -77,6 +81,7 @@ public class Elfo extends Creature {
                 if (mapa[posY + 2][posX] != 1 || mapa[posY + 2][posX] != 5) {
                     if (mapa[posY + 2][posX] == 1 || mapa[posY + 2][posX] == 2 || mapa[posY + 2][posX] == 3) {
                         encontrou = mapa[posY + 2][posX];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posY += 2;
@@ -90,6 +95,7 @@ public class Elfo extends Creature {
                 if (mapa[posY + 2][posX - 2] != 1 || mapa[posY + 2][posX - 2] != 5) {
                     if (mapa[posY + 2][posX - 2] == 1 || mapa[posY + 2][posX - 2] == 2 || mapa[posY + 2][posX - 2] == 3) {
                         encontrou = mapa[posY + 2][posX - 3];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posY += 2;
@@ -104,6 +110,7 @@ public class Elfo extends Creature {
                 if (mapa[posY][posX - 2] != 1 || mapa[posY][posX - 2] != 5) {
                     if (mapa[posY][posX - 2] == 1 || mapa[posY][posX - 2] == 2 || mapa[posY][posX - 2] == 3) {
                         encontrou = mapa[posY][posX - 2];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posX -= 2;
@@ -117,6 +124,7 @@ public class Elfo extends Creature {
                 if (mapa[posY - 2][posX - 2] != 1 || mapa[posY - 2][posX - 2] != 5) {
                     if (mapa[posY - 2][posX - 2] == 1 || mapa[posY - 2][posX - 2] == 2 || mapa[posY - 2][posX - 2] == 3) {
                         encontrou = mapa[posY - 2][posX - 2];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posX -= 2;

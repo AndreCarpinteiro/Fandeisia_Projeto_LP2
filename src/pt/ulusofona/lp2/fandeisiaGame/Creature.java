@@ -12,6 +12,9 @@ public abstract class Creature {
     int id;
     int idEquipa;
     int custo;
+    int ouro = 0;
+    int prata = 0;
+    int bronze = 0;
     String feitico = null;
     int[][] mapa = mapStartGame;
 
@@ -54,7 +57,7 @@ public abstract class Creature {
             if (tipo.equals("Humano")) {
                 return "skeleton_sul.png";
             }
-            if (tipo.equals("Super Dragão")) {
+            if (tipo.equals("Dragão")) {
                 return "super_dragon_sul.png";
             }
         }
@@ -69,7 +72,7 @@ public abstract class Creature {
             if (tipo.equals("Humano")) {
                 return "skeleton_norte.png";
             }
-            if (tipo.equals("Super Dragão")) {
+            if (tipo.equals("Dragão")) {
                 return "super_dragon_norte.png";
             }
         }
@@ -84,7 +87,7 @@ public abstract class Creature {
             if (tipo.equals("Humano")) {
                 return "skeleton_este.png";
             }
-            if (tipo.equals("Super Dragão")) {
+            if (tipo.equals("Dragão")) {
                 return "super_dragon_este.png";
             }
         }
@@ -99,7 +102,7 @@ public abstract class Creature {
             if (tipo.equals("Humano")) {
                 return "skeleton_oeste.png";
             }
-            if (tipo.equals("Super Dragão")) {
+            if (tipo.equals("Dragão")) {
                 return "super_dragon_oeste.png";
             }
         }
@@ -173,5 +176,29 @@ public abstract class Creature {
 
     public void somaPontos(){
         this.pontos++;
+    }
+
+    public void calcTrofeus(int valor){
+        if(valor == 1){
+            bronze++;
+        }
+        if(valor == 2){
+            prata++;
+        }
+        if(valor == 3){
+            ouro++;
+        }
+    }
+
+    public int getBronze() {
+        return bronze;
+    }
+
+    public int getPrata() {
+        return prata;
+    }
+
+    public int getOuro() {
+        return ouro;
     }
 }

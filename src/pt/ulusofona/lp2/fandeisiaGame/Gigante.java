@@ -23,6 +23,7 @@ public class Gigante extends Creature {
                 if (mapa[posY - 3][posX] != 1 || mapa[posY - 3][posX] != 5) {
                     if (mapa[posY - 3][posX] == 1 || mapa[posY - 3][posX] == 2 || mapa[posY - 3][posX] == 3) {
                         encontrou = mapa[posY - 3][posX];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posY -= 3;
@@ -36,6 +37,7 @@ public class Gigante extends Creature {
                 if (mapa[posY][posX + 3] != 1 || mapa[posY][posX + 3] != 5) {
                     if (mapa[posY][posX + 3] == 1 || mapa[posY][posX + 3] == 2 || mapa[posY][posX + 3] == 3) {
                         encontrou = mapa[posY][posX + 3];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posX += 3;
@@ -49,6 +51,7 @@ public class Gigante extends Creature {
                 if (mapa[posY + 3][posX] != 1 || mapa[posY + 3][posX] != 5) {
                     if (mapa[posY + 3][posX] == 1 || mapa[posY + 3][posX] == 2 || mapa[posY + 3][posX] == 3) {
                         encontrou = mapa[posY + 3][posX];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posY += 3;
@@ -62,6 +65,7 @@ public class Gigante extends Creature {
                 if (mapa[posY][posX - 3] != 1 || mapa[posY][posX - 3] != 5) {
                     if (mapa[posY][posX - 3] == 1 || mapa[posY][posX - 3] == 2 || mapa[posY][posX - 3] == 3) {
                         encontrou = mapa[posY][posX - 3];
+                        calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posX -= 3;

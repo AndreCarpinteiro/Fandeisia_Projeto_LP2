@@ -42,7 +42,7 @@ public class FandeisiaGameManager {
         creatureTypeOptions[0] = new String[]{"Humano", "skeleton.png", "Muito fixe", "3"};
         creatureTypeOptions[1] = new String[]{"Anão", "dwarf.png", "Dá cabeçadas", "1"};
         creatureTypeOptions[2] = new String[]{"Gigante", "chimera.png", "Bue grande", "5"};
-        creatureTypeOptions[3] = new String[]{"Super Dragão", "super_dragon.png", "Comandado pelo Macaco Lider", "9"};
+        creatureTypeOptions[3] = new String[]{"Dragão", "super_dragon.png", "Comandado pelo Macaco Lider", "9"};
         creatureTypeOptions[4] = new String[]{"Elfo", "bird.png", "Muito fixe", "5"};
 
         return creatureTypeOptions;
@@ -176,7 +176,7 @@ public class FandeisiaGameManager {
                     Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
                     listaCreatures.add(anao);
                 }
-                if (typeTemp.equals("Super Dragão")) {
+                if (typeTemp.equals("Dragão")) {
                     Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
                     listaCreatures.add(dragao);
                 }
@@ -336,6 +336,21 @@ public class FandeisiaGameManager {
     public List<String> getResults() {//Done---------------
 
         List<String> resultado = new ArrayList<>();
+        int id = 0;
+        int ouros = 0;
+        int pratas = 0;
+        int bronze = 0;
+        String tipo = "";
+        int pontos = 0;
+
+        for (int i = 0; i < listaCreatures.size(); i++) {
+            id = listaCreatures.get(i).getId();
+            ouros = listaCreatures.get(i).getOuro();
+            pratas= listaCreatures.get(i).getPrata();
+            bronze = listaCreatures.get(i).getBronze();
+            pontos = listaCreatures.get(i).getPontos();
+            tipo = listaCreatures.get(i).getTipo();
+        }
 
         resultado.add("Welcome to FANDEISIA");
 
@@ -345,9 +360,6 @@ public class FandeisiaGameManager {
             resultado.add("RESISTENCIA: " + tRST.getTeamPontos());
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
-            for (int i = 0; i < listaCreatures.size(); i++) {
-                resultado.add(listaCreatures.get(i).getId() + " : " + listaCreatures.get(i).getTipo() + " : " + listaCreatures.get(i).getPontos());
-            }
         }
 
         if (tLDR.getTeamPontos() > tRST.getTeamPontos()) {
@@ -356,9 +368,6 @@ public class FandeisiaGameManager {
             resultado.add("RESISTENCIA: " + tRST.getTeamPontos());
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
-            for (int i = 0; i < listaCreatures.size(); i++) {
-                resultado.add(listaCreatures.get(i).getId() + " : " + listaCreatures.get(i).getTipo() + " : " + listaCreatures.get(i).getPontos());
-            }
         }
 
         if (tLDR.getTeamPontos() < tRST.getTeamPontos()) {
@@ -367,10 +376,8 @@ public class FandeisiaGameManager {
             resultado.add("LDR: " + tLDR.getTeamPontos());
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
-            for (int i = 0; i < listaCreatures.size(); i++) {
-                resultado.add(listaCreatures.get(i).getId() + " : " + listaCreatures.get(i).getTipo() + " : " + listaCreatures.get(i).getPontos());
-            }
         }
+        resultado.add(id + " : " + tipo + " : " + ouros + " : " + pratas + " : " +  bronze + " : " + pontos);
         return resultado;
     }
 
