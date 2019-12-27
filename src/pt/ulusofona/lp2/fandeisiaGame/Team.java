@@ -35,8 +35,12 @@ public class Team {
         return plafond;
     }
 
-    public void setPlafond(int plafond){
-        this.plafond = plafond;
+    public void somaPlafond(int plafond){
+        this.plafond += plafond;
+    }
+
+    public void decrementaPlafond(int plafond){
+        this.plafond -= plafond;
     }
 
     public int getId(){

@@ -34,12 +34,16 @@ public class FandeisiaGameManager {
 
     public String[][] getCreatureTypes() {//Done mas...-------------
 
-        String[][] creatureTypeOptions = new String[4][4];
+        tLDR = new Team(10, 0);
+        tRST = new Team(20, 0);
 
-        creatureTypeOptions[0] = new String[]{"Skeleton", "skeleton.png", "Lança flechas", "2"};
-        creatureTypeOptions[1] = new String[]{"Dwarf", "dwarf.png", "Dá cabeçadas", "3"};
-        creatureTypeOptions[2] = new String[]{"Chimera", "chimera.png", "Morde cenas", "1"};
-        creatureTypeOptions[3] = new String[]{"Super Dragão", "super_dragon.png", "Comandado pelo Macaco Lider", "5"};
+        String[][] creatureTypeOptions = new String[5][4];
+
+        creatureTypeOptions[0] = new String[]{"Humano", "skeleton.png", "Muito fixe", "3"};
+        creatureTypeOptions[1] = new String[]{"Anão", "dwarf.png", "Dá cabeçadas", "1"};
+        creatureTypeOptions[2] = new String[]{"Gigante", "chimera.png", "Bue grande", "5"};
+        creatureTypeOptions[3] = new String[]{"Super Dragão", "super_dragon.png", "Comandado pelo Macaco Lider", "9"};
+        creatureTypeOptions[4] = new String[]{"Elfo", "bird.png", "Muito fixe", "5"};
 
         return creatureTypeOptions;
     }
@@ -48,8 +52,6 @@ public class FandeisiaGameManager {
 
         //TODO: Falta receber buraco para a classe, de resto tudo ok...
 
-        tLDR = new Team(10, 0);
-        tRST = new Team(20, 0);
         listaCreatures.clear();
         listaTreasures.clear();
 
@@ -74,7 +76,8 @@ public class FandeisiaGameManager {
         String typeTemp = "";
         int xTemp = 0;
         int yTemp = 0;
-        int custoTotal = 0;
+        int custoLDR = 0;
+        int custoRST = 0;
         int teamIdTemp = 0;
         String orientTemp = "Norte";
 
@@ -198,26 +201,36 @@ public class FandeisiaGameManager {
         for (int i = 0; i < listaCreatures.size(); i++) {
             System.out.println(listaCreatures.get(i).toString());
         }
-        for(int i = 0; i < listaHoles.size(); i++){
+        for (int i = 0; i < listaHoles.size(); i++) {
             System.out.println(listaHoles.get(i).toString());
         }
 
         tesourosTotais = listaTreasures.size();
 
+        //Atualizar plafond
+
         //Validar plafond
         for (int i = 0; i < listaCreatures.size(); i++) {
-            custoTotal += listaCreatures.get(i).getCusto();
-
-            if (custoTotal > tLDR.getPlafond() && custoTotal > tRST.getPlafond()) {
-                return 1;
-            }
-            if (custoTotal > tLDR.getPlafond()) {
-                return 2;
-            }
-            if (custoTotal > tRST.getPlafond()) {
-                return 3;
+            if (listaCreatures.get(i).idEquipa == 10) {
+                custoLDR += listaCreatures.get(i).getCusto();
+            } else {
+                custoRST += listaCreatures.get(i).getCusto();
             }
         }
+
+            if (custoLDR > tLDR.getPlafond() && custoRST > tRST.getPlafond()) {
+                return 1;
+            }
+            if (custoLDR > tLDR.getPlafond()) {
+                return 2;
+            }
+            if (custoRST > tRST.getPlafond()) {
+                return 3;
+            }
+
+        tLDR.decrementaPlafond(custoLDR); //Atualiza plafond
+        tRST.decrementaPlafond(custoRST); //Atualiza plafond
+
         return 0; //Tudo válido
     }
 
@@ -238,7 +251,7 @@ public class FandeisiaGameManager {
 
     public void processTurn() {
 
-        int encontrou;
+        int encontrou = 0;
 
         for (int i = 0; i < listaCreatures.size(); i++) {
 
@@ -413,12 +426,34 @@ public class FandeisiaGameManager {
 
     public Map<String, Integer> createComputerArmy() {
 
-        Map<String, Integer> mapa = new HashMap<String, Integer>();
-        mapa.put("Super Dragão", 2);
-        mapa.put("Dwarf", 1);
+        Random random = new Random();
+        int calhou = random.nextInt(4 - 1) + 1;
 
+        Map<String, Integer> mapa = new HashMap<String, Integer>();
+
+        if(calhou == 1) {
+            mapa.put("Super Dragão", 2);
+            mapa.put("Anão", 3);
+            mapa.put("Humano", 2);
+            mapa.put("Elfo", 2);
+        }
+
+        if(calhou == 2) {
+            mapa.put("Super Dragão", 1);
+            mapa.put("Anão", 3);
+            mapa.put("Gigante", 3);
+            mapa.put("Elfo", 2);
+        }
+
+        if(calhou == 3) {
+            mapa.put("Super Dragão", 1);
+            mapa.put("Gigante", 2);
+            mapa.put("Anão", 3);
+            mapa.put("Humano", 1);
+            mapa.put("Elfo", 3);
+        }
         return mapa;
-    }
+    }//Done---------
 
     public boolean enchant(int x, int y, String spellName) {
         //TODO: Aplicar efeito
