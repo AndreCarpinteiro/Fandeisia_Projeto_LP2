@@ -23,10 +23,9 @@ public class Humano extends Creature {
                     mapa[posY][posX] = 0;
                     posY -= 2;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Este;
-            }
-            orientacao = Orientacao.Este;
+                    return encontrou;
+                }else{orientacao = Orientacao.Este;}
+            }else{orientacao = Orientacao.Este;}
         }
         if (orientacao == Orientacao.Este) {
             if(posX + 2 < xMax) {
@@ -37,10 +36,9 @@ public class Humano extends Creature {
                     mapa[posY][posX] = 0;
                     posX += 2;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Sul;
-            }
-            orientacao = Orientacao.Sul;
+                    return encontrou;
+                }else{orientacao = Orientacao.Sul;}
+            }else{orientacao = Orientacao.Sul;}
         }
         if (orientacao == Orientacao.Sul) {
             if(posY + 2 < yMax) {
@@ -51,10 +49,9 @@ public class Humano extends Creature {
                     mapa[posY][posX] = 0;
                     posY += 2;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Oeste;
-            }
-            orientacao = Orientacao.Oeste;
+                    return encontrou;
+                }else{orientacao = Orientacao.Oeste;}
+            }else{orientacao = Orientacao.Oeste;}
         }
         if (orientacao == Orientacao.Oeste) {
             if(posX - 2 > 0) {
@@ -65,10 +62,8 @@ public class Humano extends Creature {
                     mapa[posY][posX] = 0;
                     posX -= 2;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Norte;
-            }
-            orientacao = Orientacao.Norte;
+                }else{orientacao = Orientacao.Norte;}
+            }else{orientacao = Orientacao.Norte;}
         }
         return encontrou;
     }

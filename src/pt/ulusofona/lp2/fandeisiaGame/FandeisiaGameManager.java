@@ -172,7 +172,7 @@ public class FandeisiaGameManager {
                     }
                 }
 
-                if (typeTemp.equals("Dwarf")) {
+                if (typeTemp.equals("Anão")) {
                     Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
                     listaCreatures.add(anao);
                 }
@@ -235,15 +235,15 @@ public class FandeisiaGameManager {
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
-        Random random = new Random();
-        teamId = random.nextInt(3 - 1) + 1;
+       // Random random = new Random();
+        //teamId = random.nextInt(3 - 1) + 1;
 
-        if (teamId == 1) { //Acho que funciona, no debug está bem
-            teamId = 10;
+        if (teamId == 10) { //Acho que funciona, no debug está bem
+           // teamId = 10;
             tLDR.setEstado(true);
             tRST.setEstado(false);
         } else {
-            teamId = 20;
+            //teamId = 20;
             tLDR.setEstado(false);
             tRST.setEstado(true);
         }
@@ -265,12 +265,12 @@ public class FandeisiaGameManager {
                     }
                 }
 
-                if (listaCreatures.get(i).getIdEquipa() == 0) {
+                if (listaCreatures.get(i).getIdEquipa() == 10) {
                     tLDR.somaPontos(encontrou);
-                    listaCreatures.get(i).setPontos(encontrou);
+                    listaCreatures.get(i).somaPontos(); //Mudei isto porque acho que soma e não o set...
                 } else {
                     tRST.somaPontos(encontrou);
-                    listaCreatures.get(i).setPontos(encontrou);
+                    listaCreatures.get(i).somaPontos(); //Mudei isto porque acho que soma e não o set...
                 }
             }
         }
@@ -466,7 +466,7 @@ public class FandeisiaGameManager {
         return true;
     }
 
-    public String getSpell(int x, int y) {
+    public String getSpell(int x, int y) { //Done-------
         for (int i = 0; i < listaCreatures.size(); i++) {
             if (listaCreatures.get(i).posX == x && listaCreatures.get(i).posY == y) {
                 return listaCreatures.get(i).getFeitico();

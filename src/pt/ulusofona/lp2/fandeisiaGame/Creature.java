@@ -45,13 +45,13 @@ public abstract class Creature {
     public String getImagePNG() {//Done---------------------
 
         if (orientacao.toString().equals("Sul")) {
-            if (tipo.equals("Dwarf")) {
+            if (tipo.equals("Anão")) {
                 return "dwarf_sul.png";
             }
-            if (tipo.equals("Chimera")) {
+            if (tipo.equals("Gigante")) {
                 return "chimera_sul2.png";
             }
-            if (tipo.equals("Skeleton")) {
+            if (tipo.equals("Humano")) {
                 return "skeleton_sul.png";
             }
             if (tipo.equals("Super Dragão")) {
@@ -60,13 +60,13 @@ public abstract class Creature {
         }
 
         if (orientacao.toString().equals("Norte")) {
-            if (tipo.equals("Dwarf")) {
+            if (tipo.equals("Anão")) {
                 return "dwarf_norte.png";
             }
-            if (tipo.equals("Chimera")) {
+            if (tipo.equals("Gigante")) {
                 return "chimera_norte2.png";
             }
-            if (tipo.equals("Skeleton")) {
+            if (tipo.equals("Humano")) {
                 return "skeleton_norte.png";
             }
             if (tipo.equals("Super Dragão")) {
@@ -75,13 +75,13 @@ public abstract class Creature {
         }
 
         if (orientacao.toString().equals("Este")) {
-            if (tipo.equals("Dwarf")) {
+            if (tipo.equals("Anão")) {
                 return "dwarf_este.png";
             }
-            if (tipo.equals("Chimera")) {
+            if (tipo.equals("Gigante")) {
                 return "chimera_este2.png";
             }
-            if (tipo.equals("Skeleton")) {
+            if (tipo.equals("Humano")) {
                 return "skeleton_este.png";
             }
             if (tipo.equals("Super Dragão")) {
@@ -90,13 +90,13 @@ public abstract class Creature {
         }
 
         if (orientacao.toString().equals("Oeste")) {
-            if (tipo.equals("Dwarf")) {
+            if (tipo.equals("Anão")) {
                 return "dwarf_oeste.png";
             }
-            if (tipo.equals("Chimera")) {
+            if (tipo.equals("Gigante")) {
                 return "chimera_oeste.png";
             }
-            if (tipo.equals("Skeleton")) {
+            if (tipo.equals("Humano")) {
                 return "skeleton_oeste.png";
             }
             if (tipo.equals("Super Dragão")) {
@@ -171,7 +171,7 @@ public abstract class Creature {
         this.feitico = feitico;
     }
 
-    public void setPontos(int pontos){
-        this.pontos = pontos;
+    public void somaPontos(){
+        this.pontos++;
     }
 }

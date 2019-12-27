@@ -19,7 +19,7 @@ public class Gigante extends Creature {
         int encontrou = 0;
 
         if (orientacao == Orientacao.Norte) {
-            if (posY - 3 > 0 || encontraGigante()) {
+            if (posY - 3 > 0 && encontraGigante()) {
                 if (mapa[posY - 3][posX] != 1 || mapa[posY - 3][posX] != 5) {
                     if (mapa[posY - 3][posX] == 1 || mapa[posY - 3][posX] == 2 || mapa[posY - 3][posX] == 3) {
                         encontrou = mapa[posY - 3][posX];
@@ -27,13 +27,12 @@ public class Gigante extends Creature {
                     mapa[posY][posX] = 0;
                     posY -= 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Este;
-            }
-            orientacao = Orientacao.Este;
+                    return encontrou;
+                }else{ orientacao = Orientacao.Este;}
+            }else{ orientacao = Orientacao.Este;}
         }
         if (orientacao == Orientacao.Este) {
-            if (posX + 3 < xMax || encontraGigante()) {
+            if (posX + 3 < xMax && encontraGigante()) {
                 if (mapa[posY][posX + 3] != 1 || mapa[posY][posX + 3] != 5) {
                     if (mapa[posY][posX + 3] == 1 || mapa[posY][posX + 3] == 2 || mapa[posY][posX + 3] == 3) {
                         encontrou = mapa[posY][posX + 3];
@@ -41,13 +40,12 @@ public class Gigante extends Creature {
                     mapa[posY][posX] = 0;
                     posX += 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Sul;
-            }
-            orientacao = Orientacao.Sul;
+                    return encontrou;
+                }else{orientacao = Orientacao.Sul;}
+            }else{orientacao = Orientacao.Sul;}
         }
         if (orientacao == Orientacao.Sul) {
-            if (posY + 3 < yMax || encontraGigante()) {
+            if (posY + 3 < yMax && encontraGigante()) {
                 if (mapa[posY + 3][posX] != 1 || mapa[posY + 3][posX] != 5) {
                     if (mapa[posY + 3][posX] == 1 || mapa[posY + 3][posX] == 2 || mapa[posY + 3][posX] == 3) {
                         encontrou = mapa[posY + 3][posX];
@@ -55,13 +53,12 @@ public class Gigante extends Creature {
                     mapa[posY][posX] = 0;
                     posY += 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Oeste;
-            }
-            orientacao = Orientacao.Oeste;
+                    return encontrou;
+                }else{orientacao = Orientacao.Oeste;}
+            }else{orientacao = Orientacao.Oeste;}
         }
         if (orientacao == Orientacao.Oeste) {
-            if (posX - 3 > 0 || encontraGigante()) {
+            if (posX - 3 > 0 && encontraGigante()) {
                 if (mapa[posY][posX - 3] != 1 || mapa[posY][posX - 3] != 5) {
                     if (mapa[posY][posX - 3] == 1 || mapa[posY][posX - 3] == 2 || mapa[posY][posX - 3] == 3) {
                         encontrou = mapa[posY][posX - 3];
@@ -69,10 +66,8 @@ public class Gigante extends Creature {
                     mapa[posY][posX] = 0;
                     posX -= 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Norte;
-            }
-            orientacao = Orientacao.Norte;
+                }else{orientacao = Orientacao.Norte;}
+            }else{orientacao = Orientacao.Norte;}
         }
         return encontrou;
     }

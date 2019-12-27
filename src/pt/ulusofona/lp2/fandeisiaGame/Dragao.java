@@ -26,10 +26,9 @@ public class Dragao extends Creature {
                     mapa[posY][posX] = 0;
                     posY -= 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Nordeste;
-            }
-            orientacao = Orientacao.Nordeste;
+                    return encontrou;
+                }else{orientacao = Orientacao.Nordeste;}
+            }else{orientacao = Orientacao.Nordeste;}
         }
         if (orientacao == Orientacao.Nordeste) {
             if(posY - 3 > 0 && posX + 3 < xMax) {
@@ -41,10 +40,9 @@ public class Dragao extends Creature {
                     posY -= 3;
                     posX += 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Este;
-            }
-            orientacao = Orientacao.Este;
+                    return encontrou;
+                }else{orientacao = Orientacao.Este;}
+            }else{orientacao = Orientacao.Este;}
         }
         if (orientacao == Orientacao.Este) {
             if(posX + 3 < xMax) {
@@ -55,10 +53,9 @@ public class Dragao extends Creature {
                     mapa[posY][posX] = 0;
                     posX += 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Sudeste;
-            }
-            orientacao = Orientacao.Sudeste;
+                    return encontrou;
+                }else{orientacao = Orientacao.Sudeste;}
+            }else{orientacao = Orientacao.Sudeste;}
         }
         if (orientacao == Orientacao.Sudeste) {
             if(posY + 3 < yMax && posX + 3 < xMax) {
@@ -70,10 +67,9 @@ public class Dragao extends Creature {
                     posX += 3;
                     posY += 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Sul;
-            }
-            orientacao = Orientacao.Sul;
+                    return encontrou;
+                }else{orientacao = Orientacao.Sul;}
+            }else{orientacao = Orientacao.Sul;}
         }
         if (orientacao == Orientacao.Sul) {
             if(posY + 3 < yMax) {
@@ -84,10 +80,9 @@ public class Dragao extends Creature {
                     mapa[posY][posX] = 0;
                     posY += 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Sudeste;
-            }
-            orientacao = Orientacao.Sudeste;
+                    return encontrou;
+                }else{orientacao = Orientacao.Sudeste;}
+            }else{orientacao = Orientacao.Sudeste;}
         }
         if (orientacao == Orientacao.Sudoeste) {
             if(posY + 3 < yMax && posX - 3 > 0) {
@@ -99,10 +94,9 @@ public class Dragao extends Creature {
                     posY += 3;
                     posX -= 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Oeste;
-            }
-            orientacao = Orientacao.Oeste;
+                    return encontrou;
+                }else{orientacao = Orientacao.Oeste;}
+            }else{orientacao = Orientacao.Oeste;}
         }
         if (orientacao == Orientacao.Oeste) {
             if(posX - 3 > 0) {
@@ -113,10 +107,9 @@ public class Dragao extends Creature {
                     mapa[posY][posX] = 0;
                     posX -= 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Noroeste;
-            }
-            orientacao = Orientacao.Noroeste;
+                    return encontrou;
+                }else{orientacao = Orientacao.Noroeste;}
+            }else{orientacao = Orientacao.Noroeste;}
         }
         if (orientacao == Orientacao.Noroeste) {
             if(posY - 3 > 0 && posX - 3 > 0) {
@@ -128,10 +121,8 @@ public class Dragao extends Creature {
                     posX -= 3;
                     posY -= 3;
                     mapa[posY][posX] = 4;
-                }
-                orientacao = Orientacao.Norte;
-            }
-            orientacao = Orientacao.Norte;
+                }else{orientacao = Orientacao.Norte;}
+            }else{orientacao = Orientacao.Norte;}
         }
         return encontrou;
     }
