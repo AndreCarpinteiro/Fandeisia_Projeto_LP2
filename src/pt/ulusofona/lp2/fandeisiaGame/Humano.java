@@ -16,7 +16,7 @@ public class Humano extends Creature {
 
         if (orientacao == Orientacao.Norte) {
             if(posY - 2 > 0) {
-                if (mapa[posY - 2][posX] != 1 || mapa[posY - 2][posX] != 5 || mapa[posY - 1][posX] != 1 || mapa[posY - 1][posX] != 5) {
+                if (mapa[posY - 2][posX] != 1 && mapa[posY - 2][posX] != 5 && mapa[posY - 1][posX] != 1 && mapa[posY - 1][posX] != 5) {
                     if (mapa[posY - 2][posX] == 1 || mapa[posY - 2][posX] == 2 || mapa[posY - 2][posX] == 3) {
                         encontrou = mapa[posY - 2][posX];
                         calcTrofeus(encontrou);
@@ -30,7 +30,7 @@ public class Humano extends Creature {
         }
         if (orientacao == Orientacao.Este) {
             if(posX + 2 < xMax) {
-                if (mapa[posY][posX + 2] != 1 || mapa[posY][posX + 2] != 5 || mapa[posY][posX + 1] != 1 || mapa[posY][posX + 1] != 5) {
+                if (mapa[posY][posX + 2] != 1 && mapa[posY][posX + 2] != 5 && mapa[posY][posX + 1] != 1 && mapa[posY][posX + 1] != 5) {
                     if (mapa[posY][posX + 2] == 1 || mapa[posY][posX + 2] == 2 || mapa[posY][posX + 2] == 3) {
                         encontrou = mapa[posY][posX + 2];
                         calcTrofeus(encontrou);
@@ -44,7 +44,7 @@ public class Humano extends Creature {
         }
         if (orientacao == Orientacao.Sul) {
             if(posY + 2 < yMax) {
-                if (mapa[posY + 2][posX] != 1 || mapa[posY + 2][posX] != 5 || mapa[posY + 1][posX] != 1 || mapa[posY + 1][posX] != 5) {
+                if (mapa[posY + 2][posX] != 1 && mapa[posY + 2][posX] != 5 && mapa[posY + 1][posX] != 1 && mapa[posY + 1][posX] != 5) {
                     if (mapa[posY + 2][posX] == 1 || mapa[posY + 2][posX] == 2 || mapa[posY + 2][posX] == 3) {
                         encontrou = mapa[posY + 2][posX];
                         calcTrofeus(encontrou);
@@ -58,7 +58,7 @@ public class Humano extends Creature {
         }
         if (orientacao == Orientacao.Oeste) {
             if(posX - 2 > 0) {
-                if (mapa[posY][posX - 2] != 1 || mapa[posY][posX - 2] != 5 || mapa[posY][posX - 1] != 1 || mapa[posY][posX - 1] != 5) {
+                if (mapa[posY][posX - 2] != 1 && mapa[posY][posX - 2] != 5 && mapa[posY][posX - 1] != 1 && mapa[posY][posX - 1] != 5) {
                     if (mapa[posY][posX - 2] == 1 || mapa[posY][posX - 2] == 2 || mapa[posY][posX - 2] == 3) {
                         encontrou = mapa[posY][posX - 2];
                         calcTrofeus(encontrou);

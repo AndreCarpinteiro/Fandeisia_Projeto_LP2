@@ -106,24 +106,22 @@ public class FandeisiaGameManager {
                         yTemp = Integer.parseInt(d.substring(4));
                         tesouroTemp.setPosY(yTemp);
                     }
+                    //Truque, se houver tempo fazer melhor
+                    if (typeTemp.equals("gold")) {
+                        mapStartGame[yTemp][xTemp] = 2;
+                        //mapa.put(mapStartGame[yTemp][xTemp], "gold");
+                    }
+                    if (typeTemp.equals("silver")) {
+                        mapStartGame[yTemp][xTemp] = 3;
+                        //mapa.put(mapStartGame[yTemp][xTemp], "silver");
+                    }
+                    if (typeTemp.equals("bronze")) {
+                        mapStartGame[yTemp][xTemp] = 4;
+                        //mapa.put(mapStartGame[yTemp][xTemp], "bronze");
+                    }
                 }
                 //System.out.println(tesouroTemp.toString());
                 listaTreasures.add(tesouroTemp);
-
-                //Truque, se houver tempo fazer melhor
-                if (typeTemp.equals("gold")) {
-                    mapStartGame[yTemp][xTemp] = 2;
-                    //mapa.put(mapStartGame[yTemp][xTemp], "gold");
-                }
-                if (typeTemp.equals("silver")) {
-                    mapStartGame[yTemp][xTemp] = 3;
-                    //mapa.put(mapStartGame[yTemp][xTemp], "silver");
-                }
-                if (typeTemp.equals("bronze")) {
-                    mapStartGame[yTemp][xTemp] = 4;
-                    //mapa.put(mapStartGame[yTemp][xTemp], "bronze");
-                }
-
             }
             if (elemento.contains("hole")) {
 
@@ -230,6 +228,14 @@ public class FandeisiaGameManager {
 
         tLDR.decrementaPlafond(custoLDR); //Atualiza plafond
         tRST.decrementaPlafond(custoRST); //Atualiza plafond
+
+        //Ver mapa TESTES
+        for (int i = 0; i < mapStartGame.length; i++) {
+            for (int j = 0; j < mapStartGame[i].length; j++) {
+                System.out.print(mapStartGame[i][j]);
+            }
+            System.out.println();
+        }
 
         return 0; //Tudo válido
     }
@@ -343,15 +349,6 @@ public class FandeisiaGameManager {
         String tipo = "";
         int pontos = 0;
 
-        for (int i = 0; i < listaCreatures.size(); i++) {
-            id = listaCreatures.get(i).getId();
-            ouros = listaCreatures.get(i).getOuro();
-            pratas= listaCreatures.get(i).getPrata();
-            bronze = listaCreatures.get(i).getBronze();
-            pontos = listaCreatures.get(i).getPontos();
-            tipo = listaCreatures.get(i).getTipo();
-        }
-
         resultado.add("Welcome to FANDEISIA");
 
         if (tLDR.getTeamPontos() == tRST.getTeamPontos()) {
@@ -377,7 +374,15 @@ public class FandeisiaGameManager {
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
         }
-        resultado.add(id + " : " + tipo + " : " + ouros + " : " + pratas + " : " +  bronze + " : " + pontos);
+        for (int i = 0; i < listaCreatures.size(); i++) {
+            id = listaCreatures.get(i).getId();
+            ouros = listaCreatures.get(i).getOuro();
+            pratas= listaCreatures.get(i).getPrata();
+            bronze = listaCreatures.get(i).getBronze();
+            pontos = listaCreatures.get(i).getPontos();
+            tipo = listaCreatures.get(i).getTipo();
+            resultado.add(id + " : " + tipo + " : " + ouros + " : " + pratas + " : " +  bronze + " : " + pontos);
+        }
         return resultado;
     }
 
@@ -392,6 +397,12 @@ public class FandeisiaGameManager {
         for (Tesouro tesouroTemp : listaTreasures) {
             if (tesouroTemp.getPosX() == x && tesouroTemp.getPosY() == y) {
                 return tesouroTemp.getId();
+            }
+        }
+
+        for (Buraco buracoTemp : listaHoles) {
+            if (buracoTemp.getPosX() == x && buracoTemp.getPosY() == y) {
+                return buracoTemp.getId();
             }
         }
         return 0;

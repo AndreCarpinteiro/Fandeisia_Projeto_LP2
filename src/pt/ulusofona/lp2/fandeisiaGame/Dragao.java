@@ -19,7 +19,7 @@ public class Dragao extends Creature {
 
         if (orientacao == Orientacao.Norte) {
             if(posY - 3 > 0) {//Tenho de fazer codigo repetido porque nao posso verificar isto no mesmo if, index out of bounds
-                if (mapa[posY - 3][posX] != 1 || mapa[posY - 3][posX] != 5) {
+                if (mapa[posY - 3][posX] != 1 && mapa[posY - 3][posX] != 5) {
                     if (mapa[posY - 3][posX] == 1 || mapa[posY - 3][posX] == 2 || mapa[posY - 3][posX] == 3) {
                         encontrou = mapa[posY - 3][posX];
                         calcTrofeus(encontrou);
@@ -33,7 +33,7 @@ public class Dragao extends Creature {
         }
         if (orientacao == Orientacao.Nordeste) {
             if(posY - 3 > 0 && posX + 3 < xMax) {
-                if (mapa[posY - 3][posX + 3] != 1 || mapa[posY - 3][posX + 3] != 5) {
+                if (mapa[posY - 3][posX + 3] != 1 && mapa[posY - 3][posX + 3] != 5) {
                     if (mapa[posY - 3][posX + 3] == 1 || mapa[posY - 3][posX + 3] == 2 || mapa[posY - 3][posX + 3] == 3) {
                         encontrou = mapa[posY - 3][posX + 3];
                         calcTrofeus(encontrou);
@@ -48,7 +48,7 @@ public class Dragao extends Creature {
         }
         if (orientacao == Orientacao.Este) {
             if(posX + 3 < xMax) {
-                if (mapa[posY][posX + 3] != 1 || mapa[posY][posX + 3] != 5) {
+                if (mapa[posY][posX + 3] != 1 && mapa[posY][posX + 3] != 5) {
                     if (mapa[posY][posX + 3] == 1 || mapa[posY][posX + 3] == 2 || mapa[posY][posX + 3] == 3) {
                         encontrou = mapa[posY][posX + 3];
                         calcTrofeus(encontrou);
@@ -62,7 +62,7 @@ public class Dragao extends Creature {
         }
         if (orientacao == Orientacao.Sudeste) {
             if(posY + 3 < yMax && posX + 3 < xMax) {
-                if (mapa[posY + 3][posX + 3] != 1 || mapa[posY + 3][posX + 3] != 5) {
+                if (mapa[posY + 3][posX + 3] != 1 && mapa[posY + 3][posX + 3] != 5) {
                     if (mapa[posY + 3][posX + 3] == 1 || mapa[posY + 3][posX + 3] == 2 || mapa[posY + 3][posX + 3] == 3) {
                         encontrou = mapa[posY + 3][posX + 3];
                         calcTrofeus(encontrou);
@@ -77,7 +77,7 @@ public class Dragao extends Creature {
         }
         if (orientacao == Orientacao.Sul) {
             if(posY + 3 < yMax) {
-                if (mapa[posY + 3][posX] != 1 || mapa[posY + 3][posX] != 5) {
+                if (mapa[posY + 3][posX] != 1 && mapa[posY + 3][posX] != 5) {
                     if (mapa[posY + 3][posX] == 1 || mapa[posY + 3][posX] == 2 || mapa[posY + 3][posX] == 3) {
                         encontrou = mapa[posY + 3][posX];
                         calcTrofeus(encontrou);
@@ -91,7 +91,7 @@ public class Dragao extends Creature {
         }
         if (orientacao == Orientacao.Sudoeste) {
             if(posY + 3 < yMax && posX - 3 > 0) {
-                if (mapa[posY + 3][posX - 3] != 1 || mapa[posY + 3][posX - 3] != 5) {
+                if (mapa[posY + 3][posX - 3] != 1 && mapa[posY + 3][posX - 3] != 5) {
                     if (mapa[posY + 3][posX - 3] == 1 || mapa[posY + 3][posX - 3] == 2 || mapa[posY + 3][posX - 3] == 3) {
                         encontrou = mapa[posY + 3][posX - 3];
                         calcTrofeus(encontrou);
@@ -106,7 +106,7 @@ public class Dragao extends Creature {
         }
         if (orientacao == Orientacao.Oeste) {
             if(posX - 3 > 0) {
-                if (mapa[posY][posX - 3] != 1 || mapa[posY][posX - 3] != 5) {
+                if (mapa[posY][posX - 3] != 1 && mapa[posY][posX - 3] != 5) {
                     if (mapa[posY][posX - 3] == 1 || mapa[posY][posX - 3] == 2 || mapa[posY][posX - 3] == 3) {
                         encontrou = mapa[posY][posX - 3];
                         calcTrofeus(encontrou);
@@ -120,7 +120,7 @@ public class Dragao extends Creature {
         }
         if (orientacao == Orientacao.Noroeste) {
             if(posY - 3 > 0 && posX - 3 > 0) {
-                if (mapa[posY - 3][posX - 3] != 1 || mapa[posY - 3][posX - 3] != 5) {
+                if (mapa[posY - 3][posX - 3] != 1 && mapa[posY - 3][posX - 3] != 5) {
                     if (mapa[posY - 3][posX - 3] == 1 || mapa[posY - 3][posX - 3] == 2 || mapa[posY - 3][posX - 3] == 3) {
                         encontrou = mapa[posY - 3][posX - 3];
                         calcTrofeus(encontrou);

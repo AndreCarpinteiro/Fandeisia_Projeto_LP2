@@ -15,7 +15,7 @@ public class Anao extends Creature {
 
         if (orientacao == Orientacao.Norte) {
             if(posY - 1 > 0) {
-                if (mapa[posY - 1][posX] != 1 || mapa[posY - 1][posX] != 5) {
+                if (mapa[posY - 1][posX] != 1 && mapa[posY - 1][posX] != 5) {
                     if (mapa[posY - 1][posX] == 1 || mapa[posY - 1][posX] == 2 || mapa[posY - 1][posX] == 3) {
                         encontrou = mapa[posY - 1][posX];
                         calcTrofeus(encontrou);
@@ -29,7 +29,7 @@ public class Anao extends Creature {
         }
         if (orientacao == Orientacao.Este) {
             if(posX + 1 < xMax) {
-                if (mapa[posY][posX + 1] != 1 || mapa[posY][posX + 1] != 5) {
+                if (mapa[posY][posX + 1] != 1 && mapa[posY][posX + 1] != 5) {
                     if (mapa[posY][posX + 1] == 1 || mapa[posY][posX + 1] == 2 || mapa[posY][posX + 1] == 3) {
                         encontrou = mapa[posY][posX + 1];
                         calcTrofeus(encontrou);
@@ -43,7 +43,7 @@ public class Anao extends Creature {
         }
         if (orientacao == Orientacao.Sul) {
             if(posY + 1 < yMax) {
-                if (mapa[posY + 1][posX] != 1 || mapa[posY + 1][posX] != 5) {
+                if (mapa[posY + 1][posX] != 1 && mapa[posY + 1][posX] != 5) {
                     if (mapa[posY + 1][posX] == 1 || mapa[posY + 1][posX] == 2 || mapa[posY + 1][posX] == 3) {
                         encontrou = mapa[posY + 2][posX];
                         calcTrofeus(encontrou);
@@ -57,7 +57,7 @@ public class Anao extends Creature {
         }
         if (orientacao == Orientacao.Oeste) {
             if(posX - 1 > 0) {
-                if (mapa[posY][posX - 1] != 1 || mapa[posY][posX - 1] != 5) {
+                if (mapa[posY][posX - 1] != 1 && mapa[posY][posX - 1] != 5) {
                     if (mapa[posY][posX - 1] == 1 || mapa[posY][posX - 1] == 2 || mapa[posY][posX - 1] == 3) {
                         encontrou = mapa[posY][posX - 2];
                         calcTrofeus(encontrou);
