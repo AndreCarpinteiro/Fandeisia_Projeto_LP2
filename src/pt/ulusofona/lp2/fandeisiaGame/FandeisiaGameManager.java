@@ -16,7 +16,7 @@ public class FandeisiaGameManager {
 
     private int countTurnos;
     private int turn15GameOver;
-    private int tesourosTotais;
+    private int pontuacaoTotal;
 
     private Team tLDR = new Team(10, 0);
     private Team tRST = new Team(20, 0);
@@ -45,14 +45,13 @@ public class FandeisiaGameManager {
 
     public int startGame(String[] content, int rows, int columns) {
 
-        //TODO: Falta receber buraco para a classe, de resto tudo ok...
 
         listaCreatures.clear();
         listaTreasures.clear();
 
         countTurnos = 0;
         turn15GameOver = 0;
-        tesourosTotais = 0;
+        pontuacaoTotal = 0;
 
         // tLDR.setPontos(0); //Estava aqui na primeira parte
         // tRST.setPontos(0);
@@ -151,17 +150,17 @@ public class FandeisiaGameManager {
                 //Truque, se houver tempo fazer melhor
                 if (typeTemp.equals("gold")) {
                     mapStartGame[yTemp][xTemp] = 3;
-                    tesourosTotais += 3;
+                    pontuacaoTotal += 3;
                     //mapa.put(mapStartGame[yTemp][xTemp], "gold");
                 }
                 if (typeTemp.equals("silver")) {
                     mapStartGame[yTemp][xTemp] = 2;
-                    tesourosTotais += 2;
+                    pontuacaoTotal += 2;
                     //mapa.put(mapStartGame[yTemp][xTemp], "silver");
                 }
                 if (typeTemp.equals("bronze")) {
                     mapStartGame[yTemp][xTemp] = 1;
-                    tesourosTotais += 1;
+                    pontuacaoTotal += 1;
                     //mapa.put(mapStartGame[yTemp][xTemp], "bronze");
                 }
                 //System.out.println(tesouroTemp.toString());
@@ -203,7 +202,7 @@ public class FandeisiaGameManager {
             System.out.println(listaHoles.get(i).toString());
         }
 
-     //   tesourosTotais = listaTreasures.size();
+     //   pontuacaoTotal = listaTreasures.size();
 
         //Atualizar plafond
 
@@ -270,7 +269,7 @@ public class FandeisiaGameManager {
                         listaTreasures.remove(listaTreasures.get(j));
                     }
                 }
-                tesourosTotais -= encontrou; //Serve para validar GameIsOver
+                //pontuacaoTotal -= encontrou; //Serve para validar GameIsOver
 
                 if (listaCreatures.get(i).getIdEquipa() == 10) {
                     tLDR.somaPontos(encontrou);
@@ -323,8 +322,10 @@ public class FandeisiaGameManager {
 
     public boolean gameIsOver() {
 
-        int conta = tesourosTotais / 2 + 1;
+        System.out.println("pontuacao total:" + pontuacaoTotal);
+        int conta = pontuacaoTotal / 2 + 1;
 
+        System.out.println("conta:" + conta);
         if (tLDR.getTeamPontos() >= conta) {
             return true;
         }
@@ -484,6 +485,7 @@ public class FandeisiaGameManager {
             mapa.put("Humano", 1);
             mapa.put("Elfo", 3);
         }
+
         return mapa;
     }//Done---------
 
