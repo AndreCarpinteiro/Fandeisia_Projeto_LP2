@@ -20,8 +20,8 @@ public class FandeisiaGameManager {
     private int turn15GameOver;
     private int tesourosTotais;
 
-    private Team tLDR;
-    private Team tRST;
+    private Team tLDR = new Team(10, 0);
+    private Team tRST = new Team(20, 0);
 
     static List<Creature> listaCreatures = new ArrayList<>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
@@ -33,9 +33,6 @@ public class FandeisiaGameManager {
     //--------------------Metodos Obrigratorios---------------------
 
     public String[][] getCreatureTypes() {//Done mas...-------------
-
-        tLDR = new Team(10, 0);
-        tRST = new Team(20, 0);
 
         String[][] creatureTypeOptions = new String[5][4];
 
@@ -155,21 +152,21 @@ public class FandeisiaGameManager {
                         tesouroTemp.setPosY(yTemp);
                     }
                 }
-                    //Truque, se houver tempo fazer melhor
-                    if (typeTemp.equals("gold")) {
-                        mapStartGame[yTemp][xTemp] = 3;
-                        //mapa.put(mapStartGame[yTemp][xTemp], "gold");
-                    }
-                    if (typeTemp.equals("silver")) {
-                        mapStartGame[yTemp][xTemp] = 2;
-                        //mapa.put(mapStartGame[yTemp][xTemp], "silver");
-                    }
-                    if (typeTemp.equals("bronze")) {
-                        mapStartGame[yTemp][xTemp] = 1;
-                        //mapa.put(mapStartGame[yTemp][xTemp], "bronze");
-                    }
-                    //System.out.println(tesouroTemp.toString());
-                    listaTreasures.add(tesouroTemp);
+                //Truque, se houver tempo fazer melhor
+                if (typeTemp.equals("gold")) {
+                    mapStartGame[yTemp][xTemp] = 3;
+                    //mapa.put(mapStartGame[yTemp][xTemp], "gold");
+                }
+                if (typeTemp.equals("silver")) {
+                    mapStartGame[yTemp][xTemp] = 2;
+                    //mapa.put(mapStartGame[yTemp][xTemp], "silver");
+                }
+                if (typeTemp.equals("bronze")) {
+                    mapStartGame[yTemp][xTemp] = 1;
+                    //mapa.put(mapStartGame[yTemp][xTemp], "bronze");
+                }
+                //System.out.println(tesouroTemp.toString());
+                listaTreasures.add(tesouroTemp);
             }
             if (elemento.contains("hole")) {
 
@@ -261,7 +258,7 @@ public class FandeisiaGameManager {
 
     public void processTurn() {
 
-        int encontrou;
+        int encontrou = 0;
         boolean encontrouLDR = false;
         boolean encontrouRST = false;
 
@@ -281,7 +278,8 @@ public class FandeisiaGameManager {
                     tLDR.somaPontos(encontrou);
                     listaCreatures.get(i).somaPontos(); //Mudei isto porque acho que soma e não o set...
                     encontrouLDR = true; //Para saber se tenho de atribuir uma só moeda
-                } else {
+                }
+                if (listaCreatures.get(i).getIdEquipa() == 20) {
                     tRST.somaPontos(encontrou);
                     listaCreatures.get(i).somaPontos(); //Mudei isto porque acho que soma e não o set...
                     encontrouRST = true;//Para saber se tenho de atribuir uma só moeda
@@ -289,14 +287,14 @@ public class FandeisiaGameManager {
             }
         }
 
-        if(!encontrouLDR){//Regra das moedas fantásticas
+        if (!encontrouLDR) {//Regra das moedas fantásticas
             tLDR.somaPlafond(1);
-        }else{
+        } else {
             tLDR.somaPlafond(2);
         }
-        if(!encontrouRST){
+        if (!encontrouRST) {
             tRST.somaPlafond(1);
-        }else {
+        } else {
             tRST.somaPlafond(2);
         }
 
@@ -466,28 +464,28 @@ public class FandeisiaGameManager {
         int calhou = random.nextInt(4 - 1) + 1;
 
         Map<String, Integer> mapa = new HashMap<String, Integer>();
-
-        if(calhou == 1) {
-            mapa.put("Super Dragão", 2);
+/*
+        if (calhou == 1) {
+            mapa.put("Dragão", 2);
             mapa.put("Anão", 3);
             mapa.put("Humano", 2);
             mapa.put("Elfo", 2);
         }
 
-        if(calhou == 2) {
-            mapa.put("Super Dragão", 1);
+        if (calhou == 2) {
+            mapa.put("Dragão", 1);
             mapa.put("Anão", 3);
             mapa.put("Gigante", 3);
             mapa.put("Elfo", 2);
         }
 
-        if(calhou == 3) {
-            mapa.put("Super Dragão", 1);
+        if (calhou == 3) {
+            mapa.put("Dragão", 1);
             mapa.put("Gigante", 2);
             mapa.put("Anão", 3);
             mapa.put("Humano", 1);
             mapa.put("Elfo", 3);
-        }
+        }*/
         return mapa;
     }//Done---------
 

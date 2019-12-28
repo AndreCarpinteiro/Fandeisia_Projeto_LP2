@@ -85,8 +85,8 @@ public class Dragao extends Creature {
                     mapa[posY][posX] = 0;
                     posY += 3;
                     mapa[posY][posX] = 4;
-                }else{orientacao = Orientacao.Sudeste;}
-            }else{orientacao = Orientacao.Sudeste;}
+                }else{orientacao = Orientacao.Sudoeste;}
+            }else{orientacao = Orientacao.Sudoeste;}
             return encontrou;
         }
         if (orientacao == Orientacao.Sudoeste) {
