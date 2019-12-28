@@ -84,10 +84,58 @@ public class FandeisiaGameManager {
         //Dissecação do parametro "content" para objetos creatures e treasures----
 
         for (String elemento : content) {
+
+
+            String[] dados = elemento.split(",");
+
+            for (String d : dados) {
+                if (d.startsWith("id:")) {
+                    idTemp = Integer.parseInt(d.substring(4));
+
+                } else if (d.startsWith(" type:")) {
+                    typeTemp = d.substring(7);
+
+                } else if (d.startsWith(" teamId:")) {
+                    teamIdTemp = Integer.parseInt(d.substring(9));
+
+                } else if (d.startsWith(" x:")) {
+                    xTemp = Integer.parseInt(d.substring(4));
+
+                } else if (d.startsWith(" y:")) {
+                    yTemp = Integer.parseInt(d.substring(4));
+
+                } else if (d.startsWith(" orientation:")) {
+                    orientTemp = d.substring(14);
+                }
+            }
+
+            if (typeTemp.equals("Anão")) {
+                Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                listaCreatures.add(anao);
+            }
+            if (typeTemp.equals("Dragão")) {
+                Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                listaCreatures.add(dragao);
+            }
+            if (typeTemp.equals("Humano")) {//Falta criar na interface...
+                Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                listaCreatures.add(humano);
+            }
+            if (typeTemp.equals("Elfo")) {//Falta criar na interface...
+                Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                listaCreatures.add(elfo);
+            }
+            if (typeTemp.equals("Gigante")) {//Falta criar na interface...
+                Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                listaCreatures.add(gigante);
+            }
+            mapStartGame[yTemp][xTemp] = 4;
+            //mapa.put(mapStartGame[yTemp][xTemp], typeTemp);
+
             if (elemento.contains("silver") || elemento.contains("gold") || elemento.contains("bronze")) {
                 Tesouro tesouroTemp = new Tesouro();
 
-                String[] dados = elemento.split(",");
+                dados = elemento.split(",");
 
                 for (String d : dados) {
                     if (d.startsWith("id:")) {
@@ -106,28 +154,28 @@ public class FandeisiaGameManager {
                         yTemp = Integer.parseInt(d.substring(4));
                         tesouroTemp.setPosY(yTemp);
                     }
+                }
                     //Truque, se houver tempo fazer melhor
                     if (typeTemp.equals("gold")) {
-                        mapStartGame[yTemp][xTemp] = 2;
+                        mapStartGame[yTemp][xTemp] = 3;
                         //mapa.put(mapStartGame[yTemp][xTemp], "gold");
                     }
                     if (typeTemp.equals("silver")) {
-                        mapStartGame[yTemp][xTemp] = 3;
+                        mapStartGame[yTemp][xTemp] = 2;
                         //mapa.put(mapStartGame[yTemp][xTemp], "silver");
                     }
                     if (typeTemp.equals("bronze")) {
-                        mapStartGame[yTemp][xTemp] = 4;
+                        mapStartGame[yTemp][xTemp] = 1;
                         //mapa.put(mapStartGame[yTemp][xTemp], "bronze");
                     }
-                }
-                //System.out.println(tesouroTemp.toString());
-                listaTreasures.add(tesouroTemp);
+                    //System.out.println(tesouroTemp.toString());
+                    listaTreasures.add(tesouroTemp);
             }
             if (elemento.contains("hole")) {
 
                 Buraco buracoTemp = new Buraco();
 
-                String[] dados = elemento.split(",");
+                dados = elemento.split(",");
 
                 for (String d : dados) {
                     if (d.startsWith("id:")) {
@@ -145,59 +193,15 @@ public class FandeisiaGameManager {
                 }
                 mapStartGame[yTemp][xTemp] = 5;
                 listaHoles.add(buracoTemp);
-            } else {
-
-                String[] dados = elemento.split(",");
-
-                for (String d : dados) {
-                    if (d.startsWith("id:")) {
-                        idTemp = Integer.parseInt(d.substring(4));
-
-                    } else if (d.startsWith(" type:")) {
-                        typeTemp = d.substring(7);
-
-                    } else if (d.startsWith(" teamId:")) {
-                        teamIdTemp = Integer.parseInt(d.substring(9));
-
-                    } else if (d.startsWith(" x:")) {
-                        xTemp = Integer.parseInt(d.substring(4));
-
-                    } else if (d.startsWith(" y:")) {
-                        yTemp = Integer.parseInt(d.substring(4));
-
-                    } else if (d.startsWith(" orientation:")) {
-                        orientTemp = d.substring(14);
-                    }
-                }
-
-                if (typeTemp.equals("Anão")) {
-                    Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                    listaCreatures.add(anao);
-                }
-                if (typeTemp.equals("Dragão")) {
-                    Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                    listaCreatures.add(dragao);
-                }
-                if (typeTemp.equals("Humano")) {//Falta criar na interface...
-                    Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                    listaCreatures.add(humano);
-                }
-                if (typeTemp.equals("Elfo")) {//Falta criar na interface...
-                    Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                    listaCreatures.add(elfo);
-                }
-                if (typeTemp.equals("Gigante")) {//Falta criar na interface...
-                    Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                    listaCreatures.add(gigante);
-                }
-                mapStartGame[yTemp][xTemp] = 1;
-                //mapa.put(mapStartGame[yTemp][xTemp], typeTemp);
             }
         }
 
         //Só para visualizar
         for (int i = 0; i < listaCreatures.size(); i++) {
             System.out.println(listaCreatures.get(i).toString());
+        }
+        for (int i = 0; i < listaTreasures.size(); i++) {
+            System.out.println(listaTreasures.get(i).toString());
         }
         for (int i = 0; i < listaHoles.size(); i++) {
             System.out.println(listaHoles.get(i).toString());
@@ -216,15 +220,15 @@ public class FandeisiaGameManager {
             }
         }
 
-            if (custoLDR > tLDR.getPlafond() && custoRST > tRST.getPlafond()) {
-                return 1;
-            }
-            if (custoLDR > tLDR.getPlafond()) {
-                return 2;
-            }
-            if (custoRST > tRST.getPlafond()) {
-                return 3;
-            }
+        if (custoLDR > tLDR.getPlafond() && custoRST > tRST.getPlafond()) {
+            return 1;
+        }
+        if (custoLDR > tLDR.getPlafond()) {
+            return 2;
+        }
+        if (custoRST > tRST.getPlafond()) {
+            return 3;
+        }
 
         tLDR.decrementaPlafond(custoLDR); //Atualiza plafond
         tRST.decrementaPlafond(custoRST); //Atualiza plafond
@@ -241,11 +245,11 @@ public class FandeisiaGameManager {
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
-       // Random random = new Random();
+        // Random random = new Random();
         //teamId = random.nextInt(3 - 1) + 1;
 
         if (teamId == 10) { //Acho que funciona, no debug está bem
-           // teamId = 10;
+            // teamId = 10;
             tLDR.setEstado(true);
             tRST.setEstado(false);
         } else {
@@ -257,7 +261,9 @@ public class FandeisiaGameManager {
 
     public void processTurn() {
 
-        int encontrou = 0;
+        int encontrou;
+        boolean encontrouLDR = false;
+        boolean encontrouRST = false;
 
         for (int i = 0; i < listaCreatures.size(); i++) {
 
@@ -274,11 +280,24 @@ public class FandeisiaGameManager {
                 if (listaCreatures.get(i).getIdEquipa() == 10) {
                     tLDR.somaPontos(encontrou);
                     listaCreatures.get(i).somaPontos(); //Mudei isto porque acho que soma e não o set...
+                    encontrouLDR = true; //Para saber se tenho de atribuir uma só moeda
                 } else {
                     tRST.somaPontos(encontrou);
                     listaCreatures.get(i).somaPontos(); //Mudei isto porque acho que soma e não o set...
+                    encontrouRST = true;//Para saber se tenho de atribuir uma só moeda
                 }
             }
+        }
+
+        if(!encontrouLDR){//Regra das moedas fantásticas
+            tLDR.somaPlafond(1);
+        }else{
+            tLDR.somaPlafond(2);
+        }
+        if(!encontrouRST){
+            tRST.somaPlafond(1);
+        }else {
+            tRST.somaPlafond(2);
         }
 
         turn15GameOver++;
@@ -377,11 +396,11 @@ public class FandeisiaGameManager {
         for (int i = 0; i < listaCreatures.size(); i++) {
             id = listaCreatures.get(i).getId();
             ouros = listaCreatures.get(i).getOuro();
-            pratas= listaCreatures.get(i).getPrata();
+            pratas = listaCreatures.get(i).getPrata();
             bronze = listaCreatures.get(i).getBronze();
             pontos = listaCreatures.get(i).getPontos();
             tipo = listaCreatures.get(i).getTipo();
-            resultado.add(id + " : " + tipo + " : " + ouros + " : " + pratas + " : " +  bronze + " : " + pontos);
+            resultado.add(id + " : " + tipo + " : " + ouros + " : " + pratas + " : " + bronze + " : " + pontos);
         }
         return resultado;
     }
@@ -419,9 +438,8 @@ public class FandeisiaGameManager {
 
     public int getCurrentScore(int teamID) {
 
-        if (0 == teamID) {
+        if (10 == teamID) {
             return tLDR.getTeamPontos();
-
         } else {
             return tRST.getTeamPontos();
         }

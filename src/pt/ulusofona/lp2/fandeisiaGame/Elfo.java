@@ -19,8 +19,8 @@ public class Elfo extends Creature {
         int encontrou = 0;
 
         if (orientacao == Orientacao.Norte && encontraCreatura()) {
-            if (posY - 2 > 0) {//Tenho de fazer codigo repetido porque nao posso verificar isto no mesmo if, index out of bounds
-                if (mapa[posY - 2][posX] != 1 && mapa[posY - 2][posX] != 5) {
+            if (posY - 2 >= 0) {//Tenho de fazer codigo repetido porque nao posso verificar isto no mesmo if, index out of bounds
+                if (mapa[posY - 2][posX] != 4 && mapa[posY - 2][posX] != 5) {
                     if (mapa[posY - 2][posX] == 1 || mapa[posY - 2][posX] == 2 || mapa[posY - 2][posX] == 3) {
                         encontrou = mapa[posY - 2][posX];
                         calcTrofeus(encontrou);
@@ -28,13 +28,13 @@ public class Elfo extends Creature {
                     mapa[posY][posX] = 0;
                     posY -= 2;
                     mapa[posY][posX] = 4;
-                    return encontrou;
                 }else{orientacao = Orientacao.Nordeste;}
             }else{orientacao = Orientacao.Nordeste;}
+            return encontrou;
         }
         if (orientacao == Orientacao.Nordeste && encontraCreatura()) {
-            if (posY - 2 > 0 && posX + 2 < xMax) {
-                if (mapa[posY - 2][posX + 2] != 1 && mapa[posY - 2][posX + 2] != 5) {
+            if (posY - 2 >= 0 && posX + 2 <= xMax) {
+                if (mapa[posY - 2][posX + 2] != 4 && mapa[posY - 2][posX + 2] != 5) {
                     if (mapa[posY - 2][posX + 2] == 1 || mapa[posY - 2][posX + 2] == 2 || mapa[posY - 2][posX + 2] == 3) {
                         encontrou = mapa[posY - 2][posX + 2];
                         calcTrofeus(encontrou);
@@ -43,13 +43,13 @@ public class Elfo extends Creature {
                     posY -= 2;
                     posX += 2;
                     mapa[posY][posX] = 4;
-                    return encontrou;
                 }else{orientacao = Orientacao.Este;}
             }else{orientacao = Orientacao.Este;}
+            return encontrou;
         }
         if (orientacao == Orientacao.Este && encontraCreatura()) {
-            if (posX + 2 < xMax) {
-                if (mapa[posY][posX + 2] != 1 && mapa[posY][posX + 2] != 5) {
+            if (posX + 2 <= xMax) {
+                if (mapa[posY][posX + 2] != 4 && mapa[posY][posX + 2] != 5) {
                     if (mapa[posY][posX + 2] == 1 || mapa[posY][posX + 2] == 2 || mapa[posY][posX + 2] == 3) {
                         encontrou = mapa[posY][posX + 2];
                         calcTrofeus(encontrou);
@@ -57,13 +57,13 @@ public class Elfo extends Creature {
                     mapa[posY][posX] = 0;
                     posX += 2;
                     mapa[posY][posX] = 4;
-                    return encontrou;
                 }else{orientacao = Orientacao.Sudeste;}
             }else{orientacao = Orientacao.Sudeste;}
+            return encontrou;
         }
         if (orientacao == Orientacao.Sudeste && encontraCreatura()) {
-            if (posY + 2 < yMax && posX + 2 < xMax) {
-                if (mapa[posY + 2][posX + 2] != 1 && mapa[posY + 2][posX + 2] != 5) {
+            if (posY + 2 <= yMax && posX + 2 <= xMax) {
+                if (mapa[posY + 2][posX + 2] != 4 && mapa[posY + 2][posX + 2] != 5) {
                     if (mapa[posY + 2][posX + 2] == 1 || mapa[posY + 2][posX + 2] == 2 || mapa[posY + 2][posX + 2] == 3) {
                         encontrou = mapa[posY + 2][posX + 2];
                         calcTrofeus(encontrou);
@@ -72,13 +72,13 @@ public class Elfo extends Creature {
                     posX += 2;
                     posY += 2;
                     mapa[posY][posX] = 4;
-                    return encontrou;
                 }else{orientacao = Orientacao.Sul;}
             }else{orientacao = Orientacao.Sul;}
+            return encontrou;
         }
         if (orientacao == Orientacao.Sul && encontraCreatura()) {
-            if (posY + 2 < yMax) {
-                if (mapa[posY + 2][posX] != 1 && mapa[posY + 2][posX] != 5) {
+            if (posY + 2 <= yMax) {
+                if (mapa[posY + 2][posX] != 4 && mapa[posY + 2][posX] != 5) {
                     if (mapa[posY + 2][posX] == 1 || mapa[posY + 2][posX] == 2 || mapa[posY + 2][posX] == 3) {
                         encontrou = mapa[posY + 2][posX];
                         calcTrofeus(encontrou);
@@ -86,13 +86,13 @@ public class Elfo extends Creature {
                     mapa[posY][posX] = 0;
                     posY += 2;
                     mapa[posY][posX] = 4;
-                    return encontrou;
                 }else{orientacao = Orientacao.Sudeste;}
             }else{orientacao = Orientacao.Sudeste;}
+            return encontrou;
         }
         if (orientacao == Orientacao.Sudoeste && encontraCreatura()) {
-            if (posY + 2 < yMax && posX - 2 > 0) {
-                if (mapa[posY + 2][posX - 2] != 1 && mapa[posY + 2][posX - 2] != 5) {
+            if (posY + 2 <= yMax && posX - 2 >= 0) {
+                if (mapa[posY + 2][posX - 2] != 4 && mapa[posY + 2][posX - 2] != 5) {
                     if (mapa[posY + 2][posX - 2] == 1 || mapa[posY + 2][posX - 2] == 2 || mapa[posY + 2][posX - 2] == 3) {
                         encontrou = mapa[posY + 2][posX - 3];
                         calcTrofeus(encontrou);
@@ -101,13 +101,13 @@ public class Elfo extends Creature {
                     posY += 2;
                     posX -= 2;
                     mapa[posY][posX] = 4;
-                    return encontrou;
                 }else{orientacao = Orientacao.Oeste;}
             }else{orientacao = Orientacao.Oeste;}
+            return encontrou;
         }
         if (orientacao == Orientacao.Oeste && encontraCreatura()) {
-            if (posX - 2 > 0) {
-                if (mapa[posY][posX - 2] != 1 && mapa[posY][posX - 2] != 5) {
+            if (posX - 2 >= 0) {
+                if (mapa[posY][posX - 2] != 4 && mapa[posY][posX - 2] != 5) {
                     if (mapa[posY][posX - 2] == 1 || mapa[posY][posX - 2] == 2 || mapa[posY][posX - 2] == 3) {
                         encontrou = mapa[posY][posX - 2];
                         calcTrofeus(encontrou);
@@ -115,13 +115,13 @@ public class Elfo extends Creature {
                     mapa[posY][posX] = 0;
                     posX -= 2;
                     mapa[posY][posX] = 4;
-                    return encontrou;
                 }else{orientacao = Orientacao.Noroeste;}
             }else{orientacao = Orientacao.Noroeste;}
+            return encontrou;
         }
         if (orientacao == Orientacao.Noroeste && encontraCreatura()) {
-            if (posY - 2 > 0 && posX - 2 > 0) {
-                if (mapa[posY - 2][posX - 2] != 1 && mapa[posY - 2][posX - 2] != 5) {
+            if (posY - 2 >= 0 && posX - 2 >= 0) {
+                if (mapa[posY - 2][posX - 2] != 4 && mapa[posY - 2][posX - 2] != 5) {
                     if (mapa[posY - 2][posX - 2] == 1 || mapa[posY - 2][posX - 2] == 2 || mapa[posY - 2][posX - 2] == 3) {
                         encontrou = mapa[posY - 2][posX - 2];
                         calcTrofeus(encontrou);
