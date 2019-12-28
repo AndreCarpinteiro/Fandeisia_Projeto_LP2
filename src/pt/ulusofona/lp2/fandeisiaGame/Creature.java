@@ -207,7 +207,7 @@ public abstract class Creature {
 
     public String toString() {//Done--------------------
 
-        return id + " | " + tipo + " | " + idEquipa + " | " + pontos + " @ (" + posX + ", " + posY + ") " + orientacao;
+        return id + " | " + tipo + " | " + idEquipa + " | " + (bronze + prata + ouro) + " @ (" + posX + ", " + posY + ") " + orientacao;
     }
 
     public int getCusto(){
