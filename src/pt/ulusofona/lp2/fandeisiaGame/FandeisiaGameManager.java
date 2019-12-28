@@ -274,12 +274,12 @@ public class FandeisiaGameManager {
 
                 if (listaCreatures.get(i).getIdEquipa() == 10) {
                     tLDR.somaPontos(encontrou);
-                    listaCreatures.get(i).somaPontos(); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
+                    listaCreatures.get(i).somaPontos(encontrou); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
                     encontrouLDR = true; //Para saber se tenho de atribuir uma só moeda
                 }
                 if (listaCreatures.get(i).getIdEquipa() == 20) {
                     tRST.somaPontos(encontrou);
-                    listaCreatures.get(i).somaPontos(); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
+                    listaCreatures.get(i).somaPontos(encontrou); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
                     encontrouRST = true;//Para saber se tenho de atribuir uma só moeda
                 }
             }
