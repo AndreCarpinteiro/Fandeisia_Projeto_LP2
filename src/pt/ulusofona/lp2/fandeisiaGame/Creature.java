@@ -174,8 +174,8 @@ public abstract class Creature {
         this.feitico = feitico;
     }
 
-    public void somaPontos(){
-        this.pontos++;
+    public void somaPontos(int pontos){
+        this.pontos = pontos;
     }
 
     public void calcTrofeus(int valor){

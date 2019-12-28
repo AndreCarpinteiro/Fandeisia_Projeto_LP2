@@ -94,7 +94,7 @@ public class Elfo extends Creature {
             if (posY + 2 <= yMax && posX - 2 >= 0) {
                 if (mapa[posY + 2][posX - 2] != 4 && mapa[posY + 2][posX - 2] != 5) {
                     if (mapa[posY + 2][posX - 2] == 1 || mapa[posY + 2][posX - 2] == 2 || mapa[posY + 2][posX - 2] == 3) {
-                        encontrou = mapa[posY + 2][posX - 3];
+                        encontrou = mapa[posY + 2][posX - 2];
                         calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;

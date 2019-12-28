@@ -1,9 +1,7 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
 
 public class FandeisiaGameManager {
@@ -81,8 +79,6 @@ public class FandeisiaGameManager {
         //Dissecação do parametro "content" para objetos creatures e treasures----
 
         for (String elemento : content) {
-
-
             String[] dados = elemento.split(",");
 
             for (String d : dados) {
@@ -276,12 +272,12 @@ public class FandeisiaGameManager {
 
                 if (listaCreatures.get(i).getIdEquipa() == 10) {
                     tLDR.somaPontos(encontrou);
-                    listaCreatures.get(i).somaPontos(); //Mudei isto porque acho que soma e não o set...
+                    listaCreatures.get(i).somaPontos(encontrou); //Mudei isto porque acho que soma e não o set...
                     encontrouLDR = true; //Para saber se tenho de atribuir uma só moeda
                 }
                 if (listaCreatures.get(i).getIdEquipa() == 20) {
                     tRST.somaPontos(encontrou);
-                    listaCreatures.get(i).somaPontos(); //Mudei isto porque acho que soma e não o set...
+                    listaCreatures.get(i).somaPontos(encontrou); //Mudei isto porque acho que soma e não o set...
                     encontrouRST = true;//Para saber se tenho de atribuir uma só moeda
                 }
             }
@@ -464,7 +460,7 @@ public class FandeisiaGameManager {
         int calhou = random.nextInt(4 - 1) + 1;
 
         Map<String, Integer> mapa = new HashMap<String, Integer>();
-/*
+
         if (calhou == 1) {
             mapa.put("Dragão", 2);
             mapa.put("Anão", 3);
@@ -485,7 +481,7 @@ public class FandeisiaGameManager {
             mapa.put("Anão", 3);
             mapa.put("Humano", 1);
             mapa.put("Elfo", 3);
-        }*/
+        }
         return mapa;
     }//Done---------
 
@@ -520,20 +516,47 @@ public class FandeisiaGameManager {
     public boolean saveGame(File fich) {
 
         try {
+            int idTemp;
+            int posXTemp;
+            int posyTemp;
+            String tipo;
+            int teamId;
+            Creature.Orientacao orientacao;
             PrintWriter gravarArq = new PrintWriter(fich);
 
+            gravarArq.println();
+            for (int i = 0; i < listaCreatures.size(); i++) {
+                idTemp = listaCreatures.get(i).getId();
+                posXTemp = listaCreatures.get(i).getPosX();
+                posyTemp = listaCreatures.get(i).getPosY();
+                tipo = listaCreatures.get(i).getTipo();
+                teamId = listaCreatures.get(i).getIdEquipa();
+                orientacao = listaCreatures.get(i).getOrientacao();
+                gravarArq.println("id: " + idTemp + ", type: " + tipo + ", teamId: " + teamId + ", x: " + posXTemp + ", y: " + posyTemp + ", orientation: " + orientacao);
+            }
+            gravarArq.println();
+            for (int i = 0; i < listaTreasures.size(); i++) {
+                idTemp = listaTreasures.get(i).getId();
+                posXTemp = listaTreasures.get(i).getPosX();
+                posyTemp = listaTreasures.get(i).getPosY();
+                gravarArq.println("id: " + idTemp + ", type: " + listaTreasures.get(i).getTipo() + ", x: " + posXTemp + ", y: " + posyTemp);
+            }
+            gravarArq.println();
+            for (int i = 0; i < listaHoles.size(); i++) {
+                idTemp = listaHoles.get(i).getId();
+                posXTemp = listaHoles.get(i).getPosX();
+                posyTemp = listaHoles.get(i).getPosY();
+                gravarArq.println("id: " + idTemp + "type: hole, x: " + posXTemp + ", y: " + posyTemp);
+            }
+
+            gravarArq.println();
             gravarArq.printf("LDR: " + tLDR.getTeamPontos() + " / " + tLDR.getPlafond() + " / " + tLDR.getEstado() + "\n");
             gravarArq.printf("RST: " + tRST.getTeamPontos() + " / " + tRST.getPlafond() + " / " + tRST.getEstado() + "\n");
-
-            for (int i = 0; i < listaCreatures.size(); i++) {
-                gravarArq.println(listaCreatures.get(i).toString());
-            }
-
-            for (int i = 0; i < listaTreasures.size(); i++) {
-                gravarArq.println(listaTreasures.get(i).posX + listaTreasures.get(i).posY + listaTreasures.get(i).tipo);
-            }
+            gravarArq.println();
+            gravarArq.println();
 
             gravarArq.printf("Mapa: " + "\n");
+            gravarArq.println();
 
             for (int i = 0; i < mapStartGame.length; i++) { //Só teste, não vai gravar assim
                 for (int j = 0; j < mapStartGame[i].length; j++) {
@@ -552,7 +575,149 @@ public class FandeisiaGameManager {
     }
 
     public boolean loadGame(File fich) {
-        //TODO:
+/*
+        int idTemp = 0;
+        String typeTemp = "";
+        int xTemp = 0;
+        int yTemp = 0;
+        int custoLDR = 0;
+        int custoRST = 0;
+        int teamIdTemp = 0;
+        String orientTemp = "Norte";
+
+        try {
+            FileReader arq = new FileReader(fich);
+            BufferedReader lerArq = new BufferedReader(arq);
+
+            String linha = lerArq.readLine(); // lê a primeira linha
+// a variável "linha" recebe o valor "null" quando o processo
+// de repetição atingir o final do arquivo texto
+            while (linha != null) {
+                System.out.printf("%s\n", linha);
+                linha = lerArq.readLine(); // lê da segunda até a última linha
+
+                for(String elemento : linha)
+
+                {
+                    String[] dados = elemento.split(",");
+
+                    for (String d : dados) {
+                        if (d.startsWith("id:")) {
+                            idTemp = Integer.parseInt(d.substring(4));
+
+                        } else if (d.startsWith(" type:")) {
+                            typeTemp = d.substring(7);
+
+                        } else if (d.startsWith(" teamId:")) {
+                            teamIdTemp = Integer.parseInt(d.substring(9));
+
+                        } else if (d.startsWith(" x:")) {
+                            xTemp = Integer.parseInt(d.substring(4));
+
+                        } else if (d.startsWith(" y:")) {
+                            yTemp = Integer.parseInt(d.substring(4));
+
+                        } else if (d.startsWith(" orientation:")) {
+                            orientTemp = d.substring(14);
+                        }
+                    }
+
+                    if (typeTemp.equals("Anão")) {
+                        Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        listaCreatures.add(anao);
+                    }
+                    if (typeTemp.equals("Dragão")) {
+                        Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        listaCreatures.add(dragao);
+                    }
+                    if (typeTemp.equals("Humano")) {//Falta criar na interface...
+                        Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        listaCreatures.add(humano);
+                    }
+                    if (typeTemp.equals("Elfo")) {//Falta criar na interface...
+                        Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        listaCreatures.add(elfo);
+                    }
+                    if (typeTemp.equals("Gigante")) {//Falta criar na interface...
+                        Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        listaCreatures.add(gigante);
+                    }
+                    mapStartGame[yTemp][xTemp] = 4;
+                    //mapa.put(mapStartGame[yTemp][xTemp], typeTemp);
+
+                    if (elemento.contains("silver") || elemento.contains("gold") || elemento.contains("bronze")) {
+                        Tesouro tesouroTemp = new Tesouro();
+
+                        dados = elemento.split(",");
+
+                        for (String d : dados) {
+                            if (d.startsWith("id:")) {
+                                idTemp = Integer.parseInt(d.substring(4));
+                                tesouroTemp.setId(idTemp);
+
+                            } else if (d.startsWith(" type:")) {
+                                typeTemp = d.substring(7);
+                                tesouroTemp.setTipo(typeTemp);
+
+                            } else if (d.startsWith(" x:")) {
+                                xTemp = Integer.parseInt(d.substring(4));
+                                tesouroTemp.setPosX(xTemp);
+
+                            } else if (d.startsWith(" y:")) {
+                                yTemp = Integer.parseInt(d.substring(4));
+                                tesouroTemp.setPosY(yTemp);
+                            }
+                        }
+                        //Truque, se houver tempo fazer melhor
+                        if (typeTemp.equals("gold")) {
+                            mapStartGame[yTemp][xTemp] = 3;
+                            //mapa.put(mapStartGame[yTemp][xTemp], "gold");
+                        }
+                        if (typeTemp.equals("silver")) {
+                            mapStartGame[yTemp][xTemp] = 2;
+                            //mapa.put(mapStartGame[yTemp][xTemp], "silver");
+                        }
+                        if (typeTemp.equals("bronze")) {
+                            mapStartGame[yTemp][xTemp] = 1;
+                            //mapa.put(mapStartGame[yTemp][xTemp], "bronze");
+                        }
+                        //System.out.println(tesouroTemp.toString());
+                        listaTreasures.add(tesouroTemp);
+                    }
+                    if (elemento.contains("hole")) {
+
+                        Buraco buracoTemp = new Buraco();
+
+                        dados = elemento.split(",");
+
+                        for (String d : dados) {
+                            if (d.startsWith("id:")) {
+                                idTemp = Integer.parseInt(d.substring(4));
+                                buracoTemp.setId(idTemp);
+
+                            } else if (d.startsWith(" x:")) {
+                                xTemp = Integer.parseInt(d.substring(4));
+                                buracoTemp.setPosX(xTemp);
+
+                            } else if (d.startsWith(" y:")) {
+                                yTemp = Integer.parseInt(d.substring(4));
+                                buracoTemp.setPosY(yTemp);
+                            }
+                        }
+                        mapStartGame[yTemp][xTemp] = 5;
+                        listaHoles.add(buracoTemp);
+                    }
+                }
+            }
+
+            arq.close();
+        } catch (IOException e) {
+            System.err.printf("Erro na abertura do arquivo: %s.\n",
+                    e.getMessage());
+        }
+
+        System.out.println();
+    }*/
         return true;
     }
 
