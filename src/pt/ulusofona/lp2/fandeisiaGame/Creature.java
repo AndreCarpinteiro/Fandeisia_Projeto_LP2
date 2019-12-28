@@ -52,13 +52,16 @@ public abstract class Creature {
                 return "dwarf_sul.png";
             }
             if (tipo.equals("Gigante")) {
-                return "chimera_sul2.png";
+                return "gigante_sul.png";
             }
             if (tipo.equals("Humano")) {
                 return "skeleton_sul.png";
             }
             if (tipo.equals("Dragão")) {
                 return "super_dragon_sul.png";
+            }
+            if (tipo.equals("Elfo")) {
+                return "elfo_sul.png";
             }
         }
 
@@ -67,13 +70,16 @@ public abstract class Creature {
                 return "dwarf_norte.png";
             }
             if (tipo.equals("Gigante")) {
-                return "chimera_norte2.png";
+                return "gigante_norte.png";
             }
             if (tipo.equals("Humano")) {
                 return "skeleton_norte.png";
             }
             if (tipo.equals("Dragão")) {
                 return "super_dragon_norte.png";
+            }
+            if (tipo.equals("Elfo")) {
+                return "elfo_norte.png";
             }
         }
 
@@ -82,13 +88,16 @@ public abstract class Creature {
                 return "dwarf_este.png";
             }
             if (tipo.equals("Gigante")) {
-                return "chimera_este2.png";
+                return "gigante_este.png";
             }
             if (tipo.equals("Humano")) {
                 return "skeleton_este.png";
             }
             if (tipo.equals("Dragão")) {
                 return "super_dragon_este.png";
+            }
+            if (tipo.equals("Elfo")) {
+                return "elfo_este.png";
             }
         }
 
@@ -97,13 +106,52 @@ public abstract class Creature {
                 return "dwarf_oeste.png";
             }
             if (tipo.equals("Gigante")) {
-                return "chimera_oeste.png";
+                return "gigante_oeste.png";
             }
             if (tipo.equals("Humano")) {
                 return "skeleton_oeste.png";
             }
             if (tipo.equals("Dragão")) {
                 return "super_dragon_oeste.png";
+            }
+            if (tipo.equals("Elfo")) {
+                return "elfo_oeste.png";
+            }
+
+        }
+
+        if (orientacao.toString().equals("Nordeste")) {
+            if (tipo.equals("Dragão")) {
+                return "super_dragon_nordeste.png";
+            }
+            if (tipo.equals("Elfo")) {
+                return "elfo_nordeste.png";
+            }
+        }
+
+        if (orientacao.toString().equals("Sudeste")) {
+            if (tipo.equals("Dragão")) {
+                return "super_dragon_sudeste.png";
+            }
+            if (tipo.equals("Elfo")) {
+                return "elfo_sudeste.png";
+            }
+        }
+        if (orientacao.toString().equals("Sudoeste")) {
+            if (tipo.equals("Dragão")) {
+                return "super_dragon_sudoeste.png";
+            }
+            if (tipo.equals("Elfo")) {
+                return "elfo_sudoeste.png";
+            }
+        }
+
+        if (orientacao.toString().equals("Noroeste")) {
+            if (tipo.equals("Dragão")) {
+                return "super_dragon_noroeste.png";
+            }
+            if (tipo.equals("Elfo")) {
+                return "elfo_noroeste.png";
             }
         }
         return null;

@@ -36,9 +36,9 @@ public class FandeisiaGameManager {
 
         creatureTypeOptions[0] = new String[]{"Humano", "skeleton.png", "Muito fixe", "3"};
         creatureTypeOptions[1] = new String[]{"Anão", "dwarf.png", "Dá cabeçadas", "1"};
-        creatureTypeOptions[2] = new String[]{"Gigante", "chimera.png", "Bue grande", "5"};
+        creatureTypeOptions[2] = new String[]{"Gigante", "gigante.png", "Bue grande", "5"};
         creatureTypeOptions[3] = new String[]{"Dragão", "super_dragon.png", "Comandado pelo Macaco Lider", "9"};
-        creatureTypeOptions[4] = new String[]{"Elfo", "bird.png", "Muito fixe", "5"};
+        creatureTypeOptions[4] = new String[]{"Elfo", "elfo.png", "Muito fixe", "5"};
 
         return creatureTypeOptions;
     }
@@ -241,8 +241,6 @@ public class FandeisiaGameManager {
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
-        // Random random = new Random();
-        //teamId = random.nextInt(3 - 1) + 1;
 
         if (teamId == 10) { //Acho que funciona, no debug está bem
             // teamId = 10;
