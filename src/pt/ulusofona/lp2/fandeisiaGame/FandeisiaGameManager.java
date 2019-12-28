@@ -151,14 +151,17 @@ public class FandeisiaGameManager {
                 //Truque, se houver tempo fazer melhor
                 if (typeTemp.equals("gold")) {
                     mapStartGame[yTemp][xTemp] = 3;
+                    tesourosTotais += 3;
                     //mapa.put(mapStartGame[yTemp][xTemp], "gold");
                 }
                 if (typeTemp.equals("silver")) {
                     mapStartGame[yTemp][xTemp] = 2;
+                    tesourosTotais += 2;
                     //mapa.put(mapStartGame[yTemp][xTemp], "silver");
                 }
                 if (typeTemp.equals("bronze")) {
                     mapStartGame[yTemp][xTemp] = 1;
+                    tesourosTotais += 1;
                     //mapa.put(mapStartGame[yTemp][xTemp], "bronze");
                 }
                 //System.out.println(tesouroTemp.toString());
@@ -200,7 +203,7 @@ public class FandeisiaGameManager {
             System.out.println(listaHoles.get(i).toString());
         }
 
-        tesourosTotais = listaTreasures.size();
+     //   tesourosTotais = listaTreasures.size();
 
         //Atualizar plafond
 
@@ -269,15 +272,16 @@ public class FandeisiaGameManager {
                         listaTreasures.remove(listaTreasures.get(j));
                     }
                 }
+                tesourosTotais -= encontrou; //Serve para validar GameIsOver
 
                 if (listaCreatures.get(i).getIdEquipa() == 10) {
                     tLDR.somaPontos(encontrou);
-                    listaCreatures.get(i).somaPontos(encontrou); //Mudei isto porque acho que soma e não o set...
+                    listaCreatures.get(i).somaPontos(); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
                     encontrouLDR = true; //Para saber se tenho de atribuir uma só moeda
                 }
                 if (listaCreatures.get(i).getIdEquipa() == 20) {
                     tRST.somaPontos(encontrou);
-                    listaCreatures.get(i).somaPontos(encontrou); //Mudei isto porque acho que soma e não o set...
+                    listaCreatures.get(i).somaPontos(); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
                     encontrouRST = true;//Para saber se tenho de atribuir uma só moeda
                 }
             }
