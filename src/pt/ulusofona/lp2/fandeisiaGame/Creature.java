@@ -15,28 +15,38 @@ public abstract class Creature {
     int ouro = 0;
     int prata = 0;
     int bronze = 0;
-    String feitico = null;
-    int[][] mapa = mapStartGame;
-
     String tipo;
-    int pontos; //Numero de tesouros apanhados (1 tesouro = 1 ponto)
-
+    int pontos;
     int posX;
     int posY;
     Orientacao orientacao;
+    String feitico = null;
+    int[][] mapa = mapStartGame;
 
     Creature() {
 
     }
 
     public Creature(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
-        //Done
         this.id = id;
         this.idEquipa = idEquipa;
         this.tipo = tipo;
         this.posX = posX;
         this.posY = posY;
         this.orientacao = orient;
+    }
+
+    public Creature(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient, int ouro, int prata, int bronze, int pontos) {
+        this.id = id;
+        this.idEquipa = idEquipa;
+        this.tipo = tipo;
+        this.posX = posX;
+        this.posY = posY;
+        this.orientacao = orient;
+        this.ouro = ouro;
+        this.prata = prata;
+        this.bronze = bronze;
+        this.pontos = pontos;
     }
 
     public int getId() {//Done------------
@@ -207,7 +217,7 @@ public abstract class Creature {
 
     public String toString() {//Done--------------------
 
-        return id + " | " + tipo + " | " + idEquipa + " | " + pontos + " @ (" + posX + ", " + posY + ") " + orientacao;
+        return id + " | " + tipo + " | " + idEquipa + " | " + (ouro + prata + bronze) + " @ (" + posX + ", " + posY + ") " + orientacao;
     }
 
     public int getCusto(){

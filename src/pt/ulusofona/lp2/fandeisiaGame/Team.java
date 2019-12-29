@@ -27,7 +27,7 @@ public class Team {
         this.pontosTeam += pontos;
     }
 
-    public void setPontos(){
+    public void incrementaPontos(){
         this.pontosTeam++;
     }
 
@@ -45,5 +45,13 @@ public class Team {
 
     public int getId(){
         return idTeam;
+    }
+
+    public void setPlafond(int plafond){
+        this.plafond = plafond;
+    }
+
+    public void setPontosTeam(int pontos){
+        this.pontosTeam = pontos;
     }
 }

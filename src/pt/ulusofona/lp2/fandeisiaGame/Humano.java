@@ -6,6 +6,10 @@ public class Humano extends Creature {
         super(id, idEquipa, tipo, posX, posY, orient);
         this.custo = 3;
     }
+    public Humano(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient, int ouro, int prata, int bronze, int pontos) {
+        super(id, idEquipa, tipo, posX, posY, orient, ouro, prata, bronze, pontos);
+    }
+
 
     @Override
     public int moveCriatura() {//Done-------------
