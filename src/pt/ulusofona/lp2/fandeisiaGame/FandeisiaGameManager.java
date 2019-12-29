@@ -1,6 +1,8 @@
 
 package pt.ulusofona.lp2.fandeisiaGame;
 
+//import com.sun.org.apache.bcel.internal.generic.RET;
+
 import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -25,6 +27,19 @@ public class FandeisiaGameManager {
     static List<Creature> listaCreatures = new ArrayList<>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
     private List<Buraco> listaHoles = new ArrayList<>();
+
+    private HashMap<String, Integer> custoFeiticos = new HashMap<String, Integer>() {
+        {
+            put("EmpurraParaNorte", 1);
+            put("EmpurraParaEste", 1);
+            put("EmpurraParaOeste", 1);
+            put("ReduzAlcance", 2);
+            put("DuplicaAlcance", 3);
+            put("Congela", 3);
+            put("Congela4Ever", 10);
+            put("Descongela", 8);
+        }
+    };
 
     //Criei isto para saber o conteudo de cada posicao TESTE
     //static HashMap<Integer, String> mapa = new HashMap<Integer, String>();
@@ -476,19 +491,90 @@ public class FandeisiaGameManager {
 
     public boolean enchant(int x, int y, String spellName) {
         //TODO: Aplicar efeito
+        int plafond;
+        int custo = custoFeiticos.get(spellName);
 
-        for (int i = 0; i < listaCreatures.size(); i++) {
-            if (listaCreatures.get(i).posX == x && listaCreatures.get(i).posY == y) {
-                listaCreatures.get(i).setFeitico(spellName);
+        int yMax = mapStartGame.length - 1;
+        int xMax = mapStartGame[0].length - 1;
+
+        if (getCurrentTeamId() == tLDR.getId()) {
+            plafond = tLDR.getPlafond();
+        } else {
+            plafond = tRST.getPlafond();
+        }
+
+        if (custo < plafond) {
+            for (Creature creature : listaCreatures) {
+                if (creature.posX == x && creature.posY == y) {
+                    if (spellName.contains("Empurra")) {
+                        switch (spellName) {
+                            case "EmpurraParaNorte":
+                                if (y - 1 >= 0) {
+                                    if (mapStartGame[y - 1][x] != 4 && mapStartGame[y - 1][x] != 5) {
+                                        if (getCurrentTeamId() == tLDR.getId()) {
+                                            tLDR.setPlafond(plafond - custo);
+                                            return true;
+                                        } else {
+                                            tRST.setPlafond(plafond - custo);
+                                            return true;
+                                        }
+                                    }
+                                }
+                                break;
+                            case "EmpurraParaEste":
+                                if (x + 1 <= xMax) {
+                                    if (mapStartGame[y][x + 1] != 4 && mapStartGame[y][x + 1] != 5) {
+                                        if (getCurrentTeamId() == tLDR.getId()) {
+                                            tLDR.setPlafond(plafond - custo);
+                                            return true;
+                                        } else {
+                                            tRST.setPlafond(plafond - custo);
+                                            return true;
+                                        }
+                                    }
+                                }
+                                break;
+                            case "EmpurraParaSul":
+                                if (y + 1 <= yMax) {
+                                    if (mapStartGame[y + 1][x] != 4 && mapStartGame[y + 1][x] != 5) {
+                                        if (getCurrentTeamId() == tLDR.getId()) {
+                                            tLDR.setPlafond(plafond - custo);
+                                            return true;
+                                        } else {
+                                            tRST.setPlafond(plafond - custo);
+                                            return true;
+                                        }
+                                    }
+                                }
+                                break;
+                            case "EmpurraParaOeste":
+                                if (x - 1 >= 0) {
+                                    if (mapStartGame[y][x - 1] != 4 && mapStartGame[y][x - 1] != 5) {
+                                        if (getCurrentTeamId() == tLDR.getId()) {
+                                            tLDR.setPlafond(plafond - custo);
+                                            return true;
+                                        } else {
+                                            tRST.setPlafond(plafond - custo);
+                                            return true;
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    } else {
+                        creature.setFeitico(spellName);
+                    }
+
+                }
             }
         }
-        return true;
+        return false;
     }
 
     public String getSpell(int x, int y) { //Done-------
         for (int i = 0; i < listaCreatures.size(); i++) {
             if (listaCreatures.get(i).posX == x && listaCreatures.get(i).posY == y) {
-                return listaCreatures.get(i).getFeitico();
+                return listaCreatures.get(i).getFeiticoEnum().toString();
             }
         }
         return null;

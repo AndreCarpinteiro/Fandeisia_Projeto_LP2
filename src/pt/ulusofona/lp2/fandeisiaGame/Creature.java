@@ -9,6 +9,10 @@ public abstract class Creature {
         Norte, Nordeste, Este, Sul, Sudeste, Oeste, Noroeste, Sudoeste
     }
 
+    enum FeiticoEnum {
+        SemFeitico, EmpurraParaNorte, EmpurraParaOeste, EmpurraParaEste, EmpurraParaSul, ReduzAlcance, DuplicaAlcance, Congela, Congela4ever, Descongela
+    }
+
     int id;
     int idEquipa;
     int custo;
@@ -20,8 +24,8 @@ public abstract class Creature {
     int posX;
     int posY;
     Orientacao orientacao;
-    String feitico = null;
     int[][] mapa = mapStartGame;
+    FeiticoEnum feiticoEnum = FeiticoEnum.SemFeitico;
 
     Creature() {
 
@@ -211,7 +215,7 @@ public abstract class Creature {
         this.orientacao = orientacao;
     }
 
-    public Orientacao getOrientacao(){
+    public Orientacao getOrientacao() {
         return orientacao;
     }
 
@@ -220,30 +224,22 @@ public abstract class Creature {
         return id + " | " + tipo + " | " + idEquipa + " | " + (ouro + prata + bronze) + " @ (" + posX + ", " + posY + ") " + orientacao;
     }
 
-    public int getCusto(){
+    public int getCusto() {
         return custo;
     }
 
-    public String getFeitico(){
-        return feitico;
+    public void somaPontos(int pontos) { //NÃO TENHO A CERTEZA SE É INCREMENTAR OU ATRIBUIR O VALOR
+        this.pontos += pontos;
     }
 
-    public void setFeitico(String feitico) {
-        this.feitico = feitico;
-    }
-
-    public void somaPontos(int pontos){ //NÃO TENHO A CERTEZA SE É INCREMENTAR OU ATRIBUIR O VALOR
-        this.pontos+=pontos;
-    }
-
-    public void calcTrofeus(int valor){
-        if(valor == 1){
+    public void calcTrofeus(int valor) {
+        if (valor == 1) {
             bronze++;
         }
-        if(valor == 2){
+        if (valor == 2) {
             prata++;
         }
-        if(valor == 3){
+        if (valor == 3) {
             ouro++;
         }
     }
@@ -258,5 +254,17 @@ public abstract class Creature {
 
     public int getOuro() {
         return ouro;
+    }
+
+    public FeiticoEnum getFeiticoEnum() {
+        return feiticoEnum;
+    }
+
+    public void setFeitico(String feitico) {
+        this.feiticoEnum = FeiticoEnum.valueOf(feitico);
+    }
+
+    public void Efeito() {
+
     }
 }
