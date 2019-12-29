@@ -46,7 +46,7 @@ public class FandeisiaGameManager {
 
     public int startGame(String[] content, int rows, int columns) {
 
-
+  System.out.println("sdf");
         listaCreatures.clear();
         listaTreasures.clear();
 
