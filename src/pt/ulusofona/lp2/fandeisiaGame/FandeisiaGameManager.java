@@ -346,8 +346,6 @@ public class FandeisiaGameManager {
         String tipo = "";
         int pontos = 0;
 
-        System.out.println("sdf");
-
         resultado.add("Welcome to FANDEISIA");
 
         if (tLDR.getTeamPontos() == tRST.getTeamPontos()) {
