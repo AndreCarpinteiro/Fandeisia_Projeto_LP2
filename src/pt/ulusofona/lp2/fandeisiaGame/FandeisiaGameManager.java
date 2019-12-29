@@ -303,10 +303,10 @@ public class FandeisiaGameManager {
 
     public boolean gameIsOver() {
 
-        System.out.println("pontuacao total:" + pontuacaoTotal);
+        //System.out.println("pontuacao total:" + pontuacaoTotal);
         int conta = pontuacaoTotal / 2 + 1;
 
-        System.out.println("conta:" + conta);
+        //System.out.println("conta:" + conta);
         if (tLDR.getTeamPontos() >= conta) {
             return true;
         }
