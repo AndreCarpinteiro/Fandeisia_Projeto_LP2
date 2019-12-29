@@ -223,6 +223,11 @@ public class TestFandeisiaGameManager {
 
     @Test
     public void test06SaltosDragao() {//Done---------------------
+        /*dragao:
+            -2 buracos ✔
+            -3 buracos X
+            -2 criaturas ✔
+            -3 criaturas X*/
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[14];
         conteudoMundo[0] = "id: 1, type: Dragão, teamId: 0, x: 0, y: 0, orientation: Este";
@@ -267,6 +272,12 @@ public class TestFandeisiaGameManager {
 
     @Test
     public void test07SaltosElfo() {//Done---------------------
+        /*elfo:
+            -1 buraco ✔
+            -2 buracos X
+            -1 criatura X
+            */
+
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[7];
         conteudoMundo[0] = "id: 1, type: Elfo, teamId: 0, x: 0, y: 0, orientation: Este";
@@ -303,6 +314,13 @@ public class TestFandeisiaGameManager {
 
     @Test
     public void test08SaltosGigante() {//Done---------------------
+
+        /*gigante:
+            -2 buracos ✔
+            -3 buracos X
+            -2 criaturas ✔
+            -3 criaturas X
+             */
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[14];
         conteudoMundo[0] = "id: 1, type: Gigante, teamId: 0, x: 0, y: 0, orientation: Este";
@@ -350,6 +368,13 @@ public class TestFandeisiaGameManager {
 
     @Test
     public void test09SaltosHumano() {//Done---------------------
+        /*humano:
+            -1 buraco X
+            -2 buracos X
+            -1 criaturas X
+            -2 criaturas X
+            */
+
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[10];
         conteudoMundo[0] = "id: 1, type: Humano, teamId: 0, x: 0, y: 0, orientation: Este";
@@ -393,6 +418,11 @@ public class TestFandeisiaGameManager {
 
     @Test
     public void test10SaltosAnao() {//Done---------------------
+        /*anao:
+            -1 buraco X
+            -1 criatura X
+            */
+
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[4];
         conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 0, y: 0, orientation: Este";
@@ -419,5 +449,191 @@ public class TestFandeisiaGameManager {
         assertEquals(-500, gameManager.getElementId(1, 0));
         assertEquals(2, gameManager.getElementId(0, 1));
         assertEquals(3, gameManager.getElementId(1, 1));
+    }
+
+    @Test
+    public void test11SaltosEspeciaisDragao01() {//Done---------------------
+        /*dragao:
+            -2 buraco diagonal ✔
+            -2 criaturas diagonal ✔
+            */
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[6];
+        conteudoMundo[0] = "id: 1, type: Dragão, teamId: 0, x: 0, y: 0, orientation: Sudeste";
+        conteudoMundo[1] = "id: 2, type: Dragão, teamId: 0, x: 0, y: 3, orientation: Nordeste";
+        //criaturas paras os saltos
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 0, x: 1, y: 1, orientation: Sul";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 2, y: 2, orientation: Norte";
+
+        //buracos
+        conteudoMundo[4] = "id: -500, type: hole, x: 2, y: 1";
+        conteudoMundo[5] = "id: -501, type: hole, x: 1, y: 2";
+
+        gameManager.startGame(conteudoMundo, 4, 4);
+
+        gameManager.processTurn();
+
+        List<Creature> listaCreatures = gameManager.getCreatures();
+
+        //Verifica orientações
+        assertEquals(Creature.Orientacao.Sudeste, listaCreatures.get(0).getOrientacao());
+        assertEquals(Creature.Orientacao.Nordeste, listaCreatures.get(1).getOrientacao());
+
+
+        //Verifica possições
+        assertEquals(0, gameManager.getElementId(0, 0));
+        assertEquals(2, gameManager.getElementId(3, 0));
+        assertEquals(0, gameManager.getElementId(0, 3));
+        assertEquals(1, gameManager.getElementId(3, 3));
+    }
+
+    @Test
+    public void test12SaltosEspeciaisDragao02() {//Done---------------------
+
+        /*dragao:
+            -3 buracos diagonal X
+            -2 criaturas mas aterrar num buraco X
+            */
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[8];
+        conteudoMundo[0] = "id: 1, type: Dragão, teamId: 0, x: 0, y: 0, orientation: Sudeste";
+        conteudoMundo[1] = "id: 2, type: Dragão, teamId: 0, x: 0, y: 3, orientation: Nordeste";
+        //criaturas paras os saltos
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 0, x: 1, y: 1, orientation: Sul";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 2, y: 2, orientation: Norte";
+
+        //buracos
+        conteudoMundo[4] = "id: -500, type: hole, x: 2, y: 1";
+        conteudoMundo[5] = "id: -501, type: hole, x: 1, y: 2";
+        conteudoMundo[6] = "id: -502, type: hole, x: 3, y: 0";
+        conteudoMundo[7] = "id: -503, type: hole, x: 3, y: 3";
+
+        gameManager.startGame(conteudoMundo, 4, 4);
+
+        gameManager.processTurn();
+
+        List<Creature> listaCreatures = gameManager.getCreatures();
+
+        //Verifica orientações
+        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(0).getOrientacao());
+        assertEquals(Creature.Orientacao.Este, listaCreatures.get(1).getOrientacao());
+
+
+        //Verifica possições
+        assertEquals(1, gameManager.getElementId(0, 0));
+        assertEquals(-502, gameManager.getElementId(3, 0));
+        assertEquals(2, gameManager.getElementId(0, 3));
+        assertEquals(-503, gameManager.getElementId(3, 3));
+    }
+
+    @Test
+    public void test13SaltosEspeciaisElfo() {//Done---------------------
+        /*elfo:
+            -1 buraco diagonal ✔
+            -2 buracos diagonal X
+            */
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[5];
+        conteudoMundo[0] = "id: 1, type: Elfo, teamId: 0, x: 0, y: 0, orientation: Sudeste";
+        conteudoMundo[1] = "id: 2, type: Elfo, teamId: 0, x: 1, y: 0, orientation: Sudeste";
+
+        //buracos
+        conteudoMundo[2] = "id: -500, type: hole, x: 1, y: 1";
+        conteudoMundo[3] = "id: -501, type: hole, x: 2, y: 1";
+        conteudoMundo[4] = "id: -502, type: hole, x: 3, y: 2";
+
+        gameManager.startGame(conteudoMundo, 4, 4);
+
+        gameManager.processTurn();
+
+        List<Creature> listaCreatures = gameManager.getCreatures();
+
+        //Verifica orientações
+        assertEquals(Creature.Orientacao.Sudeste, listaCreatures.get(0).getOrientacao());
+        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(1).getOrientacao());
+
+
+        //Verifica possições
+        assertEquals(0, gameManager.getElementId(0, 0));
+        assertEquals(2, gameManager.getElementId(1, 0));
+        assertEquals(1, gameManager.getElementId(2, 2));
+        assertEquals(-502, gameManager.getElementId(3, 2));
+
+
+    }
+
+    @Test
+    public void test14SaltosEspeciaisGigante() {//Done---------------------
+        /*gigante:
+            -2 criaturas mas aterrar num buraco X
+            -2 criaturas mas uma delas é um gigante X
+            */
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[7];
+        conteudoMundo[0] = "id: 1, type: Gigante, teamId: 0, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Gigante, teamId: 0, x: 0, y: 2, orientation: Este";
+        //criaturas paras os saltos
+        conteudoMundo[2] = "id: 3, type: Gigante, teamId: 0, x: 2, y: 2, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 1, y: 0, orientation: Norte";
+        conteudoMundo[4] = "id: 5, type: Anão, teamId: 0, x: 2, y: 0, orientation: Norte";
+        conteudoMundo[5] = "id: 6, type: Anão, teamId: 0, x: 1, y: 2, orientation: Este";
+
+        //buracos
+        conteudoMundo[6] = "id: -500, type: hole, x: 3, y: 0";
+
+
+        gameManager.startGame(conteudoMundo, 4, 4);
+
+        gameManager.processTurn();
+
+        List<Creature> listaCreatures = gameManager.getCreatures();
+
+        //Verifica orientações
+        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(0).getOrientacao());
+        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(1).getOrientacao());
+
+
+        //Verifica possições
+        assertEquals(1, gameManager.getElementId(0, 0));
+        assertEquals(-500, gameManager.getElementId(3, 0));
+        assertEquals(2, gameManager.getElementId(0, 2));
+        assertEquals(0, gameManager.getElementId(3, 2));
+
+    }
+
+    @Test
+    public void test15getCoin() {//Done---------------------
+
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[7];
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Anão, teamId: 0, x: 0, y: 2, orientation: Este";
+        //criaturas paras os saltos
+        conteudoMundo[2] = "id: 3, type: Gigante, teamId: 0, x: 2, y: 2, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 1, y: 0, orientation: Norte";
+        conteudoMundo[4] = "id: 5, type: Anão, teamId: 0, x: 2, y: 0, orientation: Norte";
+        conteudoMundo[5] = "id: 6, type: Anão, teamId: 0, x: 1, y: 2, orientation: Este";
+
+        //buracos
+        conteudoMundo[6] = "id: -500, type: hole, x: 3, y: 0";
+
+
+        gameManager.startGame(conteudoMundo, 4, 4);
+
+        gameManager.processTurn();
+
+        List<Creature> listaCreatures = gameManager.getCreatures();
+
+        //Verifica orientações
+        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(0).getOrientacao());
+        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(1).getOrientacao());
+
+
+        //Verifica possições
+        assertEquals(1, gameManager.getElementId(0, 0));
+        assertEquals(-500, gameManager.getElementId(3, 0));
+        assertEquals(2, gameManager.getElementId(0, 2));
+        assertEquals(0, gameManager.getElementId(3, 2));
+
     }
 }
