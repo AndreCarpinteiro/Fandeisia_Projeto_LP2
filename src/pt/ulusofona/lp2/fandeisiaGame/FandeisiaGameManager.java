@@ -15,12 +15,12 @@ public class FandeisiaGameManager {
     // 4 = creatura
     // 5 = buraco
 
-    private int countTurnos;
-    private int turn15GameOver;
-    private int pontuacaoTotal;
+    private int countTurnos = 0; //FALTA GUARDAR
+    private int turn15GameOver = 0;
+    private int pontuacaoTotal = 0;
 
-    private Team tLDR;
-    private Team tRST;
+    private Team tLDR = new Team(10, 0);
+    private Team tRST = new Team(20, 0);
 
     static List<Creature> listaCreatures = new ArrayList<>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
@@ -45,8 +45,6 @@ public class FandeisiaGameManager {
     }
 
     public int startGame(String[] content, int rows, int columns) {
-        tLDR = new Team(10, 0);
-        tRST = new Team(20, 0);
 
         listaCreatures.clear();
         listaTreasures.clear();
@@ -174,15 +172,15 @@ public class FandeisiaGameManager {
         }
 
         //Só para visualizar
-        for (int i = 0; i < listaCreatures.size(); i++) {
-            System.out.println(listaCreatures.get(i).toString());
-        }
-        for (int i = 0; i < listaTreasures.size(); i++) {
-            System.out.println(listaTreasures.get(i).toString());
-        }
-        for (int i = 0; i < listaHoles.size(); i++) {
-            System.out.println(listaHoles.get(i).toString());
-        }
+     //   for (int i = 0; i < listaCreatures.size(); i++) {
+       //     System.out.println(listaCreatures.get(i).toString());
+        //}
+        //for (int i = 0; i < listaTreasures.size(); i++) {
+          //  System.out.println(listaTreasures.get(i).toString());
+        //}
+        //for (int i = 0; i < listaHoles.size(); i++) {
+          //  System.out.println(listaHoles.get(i).toString());
+        //}
 
         //   pontuacaoTotal = listaTreasures.size();
 
@@ -211,12 +209,12 @@ public class FandeisiaGameManager {
         tRST.decrementaPlafond(custoRST); //Atualiza plafond
 
         //Ver mapa TESTES
-        for (int i = 0; i < mapStartGame.length; i++) {
-            for (int j = 0; j < mapStartGame[i].length; j++) {
-                System.out.print(mapStartGame[i][j]);
-            }
-            System.out.println();
-        }
+     //   for (int i = 0; i < mapStartGame.length; i++) {
+       //     for (int j = 0; j < mapStartGame[i].length; j++) {
+         //       System.out.print(mapStartGame[i][j]);
+          //  }
+            //System.out.println();
+        //}
 
         return 0; //Tudo válido
     }
@@ -289,13 +287,20 @@ public class FandeisiaGameManager {
             tRST.setEstado(false);
         }
 
-        for (int j = 0; j < listaTreasures.size(); j++) {
-            System.out.println(listaTreasures.get(j).toString());
-        }
+     //   for (int j = 0; j < listaTreasures.size(); j++) {
+       //     System.out.println(listaTreasures.get(j).toString());
+        //}
 
         for (int j = 0; j < listaCreatures.size(); j++) {
             System.out.println(listaCreatures.get(j).toString());
         }
+
+//        for (int i = 0; i < mapStartGame.length; i++) {
+  //          for (int j = 0; j < mapStartGame[i].length; j++) {
+    //            System.out.print(mapStartGame[i][j]);
+      //      }
+        //    System.out.println();
+        //}
     }
 
     public List<Creature> getCreatures() {//Quase Done--------------
@@ -398,11 +403,11 @@ public class FandeisiaGameManager {
             }
         }
 
-        for (Buraco buracoTemp : listaHoles) {
-            if (buracoTemp.getPosX() == x && buracoTemp.getPosY() == y) {
-                return buracoTemp.getId();
-            }
-        }
+      //  for (Buraco buracoTemp : listaHoles) {
+        //    if (buracoTemp.getPosX() == x && buracoTemp.getPosY() == y) {
+          //      return buracoTemp.getId();
+            //}
+        //}
 
         return 0;
     }
@@ -469,7 +474,7 @@ public class FandeisiaGameManager {
             mapa.put("Elfo", 3);
         }*/
 
-        mapa.put("Anão", 7);
+        //mapa.put("Anão", 0);
 
         return mapa;
     }//Done---------
@@ -495,11 +500,9 @@ public class FandeisiaGameManager {
     }
 
     public int getCoinTotal(int teamID) {
-        if (tLDR.getId() == teamID) {
-            return tLDR.getPlafond();
-        } else {
-            return tRST.getPlafond();
-        }
+        if (10 == teamID) {
+            return tLDR.getPlafond(); } else {
+            return tRST.getPlafond(); }
     }
 
     public boolean saveGame(File fich) {
@@ -568,20 +571,20 @@ public class FandeisiaGameManager {
 
     public boolean loadGame(File fich) {
 
-        int idTemp = 0;
-        String typeTemp = "";
-        int xTemp = 0;
-        int yTemp = 0;
-        int teamIdTemp = 0;
+        int idTemp;
+        String typeTemp;
+        int xTemp;
+        int yTemp;
+        int teamIdTemp;
         int tamanhoY = 0;
-        int tamanhoX;
-        int plafoundTemp = 0;
-        int pontosTemp = 0;
-        int ouro = 0;
-        int prata = 0;
-        int bronze = 0;
-        boolean estado = true;
-        String orientTemp = "Norte";
+        int tamanhoX = 0;
+        int plafoundTemp;
+        int pontosTemp;
+        int ouro;
+        int prata;
+        int bronze;
+        boolean estado;
+        String orientTemp;
 
         try {
             FileReader arq = new FileReader(fich);
@@ -590,6 +593,20 @@ public class FandeisiaGameManager {
             String linha = lerArq.readLine();
 
             while (true) {
+
+                idTemp = 0;
+                typeTemp = "";
+                xTemp = 0;
+                yTemp = 0;
+                teamIdTemp = 0;
+                plafoundTemp = 0;
+                pontosTemp = 0;
+                ouro = 0;
+                prata = 0;
+                bronze = 0;
+                estado = true;
+                orientTemp = "";
+
                 System.out.printf("%s\n", linha);
                 linha = lerArq.readLine();
 
@@ -709,10 +726,14 @@ public class FandeisiaGameManager {
                             }
                         }
                         if (idTemp == 10) {
-                            tLDR = new Team(idTemp, pontosTemp, plafoundTemp, estado);
+                            tLDR.setPlafond(plafoundTemp);
+                            tLDR.setEstado(estado);
+                            tLDR.setPontosTeam(pontosTemp);
                         }
                         if (idTemp == 20) {
-                            tRST = new Team(idTemp, pontosTemp, plafoundTemp, estado);
+                            tRST.setPlafond(plafoundTemp);
+                            tRST.setEstado(estado);
+                            tRST.setPontosTeam(pontosTemp);
                         }
                     }
                     if (linha.startsWith("pontuacaoTotal:")) {
