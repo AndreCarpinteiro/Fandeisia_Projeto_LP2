@@ -394,19 +394,15 @@ public class TestFandeisiaGameManager {
     @Test
     public void test10SaltosAnao() {//Done---------------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
-        String[] conteudoMundo = new String[10];
+        String[] conteudoMundo = new String[4];
         conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 0, y: 0, orientation: Este";
         conteudoMundo[1] = "id: 2, type: Anão, teamId: 0, x: 0, y: 1, orientation: Este";
 
-
         //criaturas paras os saltos
-        conteudoMundo[4] = "id: 5, type: Anão, teamId: 0, x: 1, y: 1, orientation: Sul";
-
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 0, x: 1, y: 1, orientation: Norte";
 
         //buracos
-        conteudoMundo[7] = "id: -500, type: hole, x: 1, y: 0";
-        conteudoMundo[8] = "id: -501, type: hole, x: 1, y: 1";
-        conteudoMundo[9] = "id: -502, type: hole, x: 2, y: 1";
+        conteudoMundo[3] = "id: -500, type: hole, x: 1, y: 0";
 
         gameManager.startGame(conteudoMundo, 4, 4);
 
@@ -417,18 +413,11 @@ public class TestFandeisiaGameManager {
         //Verifica orientações
         assertEquals(Creature.Orientacao.Sul, listaCreatures.get(0).getOrientacao());
         assertEquals(Creature.Orientacao.Sul, listaCreatures.get(1).getOrientacao());
-        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(2).getOrientacao());
-        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(3).getOrientacao());
 
         //Verifica possições
         assertEquals(1, gameManager.getElementId(0, 0));
-        assertEquals(0, gameManager.getElementId(2, 0));
+        assertEquals(-500, gameManager.getElementId(1, 0));
         assertEquals(2, gameManager.getElementId(0, 1));
-        assertEquals(-502, gameManager.getElementId(2, 1));
-        assertEquals(3, gameManager.getElementId(0, 2));
-        assertEquals(0, gameManager.getElementId(2, 2));
-        assertEquals(4, gameManager.getElementId(0, 3));
-        assertEquals(7, gameManager.getElementId(2, 3));
-
+        assertEquals(3, gameManager.getElementId(1, 1));
     }
 }

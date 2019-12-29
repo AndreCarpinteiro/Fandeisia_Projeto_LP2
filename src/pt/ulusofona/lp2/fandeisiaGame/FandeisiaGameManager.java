@@ -723,6 +723,7 @@ public class FandeisiaGameManager {
             arq.close();
         } catch (IOException e) {
             System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
+            return false;
         }
         System.out.println();
         return true;
