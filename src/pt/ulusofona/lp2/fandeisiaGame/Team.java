@@ -11,6 +11,13 @@ public class Team {
         this.pontosTeam = pontosTeam;
     }
 
+    Team(int idTeam,int pontosTeam, int plafond, boolean estado){
+        this.idTeam = idTeam;
+        this.pontosTeam = pontosTeam;
+        this.plafond = plafond;
+        this.ativo = estado;
+    }
+
     public void setEstado(boolean ativo){
         this.ativo = ativo;
     }

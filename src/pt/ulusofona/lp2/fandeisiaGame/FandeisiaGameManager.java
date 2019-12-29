@@ -19,8 +19,8 @@ public class FandeisiaGameManager {
     private int turn15GameOver;
     private int pontuacaoTotal;
 
-    private Team tLDR = new Team(10, 0);
-    private Team tRST = new Team(20, 0);
+    private Team tLDR;
+    private Team tRST;
 
     static List<Creature> listaCreatures = new ArrayList<>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
@@ -45,8 +45,9 @@ public class FandeisiaGameManager {
     }
 
     public int startGame(String[] content, int rows, int columns) {
+        tLDR = new Team(10, 0);
+        tRST = new Team(20, 0);
 
-  System.out.println("sdf");
         listaCreatures.clear();
         listaTreasures.clear();
 
@@ -551,8 +552,10 @@ public class FandeisiaGameManager {
             }
 
             gravarArq.println();
-            gravarArq.println("pontos: " + tLDR.getTeamPontos() + ", plafound: " + tLDR.getPlafond() + ", estado: " + tLDR.getEstado() + ", id: " + tLDR.getId());
-            gravarArq.println("pontos: " + tRST.getTeamPontos() + ", plafound: " + tRST.getPlafond() + ", estado: " + tRST.getEstado() + ", id: " + tRST.getId());
+            gravarArq.println("id: " + tLDR.getId() + ", plafound: " + tLDR.getPlafond() + ", pontos: " + tLDR.getTeamPontos() + ", estado: " + tLDR.getEstado());
+            gravarArq.println("id: " + tRST.getId() + ", plafound: " + tRST.getPlafond() + ", pontos: " + tRST.getTeamPontos() + ", estado: " + tRST.getEstado());
+            gravarArq.println("pontuacaoTotal: " + pontuacaoTotal);
+            gravarArq.println("turnosSemTesouro: " + turn15GameOver);
 
             gravarArq.close();
             return true;
@@ -615,13 +618,13 @@ public class FandeisiaGameManager {
                                 yTemp = Integer.parseInt(d.substring(4));
                             } else if (d.startsWith(" orientation:")) {
                                 orientTemp = d.substring(14);
-                            }else if (d.startsWith(" ouro:")) {
+                            } else if (d.startsWith(" ouro:")) {
                                 ouro = Integer.parseInt(d.substring(7));
-                            }else if (d.startsWith(" prata:")) {
+                            } else if (d.startsWith(" prata:")) {
                                 prata = Integer.parseInt(d.substring(8));
-                            }else if (d.startsWith(" bronze:")) {
+                            } else if (d.startsWith(" bronze:")) {
                                 bronze = Integer.parseInt(d.substring(9));
-                            }else if (d.startsWith(" pontos:")) {
+                            } else if (d.startsWith(" pontos:")) {
                                 pontosTemp = Integer.parseInt(d.substring(9));
                             }
                         }
@@ -704,17 +707,21 @@ public class FandeisiaGameManager {
                             } else if (d.startsWith(" estado:")) {
                                 estado = Boolean.parseBoolean(d.substring(9));
                             }
-                            if (idTemp == 10) {
-                                tLDR.setPlafond(plafoundTemp);
-                                tLDR.setPontosTeam(pontosTemp);
-                                tLDR.setEstado(estado);
-                            }
-                            if (idTemp == 20) {
-                                tRST.setPlafond(plafoundTemp);
-                                tRST.setPontosTeam(pontosTemp);
-                                tRST.setEstado(estado);
-                            }
                         }
+                        if (idTemp == 10) {
+                            tLDR = new Team(idTemp, pontosTemp, plafoundTemp, estado);
+                        }
+                        if (idTemp == 20) {
+                            tRST = new Team(idTemp, pontosTemp, plafoundTemp, estado);
+                        }
+                    }
+                    if (linha.startsWith("pontuacaoTotal:")) {
+                        pontosTemp = Integer.parseInt(linha.substring(16));
+                        pontuacaoTotal = pontosTemp;
+                    }
+                    if (linha.startsWith("turnosSemTesouro:")) {
+                        pontosTemp = Integer.parseInt(linha.substring(18));
+                        turn15GameOver = pontosTemp;
                     }
                 } else {
                     break;
