@@ -1,10 +1,13 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
+
 public class Anao extends Creature {
 
     Anao(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         super(id, idEquipa, tipo, posX, posY, orient);
         this.custo = 1;
+        this.alcance = 1;
     }
 
     public Anao(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient, int ouro, int prata, int bronze, int pontos) {
@@ -18,60 +21,106 @@ public class Anao extends Creature {
         int encontrou = 0;
 
         if (orientacao == Orientacao.Norte) {
-            if(posY - 1 >= 0) {
-                if (mapa[posY - 1][posX] != 4 && mapa[posY - 1][posX] != 5) {
-                    if (mapa[posY - 1][posX] == 1 || mapa[posY - 1][posX] == 2 || mapa[posY - 1][posX] == 3) {
-                        encontrou = mapa[posY - 1][posX];
+            if(posY - alcance >= 0 && semObstaculo()) {
+                if (mapa[posY - alcance][posX] != 4 && mapa[posY - alcance][posX] != 5) {
+                    if (mapa[posY - alcance][posX] == 1 || mapa[posY - alcance][posX] == 2 || mapa[posY - alcance][posX] == 3) {
+                        encontrou = mapa[posY - alcance][posX];
                         calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
-                    posY -= 1;
+                    posY -= alcance;
                     mapa[posY][posX] = 4;
                 }else { orientacao = Orientacao.Este; }
             }else { orientacao = Orientacao.Este; }
             return encontrou;
         }
         if (orientacao == Orientacao.Este) {
-            if(posX + 1 <= xMax) {
-                if (mapa[posY][posX + 1] != 4 && mapa[posY][posX + 1] != 5) {
-                    if (mapa[posY][posX + 1] == 1 || mapa[posY][posX + 1] == 2 || mapa[posY][posX + 1] == 3) {
-                        encontrou = mapa[posY][posX + 1];
+            if(posX + alcance <= xMax && semObstaculo()) {
+                if (mapa[posY][posX + alcance] != 4 && mapa[posY][posX + alcance] != 5) {
+                    if (mapa[posY][posX + alcance] == 1 || mapa[posY][posX + alcance] == 2 || mapa[posY][posX + alcance] == 3) {
+                        encontrou = mapa[posY][posX + alcance];
                         calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
-                    posX += 1;
+                    posX += alcance;
                     mapa[posY][posX] = 4;
                 }else{ orientacao = Orientacao.Sul;}
             }else{ orientacao = Orientacao.Sul;}
             return encontrou;
         }
         if (orientacao == Orientacao.Sul) {
-            if(posY + 1 <= yMax) {
-                if (mapa[posY + 1][posX] != 4 && mapa[posY + 1][posX] != 5) {
-                    if (mapa[posY + 1][posX] == 1 || mapa[posY + 1][posX] == 2 || mapa[posY + 1][posX] == 3) {
-                        encontrou = mapa[posY + 1][posX];
+            if(posY + alcance <= yMax && semObstaculo()) {
+                if (mapa[posY + alcance][posX] != 4 && mapa[posY + alcance][posX] != 5) {
+                    if (mapa[posY + alcance][posX] == 1 || mapa[posY + alcance][posX] == 2 || mapa[posY + alcance][posX] == 3) {
+                        encontrou = mapa[posY + alcance][posX];
                         calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
-                    posY += 1;
+                    posY += alcance;
                     mapa[posY][posX] = 4;
                 }else{ orientacao = Orientacao.Oeste;}
             }else{ orientacao = Orientacao.Oeste;}
             return encontrou;
         }
         if (orientacao == Orientacao.Oeste) {
-            if(posX - 1 >= 0) {
-                if (mapa[posY][posX - 1] != 4 && mapa[posY][posX - 1] != 5) {
-                    if (mapa[posY][posX - 1] == 1 || mapa[posY][posX - 1] == 2 || mapa[posY][posX - 1] == 3) {
-                        encontrou = mapa[posY][posX - 1];
+            if(posX - alcance >= 0 && semObstaculo()) {
+                if (mapa[posY][posX - alcance] != 4 && mapa[posY][posX - alcance] != 5) {
+                    if (mapa[posY][posX - alcance] == 1 || mapa[posY][posX - alcance] == 2 || mapa[posY][posX - alcance] == 3) {
+                        encontrou = mapa[posY][posX - alcance];
                         calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
-                    posX -= 1;
+                    posX -= alcance;
                     mapa[posY][posX] = 4;
                 }else{orientacao = Orientacao.Norte;}
             }else{orientacao = Orientacao.Norte;}
         }
         return encontrou;
+    }
+
+
+    private boolean semObstaculo() {
+
+        int countCreatures = 0;// 4
+        int countBuracos = 0;// 5
+
+        for (int i = 1; i < alcance; i++) {
+            if (orientacao == Orientacao.Norte) {
+                if (mapStartGame[posY - i][posX] == 4) {
+                    countCreatures++;
+                } else if (mapStartGame[posY - i][posX] == 5) {
+                    countBuracos++;
+                }
+            }
+            if (orientacao == Orientacao.Este) {
+                if (mapStartGame[posY][posX + i] == 4) {
+                    countCreatures++;
+                } else if (mapStartGame[posY][posX + i] == 5) {
+                    countBuracos++;
+                }
+            }
+            if (orientacao == Orientacao.Sul) {
+                if (mapStartGame[posY + i][posX] == 4) {
+                    countCreatures++;
+                } else if (mapStartGame[posY + i][posX] == 5) {
+                    countBuracos++;
+                }
+            }
+            if (orientacao == Orientacao.Oeste) {
+                if (mapStartGame[posY][posX - i] == 4) {
+                    countCreatures++;
+                } else if (mapStartGame[posY][posX - i] == 5) {
+                    countBuracos++;
+                }
+            }
+
+        }
+
+        if (countBuracos > 0 || countCreatures > 0) {
+            return false;
+        }
+
+
+        return true;
     }
 }

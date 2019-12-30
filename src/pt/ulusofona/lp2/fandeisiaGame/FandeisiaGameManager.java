@@ -32,6 +32,7 @@ public class FandeisiaGameManager {
         {
             put("EmpurraParaNorte", 1);
             put("EmpurraParaEste", 1);
+            put("EmpurraParaSul", 1);
             put("EmpurraParaOeste", 1);
             put("ReduzAlcance", 2);
             put("DuplicaAlcance", 3);
@@ -418,11 +419,11 @@ public class FandeisiaGameManager {
             }
         }
 
-      //  for (Buraco buracoTemp : listaHoles) {
-        //    if (buracoTemp.getPosX() == x && buracoTemp.getPosY() == y) {
-          //      return buracoTemp.getId();
-            //}
-        //}
+        for (Buraco buracoTemp : listaHoles) {
+            if (buracoTemp.getPosX() == x && buracoTemp.getPosY() == y) {
+                return buracoTemp.getId();
+            }
+        }
 
         return 0;
     }
@@ -463,39 +464,29 @@ public class FandeisiaGameManager {
     public Map<String, Integer> createComputerArmy() {
 
         Random random = new Random();
-        int calhou = random.nextInt(4 - 1) + 1;
-
         Map<String, Integer> mapa = new HashMap<String, Integer>();
-/*
-        if (calhou == 1) {
-            mapa.put("Dragão", 2);
-            mapa.put("Anão", 3);
-            mapa.put("Humano", 2);
-            mapa.put("Elfo", 2);
-        }
 
-        if (calhou == 2) {
-            mapa.put("Dragão", 1);
-            mapa.put("Anão", 3);
-            mapa.put("Gigante", 3);
-            mapa.put("Elfo", 2);
-        }
+        int gigante, elfo, humano, dragao, anao, conta;
+        Random r = new Random();
+        do {
+            gigante = Math.abs(r.nextInt()) % 5;
+            elfo = Math.abs(r.nextInt()) % 5;
+            humano = Math.abs(r.nextInt()) % 5;
+            dragao = Math.abs(r.nextInt()) % 5;
+            anao = Math.abs(r.nextInt()) % 5;
+            conta = gigante * 5 + dragao * 9 + humano * 3 + elfo * 5 + anao;
+        } while (tRST.getPlafond() < conta);
 
-        if (calhou == 3) {
-            mapa.put("Dragão", 1);
-            mapa.put("Gigante", 2);
-            mapa.put("Anão", 3);
-            mapa.put("Humano", 1);
-            mapa.put("Elfo", 3);
-        }*/
-
-        //mapa.put("Anão", 0);
+        mapa.put("Dragão", dragao);
+        mapa.put("Anão", anao);
+        mapa.put("Humano", humano);
+        mapa.put("Elfo", elfo);
+        mapa.put("Gigante", gigante);
 
         return mapa;
     }//Done---------
 
-    public boolean enchant(int x, int y, String spellName) {
-        //TODO: Aplicar efeito
+    public boolean enchant(int x, int y, String spellName) {//TODO: Aplicar efeito
         int plafond;
         int custo = custoFeiticos.get(spellName);
 
@@ -518,9 +509,11 @@ public class FandeisiaGameManager {
                                     if (mapStartGame[y - 1][x] != 4 && mapStartGame[y - 1][x] != 5) {
                                         if (getCurrentTeamId() == tLDR.getId()) {
                                             tLDR.setPlafond(plafond - custo);
+                                            creature.setFeitico(spellName);
                                             return true;
                                         } else {
                                             tRST.setPlafond(plafond - custo);
+                                            creature.setFeitico(spellName);
                                             return true;
                                         }
                                     }
@@ -531,9 +524,11 @@ public class FandeisiaGameManager {
                                     if (mapStartGame[y][x + 1] != 4 && mapStartGame[y][x + 1] != 5) {
                                         if (getCurrentTeamId() == tLDR.getId()) {
                                             tLDR.setPlafond(plafond - custo);
+                                            creature.setFeitico(spellName);
                                             return true;
                                         } else {
                                             tRST.setPlafond(plafond - custo);
+                                            creature.setFeitico(spellName);
                                             return true;
                                         }
                                     }
@@ -544,9 +539,11 @@ public class FandeisiaGameManager {
                                     if (mapStartGame[y + 1][x] != 4 && mapStartGame[y + 1][x] != 5) {
                                         if (getCurrentTeamId() == tLDR.getId()) {
                                             tLDR.setPlafond(plafond - custo);
+                                            creature.setFeitico(spellName);
                                             return true;
                                         } else {
                                             tRST.setPlafond(plafond - custo);
+                                            creature.setFeitico(spellName);
                                             return true;
                                         }
                                     }
@@ -557,9 +554,11 @@ public class FandeisiaGameManager {
                                     if (mapStartGame[y][x - 1] != 4 && mapStartGame[y][x - 1] != 5) {
                                         if (getCurrentTeamId() == tLDR.getId()) {
                                             tLDR.setPlafond(plafond - custo);
+                                            creature.setFeitico(spellName);
                                             return true;
                                         } else {
                                             tRST.setPlafond(plafond - custo);
+                                            creature.setFeitico(spellName);
                                             return true;
                                         }
                                     }
