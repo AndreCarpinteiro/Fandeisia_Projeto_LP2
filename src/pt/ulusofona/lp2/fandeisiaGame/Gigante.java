@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.listaCreatures;
+import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
 
 public class Gigante extends Creature {
 
@@ -123,6 +124,41 @@ public class Gigante extends Creature {
                     if (orientacao == Orientacao.Oeste) {
                         if ((posY == yGig && posX - j == xGig)) {
                             return false;
+                        }
+                    }
+                }
+            }else{
+
+                int countCreatures = 0;// 4
+                int countBuracos = 0;// 5
+
+                for (int i = 1; i < alcance; i++) {
+                    if (orientacao == Orientacao.Norte) {
+                        if (mapStartGame[posY - i][posX] == 4) {
+                            countCreatures++;
+                        } else if (mapStartGame[posY - i][posX] == 5) {
+                            countBuracos++;
+                        }
+                    }
+                    if (orientacao == Orientacao.Este) {
+                        if (mapStartGame[posY][posX + i] == 4) {
+                            countCreatures++;
+                        } else if (mapStartGame[posY][posX + i] == 5) {
+                            countBuracos++;
+                        }
+                    }
+                    if (orientacao == Orientacao.Sul) {
+                        if (mapStartGame[posY + i][posX] == 4) {
+                            countCreatures++;
+                        } else if (mapStartGame[posY + i][posX] == 5) {
+                            countBuracos++;
+                        }
+                    }
+                    if (orientacao == Orientacao.Oeste) {
+                        if (mapStartGame[posY][posX - i] == 4) {
+                            countCreatures++;
+                        } else if (mapStartGame[posY][posX - i] == 5) {
+                            countBuracos++;
                         }
                     }
                 }

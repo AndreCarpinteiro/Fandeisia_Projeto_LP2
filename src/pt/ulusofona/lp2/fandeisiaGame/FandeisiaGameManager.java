@@ -188,14 +188,14 @@ public class FandeisiaGameManager {
         }
 
         //Só para visualizar
-     //   for (int i = 0; i < listaCreatures.size(); i++) {
-       //     System.out.println(listaCreatures.get(i).toString());
+        //   for (int i = 0; i < listaCreatures.size(); i++) {
+        //     System.out.println(listaCreatures.get(i).toString());
         //}
         //for (int i = 0; i < listaTreasures.size(); i++) {
-          //  System.out.println(listaTreasures.get(i).toString());
+        //  System.out.println(listaTreasures.get(i).toString());
         //}
         //for (int i = 0; i < listaHoles.size(); i++) {
-          //  System.out.println(listaHoles.get(i).toString());
+        //  System.out.println(listaHoles.get(i).toString());
         //}
 
         //   pontuacaoTotal = listaTreasures.size();
@@ -225,11 +225,11 @@ public class FandeisiaGameManager {
         tRST.decrementaPlafond(custoRST); //Atualiza plafond
 
         //Ver mapa TESTES
-     //   for (int i = 0; i < mapStartGame.length; i++) {
-       //     for (int j = 0; j < mapStartGame[i].length; j++) {
-         //       System.out.print(mapStartGame[i][j]);
-          //  }
-            //System.out.println();
+        //   for (int i = 0; i < mapStartGame.length; i++) {
+        //     for (int j = 0; j < mapStartGame[i].length; j++) {
+        //       System.out.print(mapStartGame[i][j]);
+        //  }
+        //System.out.println();
         //}
 
         return 0; //Tudo válido
@@ -303,8 +303,8 @@ public class FandeisiaGameManager {
             tRST.setEstado(false);
         }
 
-     //   for (int j = 0; j < listaTreasures.size(); j++) {
-       //     System.out.println(listaTreasures.get(j).toString());
+        //   for (int j = 0; j < listaTreasures.size(); j++) {
+        //     System.out.println(listaTreasures.get(j).toString());
         //}
 
         for (int j = 0; j < listaCreatures.size(); j++) {
@@ -312,9 +312,9 @@ public class FandeisiaGameManager {
         }
 
 //        for (int i = 0; i < mapStartGame.length; i++) {
-  //          for (int j = 0; j < mapStartGame[i].length; j++) {
-    //            System.out.print(mapStartGame[i][j]);
-      //      }
+        //          for (int j = 0; j < mapStartGame[i].length; j++) {
+        //            System.out.print(mapStartGame[i][j]);
+        //      }
         //    System.out.println();
         //}
     }
@@ -393,13 +393,13 @@ public class FandeisiaGameManager {
             resultado.add("Nr. de Turnos jogados: " + countTurnos);
             resultado.add("-----");
         }
-        for (int i = 0; i < listaCreatures.size(); i++) {
-            id = listaCreatures.get(i).getId();
-            ouros = listaCreatures.get(i).getOuro();
-            pratas = listaCreatures.get(i).getPrata();
-            bronze = listaCreatures.get(i).getBronze();
-            pontos = listaCreatures.get(i).getPontos();
-            tipo = listaCreatures.get(i).getTipo();
+        for (Creature creature : listaCreatures) {
+            id = creature.getId();
+            ouros = creature.getOuro();
+            pratas = creature.getPrata();
+            bronze = creature.getBronze();
+            pontos = creature.getPontos();
+            tipo = creature.getTipo();
             resultado.add(id + " : " + tipo + " : " + ouros + " : " + pratas + " : " + bronze + " : " + pontos);
         }
         return resultado;
@@ -475,7 +475,7 @@ public class FandeisiaGameManager {
             dragao = Math.abs(r.nextInt()) % 5;
             anao = Math.abs(r.nextInt()) % 5;
             conta = gigante * 5 + dragao * 9 + humano * 3 + elfo * 5 + anao;
-        } while (tRST.getPlafond() < conta);
+        } while (tRST.getPlafond() < conta || conta < 35);
 
         mapa.put("Dragão", dragao);
         mapa.put("Anão", anao);
@@ -576,9 +576,12 @@ public class FandeisiaGameManager {
     }
 
     public String getSpell(int x, int y) { //Done-------
-        for (int i = 0; i < listaCreatures.size(); i++) {
-            if (listaCreatures.get(i).posX == x && listaCreatures.get(i).posY == y) {
-                return listaCreatures.get(i).getFeiticoEnum().toString();
+        for (Creature creature : listaCreatures) {
+            if (creature.posX == x && creature.posY == y) {
+                if (creature.getFeiticoEnum().toString().equals("SemFeitico")){
+                    return null;
+                }
+                    return creature.getFeiticoEnum().toString();
             }
         }
         return null;
@@ -586,22 +589,18 @@ public class FandeisiaGameManager {
 
     public int getCoinTotal(int teamID) {
         if (10 == teamID) {
-            return tLDR.getPlafond(); } else {
-            return tRST.getPlafond(); }
+            return tLDR.getPlafond();
+        } else {
+            return tRST.getPlafond();
+        }
     }
 
     public boolean saveGame(File fich) {
 
         try {
-            int idTemp;
-            int posXTemp;
-            int posyTemp;
+            int idTemp, posXTemp, posyTemp;
             String tipo;
-            int teamId;
-            int ouro;
-            int prata;
-            int bronze;
-            int pontos;
+            int teamId, ouro, prata, bronze, pontos;
             Creature.Orientacao orientacao;
             PrintWriter gravarArq = new PrintWriter(fich);
 
@@ -644,6 +643,7 @@ public class FandeisiaGameManager {
             gravarArq.println("id: " + tRST.getId() + ", plafound: " + tRST.getPlafond() + ", pontos: " + tRST.getTeamPontos() + ", estado: " + tRST.getEstado());
             gravarArq.println("pontuacaoTotal: " + pontuacaoTotal);
             gravarArq.println("turnosSemTesouro: " + turn15GameOver);
+            gravarArq.println("turnos: " + countTurnos);
 
             gravarArq.close();
             return true;
@@ -656,25 +656,14 @@ public class FandeisiaGameManager {
 
     public boolean loadGame(File fich) {
 
-        int idTemp;
-        String typeTemp;
-        int xTemp;
-        int yTemp;
-        int teamIdTemp;
-        int tamanhoY = 0;
-        int tamanhoX = 0;
-        int plafoundTemp;
-        int pontosTemp;
-        int ouro;
-        int prata;
-        int bronze;
+        int idTemp, xTemp, yTemp, teamIdTemp, tamanhoY = 0, tamanhoX, plafoundTemp;
+        String typeTemp, orientTemp;
+        int pontosTemp, ouro, prata, bronze;
         boolean estado;
-        String orientTemp;
 
         try {
             FileReader arq = new FileReader(fich);
             BufferedReader lerArq = new BufferedReader(arq);
-
             String linha = lerArq.readLine();
 
             while (true) {
@@ -691,6 +680,7 @@ public class FandeisiaGameManager {
                 bronze = 0;
                 estado = true;
                 orientTemp = "";
+                String[] dados;
 
                 System.out.printf("%s\n", linha);
                 linha = lerArq.readLine();
@@ -704,9 +694,8 @@ public class FandeisiaGameManager {
                         mapStartGame = new int[tamanhoY][tamanhoX];
                     }
 
-                    String[] dados = linha.split(Pattern.quote(","));
-
                     if (linha.contains("Anão") || linha.contains("Dragão") || linha.contains("Gigante") || linha.contains("Elfo") || linha.contains("Humano")) {
+                        dados = linha.split(Pattern.quote(","));
                         for (String d : dados) {
                             if (d.startsWith("id:")) {
                                 idTemp = Integer.parseInt(d.substring(4));
@@ -730,7 +719,6 @@ public class FandeisiaGameManager {
                                 pontosTemp = Integer.parseInt(d.substring(9));
                             }
                         }
-
                         if (typeTemp.equals("Anão")) {
                             Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
                             listaCreatures.add(anao);
@@ -828,6 +816,10 @@ public class FandeisiaGameManager {
                     if (linha.startsWith("turnosSemTesouro:")) {
                         pontosTemp = Integer.parseInt(linha.substring(18));
                         turn15GameOver = pontosTemp;
+                    }
+                    if (linha.startsWith("turnos:")) {
+                        yTemp = Integer.parseInt(linha.substring(8));
+                        countTurnos = yTemp; //Aproveitei a variavel...
                     }
                 } else {
                     break;
