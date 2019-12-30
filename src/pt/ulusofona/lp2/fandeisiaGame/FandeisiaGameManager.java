@@ -74,14 +74,6 @@ public class FandeisiaGameManager {
 
         mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
 
-        for (int i = 0; i < mapStartGame.length; i++) {
-            for (int j = 0; j < mapStartGame[i].length; j++) {
-                mapStartGame[i][j] = 0;
-                //mapa.put(mapStartGame[i][j], "vazio");
-            }
-        }
-        //mapa.containsValue("vazio");
-
         int idTemp = 0;
         String typeTemp = "";
         int xTemp = 0;
@@ -90,57 +82,51 @@ public class FandeisiaGameManager {
         int custoRST = 0;
         int teamIdTemp = 0;
         String orientTemp = "Norte";
-
+        String[] dados;
         //Dissecação do parametro "content" para objetos creatures e treasures----
 
         for (String elemento : content) {
-            String[] dados = elemento.split(",");
-
-            for (String d : dados) {
-                if (d.startsWith("id:")) {
-                    idTemp = Integer.parseInt(d.substring(4));
-
-                } else if (d.startsWith(" type:")) {
-                    typeTemp = d.substring(7);
-
-                } else if (d.startsWith(" teamId:")) {
-                    teamIdTemp = Integer.parseInt(d.substring(9));
-
-                } else if (d.startsWith(" x:")) {
-                    xTemp = Integer.parseInt(d.substring(4));
-
-                } else if (d.startsWith(" y:")) {
-                    yTemp = Integer.parseInt(d.substring(4));
-
-                } else if (d.startsWith(" orientation:")) {
-                    orientTemp = d.substring(14);
+            if (elemento.contains("Anão") || elemento.contains("Dragão") || elemento.contains("Gigante") || elemento.contains("Elfo") || elemento.contains("Humano")) {
+                dados = elemento.split(",");
+                for (String d : dados) {
+                    if (d.startsWith("id:")) {
+                        idTemp = Integer.parseInt(d.substring(4));
+                    } else if (d.startsWith(" type:")) {
+                        typeTemp = d.substring(7);
+                    } else if (d.startsWith(" teamId:")) {
+                        teamIdTemp = Integer.parseInt(d.substring(9));
+                    } else if (d.startsWith(" x:")) {
+                        xTemp = Integer.parseInt(d.substring(4));
+                    } else if (d.startsWith(" y:")) {
+                        yTemp = Integer.parseInt(d.substring(4));
+                    } else if (d.startsWith(" orientation:")) {
+                        orientTemp = d.substring(14);
+                    }
                 }
+                if (typeTemp.equals("Anão")) {
+                    Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                    listaCreatures.add(anao);
+                }
+                if (typeTemp.equals("Dragão")) {
+                    Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                    listaCreatures.add(dragao);
+                }
+                if (typeTemp.equals("Humano")) {//Falta criar na interface...
+                    Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                    listaCreatures.add(humano);
+                }
+                if (typeTemp.equals("Elfo")) {//Falta criar na interface...
+                    Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                    listaCreatures.add(elfo);
+                }
+                if (typeTemp.equals("Gigante")) {//Falta criar na interface...
+                    Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                    listaCreatures.add(gigante);
+                }
+                mapStartGame[yTemp][xTemp] = 4;
+                //mapa.put(mapStartGame[yTemp][xTemp], typeTemp);
             }
-
-            if (typeTemp.equals("Anão")) {
-                Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                listaCreatures.add(anao);
-            }
-            if (typeTemp.equals("Dragão")) {
-                Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                listaCreatures.add(dragao);
-            }
-            if (typeTemp.equals("Humano")) {//Falta criar na interface...
-                Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                listaCreatures.add(humano);
-            }
-            if (typeTemp.equals("Elfo")) {//Falta criar na interface...
-                Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                listaCreatures.add(elfo);
-            }
-            if (typeTemp.equals("Gigante")) {//Falta criar na interface...
-                Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                listaCreatures.add(gigante);
-            }
-            mapStartGame[yTemp][xTemp] = 4;
-            //mapa.put(mapStartGame[yTemp][xTemp], typeTemp);
-
-            if (elemento.contains("silver") || elemento.contains("gold") || elemento.contains("bronze")) {
+            if (!elemento.contains("orientation") && (elemento.contains("silver") || elemento.contains("gold") || elemento.contains("bronze"))) {
                 dados = elemento.split(",");
                 for (String d : dados) {
                     if (d.startsWith("id:")) {
@@ -188,15 +174,15 @@ public class FandeisiaGameManager {
         }
 
         //Só para visualizar
-        //   for (int i = 0; i < listaCreatures.size(); i++) {
-        //     System.out.println(listaCreatures.get(i).toString());
-        //}
-        //for (int i = 0; i < listaTreasures.size(); i++) {
-        //  System.out.println(listaTreasures.get(i).toString());
-        //}
-        //for (int i = 0; i < listaHoles.size(); i++) {
-        //  System.out.println(listaHoles.get(i).toString());
-        //}
+        for (int i = 0; i < listaCreatures.size(); i++) {
+            System.out.println(listaCreatures.get(i).toString());
+        }
+        for (int i = 0; i < listaTreasures.size(); i++) {
+            System.out.println(listaTreasures.get(i).toString());
+        }
+        for (int i = 0; i < listaHoles.size(); i++) {
+            System.out.println(listaHoles.get(i).toString());
+        }
 
         //   pontuacaoTotal = listaTreasures.size();
 
@@ -254,31 +240,79 @@ public class FandeisiaGameManager {
         boolean encontrouLDR = false;
         boolean encontrouRST = false;
 
-        for (int i = 0; i < listaCreatures.size(); i++) {
+        for (Creature creature:listaCreatures) {
+            switch (creature.getFeiticoEnum()) {//todo falta o caso de encontrar tesouros com o empurra
+                case EmpurraParaNorte:
+                    mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
+                    creature.setPosY(creature.getPosY() - 1);
+                    mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
+                    break;
+                case EmpurraParaEste:
+                    mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
+                    creature.setPosX(creature.getPosX() + 1);
+                    mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
+                    break;
+                case EmpurraParaSul:
+                    mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
+                    creature.setPosY(creature.getPosY() + 1);
+                    mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
+                    break;
+                case EmpurraParaOeste:
+                    mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
+                    creature.setPosX(creature.getPosX() - 1);
+                    mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
+                    break;
+                case ReduzAlcance:
+                    creature.setAlcance(1);
+                    break;
+                case DuplicaAlcance:
+                    creature.setAlcance(creature.getAlcance() * 2);
+                    break;
+                case Congela:
+                    creature.setcongeladoNesteTurno(true);
+                    break;
+                case Congela4Ever:
+                    creature.setCongelado4Ever(true);
+                    break;
+                case Descongela:
+                    creature.setCongelado4Ever(false);
+                    break;
+                case SemFeitico://nao faz nada
+                    break;
 
-            encontrou = listaCreatures.get(i).moveCriatura();
+
+            }
+        }
+
+        for (Creature creature : listaCreatures) {
+
+            if(!creature.getCongelado4Ever() && !creature.getcongeladoNesteTurno()){
+                encontrou = creature.moveCriatura();
+            }
+            creature.setcongeladoNesteTurno(false);//por false porque só é para este turno
 
             if (encontrou == 1 || encontrou == 2 || encontrou == 3) {
                 turn15GameOver = 0;
                 for (int j = 0; j < listaTreasures.size(); j++) {
-                    if (listaTreasures.get(j).getPosY() == listaCreatures.get(i).getPosY() && listaTreasures.get(j).getPosX() == listaCreatures.get(i).getPosX()) {
+                    if (listaTreasures.get(j).getPosY() == creature.getPosY() && listaTreasures.get(j).getPosX() == creature.getPosX()) {
                         listaTreasures.remove(listaTreasures.get(j));
                     }
                 }
-                //pontuacaoTotal -= encontrou; //Serve para validar GameIsOver
 
-                if (listaCreatures.get(i).getIdEquipa() == 10) {
+                if (creature.getIdEquipa() == 10) {
                     tLDR.somaPontos(encontrou);
-                    listaCreatures.get(i).somaPontos(encontrou); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
+                    creature.somaPontos(encontrou); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
                     encontrouLDR = true; //Para saber se tenho de atribuir uma só moeda
                 }
-                if (listaCreatures.get(i).getIdEquipa() == 20) {
+                if (creature.getIdEquipa() == 20) {
                     tRST.somaPontos(encontrou);
-                    listaCreatures.get(i).somaPontos(encontrou); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
+                    creature.somaPontos(encontrou); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
                     encontrouRST = true;//Para saber se tenho de atribuir uma só moeda
                 }
             }
         }
+
+        limparFeiticosPorTurno();//AQUI É LIMPO OS FEITIÇOS
 
         if (!encontrouLDR) {//Regra das moedas fantásticas
             tLDR.somaPlafond(1);
@@ -311,12 +345,12 @@ public class FandeisiaGameManager {
             System.out.println(listaCreatures.get(j).toString());
         }
 
-//        for (int i = 0; i < mapStartGame.length; i++) {
-        //          for (int j = 0; j < mapStartGame[i].length; j++) {
-        //            System.out.print(mapStartGame[i][j]);
-        //      }
-        //    System.out.println();
-        //}
+        /*for (int i = 0; i < mapStartGame.length; i++) {
+                  for (int j = 0; j < mapStartGame[i].length; j++) {
+                    System.out.print(mapStartGame[i][j]);
+              }
+            System.out.println();
+        }*/
     }
 
     public List<Creature> getCreatures() {//Quase Done--------------
@@ -488,7 +522,40 @@ public class FandeisiaGameManager {
 
     public boolean enchant(int x, int y, String spellName) {//TODO: Aplicar efeito
         int plafond;
-        int custo = custoFeiticos.get(spellName);
+        int custo = custoFeiticos.get(spellName);//TODO: Rebenta nesta linha quando abro os feiticos de novo e depois fecho
+        /*Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
+	        at pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.enchant(FandeisiaGameManager.java:493)
+	        at pt.ulusofona.lp2.guiSimulator.Track$1.mouseClicked(Track.java:93)
+	        at java.desktop/java.awt.Component.processMouseEvent(Component.java:6635)
+	        at java.desktop/javax.swing.JComponent.processMouseEvent(JComponent.java:3342)
+	        at java.desktop/java.awt.Component.processEvent(Component.java:6397)
+	        at java.desktop/java.awt.Container.processEvent(Container.java:2263)
+	        at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:5008)
+	        at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2321)
+	        at java.desktop/java.awt.Component.dispatchEvent(Component.java:4840)
+	        at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4918)
+	        at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Container.java:4556)
+	        at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Container.java:4488)
+	        at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2307)
+	        at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2772)
+	        at java.desktop/java.awt.Component.dispatchEvent(Component.java:4840)
+	        at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:772)
+	        at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	        at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:715)
+	        at java.base/java.security.AccessController.doPrivileged(Native Method)
+	        at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	        at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:95)
+	        at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)
+	        at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:743)
+	        at java.base/java.security.AccessController.doPrivileged(Native Method)
+	        at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	        at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:742)
+	        at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	        at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	        at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	        at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	        at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	        at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)*/
 
         int yMax = mapStartGame.length - 1;
         int xMax = mapStartGame[0].length - 1;
@@ -502,73 +569,304 @@ public class FandeisiaGameManager {
         if (custo < plafond) {
             for (Creature creature : listaCreatures) {
                 if (creature.posX == x && creature.posY == y) {
-                    if (spellName.contains("Empurra")) {
-                        switch (spellName) {
-                            case "EmpurraParaNorte":
-                                if (y - 1 >= 0) {
-                                    if (mapStartGame[y - 1][x] != 4 && mapStartGame[y - 1][x] != 5) {
-                                        if (getCurrentTeamId() == tLDR.getId()) {
-                                            tLDR.setPlafond(plafond - custo);
-                                            creature.setFeitico(spellName);
-                                            return true;
-                                        } else {
-                                            tRST.setPlafond(plafond - custo);
-                                            creature.setFeitico(spellName);
-                                            return true;
-                                        }
-                                    }
-                                }
-                                break;
-                            case "EmpurraParaEste":
-                                if (x + 1 <= xMax) {
-                                    if (mapStartGame[y][x + 1] != 4 && mapStartGame[y][x + 1] != 5) {
-                                        if (getCurrentTeamId() == tLDR.getId()) {
-                                            tLDR.setPlafond(plafond - custo);
-                                            creature.setFeitico(spellName);
-                                            return true;
-                                        } else {
-                                            tRST.setPlafond(plafond - custo);
-                                            creature.setFeitico(spellName);
-                                            return true;
-                                        }
-                                    }
-                                }
-                                break;
-                            case "EmpurraParaSul":
-                                if (y + 1 <= yMax) {
-                                    if (mapStartGame[y + 1][x] != 4 && mapStartGame[y + 1][x] != 5) {
-                                        if (getCurrentTeamId() == tLDR.getId()) {
-                                            tLDR.setPlafond(plafond - custo);
-                                            creature.setFeitico(spellName);
-                                            return true;
-                                        } else {
-                                            tRST.setPlafond(plafond - custo);
-                                            creature.setFeitico(spellName);
-                                            return true;
-                                        }
-                                    }
-                                }
-                                break;
-                            case "EmpurraParaOeste":
-                                if (x - 1 >= 0) {
-                                    if (mapStartGame[y][x - 1] != 4 && mapStartGame[y][x - 1] != 5) {
-                                        if (getCurrentTeamId() == tLDR.getId()) {
-                                            tLDR.setPlafond(plafond - custo);
-                                            creature.setFeitico(spellName);
-                                            return true;
-                                        } else {
-                                            tRST.setPlafond(plafond - custo);
-                                            creature.setFeitico(spellName);
-                                            return true;
-                                        }
-                                    }
-                                }
-                                break;
+                    if (spellName.equals("Descongela") && creature.getFeiticoEnum().toString().equals("Congela4Ever")) {
+                        if (getCurrentTeamId() == tLDR.getId()) {
+                            tLDR.setPlafond(plafond - custo);
+                        } else {
+                            tRST.setPlafond(plafond - custo);
                         }
-                    } else {
                         creature.setFeitico(spellName);
-                    }
+                        return true;
+                    } else if (spellName.equals("Congela") && creature.getFeiticoEnum().toString().equals("Congela4Ever")) {
+                        return false;
+                    } else {
+                        boolean condicao = false;
+                        do {
+                            switch (spellName) {
+                                case "EmpurraParaNorte":
+                                    if (y - 1 >= 0) {
+                                        if (mapStartGame[y - 1][x] != 4 && mapStartGame[y - 1][x] != 5) {
+                                            if (getCurrentTeamId() == tLDR.getId()) {
+                                                tLDR.setPlafond(plafond - custo);
+                                                if (!condicao) {
+                                                    creature.setFeitico(spellName);
+                                                } else {
+                                                    creature.setFeitico("ReduzAlcance");
+                                                }
+                                            } else {
+                                                tRST.setPlafond(plafond - custo);
+                                                if (!condicao) {
+                                                    creature.setFeitico(spellName);
+                                                } else {
+                                                    creature.setFeitico("ReduzAlcance");
+                                                }
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                    return false;
+                                case "EmpurraParaEste":
+                                    if (x + 1 <= xMax) {
+                                        if (mapStartGame[y][x + 1] != 4 && mapStartGame[y][x + 1] != 5) {
+                                            if (getCurrentTeamId() == tLDR.getId()) {
+                                                tLDR.setPlafond(plafond - custo);
+                                                if (!condicao) {
+                                                    creature.setFeitico(spellName);
+                                                } else {
+                                                    creature.setFeitico("ReduzAlcance");
+                                                }
+                                            } else {
+                                                tRST.setPlafond(plafond - custo);
+                                                if (!condicao) {
+                                                    creature.setFeitico(spellName);
+                                                } else {
+                                                    creature.setFeitico("ReduzAlcance");
+                                                }
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                    return false;
+                                case "EmpurraParaSul":
+                                    if (y + 1 <= yMax) {
+                                        if (mapStartGame[y + 1][x] != 4 && mapStartGame[y + 1][x] != 5) {
+                                            if (getCurrentTeamId() == tLDR.getId()) {
+                                                tLDR.setPlafond(plafond - custo);
+                                                if (!condicao) {
+                                                    creature.setFeitico(spellName);
+                                                } else {
+                                                    creature.setFeitico("ReduzAlcance");
+                                                }
+                                            } else {
+                                                tRST.setPlafond(plafond - custo);
+                                                if (!condicao) {
+                                                    creature.setFeitico(spellName);
+                                                } else {
+                                                    creature.setFeitico("ReduzAlcance");
+                                                }
+                                            }
+                                            return true;
+                                        }
 
+                                    }
+                                    return false;
+                                case "EmpurraParaOeste":
+                                    if (x - 1 >= 0) {
+                                        if (mapStartGame[y][x - 1] != 4 && mapStartGame[y][x - 1] != 5) {
+                                            if (getCurrentTeamId() == tLDR.getId()) {
+                                                tLDR.setPlafond(plafond - custo);
+                                                if (!condicao) {
+                                                    creature.setFeitico(spellName);
+                                                } else {
+                                                    creature.setFeitico("ReduzAlcance");
+                                                }
+                                            } else {
+                                                tRST.setPlafond(plafond - custo);
+                                                if (!condicao) {
+                                                    creature.setFeitico(spellName);
+                                                } else {
+                                                    creature.setFeitico("ReduzAlcance");
+                                                }
+                                            }
+                                            return true;
+                                        }
+
+                                    }
+                                    return false;
+                                    //break;
+                                case "ReduzAlcance":
+                                    switch (creature.getOrientacao()) {
+                                        case Norte:
+                                            condicao = true;
+                                            spellName = "EmpurraParaNorte";
+                                            break;
+                                        case Nordeste://todo deve estar bem agora
+                                            if (creature.getPosY() - 1 >= 0 && creature.getPosX() + 1 <= xMax) {
+                                                if (mapStartGame[y - 1][x + 1] != 4 && mapStartGame[y - 1][x + 1] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+                                            return false;
+                                        case Este:
+                                            condicao = true;
+                                            spellName = "EmpurraParaEste";
+                                            break;
+                                        case Sudeste://todo deve estar bem agora
+                                            if (creature.getPosY() + 1 <= yMax && creature.getPosX() + 1 <= xMax) {
+                                                if (mapStartGame[y + 1][x + 1] != 4 && mapStartGame[y + 1][x + 1] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+
+                                            return false;
+                                        case Sul:
+                                            condicao = true;
+                                            spellName = "EmpurraParaSul";
+                                            break;
+                                        case Sudoeste://todo deve estar bem agora
+                                            if (creature.getPosY() + 1 <= yMax && creature.getPosX() - 1 >= 0) {
+                                                if (mapStartGame[y + 1][x - 1] != 4 && mapStartGame[y + 1][x - 1] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+
+                                            return false;
+                                        case Oeste:
+                                            condicao = true;
+                                            spellName = "EmpurraParaOeste";
+                                            break;
+                                        case Noroeste://todo deve estar bem agora
+                                            if (creature.getPosY() - 1 >= 0 && creature.getPosX() - 1 >= 0) {
+                                                if (mapStartGame[y - 1][x - 1] != 4 && mapStartGame[y - 1][x - 1] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+                                            return false;
+                                    }
+                                    break;
+                                case "DuplicaAlcance":
+                                    int alcanceDuplTemp = creature.getAlcance() * 2;
+                                    switch (creature.getOrientacao()) {
+                                        case Norte:
+                                            if (creature.getPosY() - alcanceDuplTemp >= 0) {
+                                                if (mapStartGame[y - alcanceDuplTemp][x] != 4 && mapStartGame[y - alcanceDuplTemp][x] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+
+                                        case Nordeste://todo deve estar bem agora
+                                            if (creature.getPosY() - alcanceDuplTemp >= 0 && creature.getPosX() + alcanceDuplTemp <= xMax) {
+                                                if (mapStartGame[y - alcanceDuplTemp][x + alcanceDuplTemp] != 4 && mapStartGame[y - alcanceDuplTemp][x + alcanceDuplTemp] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+
+
+                                            break;
+                                        case Este:
+                                            if (creature.getPosX() + alcanceDuplTemp <= xMax) {
+                                                if (mapStartGame[y][x + alcanceDuplTemp] != 4 && mapStartGame[y][x + alcanceDuplTemp] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+
+                                            break;
+                                        case Sudeste://todo deve estar bem agora
+                                            if (creature.getPosY() + alcanceDuplTemp <= yMax && creature.getPosX() + alcanceDuplTemp <= xMax) {
+                                                if (mapStartGame[y + alcanceDuplTemp][x + alcanceDuplTemp] != 4 && mapStartGame[y + alcanceDuplTemp][x + alcanceDuplTemp] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+
+                                            break;
+                                        case Sul:
+                                            if (creature.getPosY() + alcanceDuplTemp <= yMax) {
+                                                if (mapStartGame[y + alcanceDuplTemp][x] != 4 && mapStartGame[y + alcanceDuplTemp][x] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+
+                                            break;
+                                        case Sudoeste://todo deve estar bem agora
+                                            if (creature.getPosY() + alcanceDuplTemp <= yMax && creature.getPosX() - alcanceDuplTemp >= 0) {
+                                                if (mapStartGame[y + alcanceDuplTemp][x - alcanceDuplTemp] != 4 && mapStartGame[y + alcanceDuplTemp][x - alcanceDuplTemp] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+
+                                            break;
+                                        case Oeste:
+                                            if (creature.getPosX() - alcanceDuplTemp >= 0) {
+                                                if (mapStartGame[y][x - alcanceDuplTemp] != 4 && mapStartGame[y][x - alcanceDuplTemp] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+
+                                            break;
+                                        case Noroeste://todo deve estar bem agora
+                                            if (creature.getPosY() - alcanceDuplTemp >= 0 && creature.getPosX() - alcanceDuplTemp >= 0) {
+                                                if (mapStartGame[y - alcanceDuplTemp][x - alcanceDuplTemp] != 4 && mapStartGame[y - alcanceDuplTemp][x - alcanceDuplTemp] != 5) {
+                                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                                        tLDR.setPlafond(plafond - custo);
+                                                    } else {
+                                                        tRST.setPlafond(plafond - custo);
+                                                    }
+                                                    creature.setFeitico(spellName);
+                                                    return true;
+                                                }
+                                            }
+                                            break;
+                                    }
+                                    break;
+                            }
+                        } while (condicao);
+                    }
                 }
             }
         }
@@ -578,10 +876,10 @@ public class FandeisiaGameManager {
     public String getSpell(int x, int y) { //Done-------
         for (Creature creature : listaCreatures) {
             if (creature.posX == x && creature.posY == y) {
-                if (creature.getFeiticoEnum().toString().equals("SemFeitico")){
+                if (creature.getFeiticoEnum().toString().equals("SemFeitico")) {
                     return null;
                 }
-                    return creature.getFeiticoEnum().toString();
+                return creature.getFeiticoEnum().toString();
             }
         }
         return null;
@@ -656,10 +954,11 @@ public class FandeisiaGameManager {
 
     public boolean loadGame(File fich) {
 
-        int idTemp, xTemp, yTemp, teamIdTemp, tamanhoY = 0, tamanhoX, plafoundTemp;
-        String typeTemp, orientTemp;
-        int pontosTemp, ouro, prata, bronze;
-        boolean estado;
+        int idTemp = 0, yTemp, tamanhoY = 0, tamanhoX = 0, plafoundTemp = 0;
+        int pontosTemp = 0, ouro, prata, bronze, i = 0;
+        boolean estado = false;
+        List<String> stringArrayList = new ArrayList<>();
+        String[] dados;
 
         try {
             FileReader arq = new FileReader(fich);
@@ -667,123 +966,17 @@ public class FandeisiaGameManager {
             String linha = lerArq.readLine();
 
             while (true) {
-
-                idTemp = 0;
-                typeTemp = "";
-                xTemp = 0;
-                yTemp = 0;
-                teamIdTemp = 0;
-                plafoundTemp = 0;
-                pontosTemp = 0;
-                ouro = 0;
-                prata = 0;
-                bronze = 0;
-                estado = true;
-                orientTemp = "";
-                String[] dados;
-
                 System.out.printf("%s\n", linha);
                 linha = lerArq.readLine();
 
                 if (linha != null) {
+                    stringArrayList.add(linha);
                     if (linha.contains("my:")) {
                         tamanhoY = Integer.parseInt(linha.substring(4));
                     }
                     if (linha.contains("mx: ")) {
                         tamanhoX = Integer.parseInt(linha.substring(4));
-                        mapStartGame = new int[tamanhoY][tamanhoX];
                     }
-
-                    if (linha.contains("Anão") || linha.contains("Dragão") || linha.contains("Gigante") || linha.contains("Elfo") || linha.contains("Humano")) {
-                        dados = linha.split(Pattern.quote(","));
-                        for (String d : dados) {
-                            if (d.startsWith("id:")) {
-                                idTemp = Integer.parseInt(d.substring(4));
-                            } else if (d.startsWith(" type:")) {
-                                typeTemp = d.substring(7);
-                            } else if (d.startsWith(" teamId:")) {
-                                teamIdTemp = Integer.parseInt(d.substring(9));
-                            } else if (d.startsWith(" x:")) {
-                                xTemp = Integer.parseInt(d.substring(4));
-                            } else if (d.startsWith(" y:")) {
-                                yTemp = Integer.parseInt(d.substring(4));
-                            } else if (d.startsWith(" orientation:")) {
-                                orientTemp = d.substring(14);
-                            } else if (d.startsWith(" ouro:")) {
-                                ouro = Integer.parseInt(d.substring(7));
-                            } else if (d.startsWith(" prata:")) {
-                                prata = Integer.parseInt(d.substring(8));
-                            } else if (d.startsWith(" bronze:")) {
-                                bronze = Integer.parseInt(d.substring(9));
-                            } else if (d.startsWith(" pontos:")) {
-                                pontosTemp = Integer.parseInt(d.substring(9));
-                            }
-                        }
-                        if (typeTemp.equals("Anão")) {
-                            Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
-                            listaCreatures.add(anao);
-                        }
-                        if (typeTemp.equals("Dragão")) {
-                            Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
-                            listaCreatures.add(dragao);
-                        }
-                        if (typeTemp.equals("Humano")) {//Falta criar na interface...
-                            Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
-                            listaCreatures.add(humano);
-                        }
-                        if (typeTemp.equals("Elfo")) {//Falta criar na interface...
-                            Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
-                            listaCreatures.add(elfo);
-                        }
-                        if (typeTemp.equals("Gigante")) {//Falta criar na interface...
-                            Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
-                            listaCreatures.add(gigante);
-                        }
-                        mapStartGame[yTemp][xTemp] = 4;
-                    }
-                    if (linha.contains("silver") || linha.contains("gold") || linha.contains("bronze")) {
-                        dados = linha.split(Pattern.quote(","));
-                        for (String d : dados) {
-                            if (d.startsWith("id:")) {
-                                idTemp = Integer.parseInt(d.substring(4));
-                            } else if (d.startsWith(" type:")) {
-                                typeTemp = d.substring(7);
-                            } else if (d.startsWith(" x:")) {
-                                xTemp = Integer.parseInt(d.substring(4));
-                            } else if (d.startsWith(" y:")) {
-                                yTemp = Integer.parseInt(d.substring(4));
-                            }
-                        }
-                        Tesouro tesouroTemp = new Tesouro(idTemp, typeTemp, xTemp, yTemp);
-                        //Truque, se houver tempo fazer melhor
-                        if (typeTemp.equals("gold")) {
-                            mapStartGame[yTemp][xTemp] = 3;
-                        }
-                        if (typeTemp.equals("silver")) {
-                            mapStartGame[yTemp][xTemp] = 2;
-                        }
-                        if (typeTemp.equals("bronze")) {
-                            mapStartGame[yTemp][xTemp] = 1;
-                        }
-                        listaTreasures.add(tesouroTemp);
-                    }
-                    if (linha.contains("hole")) {
-                        dados = linha.split(Pattern.quote(","));
-
-                        for (String d : dados) {
-                            if (d.startsWith("id:")) {
-                                idTemp = Integer.parseInt(d.substring(4));
-                            } else if (d.startsWith(" x:")) {
-                                xTemp = Integer.parseInt(d.substring(4));
-                            } else if (d.startsWith(" y:")) {
-                                yTemp = Integer.parseInt(d.substring(4));
-                            }
-                        }
-                        Buraco buracoTemp = new Buraco(idTemp, xTemp, yTemp);
-                        listaHoles.add(buracoTemp);
-                        mapStartGame[yTemp][xTemp] = 5;
-                    }
-
                     if (linha.contains("plafound")) {
                         dados = linha.split(Pattern.quote(","));
 
@@ -821,7 +1014,13 @@ public class FandeisiaGameManager {
                         yTemp = Integer.parseInt(linha.substring(8));
                         countTurnos = yTemp; //Aproveitei a variavel...
                     }
+                    i++;
                 } else {
+                    String[] dsfs = new String[stringArrayList.size()];
+                    for (int j = 0; j < stringArrayList.size(); j++) {
+                        dsfs[j] = stringArrayList.get(j);
+                    }
+                    startGame(dsfs, tamanhoY, tamanhoX);
                     break;
                 }
             }
@@ -836,5 +1035,47 @@ public class FandeisiaGameManager {
 
     public String whoIsLordEder() {
         return "Ederzito António Macedo Lopes";
+    }
+
+    private void limparFeiticosPorTurno() {
+        for (Creature creature : listaCreatures) {
+            if (!creature.getFeiticoEnum().toString().equals("Congela4Ever")) {
+                creature.setFeitico("SemFeitico");
+            }
+        }
+    }
+
+    private void aplicarFeiticosPorTurno() {
+        for (Creature creature : listaCreatures) {
+            switch (creature.getFeiticoEnum()) {
+                case EmpurraParaNorte:
+
+                    break;
+                case EmpurraParaEste:
+
+                    break;
+                case EmpurraParaSul:
+
+                    break;
+                case EmpurraParaOeste:
+
+                    break;
+                case ReduzAlcance:
+
+                    break;
+                case DuplicaAlcance:
+
+                    break;
+                case Congela:
+
+                    break;
+                case Congela4Ever:
+
+                    break;
+                case Descongela:
+
+                    break;
+            }
+        }
     }
 }

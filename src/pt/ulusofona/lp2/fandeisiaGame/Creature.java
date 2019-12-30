@@ -10,7 +10,7 @@ public abstract class Creature {
     }
 
     enum FeiticoEnum {
-        SemFeitico, EmpurraParaNorte, EmpurraParaOeste, EmpurraParaEste, EmpurraParaSul, ReduzAlcance, DuplicaAlcance, Congela, Congela4ever, Descongela
+        SemFeitico, EmpurraParaNorte, EmpurraParaOeste, EmpurraParaEste, EmpurraParaSul, ReduzAlcance, DuplicaAlcance, Congela, Congela4Ever, Descongela
     }
 
     int id;
@@ -27,6 +27,8 @@ public abstract class Creature {
     int[][] mapa = mapStartGame;
     FeiticoEnum feiticoEnum = FeiticoEnum.SemFeitico;
     int alcance;
+    boolean congelado4Ever = false;
+    boolean congeladoNesteTurno = false;
     Creature() {
 
     }
@@ -264,7 +266,28 @@ public abstract class Creature {
         this.feiticoEnum = FeiticoEnum.valueOf(feitico);
     }
 
-    public void Efeito() {
-
+    public int getAlcance() {
+        return alcance;
     }
+
+    public void setAlcance(int alcance) {
+        this.alcance = alcance;
+    }
+
+    public boolean getCongelado4Ever() {
+        return congelado4Ever;
+    }
+
+    public void setCongelado4Ever(boolean congelado4Ever) {
+        this.congelado4Ever = congelado4Ever;
+    }
+
+    public boolean getcongeladoNesteTurno() {
+        return congeladoNesteTurno;
+    }
+
+    public void setcongeladoNesteTurno(boolean congeladoNesteTurno) {
+        this.congeladoNesteTurno = congeladoNesteTurno;
+    }
+
 }
