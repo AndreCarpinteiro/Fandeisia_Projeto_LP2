@@ -42,9 +42,6 @@ public class FandeisiaGameManager {
         }
     };
 
-    //Criei isto para saber o conteudo de cada posicao TESTE
-    //static HashMap<Integer, String> mapa = new HashMap<Integer, String>();
-
     //--------------------Metodos Obrigratorios---------------------
 
     public String[][] getCreatureTypes() {//Done mas...-------------
@@ -224,11 +221,9 @@ public class FandeisiaGameManager {
     public void setInitialTeam(int teamId) {//Done----------------
 
         if (teamId == 10) { //Acho que funciona, no debug está bem
-            // teamId = 10;
             tLDR.setEstado(true);
             tRST.setEstado(false);
         } else {
-            //teamId = 20;
             tLDR.setEstado(false);
             tRST.setEstado(true);
         }
@@ -523,39 +518,6 @@ public class FandeisiaGameManager {
     public boolean enchant(int x, int y, String spellName) {//TODO: Aplicar efeito
         int plafond;
         int custo = custoFeiticos.get(spellName);//TODO: Rebenta nesta linha quando abro os feiticos de novo e depois fecho
-        /*Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
-	        at pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.enchant(FandeisiaGameManager.java:493)
-	        at pt.ulusofona.lp2.guiSimulator.Track$1.mouseClicked(Track.java:93)
-	        at java.desktop/java.awt.Component.processMouseEvent(Component.java:6635)
-	        at java.desktop/javax.swing.JComponent.processMouseEvent(JComponent.java:3342)
-	        at java.desktop/java.awt.Component.processEvent(Component.java:6397)
-	        at java.desktop/java.awt.Container.processEvent(Container.java:2263)
-	        at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:5008)
-	        at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2321)
-	        at java.desktop/java.awt.Component.dispatchEvent(Component.java:4840)
-	        at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4918)
-	        at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Container.java:4556)
-	        at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Container.java:4488)
-	        at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2307)
-	        at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2772)
-	        at java.desktop/java.awt.Component.dispatchEvent(Component.java:4840)
-	        at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:772)
-	        at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
-	        at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:715)
-	        at java.base/java.security.AccessController.doPrivileged(Native Method)
-	        at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
-	        at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:95)
-	        at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)
-	        at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:743)
-	        at java.base/java.security.AccessController.doPrivileged(Native Method)
-	        at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
-	        at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:742)
-	        at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
-	        at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
-	        at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
-	        at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
-	        at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	        at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)*/
 
         int yMax = mapStartGame.length - 1;
         int xMax = mapStartGame[0].length - 1;
@@ -1049,31 +1011,22 @@ public class FandeisiaGameManager {
         for (Creature creature : listaCreatures) {
             switch (creature.getFeiticoEnum()) {
                 case EmpurraParaNorte:
-
                     break;
                 case EmpurraParaEste:
-
                     break;
                 case EmpurraParaSul:
-
                     break;
                 case EmpurraParaOeste:
-
                     break;
                 case ReduzAlcance:
-
                     break;
                 case DuplicaAlcance:
-
                     break;
                 case Congela:
-
                     break;
                 case Congela4Ever:
-
                     break;
                 case Descongela:
-
                     break;
             }
         }

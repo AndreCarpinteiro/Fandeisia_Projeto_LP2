@@ -1,10 +1,13 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import org.junit.Test;
-
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
 
 public class TestFandeisiaGameManager {
 
@@ -634,6 +637,153 @@ public class TestFandeisiaGameManager {
         assertEquals(-500, gameManager.getElementId(3, 0));
         assertEquals(2, gameManager.getElementId(0, 2));
         assertEquals(0, gameManager.getElementId(3, 2));
+    }
 
+    @Test
+    public void test16SaveGame()
+            throws IOException {
+        boolean atual;
+        File file = new File("fandeisia.txt");
+        FandeisiaGameManager gg = new FandeisiaGameManager();
+        atual = gg.saveGame(file);
+        assertEquals(true, atual);
+    }
+
+    @Test
+    public void test17LoadGame()
+            throws IOException {
+        boolean atual;
+        File file = new File("fandeisia.txt");
+        FandeisiaGameManager gg = new FandeisiaGameManager();
+        atual = gg.loadGame(file);
+        assertEquals(true, atual);
+    }
+
+    @Test
+    public void test18getIdTesouro() {
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[7];
+        conteudoMundo[0] = "id: 1, type: Elfo, teamId: 0, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Elfo, teamId: 0, x: 0, y: 1, orientation: Este";
+        conteudoMundo[2] = "id: 3, type: Elfo, teamId: 0, x: 0, y: 2, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 1, y: 2, orientation: Norte";
+
+        //tesouros
+        conteudoMundo[4] = "id: -100, type: gold, x: 1, y: 0";
+        conteudoMundo[5] = "id: -101, type: bronze, x: 1, y: 1";
+        conteudoMundo[6] = "id: -102, type: silver, x: 2, y: 1";
+
+        gameManager.startGame(conteudoMundo, 4, 4);
+
+        //Verifica possições
+        assertEquals(-100, gameManager.getElementId(1, 0));
+        assertEquals(-101, gameManager.getElementId(1, 1));
+        assertEquals(-102, gameManager.getElementId(2, 1));
+    }
+
+    @Test
+    public void test19GeralTesouro() {
+        Tesouro tesouro = new Tesouro(-100, "gold", 1, 0);
+        assertEquals("Tesouro{" + "id=" + -100 + ", tipo='" + "gold" + '\'' + ", posX=" + 1 + ", posY=" + 0 + '}', tesouro.toString());
+        tesouro.setPosX(0);
+        assertEquals(0, tesouro.getPosX());
+        tesouro.setPosY(1);
+        assertEquals(1, tesouro.getPosY());
+        assertEquals("gold", tesouro.getTipo());
+        tesouro.setTipo("silver");
+        assertEquals("silver", tesouro.getTipo());
+        tesouro.setId(1);
+        assertEquals(1, tesouro.getId());
+    }
+
+    @Test
+    public void test20GeralTeam() {
+        Team team = new Team(10, 5);
+        team.somaPlafond(2);
+        assertEquals(52,  team.getPlafond());
+        team.setEstado(true);
+        assertEquals(true, team.getEstado());
+        assertEquals(10, team.getId());
+        team.setPontosTeam(10);
+        team.somaPontos(2);
+        assertEquals(12, team.getTeamPontos());
+        team.decrementaPlafond(2);
+        assertEquals(50,  team.getPlafond());
+        team.setPlafond(30);
+        assertEquals(30,  team.getPlafond());
+        team.incrementaPontos();
+        assertEquals(13,  team.getTeamPontos());
+    }
+
+    @Test
+    public void test21Eder(){
+        FandeisiaGameManager gg = new FandeisiaGameManager();
+        assertEquals("Ederzito António Macedo Lopes" ,gg.whoIsLordEder());
+    }
+
+    @Test
+    public void test22CoinTotal(){
+        FandeisiaGameManager gg = new FandeisiaGameManager();
+        assertEquals(50 ,gg.getCoinTotal(10));
+    }
+
+    @Test
+    public void test23FeiticoEmpurraParaNorteAnao(){
+
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[8];
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 0, y: 3, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Anão, teamId: 0, x: 1, y: 3, orientation: Oeste";
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 0, x: 2, y: 3, orientation: Norte";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 3, y: 3, orientation: Sul";
+        //criaturas paras as sobreposição
+        conteudoMundo[4] = "id: 5, type: Anão, teamId: 0, x: 0, y: 2, orientation: Norte";
+        conteudoMundo[5] = "id: 6, type: Anão, teamId: 0, x: 1, y: 2, orientation: Sul";
+        //buracos
+        conteudoMundo[6] = "id: -500, type: hole, x: 2, y: 2";
+        conteudoMundo[7] = "id: -501, type: hole, x: 3, y: 2";
+
+
+        gameManager.startGame(conteudoMundo, 4, 4);
+        gameManager.enchant(0,3, "EmpurraParaNorte");
+        gameManager.enchant(1,3, "EmpurraParaNorte");
+        gameManager.enchant(2,3, "EmpurraParaNorte");
+        gameManager.enchant(3,3, "EmpurraParaNorte");
+        gameManager.processTurn();
+
+        //Verifica
+        assertEquals(true, gameManager.enchant(0, 3, "EmpurraParaNorte"));//Erro na movimentação
+        assertFalse(gameManager.enchant(1, 3, "EmpurraParaNorte"));
+        assertFalse(gameManager.enchant(2, 3, "EmpurraParaNorte"));
+        assertFalse(gameManager.enchant(3, 3, "EmpurraParaNorte"));
+
+    }
+
+    @Test
+    public void test24FeiticoEmpurraParaNorteHumano(){
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[2];
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 1, y: 1, orientation: Sul";
+        conteudoMundo[1] = "id: 2, type: Humano, teamId: 1, x: 4, y: 3, orientation: Oeste";
+        gameManager.startGame(conteudoMundo, 5, 5);
+        gameManager.enchant(4,3, "EmpurraParaNorte");
+        gameManager.processTurn();
+
+        //Verifica possições
+        assertEquals(2, gameManager.getElementId(2, 2));
+    }
+
+    @Test
+    public void test25FeiticoEmpurraParaNorteDragao(){
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[2];
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 1, y: 1, orientation: Sul";
+        conteudoMundo[1] = "id: 2, type: Humano, teamId: 1, x: 4, y: 3, orientation: Oeste";
+        gameManager.startGame(conteudoMundo, 5, 5);
+        gameManager.enchant(4,3, "EmpurraParaNorte");
+        gameManager.processTurn();
+
+        //Verifica possições
+        assertEquals(2, gameManager.getElementId(2, 2));
     }
 }

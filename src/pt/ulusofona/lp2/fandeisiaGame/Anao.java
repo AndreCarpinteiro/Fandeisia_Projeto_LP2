@@ -10,10 +10,6 @@ public class Anao extends Creature {
         this.alcance = 1;
     }
 
-    public Anao(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient, int ouro, int prata, int bronze, int pontos) {
-        super(id, idEquipa, tipo, posX, posY, orient, ouro, prata, bronze, pontos);
-    }
-
     @Override //Done--------------
     public int moveCriatura() {
         int yMax = mapa.length - 1;
@@ -77,7 +73,6 @@ public class Anao extends Creature {
         }
         return encontrou;
     }
-
 
     private boolean semObstaculo() {
 
