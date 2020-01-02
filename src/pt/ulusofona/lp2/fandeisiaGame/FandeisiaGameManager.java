@@ -1007,6 +1007,22 @@ public class FandeisiaGameManager {
         }
     }
 
+    public void toggleAI(boolean active){
+        if(active){
+            int posXT, posYT;
+         //   int pos
+            for (int i = 0; i < listaCreatures.size(); i++){
+                if(listaCreatures.get(i).getIdEquipa() == 20){
+                    for(int j = 0; j < listaTreasures.size(); j++){
+           //             if()
+                    }
+                }
+            }
+        }else{
+
+        }
+    }
+
     private void aplicarFeiticosPorTurno() {
         for (Creature creature : listaCreatures) {
             switch (creature.getFeiticoEnum()) {

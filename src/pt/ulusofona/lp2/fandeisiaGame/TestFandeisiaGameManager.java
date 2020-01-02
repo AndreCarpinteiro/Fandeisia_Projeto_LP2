@@ -749,14 +749,13 @@ public class TestFandeisiaGameManager {
         gameManager.enchant(1,3, "EmpurraParaNorte");
         gameManager.enchant(2,3, "EmpurraParaNorte");
         gameManager.enchant(3,3, "EmpurraParaNorte");
-        gameManager.processTurn();
 
         //Verifica
-        assertEquals(true, gameManager.enchant(0, 3, "EmpurraParaNorte"));//Erro na movimentação
+        assertEquals(false, gameManager.enchant(0, 3, "EmpurraParaNorte"));//Erro na movimentação
         assertFalse(gameManager.enchant(1, 3, "EmpurraParaNorte"));
         assertFalse(gameManager.enchant(2, 3, "EmpurraParaNorte"));
         assertFalse(gameManager.enchant(3, 3, "EmpurraParaNorte"));
-
+        gameManager.processTurn();
     }
 
     @Test
