@@ -19,6 +19,8 @@ public class FandeisiaGameManager {
 
     private int countTurnos = 0; //FALTA GUARDAR
     private int turn15GameOver = 0;
+    private int tesourosNoMapa = 0;
+    private int turnosSemTesouro = 0;
     private int pontuacaoTotal = 0;
     private boolean carregouFicheiro = false;
 
@@ -242,13 +244,13 @@ public class FandeisiaGameManager {
         tRST.decrementaPlafond(custoRST); //Atualiza plafond
 
         //Ver mapa TESTES
-        //   for (int i = 0; i < mapStartGame.length; i++) {
-        //     for (int j = 0; j < mapStartGame[i].length; j++) {
-        //       System.out.print(mapStartGame[i][j]);
-        //  }
-        //System.out.println();
-        //}
-
+        for (int i = 0; i < mapStartGame.length; i++) {
+            for (int j = 0; j < mapStartGame[i].length; j++) {
+               System.out.print(mapStartGame[i][j]);
+            }
+          System.out.println();
+        }
+        tesourosNoMapa = listaTreasures.size();
         return 0; //Tudo válido
     }
 
@@ -269,6 +271,7 @@ public class FandeisiaGameManager {
         boolean encontrouLDR = false;
         boolean encontrouRST = false;
 
+        //Execução de Feitiços
         for (Creature creature:listaCreatures) {
             switch (creature.getFeiticoEnum()) {//todo falta o caso de encontrar tesouros com o empurra
                 case EmpurraParaNorte:
@@ -313,14 +316,18 @@ public class FandeisiaGameManager {
             }
         }
 
+        //Execução de movimento
         for (Creature creature : listaCreatures) {
 
             if(!creature.getCongelado4Ever() && !creature.getcongeladoNesteTurno()){
                 encontrou = creature.moveCriatura();
             }
-            creature.setcongeladoNesteTurno(false);//por false porque só é para este turno
+
+            // reset para false porque só é para este turno
+            creature.setcongeladoNesteTurno(false);
 
             if (encontrou == 1 || encontrou == 2 || encontrou == 3) {
+
                 turn15GameOver = 0;
                 for (int j = 0; j < listaTreasures.size(); j++) {
                     if (listaTreasures.get(j).getPosY() == creature.getPosY() && listaTreasures.get(j).getPosX() == creature.getPosX()) {
@@ -339,6 +346,12 @@ public class FandeisiaGameManager {
                     encontrouRST = true;//Para saber se tenho de atribuir uma só moeda
                 }
             }
+        }
+
+        if (listaTreasures.size() == tesourosNoMapa) {
+            turnosSemTesouro++;
+        } else {
+            turnosSemTesouro = 0;
         }
 
         limparFeiticosPorTurno();//AQUI É LIMPO OS FEITIÇOS
@@ -403,7 +416,7 @@ public class FandeisiaGameManager {
             return true;
         }
 
-        if (turn15GameOver == 15) {
+        if (turnosSemTesouro == 15) {
             return true;
         }
 
@@ -576,6 +589,7 @@ public class FandeisiaGameManager {
                         return false;
                     } else {
                         boolean condicao = false;
+
                         do {
                             switch (spellName) {
                                 case "EmpurraParaNorte":
