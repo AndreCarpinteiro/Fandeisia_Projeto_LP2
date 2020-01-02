@@ -357,7 +357,6 @@ public class FandeisiaGameManager {
         turn15GameOver++;
         countTurnos++;
 
-
         if (tLDR.getEstado()) {
             tLDR.setEstado(false);
             tRST.setEstado(true);
@@ -552,7 +551,7 @@ public class FandeisiaGameManager {
     public boolean enchant(int x, int y, String spellName) {//TODO: Aplicar efeito
         int plafond;
         int custo = custoFeiticos.get(spellName);//TODO: Rebenta nesta linha quando abro os feiticos de novo e depois fecho
-
+        System.out.println(custo);
         int yMax = mapStartGame.length - 1;
         int xMax = mapStartGame[0].length - 1;
 

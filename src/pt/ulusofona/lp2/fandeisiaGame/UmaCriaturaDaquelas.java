@@ -4,15 +4,15 @@ public class UmaCriaturaDaquelas extends Creature {
 
     @Override
     public int moveCriatura() {
-
+/*
         int yMax = mapa.length - 1;
-        int xMax = mapa[0].length - 1;
+        int xMax = mapa[0].length - 1;*/
         int encontrou = 1;
 
         //System.out.println("rows" + yMax);
         //System.out.println("columns" + xMax);
 
-        if (orientacao == Orientacao.Norte) {
+        /*if (orientacao == Orientacao.Norte) {
             if (posY - 3 == 0 || mapa[posY - 4][posX] == 1) {
                 orientacao = Orientacao.Nordeste;
             }
@@ -61,7 +61,7 @@ public class UmaCriaturaDaquelas extends Creature {
                 pontos++;
                 encontrou = 1;
             }
-        }
+        }*/
         return encontrou;
     }
 }
