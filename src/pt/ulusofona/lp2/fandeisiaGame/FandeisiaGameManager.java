@@ -20,6 +20,7 @@ public class FandeisiaGameManager {
     private int countTurnos = 0; //FALTA GUARDAR
     private int turn15GameOver = 0;
     private int pontuacaoTotal = 0;
+    private boolean carregouFicheiro = false;
 
     private Team tLDR = new Team(10, 0);
     private Team tRST = new Team(20, 0);
@@ -77,7 +78,7 @@ public class FandeisiaGameManager {
         int yTemp = 0;
         int custoLDR = 0;
         int custoRST = 0;
-        int teamIdTemp = 0;
+        int teamIdTemp = 0, ouro = 0, prata = 0, bronze = 0, pontosTemp = 0;
         String orientTemp = "Norte";
         String[] dados;
         //Dissecação do parametro "content" para objetos creatures e treasures----
@@ -98,27 +99,60 @@ public class FandeisiaGameManager {
                         yTemp = Integer.parseInt(d.substring(4));
                     } else if (d.startsWith(" orientation:")) {
                         orientTemp = d.substring(14);
+                    }else if (d.startsWith(" ouro:")) {
+                        ouro = Integer.parseInt(d.substring(7));
+                    } else if (d.startsWith(" prata:")) {
+                        prata = Integer.parseInt(d.substring(8));
+                    } else if (d.startsWith(" bronze:")) {
+                        bronze = Integer.parseInt(d.substring(9));
+                    } else if (d.startsWith(" pontos:")) {
+                        pontosTemp = Integer.parseInt(d.substring(9));
                     }
                 }
                 if (typeTemp.equals("Anão")) {
-                    Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                    listaCreatures.add(anao);
+                    if(!carregouFicheiro) {
+                        Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        listaCreatures.add(anao);
+                    }else{
+                        Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, bronze, prata, pontosTemp);
+                        listaCreatures.add(anao);
+                    }
                 }
                 if (typeTemp.equals("Dragão")) {
-                    Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                    listaCreatures.add(dragao);
+                    if(!carregouFicheiro) {
+                        Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        listaCreatures.add(dragao);
+                    }else {
+                        Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, bronze, prata, pontosTemp);
+                        listaCreatures.add(dragao);
+                    }
                 }
-                if (typeTemp.equals("Humano")) {//Falta criar na interface...
-                    Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                    listaCreatures.add(humano);
+                if (typeTemp.equals("Humano")) {
+                    if(!carregouFicheiro) {
+                        Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        listaCreatures.add(humano);
+                    }else{
+                        Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
+                        listaCreatures.add(humano);
+                    }
                 }
-                if (typeTemp.equals("Elfo")) {//Falta criar na interface...
-                    Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                    listaCreatures.add(elfo);
+                if (typeTemp.equals("Elfo")) {
+                    if(!carregouFicheiro) {
+                        Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        listaCreatures.add(elfo);
+                    }else{
+                        Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
+                        listaCreatures.add(elfo);
+                    }
                 }
-                if (typeTemp.equals("Gigante")) {//Falta criar na interface...
-                    Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                    listaCreatures.add(gigante);
+                if (typeTemp.equals("Gigante")) {
+                    if(!carregouFicheiro) {
+                        Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        listaCreatures.add(gigante);
+                    }else{
+                        Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
+                        listaCreatures.add(gigante);
+                    }
                 }
                 mapStartGame[yTemp][xTemp] = 4;
                 //mapa.put(mapStartGame[yTemp][xTemp], typeTemp);
@@ -982,6 +1016,7 @@ public class FandeisiaGameManager {
                     for (int j = 0; j < stringArrayList.size(); j++) {
                         dsfs[j] = stringArrayList.get(j);
                     }
+                    carregouFicheiro = true;
                     startGame(dsfs, tamanhoY, tamanhoX);
                     break;
                 }

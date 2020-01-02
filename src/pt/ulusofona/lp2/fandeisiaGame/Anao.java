@@ -9,6 +9,11 @@ public class Anao extends Creature {
         this.custo = 1;
         this.alcance = 1;
     }
+    Anao(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient, int ouro, int prata, int bronze, int pontos) {
+        super(id, idEquipa, tipo, posX, posY, orient, ouro, prata, bronze, pontos);
+        this.custo = 1;
+        this.alcance = 1;
+    }
 
     @Override //Done--------------
     public int moveCriatura() {

@@ -12,6 +12,8 @@ public class Elfo extends Creature {
 
     public Elfo(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient, int ouro, int prata, int bronze, int pontos) {
         super(id, idEquipa, tipo, posX, posY, orient, ouro, prata, bronze, pontos);
+        this.custo = 5;
+        this.alcance = 2;
     }
 
     @Override
