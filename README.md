@@ -3,7 +3,7 @@
 Aqui está o video da demonstração:
 https://www.youtube.com/watch?v=zB3TMz_qu6I 
 
-e aqui esta o diagrama:
+para ver o diagrama com melhor resolução coloquei um ficheiro svg no repositorio, ao lado do src
 ![](diagramaimage.png?raw=true "Diagrama UML") 
 
 
