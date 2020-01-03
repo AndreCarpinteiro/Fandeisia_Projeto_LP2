@@ -21,9 +21,7 @@ public abstract class Creature {
     int alcance, pontos, posX, posY;;
     boolean congelado4Ever = false;
     boolean congeladoNesteTurno = false;
-    Creature() {
-
-    }
+    Creature() { }
 
     public Creature(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         this.id = id;
@@ -68,8 +66,7 @@ public abstract class Creature {
         if (orientacao.toString().equals("Sudeste")) {if (tipo.equals("Dragão")) { return "super_dragon_sudeste.png"; }if (tipo.equals("Elfo")) { return "elfo_sudeste.png"; } }
         if (orientacao.toString().equals("Sudoeste")) { if (tipo.equals("Dragão")) { return "super_dragon_sudoeste.png"; }if (tipo.equals("Elfo")) { return "elfo_sudoeste.png"; } }
 
-        if (orientacao.toString().equals("Noroeste")) { if (tipo.equals("Dragão")) { return "super_dragon_noroeste.png"; }if (tipo.equals("Elfo")) { return "elfo_noroeste.png"; } }
-        return null;
+        if (orientacao.toString().equals("Noroeste")) { if (tipo.equals("Dragão")) { return "super_dragon_noroeste.png"; }if (tipo.equals("Elfo")) { return "elfo_noroeste.png"; } }return null;
     }
 
     public int getPosY() {

@@ -9,9 +9,7 @@ public class Buraco {
         this.id = id;
         this.posX = posX;
         this.posY = posy;
-    }
-
-    Buraco(){}
+    }Buraco(){}
 
     public int getId() {
         return id;
@@ -25,17 +23,9 @@ public class Buraco {
         return posY;
     }
 
-    public void setId(int id){
-        this.id = id;
-    }
+    public void setId(int id){ this.id = id; }
 
-    public void setPosY(int posY) {
-        this.posY = posY;
-    }
-
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
+    public void setPosY(int posY) { this.posY = posY; }public void setPosX(int posX) { this.posX = posX; }
 
     public String toString() {
         return "Buraco{" + "id=" + id + ", posX=" + posX + ", posY=" + posY + '}';

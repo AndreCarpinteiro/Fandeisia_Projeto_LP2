@@ -134,7 +134,7 @@ public class Humano extends Creature {
 
         }
 
-        if(countBuracos > 0 || countCreatures > 0){
+        if (countBuracos > 0 || countCreatures > 0) {
             return false;
         }
 
