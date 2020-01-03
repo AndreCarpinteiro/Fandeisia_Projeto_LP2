@@ -259,6 +259,8 @@ public class FandeisiaGameManager {
     public void processTurn() {
 
         int encontrou = 0, tesouroEmpurra = 0;
+        encontrouLDR = false;
+        encontrouRST = false;
         int flag1 = 0, flag2 = 0;
 
         //Execução de Feitiços
