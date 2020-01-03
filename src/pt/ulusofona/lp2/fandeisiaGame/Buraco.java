@@ -9,7 +9,7 @@ public class Buraco {
         this.id = id;
         this.posX = posX;
         this.posY = posy;
-    }Buraco(){}
+    }
 
     public int getId() {
         return id;
