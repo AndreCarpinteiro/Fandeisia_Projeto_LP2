@@ -259,7 +259,7 @@ public class FandeisiaGameManager {
     public void processTurn() {
 
         int encontrou = 0, tesouroEmpurra = 0;
-        boolean flag1 = false, flag2 = false;
+        int flag1 = 0, flag2 = 0;
 
         //Execução de Feitiços
         for (Creature creature : listaCreatures) {
@@ -306,7 +306,7 @@ public class FandeisiaGameManager {
                 case SemFeitico://nao faz nada
                     break;
             }
-            flag1 = encontraTesouro(tesouroEmpurra, creature);
+            flag1 += encontraTesouro(tesouroEmpurra, creature);
         }
 
         //Execução de movimento
@@ -318,10 +318,10 @@ public class FandeisiaGameManager {
 
             // reset para false porque só é para este turno
             creature.setcongeladoNesteTurno(false);
-            flag2 = encontraTesouro(encontrou, creature);
+            flag2 += encontraTesouro(encontrou, creature);
         }
 
-        if (!flag1 && !flag2) {
+        if (flag1 == 0 && flag2 == 0) {
             turnosSemTesouro++;
         } else {
             turnosSemTesouro = 0;
@@ -1108,7 +1108,7 @@ public class FandeisiaGameManager {
         }
     }
 
-    public boolean encontraTesouro(int encontrou, Creature creature){
+    public int encontraTesouro(int encontrou, Creature creature){
 
         if (encontrou == 1 || encontrou == 2 || encontrou == 3) {
             pontuacaoTotalEmJogo -= encontrou;
@@ -1128,8 +1128,8 @@ public class FandeisiaGameManager {
                 creature.somaPontos(encontrou);
                 encontrouRST = true;
             }
-            return true;
+            return 1;
         }
-        return false;
+        return 0;
     }
 }
