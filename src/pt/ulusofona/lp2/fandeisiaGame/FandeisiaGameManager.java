@@ -861,6 +861,22 @@ public class FandeisiaGameManager {
                                             break;
                                     }
                                     break;
+                                case "Congela":
+                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                        tLDR.setPlafond(plafond - custo);
+                                    } else {
+                                        tRST.setPlafond(plafond - custo);
+                                    }
+                                    creature.setFeitico(spellName);
+                                    return true;
+                                case "Congela4Ever":
+                                    if (getCurrentTeamId() == tLDR.getId()) {
+                                        tLDR.setPlafond(plafond - custo);
+                                    } else {
+                                        tRST.setPlafond(plafond - custo);
+                                    }
+                                    creature.setFeitico(spellName);
+                                    return true;
                             }
 
                         } while (condicao);
@@ -868,7 +884,7 @@ public class FandeisiaGameManager {
                 }
             }
         }
-        return true;
+        return false;
     }
 
     public String getSpell(int x, int y) { //Done-------
