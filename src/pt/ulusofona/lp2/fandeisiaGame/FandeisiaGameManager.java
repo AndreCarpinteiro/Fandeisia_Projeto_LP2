@@ -344,7 +344,7 @@ public class FandeisiaGameManager {
             }
         }
 
-        if (listaTreasures.size() == tesourosNoMapa) {
+        if (encontrou == 0) {
             turnosSemTesouro++;
         } else {
             turnosSemTesouro = 0;
