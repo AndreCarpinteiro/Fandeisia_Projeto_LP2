@@ -15,10 +15,10 @@ public class TestFandeisiaGameManager {
     public void test01FronteirasAnao() {//Done-------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[4];
-        conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 0, y: 0, orientation: Norte";
-        conteudoMundo[1] = "id: 2, type: Anão, teamId: 1, x: 3, y: 3, orientation: Sul";
-        conteudoMundo[2] = "id: 3, type: Anão, teamId: 0, x: 3, y: 0, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Anão, teamId: 1, x: 0, y: 3, orientation: Oeste";
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Norte";
+        conteudoMundo[1] = "id: 2, type: Anão, teamId: 20, x: 3, y: 3, orientation: Sul";
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 10, x: 3, y: 0, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 20, x: 0, y: 3, orientation: Oeste";
         gameManager.startGame(conteudoMundo, 4, 4);
 
         gameManager.processTurn();
@@ -54,10 +54,10 @@ public class TestFandeisiaGameManager {
     public void test02FronteirasHumano() {//Done------------------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[4];
-        conteudoMundo[0] = "id: 1, type: Humano, teamId: 0, x: 0, y: 0, orientation: Norte";
-        conteudoMundo[1] = "id: 2, type: Humano, teamId: 1, x: 3, y: 3, orientation: Sul";
-        conteudoMundo[2] = "id: 3, type: Humano, teamId: 0, x: 3, y: 0, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Humano, teamId: 1, x: 0, y: 3, orientation: Oeste";
+        conteudoMundo[0] = "id: 1, type: Humano, teamId: 10, x: 0, y: 0, orientation: Norte";
+        conteudoMundo[1] = "id: 2, type: Humano, teamId: 20, x: 3, y: 3, orientation: Sul";
+        conteudoMundo[2] = "id: 3, type: Humano, teamId: 10, x: 3, y: 0, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Humano, teamId: 20, x: 0, y: 3, orientation: Oeste";
         gameManager.startGame(conteudoMundo, 4, 4);
 
         gameManager.processTurn();
@@ -93,10 +93,10 @@ public class TestFandeisiaGameManager {
     public void test03FronteirasGigante() {//Done---------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[4];
-        conteudoMundo[0] = "id: 1, type: Gigante, teamId: 0, x: 0, y: 0, orientation: Norte";
-        conteudoMundo[1] = "id: 2, type: Gigante, teamId: 1, x: 3, y: 3, orientation: Sul";
-        conteudoMundo[2] = "id: 3, type: Gigante, teamId: 0, x: 3, y: 0, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Gigante, teamId: 1, x: 0, y: 3, orientation: Oeste";
+        conteudoMundo[0] = "id: 1, type: Gigante, teamId: 10, x: 0, y: 0, orientation: Norte";
+        conteudoMundo[1] = "id: 2, type: Gigante, teamId: 20, x: 3, y: 3, orientation: Sul";
+        conteudoMundo[2] = "id: 3, type: Gigante, teamId: 10, x: 3, y: 0, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Gigante, teamId: 20, x: 0, y: 3, orientation: Oeste";
         gameManager.startGame(conteudoMundo, 4, 4);
 
         gameManager.processTurn();
@@ -132,14 +132,14 @@ public class TestFandeisiaGameManager {
     public void test04FronteirasDragao() {//Done---------------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[8];
-        conteudoMundo[0] = "id: 1, type: Dragão, teamId: 0, x: 1, y: 0, orientation: Norte";
-        conteudoMundo[1] = "id: 2, type: Dragão, teamId: 0, x: 2, y: 3, orientation: Sul";
-        conteudoMundo[2] = "id: 3, type: Dragão, teamId: 0, x: 3, y: 1, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Dragão, teamId: 0, x: 0, y: 2, orientation: Oeste";
-        conteudoMundo[4] = "id: 5, type: Dragão, teamId: 1, x: 0, y: 0, orientation: Noroeste";
-        conteudoMundo[5] = "id: 6, type: Dragão, teamId: 1, x: 3, y: 0, orientation: Nordeste";
-        conteudoMundo[6] = "id: 7, type: Dragão, teamId: 1, x: 3, y: 3, orientation: Sudeste";
-        conteudoMundo[7] = "id: 8, type: Dragão, teamId: 1, x: 0, y: 3, orientation: Sudoeste";
+        conteudoMundo[0] = "id: 1, type: Dragão, teamId: 10, x: 1, y: 0, orientation: Norte";
+        conteudoMundo[1] = "id: 2, type: Dragão, teamId: 10, x: 2, y: 3, orientation: Sul";
+        conteudoMundo[2] = "id: 3, type: Dragão, teamId: 10, x: 3, y: 1, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Dragão, teamId: 10, x: 0, y: 2, orientation: Oeste";
+        conteudoMundo[4] = "id: 5, type: Dragão, teamId: 20, x: 0, y: 0, orientation: Noroeste";
+        conteudoMundo[5] = "id: 6, type: Dragão, teamId: 20, x: 3, y: 0, orientation: Nordeste";
+        conteudoMundo[6] = "id: 7, type: Dragão, teamId: 20, x: 3, y: 3, orientation: Sudeste";
+        conteudoMundo[7] = "id: 8, type: Dragão, teamId: 20, x: 0, y: 3, orientation: Sudoeste";
 
         gameManager.startGame(conteudoMundo, 4, 4);
 
@@ -180,14 +180,14 @@ public class TestFandeisiaGameManager {
     public void test05FronteirasElfo() {//Done---------------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[8];
-        conteudoMundo[0] = "id: 1, type: Elfo, teamId: 0, x: 1, y: 0, orientation: Norte";
-        conteudoMundo[1] = "id: 2, type: Elfo, teamId: 0, x: 2, y: 3, orientation: Sul";
-        conteudoMundo[2] = "id: 3, type: Elfo, teamId: 0, x: 3, y: 1, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Elfo, teamId: 0, x: 0, y: 2, orientation: Oeste";
-        conteudoMundo[4] = "id: 5, type: Elfo, teamId: 1, x: 0, y: 0, orientation: Noroeste";
-        conteudoMundo[5] = "id: 6, type: Elfo, teamId: 1, x: 3, y: 0, orientation: Nordeste";
-        conteudoMundo[6] = "id: 7, type: Elfo, teamId: 1, x: 3, y: 3, orientation: Sudeste";
-        conteudoMundo[7] = "id: 8, type: Elfo, teamId: 1, x: 0, y: 3, orientation: Sudoeste";
+        conteudoMundo[0] = "id: 1, type: Elfo, teamId: 10, x: 1, y: 0, orientation: Norte";
+        conteudoMundo[1] = "id: 2, type: Elfo, teamId: 10, x: 2, y: 3, orientation: Sul";
+        conteudoMundo[2] = "id: 3, type: Elfo, teamId: 10, x: 3, y: 1, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Elfo, teamId: 10, x: 0, y: 2, orientation: Oeste";
+        conteudoMundo[4] = "id: 5, type: Elfo, teamId: 20, x: 0, y: 0, orientation: Noroeste";
+        conteudoMundo[5] = "id: 6, type: Elfo, teamId: 20, x: 3, y: 0, orientation: Nordeste";
+        conteudoMundo[6] = "id: 7, type: Elfo, teamId: 20, x: 3, y: 3, orientation: Sudeste";
+        conteudoMundo[7] = "id: 8, type: Elfo, teamId: 20, x: 0, y: 3, orientation: Sudoeste";
 
         gameManager.startGame(conteudoMundo, 4, 4);
 
@@ -233,16 +233,16 @@ public class TestFandeisiaGameManager {
             -3 criaturas X*/
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[14];
-        conteudoMundo[0] = "id: 1, type: Dragão, teamId: 0, x: 0, y: 0, orientation: Este";
-        conteudoMundo[1] = "id: 2, type: Dragão, teamId: 0, x: 0, y: 1, orientation: Este";
-        conteudoMundo[2] = "id: 3, type: Dragão, teamId: 0, x: 0, y: 2, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Dragão, teamId: 0, x: 0, y: 3, orientation: Este";
+        conteudoMundo[0] = "id: 1, type: Dragão, teamId: 20, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Dragão, teamId: 20, x: 0, y: 1, orientation: Este";
+        conteudoMundo[2] = "id: 3, type: Dragão, teamId: 20, x: 0, y: 2, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Dragão, teamId: 20, x: 0, y: 3, orientation: Este";
         //criaturas paras os saltos
-        conteudoMundo[4] = "id: 5, type: Anão, teamId: 0, x: 1, y: 2, orientation: Norte";
-        conteudoMundo[5] = "id: 6, type: Anão, teamId: 0, x: 2, y: 2, orientation: Norte";
-        conteudoMundo[6] = "id: 7, type: Anão, teamId: 0, x: 1, y: 3, orientation: Norte";
-        conteudoMundo[7] = "id: 8, type: Anão, teamId: 0, x: 2, y: 3, orientation: Norte";
-        conteudoMundo[8] = "id: 9, type: Anão, teamId: 0, x: 3, y: 3, orientation: Norte";
+        conteudoMundo[4] = "id: 5, type: Anão, teamId: 10, x: 1, y: 2, orientation: Norte";
+        conteudoMundo[5] = "id: 6, type: Anão, teamId: 10, x: 2, y: 2, orientation: Norte";
+        conteudoMundo[6] = "id: 7, type: Anão, teamId: 20, x: 1, y: 3, orientation: Norte";
+        conteudoMundo[7] = "id: 8, type: Anão, teamId: 10, x: 2, y: 3, orientation: Norte";
+        conteudoMundo[8] = "id: 9, type: Anão, teamId: 20, x: 3, y: 3, orientation: Norte";
         //buracos
         conteudoMundo[9] = "id: -500, type: hole, x: 1, y: 0";
         conteudoMundo[10] = "id: -501, type: hole, x: 2, y: 0";
@@ -283,11 +283,11 @@ public class TestFandeisiaGameManager {
 
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[7];
-        conteudoMundo[0] = "id: 1, type: Elfo, teamId: 0, x: 0, y: 0, orientation: Este";
-        conteudoMundo[1] = "id: 2, type: Elfo, teamId: 0, x: 0, y: 1, orientation: Este";
-        conteudoMundo[2] = "id: 3, type: Elfo, teamId: 0, x: 0, y: 2, orientation: Este";
+        conteudoMundo[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Elfo, teamId: 10, x: 0, y: 1, orientation: Este";
+        conteudoMundo[2] = "id: 3, type: Elfo, teamId: 10, x: 0, y: 2, orientation: Este";
         //criaturas paras os saltos
-        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 1, y: 2, orientation: Norte";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 20, x: 1, y: 2, orientation: Norte";
 
         //buracos
         conteudoMundo[4] = "id: -500, type: hole, x: 1, y: 0";
@@ -326,16 +326,16 @@ public class TestFandeisiaGameManager {
              */
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[14];
-        conteudoMundo[0] = "id: 1, type: Gigante, teamId: 0, x: 0, y: 0, orientation: Este";
-        conteudoMundo[1] = "id: 2, type: Gigante, teamId: 0, x: 0, y: 1, orientation: Este";
-        conteudoMundo[2] = "id: 3, type: Gigante, teamId: 0, x: 0, y: 2, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Gigante, teamId: 0, x: 0, y: 3, orientation: Este";
+        conteudoMundo[0] = "id: 1, type: Gigante, teamId: 20, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Gigante, teamId: 20, x: 0, y: 1, orientation: Este";
+        conteudoMundo[2] = "id: 3, type: Gigante, teamId: 20, x: 0, y: 2, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Gigante, teamId: 20, x: 0, y: 3, orientation: Este";
         //criaturas paras os saltos
-        conteudoMundo[4] = "id: 5, type: Anão, teamId: 0, x: 1, y: 2, orientation: Norte";
-        conteudoMundo[5] = "id: 6, type: Anão, teamId: 0, x: 2, y: 2, orientation: Norte";
-        conteudoMundo[6] = "id: 7, type: Anão, teamId: 0, x: 1, y: 3, orientation: Norte";
-        conteudoMundo[7] = "id: 8, type: Anão, teamId: 0, x: 2, y: 3, orientation: Norte";
-        conteudoMundo[8] = "id: 9, type: Anão, teamId: 0, x: 3, y: 3, orientation: Sul";
+        conteudoMundo[4] = "id: 5, type: Anão, teamId: 10, x: 1, y: 2, orientation: Norte";
+        conteudoMundo[5] = "id: 6, type: Anão, teamId: 10, x: 2, y: 2, orientation: Norte";
+        conteudoMundo[6] = "id: 7, type: Anão, teamId: 10, x: 1, y: 3, orientation: Norte";
+        conteudoMundo[7] = "id: 8, type: Anão, teamId: 10, x: 2, y: 3, orientation: Norte";
+        conteudoMundo[8] = "id: 9, type: Anão, teamId: 10, x: 3, y: 3, orientation: Sul";
 
         //buracos
         conteudoMundo[9] = "id: -500, type: hole, x: 1, y: 0";
@@ -380,15 +380,15 @@ public class TestFandeisiaGameManager {
 
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[10];
-        conteudoMundo[0] = "id: 1, type: Humano, teamId: 0, x: 0, y: 0, orientation: Este";
-        conteudoMundo[1] = "id: 2, type: Humano, teamId: 0, x: 0, y: 1, orientation: Este";
-        conteudoMundo[2] = "id: 3, type: Humano, teamId: 0, x: 0, y: 2, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Humano, teamId: 0, x: 0, y: 3, orientation: Este";
+        conteudoMundo[0] = "id: 1, type: Humano, teamId: 20, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Humano, teamId: 20, x: 0, y: 1, orientation: Este";
+        conteudoMundo[2] = "id: 3, type: Humano, teamId: 20, x: 0, y: 2, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Humano, teamId: 20, x: 0, y: 3, orientation: Este";
 
         //criaturas paras os saltos
-        conteudoMundo[4] = "id: 5, type: Anão, teamId: 0, x: 1, y: 2, orientation: Sul";
-        conteudoMundo[5] = "id: 6, type: Anão, teamId: 0, x: 1, y: 3, orientation: Sul";
-        conteudoMundo[6] = "id: 7, type: Anão, teamId: 0, x: 2, y: 3, orientation: Sul";
+        conteudoMundo[4] = "id: 5, type: Anão, teamId: 10, x: 1, y: 2, orientation: Sul";
+        conteudoMundo[5] = "id: 6, type: Anão, teamId: 10, x: 1, y: 3, orientation: Sul";
+        conteudoMundo[6] = "id: 7, type: Anão, teamId: 10, x: 2, y: 3, orientation: Sul";
 
         //buracos
         conteudoMundo[7] = "id: -500, type: hole, x: 1, y: 0";
@@ -428,11 +428,11 @@ public class TestFandeisiaGameManager {
 
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[4];
-        conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 0, y: 0, orientation: Este";
-        conteudoMundo[1] = "id: 2, type: Anão, teamId: 0, x: 0, y: 1, orientation: Este";
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 20, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Anão, teamId: 20, x: 0, y: 1, orientation: Este";
 
         //criaturas paras os saltos
-        conteudoMundo[2] = "id: 3, type: Anão, teamId: 0, x: 1, y: 1, orientation: Norte";
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 10, x: 1, y: 1, orientation: Norte";
 
         //buracos
         conteudoMundo[3] = "id: -500, type: hole, x: 1, y: 0";
@@ -462,11 +462,11 @@ public class TestFandeisiaGameManager {
             */
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[6];
-        conteudoMundo[0] = "id: 1, type: Dragão, teamId: 0, x: 0, y: 0, orientation: Sudeste";
-        conteudoMundo[1] = "id: 2, type: Dragão, teamId: 0, x: 0, y: 3, orientation: Nordeste";
+        conteudoMundo[0] = "id: 1, type: Dragão, teamId: 20, x: 0, y: 0, orientation: Sudeste";
+        conteudoMundo[1] = "id: 2, type: Dragão, teamId: 20, x: 0, y: 3, orientation: Nordeste";
         //criaturas paras os saltos
-        conteudoMundo[2] = "id: 3, type: Anão, teamId: 0, x: 1, y: 1, orientation: Sul";
-        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 2, y: 2, orientation: Norte";
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 10, x: 1, y: 1, orientation: Sul";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 10, x: 2, y: 2, orientation: Norte";
 
         //buracos
         conteudoMundo[4] = "id: -500, type: hole, x: 2, y: 1";
@@ -499,11 +499,11 @@ public class TestFandeisiaGameManager {
             */
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[8];
-        conteudoMundo[0] = "id: 1, type: Dragão, teamId: 0, x: 0, y: 0, orientation: Sudeste";
-        conteudoMundo[1] = "id: 2, type: Dragão, teamId: 0, x: 0, y: 3, orientation: Nordeste";
+        conteudoMundo[0] = "id: 1, type: Dragão, teamId: 10, x: 0, y: 0, orientation: Sudeste";
+        conteudoMundo[1] = "id: 2, type: Dragão, teamId: 10, x: 0, y: 3, orientation: Nordeste";
         //criaturas paras os saltos
-        conteudoMundo[2] = "id: 3, type: Anão, teamId: 0, x: 1, y: 1, orientation: Sul";
-        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 2, y: 2, orientation: Norte";
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 20, x: 1, y: 1, orientation: Sul";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 20, x: 2, y: 2, orientation: Norte";
 
         //buracos
         conteudoMundo[4] = "id: -500, type: hole, x: 2, y: 1";
@@ -537,8 +537,8 @@ public class TestFandeisiaGameManager {
             */
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[5];
-        conteudoMundo[0] = "id: 1, type: Elfo, teamId: 0, x: 0, y: 0, orientation: Sudeste";
-        conteudoMundo[1] = "id: 2, type: Elfo, teamId: 0, x: 1, y: 0, orientation: Sudeste";
+        conteudoMundo[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Sudeste";
+        conteudoMundo[1] = "id: 2, type: Elfo, teamId: 10, x: 1, y: 0, orientation: Sudeste";
 
         //buracos
         conteudoMundo[2] = "id: -500, type: hole, x: 1, y: 1";
@@ -573,13 +573,13 @@ public class TestFandeisiaGameManager {
             */
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[7];
-        conteudoMundo[0] = "id: 1, type: Gigante, teamId: 0, x: 0, y: 0, orientation: Este";
-        conteudoMundo[1] = "id: 2, type: Gigante, teamId: 0, x: 0, y: 2, orientation: Este";
+        conteudoMundo[0] = "id: 1, type: Gigante, teamId: 10, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Gigante, teamId: 10, x: 0, y: 2, orientation: Este";
         //criaturas paras os saltos
-        conteudoMundo[2] = "id: 3, type: Gigante, teamId: 0, x: 2, y: 2, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 1, y: 0, orientation: Norte";
-        conteudoMundo[4] = "id: 5, type: Anão, teamId: 0, x: 2, y: 0, orientation: Norte";
-        conteudoMundo[5] = "id: 6, type: Anão, teamId: 0, x: 1, y: 2, orientation: Este";
+        conteudoMundo[2] = "id: 3, type: Gigante, teamId: 20, x: 2, y: 2, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 20, x: 1, y: 0, orientation: Norte";
+        conteudoMundo[4] = "id: 5, type: Anão, teamId: 20, x: 2, y: 0, orientation: Norte";
+        conteudoMundo[5] = "id: 6, type: Anão, teamId: 10, x: 1, y: 2, orientation: Este";
 
         //buracos
         conteudoMundo[6] = "id: -500, type: hole, x: 3, y: 0";
@@ -609,13 +609,13 @@ public class TestFandeisiaGameManager {
 
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[7];
-        conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 0, y: 0, orientation: Este";
-        conteudoMundo[1] = "id: 2, type: Anão, teamId: 0, x: 0, y: 2, orientation: Este";
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Anão, teamId: 10, x: 0, y: 2, orientation: Este";
         //criaturas paras os saltos
-        conteudoMundo[2] = "id: 3, type: Gigante, teamId: 0, x: 2, y: 2, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 1, y: 0, orientation: Norte";
-        conteudoMundo[4] = "id: 5, type: Anão, teamId: 0, x: 2, y: 0, orientation: Norte";
-        conteudoMundo[5] = "id: 6, type: Anão, teamId: 0, x: 1, y: 2, orientation: Este";
+        conteudoMundo[2] = "id: 3, type: Gigante, teamId: 10, x: 2, y: 2, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 20, x: 1, y: 0, orientation: Norte";
+        conteudoMundo[4] = "id: 5, type: Anão, teamId: 20, x: 2, y: 0, orientation: Norte";
+        conteudoMundo[5] = "id: 6, type: Anão, teamId: 20, x: 1, y: 2, orientation: Este";
 
         //buracos
         conteudoMundo[6] = "id: -500, type: hole, x: 3, y: 0";
@@ -663,10 +663,10 @@ public class TestFandeisiaGameManager {
     public void test18getIdTesouro() {
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[7];
-        conteudoMundo[0] = "id: 1, type: Elfo, teamId: 0, x: 0, y: 0, orientation: Este";
-        conteudoMundo[1] = "id: 2, type: Elfo, teamId: 0, x: 0, y: 1, orientation: Este";
-        conteudoMundo[2] = "id: 3, type: Elfo, teamId: 0, x: 0, y: 2, orientation: Este";
-        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 1, y: 2, orientation: Norte";
+        conteudoMundo[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Elfo, teamId: 10, x: 0, y: 1, orientation: Este";
+        conteudoMundo[2] = "id: 3, type: Elfo, teamId: 20, x: 0, y: 2, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 20, x: 1, y: 2, orientation: Norte";
 
         //tesouros
         conteudoMundo[4] = "id: -100, type: gold, x: 1, y: 0";
@@ -732,13 +732,13 @@ public class TestFandeisiaGameManager {
 
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[8];
-        conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 0, y: 3, orientation: Este";
-        conteudoMundo[1] = "id: 2, type: Anão, teamId: 0, x: 1, y: 3, orientation: Oeste";
-        conteudoMundo[2] = "id: 3, type: Anão, teamId: 0, x: 2, y: 3, orientation: Norte";
-        conteudoMundo[3] = "id: 4, type: Anão, teamId: 0, x: 3, y: 3, orientation: Sul";
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 3, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Anão, teamId: 10, x: 1, y: 3, orientation: Oeste";
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 10, x: 2, y: 3, orientation: Norte";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 10, x: 3, y: 3, orientation: Sul";
         //criaturas paras as sobreposição
-        conteudoMundo[4] = "id: 5, type: Anão, teamId: 0, x: 0, y: 2, orientation: Norte";
-        conteudoMundo[5] = "id: 6, type: Anão, teamId: 0, x: 1, y: 2, orientation: Sul";
+        conteudoMundo[4] = "id: 5, type: Anão, teamId: 10, x: 0, y: 2, orientation: Norte";
+        conteudoMundo[5] = "id: 6, type: Anão, teamId: 10, x: 1, y: 2, orientation: Sul";
         //buracos
         conteudoMundo[6] = "id: -500, type: hole, x: 2, y: 2";
         conteudoMundo[7] = "id: -501, type: hole, x: 3, y: 2";
@@ -762,8 +762,8 @@ public class TestFandeisiaGameManager {
     public void test24FeiticoEmpurraParaNorteHumano(){
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[2];
-        conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 1, y: 1, orientation: Sul";
-        conteudoMundo[1] = "id: 2, type: Humano, teamId: 1, x: 4, y: 3, orientation: Oeste";
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 1, y: 1, orientation: Sul";
+        conteudoMundo[1] = "id: 2, type: Humano, teamId: 20, x: 4, y: 3, orientation: Oeste";
         gameManager.startGame(conteudoMundo, 5, 5);
         gameManager.enchant(4,3, "EmpurraParaNorte");
         gameManager.processTurn();
@@ -776,13 +776,57 @@ public class TestFandeisiaGameManager {
     public void test25FeiticoEmpurraParaNorteDragao(){
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[2];
-        conteudoMundo[0] = "id: 1, type: Anão, teamId: 0, x: 1, y: 1, orientation: Sul";
-        conteudoMundo[1] = "id: 2, type: Humano, teamId: 1, x: 4, y: 3, orientation: Oeste";
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 1, y: 1, orientation: Sul";
+        conteudoMundo[1] = "id: 2, type: Humano, teamId: 20, x: 4, y: 3, orientation: Oeste";
         gameManager.startGame(conteudoMundo, 5, 5);
         gameManager.enchant(4,3, "EmpurraParaNorte");
         gameManager.processTurn();
 
         //Verifica possições
         assertEquals(2, gameManager.getElementId(2, 2));
+    }
+
+    @Test
+    public void test26ApanhaTesouros() {//Done-------------
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[8];
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Anão, teamId: 10, x: 3, y: 3, orientation: Oeste";
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 10, x: 3, y: 0, orientation: Sul";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 20, x: 0, y: 3, orientation: Norte";
+        conteudoMundo[4] = "id: -1, type: bronze, x: 1, y: 0";
+        conteudoMundo[5] = "id: -2, type: silver, x: 2, y: 3";
+        conteudoMundo[6] = "id: -3, type: gold, x: 3, y: 1";
+        conteudoMundo[7] = "id: -4, type: bronze, x: 0, y: 2";
+
+        gameManager.startGame(conteudoMundo, 4, 4);
+
+        gameManager.processTurn();
+
+        List<Creature> listaCreatures = gameManager.getCreatures();
+
+        for (int i = 0; i < gameManager.mapStartGame.length; i++) {
+            for (int j = 0; j < gameManager.mapStartGame[i].length; j++) {
+                System.out.print(gameManager.mapStartGame[i][j]);
+            }
+            System.out.println();
+        }
+        //Verifica orientações
+        assertEquals(Creature.Orientacao.Este, gameManager.getCreatures().get(0).getOrientacao());
+        assertEquals(Creature.Orientacao.Oeste, listaCreatures.get(1).getOrientacao());
+        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(2).getOrientacao());
+        assertEquals(Creature.Orientacao.Norte, listaCreatures.get(3).getOrientacao());
+
+        //Verifica possições
+        assertEquals(1, gameManager.getElementId(1, 0));
+        assertEquals(2, gameManager.getElementId(2, 3));
+        assertEquals(3, gameManager.getElementId(3, 1));
+        assertEquals(4, gameManager.getElementId(0, 2));
+        System.out.println(listaCreatures.get(0).getPontos());
+        assertEquals(1, listaCreatures.get(0).getBronze());
+        assertEquals(1, listaCreatures.get(1).getPrata());
+        assertEquals(1, listaCreatures.get(2).getOuro());
+        assertEquals(1, listaCreatures.get(3).getBronze());
+
     }
 }
