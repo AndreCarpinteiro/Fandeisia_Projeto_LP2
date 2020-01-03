@@ -211,8 +211,6 @@ public class FandeisiaGameManager {
             System.out.println(listaHoles.get(i).toString());
         }
 
-        //   pontuacaoTotal = listaTreasures.size();
-
         //Atualizar plafond
 
         //Validar plafond
@@ -244,7 +242,7 @@ public class FandeisiaGameManager {
             }
             System.out.println();
         }
-        //  tesourosEmJogo = listaTreasures.size();
+
         return 0; //Tudo válido
     }
 
@@ -864,12 +862,13 @@ public class FandeisiaGameManager {
                                     }
                                     break;
                             }
+
                         } while (condicao);
                     }
                 }
             }
         }
-        return false;
+        return true;
     }
 
     public String getSpell(int x, int y) { //Done-------
