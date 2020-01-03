@@ -12,8 +12,7 @@ public class Dragao extends Creature {
 
     public Dragao(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient, int ouro, int prata, int bronze, int pontos) {
         super(id, idEquipa, tipo, posX, posY, orient, ouro, prata, bronze, pontos);
-        this.custo = 9;
-        this.alcance = 3;
+        this.custo = 9;this.alcance = 3;
     }
 
     @Override
@@ -27,25 +26,14 @@ public class Dragao extends Creature {
         int encontrou = 0;
 
         if (orientacao == Orientacao.Norte) {
-            if(posY - alcance >= 0 && semObstaculo()) {//Tenho de fazer codigo repetido porque nao posso verificar isto no mesmo if, index out of bounds
-                if (mapa[posY - alcance][posX] != 4 && mapa[posY - alcance][posX] != 5) {
-                    if (mapa[posY - alcance][posX] == 1 || mapa[posY - alcance][posX] == 2 || mapa[posY - alcance][posX] == 3) {
-                        encontrou = mapa[posY - alcance][posX];
-                        calcTrofeus(encontrou);
-                    }
-                    mapa[posY][posX] = 0;
-                    posY -= alcance;
-                    mapa[posY][posX] = 4;
-                }else{orientacao = Orientacao.Nordeste;}
+            if(posY - alcance >= 0 && semObstaculo()) { if (mapa[posY - alcance][posX] != 4 && mapa[posY - alcance][posX] != 5) { if (mapa[posY - alcance][posX] == 1 || mapa[posY - alcance][posX] == 2 || mapa[posY - alcance][posX] == 3) { encontrou = mapa[posY - alcance][posX];calcTrofeus(encontrou); }mapa[posY][posX] = 0;posY -= alcance;mapa[posY][posX] = 4; }else{orientacao = Orientacao.Nordeste;}
             }else{orientacao = Orientacao.Nordeste;}
             return encontrou;
         }
         if (orientacao == Orientacao.Nordeste) {
             if(posY - alcance >= 0 && posX + alcance <= xMax && semObstaculo()) {
                 if (mapa[posY - alcance][posX + alcance] != 4 && mapa[posY - alcance][posX + alcance] != 5) {
-                    if (mapa[posY - alcance][posX + alcance] == 1 || mapa[posY - alcance][posX + alcance] == 2 || mapa[posY - alcance][posX + alcance] == 3) {
-                        encontrou = mapa[posY - alcance][posX + alcance];
-                        calcTrofeus(encontrou);
+                    if (mapa[posY - alcance][posX + alcance] == 1 || mapa[posY - alcance][posX + alcance] == 2 || mapa[posY - alcance][posX + alcance] == 3) { encontrou = mapa[posY - alcance][posX + alcance];calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posY -= alcance;
@@ -58,9 +46,7 @@ public class Dragao extends Creature {
         if (orientacao == Orientacao.Este) {
             if(posX + alcance <= xMax && semObstaculo()) {
                 if (mapa[posY][posX + alcance] != 4 && mapa[posY][posX + alcance] != 5) {
-                    if (mapa[posY][posX + alcance] == 1 || mapa[posY][posX + alcance] == 2 || mapa[posY][posX + alcance] == 3) {
-                        encontrou = mapa[posY][posX + 3];
-                        calcTrofeus(encontrou);
+                    if (mapa[posY][posX + alcance] == 1 || mapa[posY][posX + alcance] == 2 || mapa[posY][posX + alcance] == 3) { encontrou = mapa[posY][posX + 3];calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posX += alcance;
@@ -72,9 +58,8 @@ public class Dragao extends Creature {
         if (orientacao == Orientacao.Sudeste) {
             if(posY + alcance <= yMax && posX + alcance <= xMax && semObstaculo()) {
                 if (mapa[posY + alcance][posX + alcance] != 4 && mapa[posY + alcance][posX + alcance] != 5) {
-                    if (mapa[posY + alcance][posX + alcance] == 1 || mapa[posY + alcance][posX + alcance] == 2 || mapa[posY + alcance][posX + alcance] == 3) {
-                        encontrou = mapa[posY + 3][posX + 3];
-                        calcTrofeus(encontrou);
+                    if (mapa[posY + alcance][posX + alcance] == 1 || mapa[posY + alcance][posX + alcance] == 2 || mapa[posY + alcance][posX + alcance] == 3) { encontrou = mapa[posY + 3][posX + 3];
+                    calcTrofeus(encontrou);
                     }
                     mapa[posY][posX] = 0;
                     posX += alcance;
@@ -85,60 +70,22 @@ public class Dragao extends Creature {
             return encontrou;
         }
         if (orientacao == Orientacao.Sul) {
-            if(posY + alcance <= yMax && semObstaculo()) {
-                if (mapa[posY + alcance][posX] != 4 && mapa[posY + alcance][posX] != 5) {
-                    if (mapa[posY + alcance][posX] == 1 || mapa[posY + alcance][posX] == 2 || mapa[posY + alcance][posX] == 3) {
-                        encontrou = mapa[posY + alcance][posX];
-                        calcTrofeus(encontrou);
-                    }
-                    mapa[posY][posX] = 0;
-                    posY += alcance;
-                    mapa[posY][posX] = 4;
-                }else{orientacao = Orientacao.Sudoeste;}
+            if(posY + alcance <= yMax && semObstaculo()) { if (mapa[posY + alcance][posX] != 4 && mapa[posY + alcance][posX] != 5) { if (mapa[posY + alcance][posX] == 1 || mapa[posY + alcance][posX] == 2 || mapa[posY + alcance][posX] == 3) { encontrou = mapa[posY + alcance][posX];calcTrofeus(encontrou); }mapa[posY][posX] = 0;posY += alcance;mapa[posY][posX] = 4; }else{orientacao = Orientacao.Sudoeste;}
             }else{orientacao = Orientacao.Sudoeste;}
             return encontrou;
         }
         if (orientacao == Orientacao.Sudoeste) {
-            if(posY + alcance <= yMax && posX - alcance >= 0 && semObstaculo()) {
-                if (mapa[posY + alcance][posX - alcance] != 4 && mapa[posY + alcance][posX - alcance] != 5) {
-                    if (mapa[posY + alcance][posX - alcance] == 1 || mapa[posY + alcance][posX - alcance] == 2 || mapa[posY + alcance][posX - alcance] == 3) {
-                        encontrou = mapa[posY + alcance][posX - alcance];
-                        calcTrofeus(encontrou);
-                    }
-                    mapa[posY][posX] = 0;
-                    posY += alcance;
-                    posX -= alcance;
-                    mapa[posY][posX] = 4;
-                }else{orientacao = Orientacao.Oeste;}
+            if(posY + alcance <= yMax && posX - alcance >= 0 && semObstaculo()) { if (mapa[posY + alcance][posX - alcance] != 4 && mapa[posY + alcance][posX - alcance] != 5) { if (mapa[posY + alcance][posX - alcance] == 1 || mapa[posY + alcance][posX - alcance] == 2 || mapa[posY + alcance][posX - alcance] == 3) { encontrou = mapa[posY + alcance][posX - alcance];calcTrofeus(encontrou); }mapa[posY][posX] = 0;posY += alcance;posX -= alcance;mapa[posY][posX] = 4; }else{orientacao = Orientacao.Oeste;}
             }else{orientacao = Orientacao.Oeste;}
             return encontrou;
         }
         if (orientacao == Orientacao.Oeste) {
-            if(posX - alcance >= 0 && semObstaculo()) {
-                if (mapa[posY][posX - alcance] != 4 && mapa[posY][posX - alcance] != 5) {
-                    if (mapa[posY][posX - alcance] == 1 || mapa[posY][posX - alcance] == 2 || mapa[posY][posX - alcance] == 3) {
-                        encontrou = mapa[posY][posX - alcance];
-                        calcTrofeus(encontrou);
-                    }
-                    mapa[posY][posX] = 0;
-                    posX -= alcance;
-                    mapa[posY][posX] = 4;
-                }else{orientacao = Orientacao.Noroeste;}
+            if(posX - alcance >= 0 && semObstaculo()) {if (mapa[posY][posX - alcance] != 4 && mapa[posY][posX - alcance] != 5) { if (mapa[posY][posX - alcance] == 1 || mapa[posY][posX - alcance] == 2 || mapa[posY][posX - alcance] == 3) { encontrou = mapa[posY][posX - alcance];calcTrofeus(encontrou); }mapa[posY][posX] = 0;posX -= alcance;mapa[posY][posX] = 4; }else{orientacao = Orientacao.Noroeste;}
             }else{orientacao = Orientacao.Noroeste;}
             return encontrou;
         }
         if (orientacao == Orientacao.Noroeste) {
-            if(posY - alcance >= 0 && posX - alcance >= 0 && semObstaculo()) {
-                if (mapa[posY - alcance][posX - alcance] != 4 && mapa[posY - alcance][posX - alcance] != 5) {
-                    if (mapa[posY - alcance][posX - alcance] == 1 || mapa[posY - alcance][posX - alcance] == 2 || mapa[posY - alcance][posX - alcance] == 3) {
-                        encontrou = mapa[posY - alcance][posX - alcance];
-                        calcTrofeus(encontrou);
-                    }
-                    mapa[posY][posX] = 0;
-                    posX -= alcance;
-                    posY -= alcance;
-                    mapa[posY][posX] = 4;
-                }else{orientacao = Orientacao.Norte;}
+            if(posY - alcance >= 0 && posX - alcance >= 0 && semObstaculo()) {if (mapa[posY - alcance][posX - alcance] != 4 && mapa[posY - alcance][posX - alcance] != 5) { if (mapa[posY - alcance][posX - alcance] == 1 || mapa[posY - alcance][posX - alcance] == 2 || mapa[posY - alcance][posX - alcance] == 3) { encontrou = mapa[posY - alcance][posX - alcance];calcTrofeus(encontrou); }mapa[posY][posX] = 0;posX -= alcance;posY -= alcance;mapa[posY][posX] = 4; }else{orientacao = Orientacao.Norte;}
             }else{orientacao = Orientacao.Norte;}
         }
         return encontrou;
@@ -150,16 +97,11 @@ public class Dragao extends Creature {
         int countBuracos = 0;// 5
 
         for (int i = 1; i < alcance; i++) {
-            if (orientacao == Orientacao.Norte) {
-                if (mapStartGame[posY - i][posX] == 4) {
-                    countCreatures++;
-                } else if (mapStartGame[posY - i][posX] == 5) {
-                    countBuracos++;
-                }
+            if (orientacao == Orientacao.Norte) { if (mapStartGame[posY - i][posX] == 4) { countCreatures++; } else if (mapStartGame[posY - i][posX] == 5) { countBuracos++;
+            }
             }
             if (orientacao == Orientacao.Nordeste) {
-                if (mapStartGame[posY - i][posX + i] == 4) {
-                    countCreatures++;
+                if (mapStartGame[posY - i][posX + i] == 4) { countCreatures++;
                 } else if (mapStartGame[posY - i][posX + i] == 5) {
                     countBuracos++;
                 }
@@ -173,43 +115,24 @@ public class Dragao extends Creature {
             }
             if (orientacao == Orientacao.Sudeste) {
                 if (mapStartGame[posY + i][posX + i] == 4) {
-                    countCreatures++;
-                } else if (mapStartGame[posY + i][posX + i] == 5) {
-                    countBuracos++;
+                    countCreatures++; } else if (mapStartGame[posY + i][posX + i] == 5) { countBuracos++;
                 }
             }
-            if (orientacao == Orientacao.Sul) {
-                if (mapStartGame[posY + i][posX] == 4) {
-                    countCreatures++;
-                } else if (mapStartGame[posY + i][posX] == 5) {
-                    countBuracos++;
+            if (orientacao == Orientacao.Sul) { if (mapStartGame[posY + i][posX] == 4) { countCreatures++; } else if (mapStartGame[posY + i][posX] == 5) { countBuracos++;
                 }
             }
-            if (orientacao == Orientacao.Sudoeste) {
-                if (mapStartGame[posY + i][posX - i] == 4) {
-                    countCreatures++;
-                } else if (mapStartGame[posY + i][posX - i] == 5) {
-                    countBuracos++;
+            if (orientacao == Orientacao.Sudoeste) { if (mapStartGame[posY + i][posX - i] == 4) { countCreatures++; } else if (mapStartGame[posY + i][posX - i] == 5) { countBuracos++;
                 }
             }
-            if (orientacao == Orientacao.Oeste) {
-                if (mapStartGame[posY][posX - i] == 4) {
-                    countCreatures++;
-                } else if (mapStartGame[posY][posX - i] == 5) {
-                    countBuracos++;
+            if (orientacao == Orientacao.Oeste) { if (mapStartGame[posY][posX - i] == 4) { countCreatures++; } else if (mapStartGame[posY][posX - i] == 5) { countBuracos++;
                 }
             }
-            if (orientacao == Orientacao.Noroeste) {
-                if (mapStartGame[posY - i][posX - i] == 4) {
-                    countCreatures++;
-                } else if (mapStartGame[posY - i][posX - i] == 5) {
-                    countBuracos++;
+            if (orientacao == Orientacao.Noroeste) { if (mapStartGame[posY - i][posX - i] == 4) { countCreatures++; } else if (mapStartGame[posY - i][posX - i] == 5) { countBuracos++;
                 }
             }
         }
 
-        if (countBuracos > 2 || countCreatures > 2) {//todo ainda não entendi se não dá para combinar criaturas e buracos
-            return false;
+        if (countBuracos > 2 || countCreatures > 2) { return false;
         }
 
         return true;

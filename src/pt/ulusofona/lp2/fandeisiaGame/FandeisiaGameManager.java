@@ -72,12 +72,8 @@ public class FandeisiaGameManager {
 
         mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
 
-        int idTemp = 0;
         String typeTemp = "";
-        int xTemp = 0;
-        int yTemp = 0;
-        int custoLDR = 0;
-        int custoRST = 0;
+        int xTemp = 0, yTemp = 0, custoLDR = 0, custoRST = 0, idTemp = 0;
         int teamIdTemp = 0, ouro = 0, prata = 0, bronze = 0, pontosTemp = 0;
         String orientTemp = "Norte";
         String[] dados;
@@ -354,7 +350,9 @@ public class FandeisiaGameManager {
             tRST.somaPlafond(2);
         }
 
-        turn15GameOver++;
+        if(encontrou == 0) {
+            turn15GameOver++;
+              }
         countTurnos++;
 
 
@@ -1045,7 +1043,16 @@ public class FandeisiaGameManager {
     public void toggleAI(boolean active){
         if(active){
             int posXT, posYT;
-         //   int pos
+
+            Random rnd = new Random();
+            int randNum = rnd.nextInt((100-50)+1) + 50;
+            for (int i = 0; i < listaCreatures.size(); i++){
+                if(randNum > 55) {
+          //          enchant();
+                }
+            }
+        }
+
             for (int i = 0; i < listaCreatures.size(); i++){
                 if(listaCreatures.get(i).getIdEquipa() == 20){
                     for(int j = 0; j < listaTreasures.size(); j++){
@@ -1053,9 +1060,6 @@ public class FandeisiaGameManager {
                     }
                 }
             }
-        }else{
-
-        }
     }
 
     private void aplicarFeiticosPorTurno() {

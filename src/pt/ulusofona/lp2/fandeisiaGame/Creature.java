@@ -13,20 +13,12 @@ public abstract class Creature {
         SemFeitico, EmpurraParaNorte, EmpurraParaOeste, EmpurraParaEste, EmpurraParaSul, ReduzAlcance, DuplicaAlcance, Congela, Congela4Ever, Descongela
     }
 
-    int id;
-    int idEquipa;
-    int custo;
-    int ouro = 0;
-    int prata = 0;
-    int bronze = 0;
+    int id, idEquipa, custo, ouro = 0, prata = 0, bronze = 0;
     String tipo;
-    int pontos;
-    int posX;
-    int posY;
     Orientacao orientacao;
     int[][] mapa = mapStartGame;
     FeiticoEnum feiticoEnum = FeiticoEnum.SemFeitico;
-    int alcance;
+    int alcance, pontos, posX, posY;;
     boolean congelado4Ever = false;
     boolean congeladoNesteTurno = false;
     Creature() {
