@@ -17,11 +17,10 @@ public class FandeisiaGameManager {
     // 4 = creatura
     // 5 = buraco
 
-    private int countTurnos = 0; //FALTA GUARDAR
-    //  private int turn15GameOver = 0;
+    private int countTurnos = 0;
     private int turnosSemTesouro = 0;
     private int pontuacaoTotalEmJogo = 0;
-    private boolean carregouFicheiro = false;
+    private boolean carregouFicheiro = false, encontrouLDR = false, encontrouRST = false;
 
     private Team tLDR = new Team(10, 0);
     private Team tRST = new Team(20, 0);
@@ -259,30 +258,33 @@ public class FandeisiaGameManager {
 
     public void processTurn() {
 
-        int encontrou = 0, flag = 0;
-        boolean encontrouLDR = false;
-        boolean encontrouRST = false;
+        int encontrou = 0, tesouroEmpurra = 0;
+        boolean flag1 = false, flag2 = false;
 
         //Execução de Feitiços
         for (Creature creature : listaCreatures) {
             switch (creature.getFeiticoEnum()) {//todo falta o caso de encontrar tesouros com o empurra
                 case EmpurraParaNorte:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
+                    tesouroEmpurra = mapStartGame[creature.getPosY() - 1][creature.getPosX()];
                     creature.setPosY(creature.getPosY() - 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
                     break;
                 case EmpurraParaEste:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
+                    tesouroEmpurra = mapStartGame[creature.getPosY()][creature.getPosX() + 1];
                     creature.setPosX(creature.getPosX() + 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
                     break;
                 case EmpurraParaSul:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
+                    tesouroEmpurra = mapStartGame[creature.getPosY() + 1][creature.getPosX()];
                     creature.setPosY(creature.getPosY() + 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
                     break;
                 case EmpurraParaOeste:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
+                    tesouroEmpurra = mapStartGame[creature.getPosY()][creature.getPosX() - 1];
                     creature.setPosX(creature.getPosX() - 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
                     break;
@@ -303,9 +305,8 @@ public class FandeisiaGameManager {
                     break;
                 case SemFeitico://nao faz nada
                     break;
-
-
             }
+            flag1 = encontraTesouro(tesouroEmpurra, creature);
         }
 
         //Execução de movimento
@@ -317,30 +318,10 @@ public class FandeisiaGameManager {
 
             // reset para false porque só é para este turno
             creature.setcongeladoNesteTurno(false);
-
-            if (encontrou == 1 || encontrou == 2 || encontrou == 3) {
-                pontuacaoTotalEmJogo -= encontrou;
-                for (int j = 0; j < listaTreasures.size(); j++) {
-                    if (listaTreasures.get(j).getPosY() == creature.getPosY() && listaTreasures.get(j).getPosX() == creature.getPosX()) {
-                        listaTreasures.remove(listaTreasures.get(j));
-                    }
-                }
-
-                if (creature.getIdEquipa() == 10) {
-                    tLDR.somaPontos(encontrou);
-                    creature.somaPontos(encontrou); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
-                    encontrouLDR = true; //Para saber se tenho de atribuir uma só moeda
-                }
-                if (creature.getIdEquipa() == 20) {
-                    tRST.somaPontos(encontrou);
-                    creature.somaPontos(encontrou); //NÃO TENHO A CERTEZA SE É PARA INCREMENTAR OU ATRIBUIR O VALOR
-                    encontrouRST = true;//Para saber se tenho de atribuir uma só moeda
-                }
-                flag++;
-            }
+            flag2 = encontraTesouro(encontrou, creature);
         }
 
-        if (flag == 0) {
+        if (!flag1 && !flag2) {
             turnosSemTesouro++;
         } else {
             turnosSemTesouro = 0;
@@ -369,21 +350,12 @@ public class FandeisiaGameManager {
             tRST.setEstado(false);
         }
 
-        //   for (int j = 0; j < listaTreasures.size(); j++) {
         System.out.println("Turnos sem tesouro: " + turnosSemTesouro);
         System.out.println("Pontoação total em jogo: " + pontuacaoTotalEmJogo);
-        //}
 
         for (int j = 0; j < listaCreatures.size(); j++) {
             System.out.println(listaCreatures.get(j).toString());
         }
-
-        /*for (int i = 0; i < mapStartGame.length; i++) {
-                  for (int j = 0; j < mapStartGame[i].length; j++) {
-                    System.out.print(mapStartGame[i][j]);
-              }
-            System.out.println();
-        }*/
     }
 
     public List<Creature> getCreatures() {//Quase Done--------------
@@ -550,6 +522,9 @@ public class FandeisiaGameManager {
     }//Done---------
 
     public boolean enchant(int x, int y, String spellName) {//TODO: Aplicar efeito
+        if (spellName == null) {
+            return false;
+        }
         int plafond;
         int custo = custoFeiticos.get(spellName);//TODO: Rebenta nesta linha quando abro os feiticos de novo e depois fecho
         System.out.println(custo);
@@ -1062,48 +1037,99 @@ public class FandeisiaGameManager {
 
     public void toggleAI(boolean active) {
         if (active) {
-            int posXT, posYT;
+            Random r = new Random();
+            boolean aplica = false;
+            int feiticoRandom, qtdLDR = 0, creaturaRandom, joga = r.nextInt(6);
+            List<Integer> array = new ArrayList<>();
 
-            Random rnd = new Random();
-            int randNum = rnd.nextInt((100 - 50) + 1) + 50;
             for (int i = 0; i < listaCreatures.size(); i++) {
-                if (randNum > 55) {
-                    //          enchant();
+                if (listaCreatures.get(i).getIdEquipa() == 20) {
+                    array.add(listaCreatures.get(i).getId());
                 }
             }
-        }
 
-        for (int i = 0; i < listaCreatures.size(); i++) {
-            if (listaCreatures.get(i).getIdEquipa() == 20) {
-                for (int j = 0; j < listaTreasures.size(); j++) {
-                    //             if()
+            if (joga < 3) {//Para não fazer sempre feitiços...
+                while (!aplica) {
+
+                    feiticoRandom = r.nextInt(7);
+                    creaturaRandom = r.nextInt(qtdLDR);
+
+                    switch (feiticoRandom) {
+                        case 0:
+                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
+                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                                    "EmpurraParaNorte");
+                            break;
+
+                        case 1:
+                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
+                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                                    "EmpurraParaSul");
+                            break;
+
+                        case 2:
+                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
+                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                                    "EmpurraParaEste");
+                            break;
+
+                        case 3:
+                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
+                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                                    "EmpurraParaOeste");
+                            break;
+
+                        case 4:
+                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
+                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                                    "Congela");
+                            break;
+
+                        case 5:
+                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
+                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                                    "ReduzAlcance");
+                            break;
+
+                        case 6:
+                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
+                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                                    "DuplicaAlcance");
+                            break;
+
+                        case 7:
+                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
+                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                                    "Congela4Ever");
+                            break;
+                    }
                 }
             }
         }
     }
 
-    private void aplicarFeiticosPorTurno() {
-        for (Creature creature : listaCreatures) {
-            switch (creature.getFeiticoEnum()) {
-                case EmpurraParaNorte:
-                    break;
-                case EmpurraParaEste:
-                    break;
-                case EmpurraParaSul:
-                    break;
-                case EmpurraParaOeste:
-                    break;
-                case ReduzAlcance:
-                    break;
-                case DuplicaAlcance:
-                    break;
-                case Congela:
-                    break;
-                case Congela4Ever:
-                    break;
-                case Descongela:
-                    break;
+    public boolean encontraTesouro(int encontrou, Creature creature){
+
+        if (encontrou == 1 || encontrou == 2 || encontrou == 3) {
+            pontuacaoTotalEmJogo -= encontrou;
+            for (int j = 0; j < listaTreasures.size(); j++) {
+                if (listaTreasures.get(j).getPosY() == creature.getPosY() && listaTreasures.get(j).getPosX() == creature.getPosX()) {
+                    listaTreasures.remove(listaTreasures.get(j));
+                }
             }
+
+            if (creature.getIdEquipa() == 10) {
+                tLDR.somaPontos(encontrou);
+                creature.somaPontos(encontrou);
+                encontrouLDR = true;
+            }
+            if (creature.getIdEquipa() == 20) {
+                tRST.somaPontos(encontrou);
+                creature.somaPontos(encontrou);
+                encontrouRST = true;
+            }
+            return true;
         }
+        return false;
     }
 }

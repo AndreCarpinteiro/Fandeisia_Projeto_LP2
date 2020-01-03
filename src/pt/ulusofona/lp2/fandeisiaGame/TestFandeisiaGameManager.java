@@ -827,6 +827,5 @@ public class TestFandeisiaGameManager {
         assertEquals(1, listaCreatures.get(1).getPrata());
         assertEquals(1, listaCreatures.get(2).getOuro());
         assertEquals(1, listaCreatures.get(3).getBronze());
-
     }
 }
