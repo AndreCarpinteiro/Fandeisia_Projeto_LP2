@@ -1041,7 +1041,7 @@ public class FandeisiaGameManager {
         if (active) {
             Random r = new Random();
             boolean aplica = false;
-            int feiticoRandom, qtdLDR = 0, creaturaRandom, joga = r.nextInt(6);
+            int feiticoRandom, creaturaRandom, joga = r.nextInt(6), id = -1;
             List<Integer> array = new ArrayList<>();
 
             for (int i = 0; i < listaCreatures.size(); i++) {
@@ -1054,54 +1054,61 @@ public class FandeisiaGameManager {
                 while (!aplica) {
 
                     feiticoRandom = r.nextInt(7);
-                    creaturaRandom = r.nextInt(qtdLDR);
+                    creaturaRandom = r.nextInt(array.size());
+
+                    for (int i = 0; i < listaCreatures.size(); i++) {
+                        if (listaCreatures.get(i).getId() == array.get(creaturaRandom)) {
+                            id = i;
+                            break;
+                        }
+                    }
 
                     switch (feiticoRandom) {
                         case 0:
-                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
-                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                            aplica = enchant(listaCreatures.get(id).getPosX(),
+                                    listaCreatures.get(id).getPosY(),
                                     "EmpurraParaNorte");
                             break;
 
                         case 1:
-                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
-                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                            aplica = enchant(listaCreatures.get(id).getPosX(),
+                                    listaCreatures.get(id).getPosY(),
                                     "EmpurraParaSul");
                             break;
 
                         case 2:
-                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
-                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                            aplica = enchant(listaCreatures.get(id).getPosX(),
+                                    listaCreatures.get(id).getPosY(),
                                     "EmpurraParaEste");
                             break;
 
                         case 3:
-                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
-                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                            aplica = enchant(listaCreatures.get(id).getPosX(),
+                                    listaCreatures.get(id).getPosY(),
                                     "EmpurraParaOeste");
                             break;
 
                         case 4:
-                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
-                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                            aplica = enchant(listaCreatures.get(id).getPosX(),
+                                    listaCreatures.get(id).getPosY(),
                                     "Congela");
                             break;
 
                         case 5:
-                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
-                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                            aplica = enchant(listaCreatures.get(id).getPosX(),
+                                    listaCreatures.get(id).getPosY(),
                                     "ReduzAlcance");
                             break;
 
                         case 6:
-                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
-                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                            aplica = enchant(listaCreatures.get(id).getPosX(),
+                                    listaCreatures.get(id).getPosY(),
                                     "DuplicaAlcance");
                             break;
 
                         case 7:
-                            aplica = enchant(listaCreatures.get(array.get(creaturaRandom)).getPosX(),
-                                    listaCreatures.get(array.get(creaturaRandom)).getPosY(),
+                            aplica = enchant(listaCreatures.get(id).getPosX(),
+                                    listaCreatures.get(id).getPosY(),
                                     "Congela4Ever");
                             break;
                     }
@@ -1110,7 +1117,7 @@ public class FandeisiaGameManager {
         }
     }
 
-    public int encontraTesouro(int encontrou, Creature creature){
+    public int encontraTesouro(int encontrou, Creature creature) {
 
         if (encontrou == 1 || encontrou == 2 || encontrou == 3) {
             pontuacaoTotalEmJogo -= encontrou;

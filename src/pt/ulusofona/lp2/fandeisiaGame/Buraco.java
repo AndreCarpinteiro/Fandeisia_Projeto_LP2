@@ -25,7 +25,9 @@ public class Buraco {
 
     public void setId(int id){ this.id = id; }
 
-    public void setPosY(int posY) { this.posY = posY; }public void setPosX(int posX) { this.posX = posX; }
+    public void setPosY(int posY) { this.posY = posY; }
+
+    public void setPosX(int posX) { this.posX = posX; }
 
     public String toString() {
         return "Buraco{" + "id=" + id + ", posX=" + posX + ", posY=" + posY + '}';

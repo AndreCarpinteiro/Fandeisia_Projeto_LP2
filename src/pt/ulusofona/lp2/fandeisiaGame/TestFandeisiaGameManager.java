@@ -828,4 +828,24 @@ public class TestFandeisiaGameManager {
         assertEquals(1, listaCreatures.get(2).getOuro());
         assertEquals(1, listaCreatures.get(3).getBronze());
     }
+
+    @Test
+    public void test27AI(){
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[2];
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 1, y: 1, orientation: Sul";
+        conteudoMundo[1] = "id: 2, type: Humano, teamId: 20, x: 4, y: 3, orientation: Oeste";
+        gameManager.startGame(conteudoMundo, 5, 5);
+        gameManager.enchant(4,3, "EmpurraParaNorte");
+        gameManager.toggleAI(true);
+        gameManager.processTurn();
+    }
+
+    @Test
+    public void test28Buraco(){
+      Buraco buraco = new Buraco(10, 2, 3);
+        buraco.setId(2);
+        buraco.setPosX(3);
+        buraco.setPosY(1);
+    }
 }

@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import java.awt.*;
+
 import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
 import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.listaCreatures;
 
