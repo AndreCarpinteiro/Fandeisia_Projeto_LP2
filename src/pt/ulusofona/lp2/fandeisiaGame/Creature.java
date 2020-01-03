@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
+import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.listaCreatures;
 
 public abstract class Creature {
 
@@ -175,5 +176,4 @@ public abstract class Creature {
     public void setcongeladoNesteTurno(boolean congeladoNesteTurno) {
         this.congeladoNesteTurno = congeladoNesteTurno;
     }
-
 }

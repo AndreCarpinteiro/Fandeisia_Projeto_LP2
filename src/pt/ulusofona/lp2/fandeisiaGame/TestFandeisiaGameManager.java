@@ -785,4 +785,37 @@ public class TestFandeisiaGameManager {
         //Verifica possições
         assertEquals(2, gameManager.getElementId(2, 2));
     }
+
+    @Test
+    public void testmarado() {//Done---------------------
+
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[8];
+
+        conteudoMundo[0] = "id: 3, type: Anão, teamId: 0, x: 0, y: 3, orientation: Norte";
+        conteudoMundo[1] = "id: 4, type: Anão, teamId: 0, x: 1, y: 3, orientation: Norte";
+        conteudoMundo[2] = "id: 5, type: Anão, teamId: 0, x: 2, y: 3, orientation: Norte";
+        conteudoMundo[3] = "id: 6, type: Anão, teamId: 0, x: 3, y: 3, orientation: Norte";
+        //criaturas paras os saltos
+        conteudoMundo[4] = "id: 1, type: Anão, teamId: 0, x: 0, y: 2, orientation: Norte";
+        conteudoMundo[5] = "id: 2, type: Anão, teamId: 0, x: 1, y: 2, orientation: Norte";
+        //buracos
+        conteudoMundo[6] = "id: -500, type: hole, x: 2, y: 2";
+        conteudoMundo[7] = "id: -501, type: hole, x: 3, y: 2";
+        gameManager.startGame(conteudoMundo, 4, 4);
+        gameManager.processTurn();
+        //Verifica possições
+        assertEquals(3, gameManager.getElementId(0, 2));
+        assertEquals(4, gameManager.getElementId(1, 2));
+        assertEquals(5, gameManager.getElementId(2, 3));
+        assertEquals(6, gameManager.getElementId(3, 3));
+
+        assertEquals(1, gameManager.getElementId(0, 1));
+        assertEquals(2, gameManager.getElementId(1, 1));
+        assertEquals(0, gameManager.getElementId(2, 1));
+        assertEquals(0, gameManager.getElementId(3, 1));
+
+        assertEquals(0, gameManager.getElementId(0, 2));
+        assertEquals(0, gameManager.getElementId(1, 2));
+    }
 }

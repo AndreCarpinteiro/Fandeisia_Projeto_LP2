@@ -18,7 +18,7 @@ public class FandeisiaGameManager {
     // 5 = buraco
 
     private int countTurnos = 0; //FALTA GUARDAR
-  //  private int turn15GameOver = 0;
+    //  private int turn15GameOver = 0;
     private int turnosSemTesouro = 0;
     private int pontuacaoTotalEmJogo = 0;
     private boolean carregouFicheiro = false;
@@ -66,6 +66,8 @@ public class FandeisiaGameManager {
 
         countTurnos = 0;
         mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
+        List<Creature> tempCreature = new ArrayList<>();
+
 
         String typeTemp = "";
         int xTemp = 0, yTemp = 0, custoLDR = 0, custoRST = 0, idTemp = 0;
@@ -90,7 +92,7 @@ public class FandeisiaGameManager {
                         yTemp = Integer.parseInt(d.substring(4));
                     } else if (d.startsWith(" orientation:")) {
                         orientTemp = d.substring(14);
-                    }else if (d.startsWith(" ouro:")) {
+                    } else if (d.startsWith(" ouro:")) {
                         ouro = Integer.parseInt(d.substring(7));
                     } else if (d.startsWith(" prata:")) {
                         prata = Integer.parseInt(d.substring(8));
@@ -101,46 +103,46 @@ public class FandeisiaGameManager {
                     }
                 }
                 if (typeTemp.equals("Anão")) {
-                    if(!carregouFicheiro) {
+                    if (!carregouFicheiro) {
                         Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
                         listaCreatures.add(anao);
-                    }else{
+                    } else {
                         Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, bronze, prata, pontosTemp);
                         listaCreatures.add(anao);
                     }
                 }
                 if (typeTemp.equals("Dragão")) {
-                    if(!carregouFicheiro) {
+                    if (!carregouFicheiro) {
                         Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
                         listaCreatures.add(dragao);
-                    }else {
+                    } else {
                         Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, bronze, prata, pontosTemp);
                         listaCreatures.add(dragao);
                     }
                 }
                 if (typeTemp.equals("Humano")) {
-                    if(!carregouFicheiro) {
+                    if (!carregouFicheiro) {
                         Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
                         listaCreatures.add(humano);
-                    }else{
+                    } else {
                         Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
                         listaCreatures.add(humano);
                     }
                 }
                 if (typeTemp.equals("Elfo")) {
-                    if(!carregouFicheiro) {
+                    if (!carregouFicheiro) {
                         Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
                         listaCreatures.add(elfo);
-                    }else{
+                    } else {
                         Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
                         listaCreatures.add(elfo);
                     }
                 }
                 if (typeTemp.equals("Gigante")) {
-                    if(!carregouFicheiro) {
+                    if (!carregouFicheiro) {
                         Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
                         listaCreatures.add(gigante);
-                    }else{
+                    } else {
                         Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
                         listaCreatures.add(gigante);
                     }
@@ -195,6 +197,9 @@ public class FandeisiaGameManager {
             }
         }
 
+        //Ordenar Ids das creaturas!
+        Collections.sort(listaCreatures, new ComparadorId());
+
         //Só para visualizar
         for (int i = 0; i < listaCreatures.size(); i++) {
             System.out.println(listaCreatures.get(i).toString());
@@ -235,11 +240,11 @@ public class FandeisiaGameManager {
         //Ver mapa TESTES
         for (int i = 0; i < mapStartGame.length; i++) {
             for (int j = 0; j < mapStartGame[i].length; j++) {
-               System.out.print(mapStartGame[i][j]);
+                System.out.print(mapStartGame[i][j]);
             }
-          System.out.println();
+            System.out.println();
         }
-      //  tesourosEmJogo = listaTreasures.size();
+        //  tesourosEmJogo = listaTreasures.size();
         return 0; //Tudo válido
     }
 
@@ -261,7 +266,7 @@ public class FandeisiaGameManager {
         boolean encontrouRST = false;
 
         //Execução de Feitiços
-        for (Creature creature:listaCreatures) {
+        for (Creature creature : listaCreatures) {
             switch (creature.getFeiticoEnum()) {//todo falta o caso de encontrar tesouros com o empurra
                 case EmpurraParaNorte:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
@@ -308,7 +313,7 @@ public class FandeisiaGameManager {
         //Execução de movimento
         for (Creature creature : listaCreatures) {
 
-            if(!creature.getCongelado4Ever() && !creature.getcongeladoNesteTurno()){
+            if (!creature.getCongelado4Ever() && !creature.getcongeladoNesteTurno()) {
                 encontrou = creature.moveCriatura();
             }
 
@@ -367,7 +372,7 @@ public class FandeisiaGameManager {
         }
 
         //   for (int j = 0; j < listaTreasures.size(); j++) {
-             System.out.println("Turnos sem tesouro: "+turnosSemTesouro);
+        System.out.println("Turnos sem tesouro: " + turnosSemTesouro);
         System.out.println("Pontoação total em jogo: " + pontuacaoTotalEmJogo);
         //}
 
@@ -389,10 +394,6 @@ public class FandeisiaGameManager {
 
     public boolean gameIsOver() {
 
-        //System.out.println("pontuacao total:" + pontuacaoTotal);
-        int conta = pontuacaoTotalEmJogo / 2 + 1;
-
-        //System.out.println("conta:" + conta);
         if (tLDR.getTeamPontos() > tRST.getTeamPontos() + pontuacaoTotalEmJogo) {
             return true;
         }
@@ -671,7 +672,7 @@ public class FandeisiaGameManager {
 
                                     }
                                     return false;
-                                    //break;
+                                //break;
                                 case "ReduzAlcance":
                                     switch (creature.getOrientacao()) {
                                         case Norte:
@@ -1044,26 +1045,26 @@ public class FandeisiaGameManager {
         }
     }
 
-    public void toggleAI(boolean active){
-        if(active){
+    public void toggleAI(boolean active) {
+        if (active) {
             int posXT, posYT;
 
             Random rnd = new Random();
-            int randNum = rnd.nextInt((100-50)+1) + 50;
-            for (int i = 0; i < listaCreatures.size(); i++){
-                if(randNum > 55) {
-          //          enchant();
+            int randNum = rnd.nextInt((100 - 50) + 1) + 50;
+            for (int i = 0; i < listaCreatures.size(); i++) {
+                if (randNum > 55) {
+                    //          enchant();
                 }
             }
         }
 
-            for (int i = 0; i < listaCreatures.size(); i++){
-                if(listaCreatures.get(i).getIdEquipa() == 20){
-                    for(int j = 0; j < listaTreasures.size(); j++){
-           //             if()
-                    }
+        for (int i = 0; i < listaCreatures.size(); i++) {
+            if (listaCreatures.get(i).getIdEquipa() == 20) {
+                for (int j = 0; j < listaTreasures.size(); j++) {
+                    //             if()
                 }
             }
+        }
     }
 
     private void aplicarFeiticosPorTurno() {
