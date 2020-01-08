@@ -40,6 +40,7 @@ public class FandeisiaGameManager {
             put("Congela", 3);
             put("Congela4Ever", 10);
             put("Descongela", 8);
+            System.out.println("dsf");
         }
     };
 
