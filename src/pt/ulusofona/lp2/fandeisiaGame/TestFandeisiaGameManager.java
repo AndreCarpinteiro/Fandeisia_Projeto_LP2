@@ -12,7 +12,7 @@ import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
 public class TestFandeisiaGameManager {
 
     @Test
-    public void test01FronteirasAnao() {//Done-------------
+    public void test01FronteirasAnao() throws InsufficientCoinsException {//Done-------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[4];
         conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Norte";
@@ -51,7 +51,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test02FronteirasHumano() {//Done------------------------
+    public void test02FronteirasHumano() throws InsufficientCoinsException {//Done------------------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[4];
         conteudoMundo[0] = "id: 1, type: Humano, teamId: 10, x: 0, y: 0, orientation: Norte";
@@ -90,7 +90,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test03FronteirasGigante() {//Done---------------
+    public void test03FronteirasGigante() throws InsufficientCoinsException {//Done---------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[4];
         conteudoMundo[0] = "id: 1, type: Gigante, teamId: 10, x: 0, y: 0, orientation: Norte";
@@ -129,7 +129,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test04FronteirasDragao() {//Done---------------------
+    public void test04FronteirasDragao() throws InsufficientCoinsException {//Done---------------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[8];
         conteudoMundo[0] = "id: 1, type: Dragão, teamId: 10, x: 1, y: 0, orientation: Norte";
@@ -177,7 +177,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test05FronteirasElfo() {//Done---------------------
+    public void test05FronteirasElfo() throws InsufficientCoinsException {//Done---------------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[8];
         conteudoMundo[0] = "id: 1, type: Elfo, teamId: 10, x: 1, y: 0, orientation: Norte";
@@ -225,7 +225,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test06SaltosDragao() {//Done---------------------
+    public void test06SaltosDragao() throws InsufficientCoinsException {//Done---------------------
         /*dragao:
             -2 buracos ✔
             -3 buracos X
@@ -274,7 +274,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test07SaltosElfo() {//Done---------------------
+    public void test07SaltosElfo() throws InsufficientCoinsException {//Done---------------------
         /*elfo:
             -1 buraco ✔
             -2 buracos X
@@ -316,7 +316,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test08SaltosGigante() {//Done---------------------
+    public void test08SaltosGigante() throws InsufficientCoinsException {//Done---------------------
 
         /*gigante:
             -2 buracos ✔
@@ -370,7 +370,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test09SaltosHumano() {//Done---------------------
+    public void test09SaltosHumano() throws InsufficientCoinsException {//Done---------------------
         /*humano:
             -1 buraco X
             -2 buracos X
@@ -420,7 +420,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test10SaltosAnao() {//Done---------------------
+    public void test10SaltosAnao() throws InsufficientCoinsException {//Done---------------------
         /*anao:
             -1 buraco X
             -1 criatura X
@@ -455,7 +455,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test11SaltosEspeciaisDragao01() {//Done---------------------
+    public void test11SaltosEspeciaisDragao01() throws InsufficientCoinsException {//Done---------------------
         /*dragao:
             -2 buraco diagonal ✔
             -2 criaturas diagonal ✔
@@ -491,7 +491,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test12SaltosEspeciaisDragao02() {//Done---------------------
+    public void test12SaltosEspeciaisDragao02() throws InsufficientCoinsException {//Done---------------------
 
         /*dragao:
             -3 buracos diagonal X
@@ -530,7 +530,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test13SaltosEspeciaisElfo() {//Done---------------------
+    public void test13SaltosEspeciaisElfo() throws InsufficientCoinsException {//Done---------------------
         /*elfo:
             -1 buraco diagonal ✔
             -2 buracos diagonal X
@@ -566,7 +566,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test14SaltosEspeciaisGigante() {//Done---------------------
+    public void test14SaltosEspeciaisGigante() throws InsufficientCoinsException {//Done---------------------
         /*gigante:
             -2 criaturas mas aterrar num buraco X
             -2 criaturas mas uma delas é um gigante X
@@ -605,7 +605,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test15getCoin() {//Done---------------------
+    public void test15getCoin() throws InsufficientCoinsException {//Done---------------------
 
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[7];
@@ -660,7 +660,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test18getIdTesouro() {
+    public void test18getIdTesouro() throws InsufficientCoinsException {
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[7];
         conteudoMundo[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -728,7 +728,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test23FeiticoEmpurraParaNorteAnao(){
+    public void test23FeiticoEmpurraParaNorteAnao() throws InsufficientCoinsException {
 
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[8];
@@ -759,7 +759,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test24FeiticoEmpurraParaNorteHumano(){
+    public void test24FeiticoEmpurraParaNorteHumano() throws InsufficientCoinsException {
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[2];
         conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 1, y: 1, orientation: Sul";
@@ -773,7 +773,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test25FeiticoEmpurraParaNorteDragao(){
+    public void test25FeiticoEmpurraParaNorteDragao() throws InsufficientCoinsException {
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[2];
         conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 1, y: 1, orientation: Sul";
@@ -787,7 +787,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test26ApanhaTesouros() {//Done-------------
+    public void test26ApanhaTesouros() throws InsufficientCoinsException {//Done-------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[8];
         conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -830,7 +830,7 @@ public class TestFandeisiaGameManager {
     }
 
     @Test
-    public void test27AI(){
+    public void test27AI() throws InsufficientCoinsException {
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
         String[] conteudoMundo = new String[2];
         conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 1, y: 1, orientation: Sul";

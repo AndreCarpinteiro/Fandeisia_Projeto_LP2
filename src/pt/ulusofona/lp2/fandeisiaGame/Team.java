@@ -4,6 +4,7 @@ public class Team {
     int idTeam;
     int pontosTeam;
     int plafond = 50;
+    int custo = 0;
     boolean ativo;
 
     Team(int idTeam,int pontosTeam){
@@ -53,5 +54,13 @@ public class Team {
 
     public void setPontosTeam(int pontos){
         this.pontosTeam = pontos;
+    }
+
+    public void somaCusto(int custo){
+        this.custo += custo;
+    }
+
+    public int getCusto(){
+        return custo;
     }
 }

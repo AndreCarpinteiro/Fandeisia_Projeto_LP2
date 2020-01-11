@@ -22,8 +22,8 @@ public class FandeisiaGameManager {
     private int pontuacaoTotalEmJogo = 0;
     private boolean carregouFicheiro = false, encontrouLDR = false, encontrouRST = false;
 
-    private Team tLDR = new Team(10, 0);
-    private Team tRST = new Team(20, 0);
+    static Team tLDR = new Team(10, 0);
+    static Team tRST = new Team(20, 0);
 
     static List<Creature> listaCreatures = new ArrayList<>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
@@ -59,24 +59,25 @@ public class FandeisiaGameManager {
         return creatureTypeOptions;
     }
 
-    public int startGame(String[] content, int rows, int columns) {
+    void startGame(String[] contents, int rows, int colums) throws
+            InsufficientCoinsException{
 
         listaCreatures.clear();
         listaTreasures.clear();
 
         countTurnos = 0;
-        mapStartGame = new int[rows][columns];//vamos usar isto nas outras funcoes
+        mapStartGame = new int[rows][colums];//vamos usar isto nas outras funcoes
         List<Creature> tempCreature = new ArrayList<>();
 
 
         String typeTemp = "";
-        int xTemp = 0, yTemp = 0, custoLDR = 0, custoRST = 0, idTemp = 0;
+        int xTemp = 0, yTemp = 0, idTemp = 0;
         int teamIdTemp = 0, ouro = 0, prata = 0, bronze = 0, pontosTemp = 0;
         String orientTemp = "Norte";
         String[] dados;
         //Dissecação do parametro "content" para objetos creatures e treasures----
 
-        for (String elemento : content) {
+        for (String elemento : contents) {
             if (elemento.contains("Anão") || elemento.contains("Dragão") || elemento.contains("Gigante") || elemento.contains("Elfo") || elemento.contains("Humano")) {
                 dados = elemento.split(",");
                 for (String d : dados) {
@@ -214,26 +215,34 @@ public class FandeisiaGameManager {
         //Atualizar plafond
 
         //Validar plafond
-        for (int i = 0; i < listaCreatures.size(); i++) {
-            if (listaCreatures.get(i).idEquipa == 10) {
-                custoLDR += listaCreatures.get(i).getCusto();
-            } else {
-                custoRST += listaCreatures.get(i).getCusto();
+            for (int i = 0; i < listaCreatures.size(); i++) {
+                if (listaCreatures.get(i).idEquipa == 10) {
+                    tLDR.somaCusto(listaCreatures.get(i).getCusto());
+                } else {
+                    tRST.somaCusto(listaCreatures.get(i).getCusto());
+                }
             }
-        }
 
-        if (custoLDR > tLDR.getPlafond() && custoRST > tRST.getPlafond()) {
-            return 1;
-        }
-        if (custoLDR > tLDR.getPlafond()) {
-            return 2;
-        }
-        if (custoRST > tRST.getPlafond()) {
-            return 3;
-        }
+            try {
+                if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
+                    System.out.println("1");
+                    throw new InsufficientCoinsException();
+                }
+                if (tLDR.getCusto() > tLDR.getPlafond()) {
+                    System.out.println("2");
+                    throw new InsufficientCoinsException();
+                }
+                if (tRST.getCusto() > tRST.getPlafond()) {
+                    System.out.println("3");
+                    throw new InsufficientCoinsException();
+                }
+            }catch (InsufficientCoinsException e){
+                System.out.println("4");
+                throw new InsufficientCoinsException();
+            }
 
-        tLDR.decrementaPlafond(custoLDR); //Atualiza plafond
-        tRST.decrementaPlafond(custoRST); //Atualiza plafond
+        tLDR.decrementaPlafond(tLDR.getCusto()); //Atualiza plafond
+        tRST.decrementaPlafond(tRST.getCusto()); //Atualiza plafond
 
         //Ver mapa TESTES
         for (int i = 0; i < mapStartGame.length; i++) {
@@ -243,7 +252,7 @@ public class FandeisiaGameManager {
             System.out.println();
         }
 
-        return 0; //Tudo válido
+        //return 0; //Tudo válido
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
@@ -1018,7 +1027,7 @@ public class FandeisiaGameManager {
                 }
             }
             arq.close();
-        } catch (IOException e) {
+        } catch (IOException | InsufficientCoinsException e) {
             System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
             return false;
         }
@@ -1141,5 +1150,11 @@ public class FandeisiaGameManager {
             return 1;
         }
         return 0;
+    }
+
+    public Map<String, List<String>> getStatistics(){
+        Map<String, List<String>> mapa = new HashMap<String, List<String>>();
+
+        return mapa;
     }
 }
