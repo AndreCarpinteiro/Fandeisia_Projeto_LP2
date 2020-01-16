@@ -223,23 +223,19 @@ public class FandeisiaGameManager {
                 }
             }
 
-            try {
-                if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
-                    System.out.println("1");
-                    throw new InsufficientCoinsException();
-                }
-                if (tLDR.getCusto() > tLDR.getPlafond()) {
-                    System.out.println("2");
-                    throw new InsufficientCoinsException();
-                }
-                if (tRST.getCusto() > tRST.getPlafond()) {
-                    System.out.println("3");
-                    throw new InsufficientCoinsException();
-                }
-            }catch (InsufficientCoinsException e){
-                System.out.println("4");
+            if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
+                System.out.println("1");
                 throw new InsufficientCoinsException();
             }
+            if (tLDR.getCusto() > tLDR.getPlafond()) {
+                System.out.println("2");
+                throw new InsufficientCoinsException();
+            }
+            if (tRST.getCusto() > tRST.getPlafond()) {
+                System.out.println("3");
+                throw new InsufficientCoinsException();
+            }
+
 
         tLDR.decrementaPlafond(tLDR.getCusto()); //Atualiza plafond
         tRST.decrementaPlafond(tRST.getCusto()); //Atualiza plafond
