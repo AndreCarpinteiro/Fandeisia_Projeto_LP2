@@ -18,8 +18,6 @@ public class Dragao extends Creature {
     @Override
     public int moveCriatura() {//Done------------
 
-        //x Horizontal
-        //y vertical
 
         int yMax = mapa.length - 1;
         int xMax = mapa[0].length - 1;

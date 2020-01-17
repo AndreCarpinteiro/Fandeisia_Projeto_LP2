@@ -26,6 +26,7 @@ public class FandeisiaGameManager {
     static Team tRST = new Team(20, 0);
 
     static List<Creature> listaCreatures = new ArrayList<>();
+    private HashMap <Integer, Creature> Criaturas = new HashMap<Integer, Creature>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
     private List<Buraco> listaHoles = new ArrayList<>();
 
@@ -40,7 +41,7 @@ public class FandeisiaGameManager {
             put("Congela", 3);
             put("Congela4Ever", 10);
             put("Descongela", 8);
-            System.out.println("dsf");
+            //System.out.println("dsf");
         }
     };
 
@@ -202,38 +203,36 @@ public class FandeisiaGameManager {
         Collections.sort(listaCreatures, new ComparadorId());
 
         //Só para visualizar
-        for (int i = 0; i < listaCreatures.size(); i++) {
-            System.out.println(listaCreatures.get(i).toString());
+        for (Creature creature : listaCreatures) {
+            System.out.println(creature.toString());
         }
-        for (int i = 0; i < listaTreasures.size(); i++) {
-            System.out.println(listaTreasures.get(i).toString());
+        for (Tesouro tesouro : listaTreasures) {
+            System.out.println(tesouro.toString());
         }
-        for (int i = 0; i < listaHoles.size(); i++) {
-            System.out.println(listaHoles.get(i).toString());
+        for (Buraco buraco : listaHoles) {
+            System.out.println(buraco.toString());
         }
 
         //Atualizar plafond
 
         //Validar plafond
-            for (int i = 0; i < listaCreatures.size(); i++) {
-                if (listaCreatures.get(i).idEquipa == 10) {
-                    tLDR.somaCusto(listaCreatures.get(i).getCusto());
-                } else {
-                    tRST.somaCusto(listaCreatures.get(i).getCusto());
-                }
+        for (Creature creature : listaCreatures) {
+            if (creature.idEquipa == 10) {
+                tLDR.somaCusto(creature.getCusto());
+            } else {
+                tRST.somaCusto(creature.getCusto());
             }
+        }
 
             if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
                 System.out.println("1");
-                throw new InsufficientCoinsException();
-            }
-            if (tLDR.getCusto() > tLDR.getPlafond()) {
+                throw new InsufficientCoinsException("Ambos os exércitos não respeitam o plafond");
+            }else if (tLDR.getCusto() > tLDR.getPlafond()) {
                 System.out.println("2");
-                throw new InsufficientCoinsException();
-            }
-            if (tRST.getCusto() > tRST.getPlafond()) {
+                throw new InsufficientCoinsException("O exército LDR(User) não respeita o plafond");
+            }else if (tRST.getCusto() > tRST.getPlafond()) {
                 System.out.println("3");
-                throw new InsufficientCoinsException();
+                throw new InsufficientCoinsException("O exército RST(Computador) não respeita o plafond");
             }
 
 
@@ -252,14 +251,19 @@ public class FandeisiaGameManager {
     }
 
     public void setInitialTeam(int teamId) {//Done----------------
-
-        if (teamId == 10) { //Acho que funciona, no debug está bem
-            tLDR.setEstado(true);
-            tRST.setEstado(false);
-        } else {
-            tLDR.setEstado(false);
-            tRST.setEstado(true);
+        try {
+            if (teamId == 10) { //Acho que funciona, no debug está bem
+                tLDR.setEstado(true);
+                tRST.setEstado(false);
+            } else if(teamId == 20){
+                tLDR.setEstado(false);
+                tRST.setEstado(true);
+            }
         }
+        catch(Exception e) {
+            System.out.println("setInitialTeam recebeu uma equipa inválida ou não recebeu de todo um valor teamId");
+        }
+
     }
 
     public void processTurn() {
@@ -404,12 +408,12 @@ public class FandeisiaGameManager {
     public List<String> getResults() {//Done---------------
 
         List<String> resultado = new ArrayList<>();
-        int id = 0;
-        int ouros = 0;
-        int pratas = 0;
-        int bronze = 0;
-        String tipo = "";
-        int pontos = 0;
+        int id; //= 0;
+        int ouros; //= 0;
+        int pratas; //= 0;
+        int bronze; //= 0;
+        String tipo; //= "";
+        int pontos; //= 0;
 
         resultado.add("Welcome to FANDEISIA");
 
@@ -506,10 +510,9 @@ public class FandeisiaGameManager {
 
     public Map<String, Integer> createComputerArmy() {
 
-        Random random = new Random();
         Map<String, Integer> mapa = new HashMap<String, Integer>();
-
         int gigante, elfo, humano, dragao, anao, conta;
+
         Random r = new Random();
         do {
             gigante = Math.abs(r.nextInt()) % 5;
@@ -534,6 +537,7 @@ public class FandeisiaGameManager {
             return false;
         }
         int plafond;
+
         int custo = custoFeiticos.get(spellName);//TODO: Rebenta nesta linha quando abro os feiticos de novo e depois fecho
         System.out.println(custo);
         int yMax = mapStartGame.length - 1;
@@ -904,32 +908,32 @@ public class FandeisiaGameManager {
             gravarArq.println("my: " + mapStartGame.length);
             gravarArq.println("mx: " + mapStartGame[0].length);
 
-            for (int i = 0; i < listaCreatures.size(); i++) {
-                idTemp = listaCreatures.get(i).getId();
-                posXTemp = listaCreatures.get(i).getPosX();
-                posyTemp = listaCreatures.get(i).getPosY();
-                tipo = listaCreatures.get(i).getTipo();
-                teamId = listaCreatures.get(i).getIdEquipa();
-                orientacao = listaCreatures.get(i).getOrientacao();
-                ouro = listaCreatures.get(i).getOuro();
-                prata = listaCreatures.get(i).getPrata();
-                bronze = listaCreatures.get(i).getBronze();
-                pontos = listaCreatures.get(i).getPontos();
+            for (Creature creature : listaCreatures) {
+                idTemp = creature.getId();
+                posXTemp = creature.getPosX();
+                posyTemp = creature.getPosY();
+                tipo = creature.getTipo();
+                teamId = creature.getIdEquipa();
+                orientacao = creature.getOrientacao();
+                ouro = creature.getOuro();
+                prata = creature.getPrata();
+                bronze = creature.getBronze();
+                pontos = creature.getPontos();
                 gravarArq.println("id: " + idTemp + ", type: " + tipo + ", teamId: " + teamId + ", x: " + posXTemp + ", y: " + posyTemp +
                         ", orientation: " + orientacao + ", ouro: " + ouro + ", prata: " + prata + ", bronze: " + bronze + ", pontos: " + pontos);
             }
             gravarArq.println();
-            for (int i = 0; i < listaTreasures.size(); i++) {
-                idTemp = listaTreasures.get(i).getId();
-                posXTemp = listaTreasures.get(i).getPosX();
-                posyTemp = listaTreasures.get(i).getPosY();
-                gravarArq.println("id: " + idTemp + ", type: " + listaTreasures.get(i).getTipo() + ", x: " + posXTemp + ", y: " + posyTemp);
+            for (Tesouro tesouro : listaTreasures) {
+                idTemp = tesouro.getId();
+                posXTemp = tesouro.getPosX();
+                posyTemp = tesouro.getPosY();
+                gravarArq.println("id: " + idTemp + ", type: " + tesouro.getTipo() + ", x: " + posXTemp + ", y: " + posyTemp);
             }
             gravarArq.println();
-            for (int i = 0; i < listaHoles.size(); i++) {
-                idTemp = listaHoles.get(i).getId();
-                posXTemp = listaHoles.get(i).getPosX();
-                posyTemp = listaHoles.get(i).getPosY();
+            for (Buraco buraco : listaHoles) {
+                idTemp = buraco.getId();
+                posXTemp = buraco.getPosX();
+                posyTemp = buraco.getPosY();
                 gravarArq.println("id: " + idTemp + ", type: hole, x: " + posXTemp + ", y: " + posyTemp);
             }
 
@@ -1050,9 +1054,9 @@ public class FandeisiaGameManager {
             int feiticoRandom, creaturaRandom, joga = r.nextInt(6), id = -1;
             List<Integer> array = new ArrayList<>();
 
-            for (int i = 0; i < listaCreatures.size(); i++) {
-                if (listaCreatures.get(i).getIdEquipa() == 20) {
-                    array.add(listaCreatures.get(i).getId());
+            for (Creature creature : listaCreatures) {
+                if (creature.getIdEquipa() == 20) {
+                    array.add(creature.getId());
                 }
             }
 
@@ -1147,6 +1151,9 @@ public class FandeisiaGameManager {
         }
         return 0;
     }
+
+
+
 
     public Map<String, List<String>> getStatistics(){
         Map<String, List<String>> mapa = new HashMap<String, List<String>>();

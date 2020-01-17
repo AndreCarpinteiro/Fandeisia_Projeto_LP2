@@ -5,6 +5,15 @@ import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.tRST;
 
 public class InsufficientCoinsException extends Exception {
 
+    String mensagem;
+    InsufficientCoinsException(String mensagem){
+        this.mensagem = mensagem;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
     public boolean teamRequiresMoreCoins(int teamId) {
 
         if (teamId == 10) {
@@ -27,4 +36,5 @@ public class InsufficientCoinsException extends Exception {
             return tRST.getCusto();
         }
     }
+
 }
