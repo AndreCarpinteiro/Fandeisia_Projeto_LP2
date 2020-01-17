@@ -28,7 +28,7 @@ public class InsufficientCoinsException extends Exception {
         return false;
     }
 
-    public int getRequiredCoinsForTeam(int teamID){
+    public int requiredCoinsForTeam(int teamID){
 
         if(teamID == 10){
             return tLDR.getCusto();

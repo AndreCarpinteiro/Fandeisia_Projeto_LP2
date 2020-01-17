@@ -6,6 +6,7 @@ package pt.ulusofona.lp2.fandeisiaGame;
 import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class FandeisiaGameManager {
 
@@ -60,7 +61,7 @@ public class FandeisiaGameManager {
         return creatureTypeOptions;
     }
 
-    void startGame(String[] contents, int rows, int colums) throws
+    public void startGame(String[] contents, int rows, int colums) throws
             InsufficientCoinsException{
 
         listaCreatures.clear();
@@ -1152,11 +1153,34 @@ public class FandeisiaGameManager {
         return 0;
     }
 
-
-
-
     public Map<String, List<String>> getStatistics(){
         Map<String, List<String>> mapa = new HashMap<String, List<String>>();
+        //as3MaisCarregadas // todo esta mal, fiz com pontos e nao tesouros
+        List<String> lista1 = listaCreatures.stream()
+                .sorted((creature1,creature2) -> creature2.getPontos() - creature1.getPontos())
+                .map(creature -> creature.getId() + ":" +creature.getPontos())
+                .limit(3)
+                .collect(Collectors.toList());
+        mapa.put("as3MaisCarregadas",lista1);
+        //as5MaisRicas
+        //List<String> lista2 = listaCreatures.stream()
+        //.
+        //mapa.put("as5MaisRicas",lista2);
+
+        //osAlvosFavoritos
+        //List<String> lista3 = listaCreatures.stream()
+        //.
+        //mapa.put("as5MaisRicas",lista3);
+
+        //os3MaisViajadas
+        //List<String> lista4 = listaCreatures.stream()
+        //.
+        //mapa.put("as5MaisRicas",lista4);
+
+        //tiposDeCriaturaESeusTesouros
+        //List<String> lista5 = listaCreatures.stream()
+        //.
+        //mapa.put("as5MaisRicas",lista5);
 
         return mapa;
     }

@@ -21,7 +21,7 @@ public abstract class Creature {
     Orientacao orientacao;
     int[][] mapa = mapStartGame;
     FeiticoEnum feiticoEnum = FeiticoEnum.SemFeitico;
-    int alcance, pontos, posX, posY;;
+    int alcance, pontos, posX, posY;
     boolean congelado4Ever = false;
     boolean congeladoNesteTurno = false;
 
