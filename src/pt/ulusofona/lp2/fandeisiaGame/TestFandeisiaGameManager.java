@@ -848,4 +848,47 @@ public class TestFandeisiaGameManager {
         buraco.setPosX(3);
         buraco.setPosY(1);
     }
+
+    @Test
+    public void test29Estatisticas() throws InsufficientCoinsException {//Done-------------
+        FandeisiaGameManager gameManager = new FandeisiaGameManager();
+        String[] conteudoMundo = new String[8];
+        conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        conteudoMundo[1] = "id: 2, type: Humano, teamId: 10, x: 3, y: 3, orientation: Oeste";
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 10, x: 3, y: 0, orientation: Sul";
+        conteudoMundo[3] = "id: 4, type: Anão, teamId: 20, x: 0, y: 3, orientation: Norte";
+        conteudoMundo[4] = "id: -1, type: bronze, x: 1, y: 0";
+        conteudoMundo[5] = "id: -2, type: silver, x: 2, y: 3";
+        conteudoMundo[6] = "id: -3, type: gold, x: 3, y: 1";
+        conteudoMundo[7] = "id: -4, type: bronze, x: 0, y: 2";
+
+        gameManager.startGame(conteudoMundo, 4, 4);
+
+        gameManager.processTurn();
+
+        List<Creature> listaCreatures = gameManager.getCreatures();
+
+        for (int i = 0; i < gameManager.mapStartGame.length; i++) {
+            for (int j = 0; j < gameManager.mapStartGame[i].length; j++) {
+                System.out.print(gameManager.mapStartGame[i][j]);
+            }
+            System.out.println();
+        }
+        //Verifica orientações
+        assertEquals(Creature.Orientacao.Este, gameManager.getCreatures().get(0).getOrientacao());
+        assertEquals(Creature.Orientacao.Oeste, listaCreatures.get(1).getOrientacao());
+        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(2).getOrientacao());
+        assertEquals(Creature.Orientacao.Norte, listaCreatures.get(3).getOrientacao());
+
+        //Verifica possições
+        assertEquals(1, gameManager.getElementId(1, 0));
+        assertEquals(2, gameManager.getElementId(2, 3));
+        assertEquals(3, gameManager.getElementId(3, 1));
+        assertEquals(4, gameManager.getElementId(0, 2));
+        System.out.println(listaCreatures.get(0).getPontos());
+        assertEquals(1, listaCreatures.get(0).getBronze());
+        assertEquals(1, listaCreatures.get(1).getPrata());
+        assertEquals(1, listaCreatures.get(2).getOuro());
+        assertEquals(1, listaCreatures.get(3).getBronze());
+    }
 }

@@ -1,12 +1,13 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
-import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.tLDR;
-import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.tRST;
-
 public class InsufficientCoinsException extends Exception {
 
     String mensagem;
-    InsufficientCoinsException(String mensagem){
+    Team tLDR;//todo dar como parametro no gmamanager
+    Team tRST;
+    InsufficientCoinsException(Team tLDR ,Team tRST,String mensagem){
+        this.tLDR = tLDR;
+        this.tRST = tRST;
         this.mensagem = mensagem;
     }
 

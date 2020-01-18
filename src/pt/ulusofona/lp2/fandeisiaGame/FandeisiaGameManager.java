@@ -52,11 +52,11 @@ public class FandeisiaGameManager {
 
         String[][] creatureTypeOptions = new String[5][4];
 
-        creatureTypeOptions[0] = new String[]{"Humano", "skeleton.png", "Muito fixe", "3"};
-        creatureTypeOptions[1] = new String[]{"Anão", "dwarf.png", "Dá cabeçadas", "1"};
-        creatureTypeOptions[2] = new String[]{"Gigante", "gigante.png", "Bue grande", "5"};
-        creatureTypeOptions[3] = new String[]{"Dragão", "super_dragon.png", "Comandado pelo Macaco Lider", "9"};
-        creatureTypeOptions[4] = new String[]{"Elfo", "elfo.png", "Muito fixe", "5"};
+        creatureTypeOptions[0] = new String[]{"Humano", "skeleton.png", "Simples", "3"};
+        creatureTypeOptions[1] = new String[]{"Anão", "dwarf.png", "Dispensavel", "1"};
+        creatureTypeOptions[2] = new String[]{"Gigante", "gigante.png", "Dá grandes saltos", "5"};
+        creatureTypeOptions[3] = new String[]{"Dragão", "super_dragon.png", "Voa sobre criaturas e buracos", "9"};
+        creatureTypeOptions[4] = new String[]{"Elfo", "elfo.png", "É fragil", "5"};
 
         return creatureTypeOptions;
     }
@@ -237,13 +237,13 @@ public class FandeisiaGameManager {
 
             if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
                 System.out.println("1");
-                throw new InsufficientCoinsException("Ambos os exércitos não respeitam o plafond");
+                throw new InsufficientCoinsException(tLDR,tRST,"Ambos os exércitos não respeitam o plafond");
             }else if (tLDR.getCusto() > tLDR.getPlafond()) {
                 System.out.println("2");
-                throw new InsufficientCoinsException("O exército LDR(User) não respeita o plafond");
+                throw new InsufficientCoinsException(tLDR,tRST,"O exército LDR(User) não respeita o plafond");
             }else if (tRST.getCusto() > tRST.getPlafond()) {
                 System.out.println("3");
-                throw new InsufficientCoinsException("O exército RST(Computador) não respeita o plafond");
+                throw new InsufficientCoinsException(tLDR,tRST,"O exército RST(Computador) não respeita o plafond");
             }
 
 
