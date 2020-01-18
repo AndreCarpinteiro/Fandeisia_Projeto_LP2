@@ -22,9 +22,11 @@ public abstract class Creature {
     int[][] mapa = mapStartGame;
     FeiticoEnum feiticoEnum = FeiticoEnum.SemFeitico;
     int alcance, pontos, posX, posY;
+    int kms = 0;
     boolean congelado4Ever = false;
     boolean congeladoNesteTurno = false;
-    int countFeitico, countTipo = 0;
+    int countFeitico;
+
 
     public Creature(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         this.id = id;
@@ -188,4 +190,18 @@ public abstract class Creature {
     public abstract void somaQtdCreatura();
 
     public abstract int getQtdCreatura();
+
+    public abstract int getPontosPorCreatura();
+
+    public void addKms(){
+        kms += alcance;
+    }
+
+    public void maisUmKm(){
+        kms ++;
+    }
+
+    public int getKms() {
+        return kms;
+    }
 }

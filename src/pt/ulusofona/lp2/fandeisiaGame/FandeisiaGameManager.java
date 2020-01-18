@@ -293,6 +293,7 @@ public class FandeisiaGameManager {
                     creature.setPosY(creature.getPosY() - 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
                     creature.somaFeitico();
+                    creature.maisUmKm();
                     break;
                 case EmpurraParaEste:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
@@ -300,6 +301,7 @@ public class FandeisiaGameManager {
                     creature.setPosX(creature.getPosX() + 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
                     creature.somaFeitico();
+                    creature.maisUmKm();
                     break;
                 case EmpurraParaSul:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
@@ -307,6 +309,7 @@ public class FandeisiaGameManager {
                     creature.setPosY(creature.getPosY() + 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
                     creature.somaFeitico();
+                    creature.maisUmKm();
                     break;
                 case EmpurraParaOeste:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
@@ -314,6 +317,7 @@ public class FandeisiaGameManager {
                     creature.setPosX(creature.getPosX() - 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
                     creature.somaFeitico();
+                    creature.maisUmKm();
                     break;
                 case ReduzAlcance:
                     creature.setAlcance(1);
@@ -1185,12 +1189,10 @@ public class FandeisiaGameManager {
 
         //as5MaisRicas
         List<String> lista2 = listaCreatures.stream()
-                .sorted((creature1,creature2) -> creature2.getPontos() - creature1.getPontos())
+                .sorted(Comparator.comparingInt(Creature::getPontos).reversed().thenComparing(Creature::getQtdTesouros))
                 .limit(5)
-                .sorted((creature1,creature2) ->   creature1.getPontos() == creature2.getPontos() ? 0 : creature1.getQtdTesouros() - creature2.getQtdTesouros())
                 .map(creature -> creature.getId() + ":" + creature.getPontos() + ":" + creature.getQtdTesouros())
                 .collect(Collectors.toList());
-
         mapa.put("as5MaisRicas",lista2);
 
         //osAlvosFavoritos
@@ -1199,24 +1201,23 @@ public class FandeisiaGameManager {
                 .map(x -> x.getId() + ":" + x.getIdEquipa() + ":" + x.getCountFeitico())
                 .limit(3)
                 .collect(Collectors.toList());
-
-        mapa.put("as5MaisRicas",lista3);
+        mapa.put("osAlvosFavoritos",lista3);
 
         //os3MaisViajadas
         List<String> lista4 = listaCreatures.stream()
                 .sorted((creature1,creature2) -> creature2.getKms() - creature1.getKms())
                 .limit(3)
-                .map(creature -> creature.getId() + ":" + creature.Kms())
+                .map(creature -> creature.getId() + ":" + creature.getKms())
                 .collect(Collectors.toList());
-
-        mapa.put("as5MaisRicas",lista4);
+        mapa.put("os3MaisViajadas",lista4);
 
         //tiposDeCriaturaESeusTesouros
-
         List<String> lista5 = listaCreatures.stream()
-        .map(x -> x.getTipo() + ":" + x.getQtdCreatura() + ":" + )
+                .sorted(Comparator.comparingInt(Creature::getPontosPorCreatura).reversed().thenComparing(Creature::getQtdCreatura))
+                .map(x -> x.getTipo() + ":" + x.getQtdCreatura() + ":" + x.getQtdTesouros())
+                .collect(Collectors.toList());
 
-        mapa.put("as5MaisRicas",lista5);
+        mapa.put("tiposDeCriaturaESeusTesouros",lista5);
 
         return mapa;
     }

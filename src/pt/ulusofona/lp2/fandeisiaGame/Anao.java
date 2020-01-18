@@ -4,6 +4,9 @@ import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
 
 public class Anao extends Creature {
 
+    static int countTipoAnao = -1;
+    static int pontosPorTipoAnao = 0;
+
     Anao(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         super(id, idEquipa, tipo, posX, posY, orient);
         this.custo = 1;
@@ -28,10 +31,12 @@ public class Anao extends Creature {
                     if (mapa[posY - alcance][posX] == 1 || mapa[posY - alcance][posX] == 2 || mapa[posY - alcance][posX] == 3) {
                         encontrou = mapa[posY - alcance][posX];
                         calcTrofeus(encontrou);
+                        pontosPorTipoAnao++;
                     }
                     mapa[posY][posX] = 0;
                     posY -= alcance;
                     mapa[posY][posX] = 4;
+                    addKms();
                 } else {
                     orientacao = Orientacao.Este;
                 }
@@ -46,10 +51,12 @@ public class Anao extends Creature {
                     if (mapa[posY][posX + alcance] == 1 || mapa[posY][posX + alcance] == 2 || mapa[posY][posX + alcance] == 3) {
                         encontrou = mapa[posY][posX + alcance];
                         calcTrofeus(encontrou);
+                        pontosPorTipoAnao++;
                     }
                     mapa[posY][posX] = 0;
                     posX += alcance;
                     mapa[posY][posX] = 4;
+                    addKms();
                 } else {
                     orientacao = Orientacao.Sul;
                 }
@@ -64,10 +71,12 @@ public class Anao extends Creature {
                     if (mapa[posY + alcance][posX] == 1 || mapa[posY + alcance][posX] == 2 || mapa[posY + alcance][posX] == 3) {
                         encontrou = mapa[posY + alcance][posX];
                         calcTrofeus(encontrou);
+                        pontosPorTipoAnao++;
                     }
                     mapa[posY][posX] = 0;
                     posY += alcance;
                     mapa[posY][posX] = 4;
+                    addKms();
                 } else {
                     orientacao = Orientacao.Oeste;
                 }
@@ -82,10 +91,12 @@ public class Anao extends Creature {
                     if (mapa[posY][posX - alcance] == 1 || mapa[posY][posX - alcance] == 2 || mapa[posY][posX - alcance] == 3) {
                         encontrou = mapa[posY][posX - alcance];
                         calcTrofeus(encontrou);
+                        pontosPorTipoAnao++;
                     }
                     mapa[posY][posX] = 0;
                     posX -= alcance;
                     mapa[posY][posX] = 4;
+                    addKms();
                 } else {
                     orientacao = Orientacao.Norte;
                 }
@@ -110,11 +121,21 @@ public class Anao extends Creature {
 
     @Override //Done--------------
     public void somaQtdCreatura() {
-        countTipo++;
+
+        if(countTipoAnao == -1){
+           countTipoAnao += 2;
+        }else{
+            countTipoAnao++;
+        }
     }
 
     @Override //Done--------------
     public int  getQtdCreatura() {
-        return countTipo;
+        return countTipoAnao;
+    }
+
+    @Override //Done--------------
+    public int  getPontosPorCreatura() {
+        return pontosPorTipoAnao;
     }
 }
