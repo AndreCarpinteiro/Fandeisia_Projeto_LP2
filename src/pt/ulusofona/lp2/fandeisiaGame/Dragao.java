@@ -135,4 +135,14 @@ public class Dragao extends Creature {
 
         return true;
     }
+
+    @Override //Done--------------
+    public void somaQtdCreatura() {
+        countTipo++;
+    }
+
+    @Override //Done--------------
+    public int  getQtdCreatura() {
+        return countTipo;
+    }
 }

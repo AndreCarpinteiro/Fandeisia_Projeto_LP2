@@ -24,6 +24,7 @@ public abstract class Creature {
     int alcance, pontos, posX, posY;
     boolean congelado4Ever = false;
     boolean congeladoNesteTurno = false;
+    int countFeitico, countTipo = 0;
 
     public Creature(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         this.id = id;
@@ -171,4 +172,20 @@ public abstract class Creature {
     public void setcongeladoNesteTurno(boolean congeladoNesteTurno) {
         this.congeladoNesteTurno = congeladoNesteTurno;
     }
+
+    public int getQtdTesouros(){
+        return ouro + prata + bronze;
+    }
+
+    public void somaFeitico(){
+        countFeitico++;
+    }
+
+    public int getCountFeitico(){
+        return countFeitico;
+    }
+
+    public abstract void somaQtdCreatura();
+
+    public abstract int getQtdCreatura();
 }

@@ -108,45 +108,55 @@ public class FandeisiaGameManager {
                 if (typeTemp.equals("Anão")) {
                     if (!carregouFicheiro) {
                         Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        anao.somaQtdCreatura();
                         listaCreatures.add(anao);
                     } else {
                         Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, bronze, prata, pontosTemp);
+                        anao.somaQtdCreatura();
                         listaCreatures.add(anao);
                     }
                 }
                 if (typeTemp.equals("Dragão")) {
                     if (!carregouFicheiro) {
                         Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        dragao.somaQtdCreatura();
                         listaCreatures.add(dragao);
                     } else {
                         Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, bronze, prata, pontosTemp);
+                        dragao.somaQtdCreatura();
                         listaCreatures.add(dragao);
                     }
                 }
                 if (typeTemp.equals("Humano")) {
                     if (!carregouFicheiro) {
                         Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                       humano.somaQtdCreatura();
                         listaCreatures.add(humano);
                     } else {
                         Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
+                       humano.somaQtdCreatura();
                         listaCreatures.add(humano);
                     }
                 }
                 if (typeTemp.equals("Elfo")) {
                     if (!carregouFicheiro) {
                         Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        elfo.somaQtdCreatura();
                         listaCreatures.add(elfo);
                     } else {
                         Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
+                        elfo.somaQtdCreatura();
                         listaCreatures.add(elfo);
                     }
                 }
                 if (typeTemp.equals("Gigante")) {
                     if (!carregouFicheiro) {
                         Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
+                        gigante.somaQtdCreatura();
                         listaCreatures.add(gigante);
                     } else {
                         Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
+                        gigante.somaQtdCreatura();
                         listaCreatures.add(gigante);
                     }
                 }
@@ -282,39 +292,48 @@ public class FandeisiaGameManager {
                     tesouroEmpurra = mapStartGame[creature.getPosY() - 1][creature.getPosX()];
                     creature.setPosY(creature.getPosY() - 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
+                    creature.somaFeitico();
                     break;
                 case EmpurraParaEste:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
                     tesouroEmpurra = mapStartGame[creature.getPosY()][creature.getPosX() + 1];
                     creature.setPosX(creature.getPosX() + 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
+                    creature.somaFeitico();
                     break;
                 case EmpurraParaSul:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
                     tesouroEmpurra = mapStartGame[creature.getPosY() + 1][creature.getPosX()];
                     creature.setPosY(creature.getPosY() + 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
+                    creature.somaFeitico();
                     break;
                 case EmpurraParaOeste:
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 0;
                     tesouroEmpurra = mapStartGame[creature.getPosY()][creature.getPosX() - 1];
                     creature.setPosX(creature.getPosX() - 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
+                    creature.somaFeitico();
                     break;
                 case ReduzAlcance:
                     creature.setAlcance(1);
+                    creature.somaFeitico();
                     break;
                 case DuplicaAlcance:
                     creature.setAlcance(creature.getAlcance() * 2);
+                    creature.somaFeitico();
                     break;
                 case Congela:
                     creature.setcongeladoNesteTurno(true);
+                    creature.somaFeitico();
                     break;
                 case Congela4Ever:
                     creature.setCongelado4Ever(true);
+                    creature.somaFeitico();
                     break;
                 case Descongela:
                     creature.setCongelado4Ever(false);
+                    creature.somaFeitico();
                     break;
                 case SemFeitico://nao faz nada
                     break;
@@ -1155,32 +1174,49 @@ public class FandeisiaGameManager {
 
     public Map<String, List<String>> getStatistics(){
         Map<String, List<String>> mapa = new HashMap<String, List<String>>();
-        //as3MaisCarregadas // todo esta mal, fiz com pontos e nao tesouros
+
+        //as3MaisCarregadas
         List<String> lista1 = listaCreatures.stream()
-                .sorted((creature1,creature2) -> creature2.getPontos() - creature1.getPontos())
-                .map(creature -> creature.getId() + ":" +creature.getPontos())
+                .sorted((creature1,creature2) -> creature2.getQtdTesouros() - creature1.getQtdTesouros())
+                .map(creature -> creature.getId() + ":" +creature.getQtdTesouros())
                 .limit(3)
                 .collect(Collectors.toList());
         mapa.put("as3MaisCarregadas",lista1);
+
         //as5MaisRicas
-        //List<String> lista2 = listaCreatures.stream()
-        //.
-        //mapa.put("as5MaisRicas",lista2);
+        List<String> lista2 = listaCreatures.stream()
+                .sorted((creature1,creature2) -> creature2.getPontos() - creature1.getPontos())
+                .limit(5)
+                .sorted((creature1,creature2) ->   creature1.getPontos() == creature2.getPontos() ? 0 : creature1.getQtdTesouros() - creature2.getQtdTesouros())
+                .map(creature -> creature.getId() + ":" + creature.getPontos() + ":" + creature.getQtdTesouros())
+                .collect(Collectors.toList());
+
+        mapa.put("as5MaisRicas",lista2);
 
         //osAlvosFavoritos
-        //List<String> lista3 = listaCreatures.stream()
-        //.
-        //mapa.put("as5MaisRicas",lista3);
+        List<String> lista3 = listaCreatures.stream()
+                .sorted((x1, x2) -> x2.getCountFeitico() - x1.getCountFeitico())
+                .map(x -> x.getId() + ":" + x.getIdEquipa() + ":" + x.getCountFeitico())
+                .limit(3)
+                .collect(Collectors.toList());
+
+        mapa.put("as5MaisRicas",lista3);
 
         //os3MaisViajadas
-        //List<String> lista4 = listaCreatures.stream()
-        //.
-        //mapa.put("as5MaisRicas",lista4);
+        List<String> lista4 = listaCreatures.stream()
+                .sorted((creature1,creature2) -> creature2.getKms() - creature1.getKms())
+                .limit(3)
+                .map(creature -> creature.getId() + ":" + creature.Kms())
+                .collect(Collectors.toList());
+
+        mapa.put("as5MaisRicas",lista4);
 
         //tiposDeCriaturaESeusTesouros
-        //List<String> lista5 = listaCreatures.stream()
-        //.
-        //mapa.put("as5MaisRicas",lista5);
+
+        List<String> lista5 = listaCreatures.stream()
+        .map(x -> x.getTipo() + ":" + x.getQtdCreatura() + ":" + )
+
+        mapa.put("as5MaisRicas",lista5);
 
         return mapa;
     }

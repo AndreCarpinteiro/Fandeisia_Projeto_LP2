@@ -121,4 +121,14 @@ public class Gigante extends Creature {
         }
         return true;
     }
+
+    @Override //Done--------------
+    public void somaQtdCreatura() {
+        countTipo++;
+    }
+
+    @Override //Done--------------
+    public int  getQtdCreatura() {
+        return countTipo;
+    }
 }
