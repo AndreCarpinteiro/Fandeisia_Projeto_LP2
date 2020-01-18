@@ -23,8 +23,8 @@ public class FandeisiaGameManager {
     private int pontuacaoTotalEmJogo = 0;
     private boolean carregouFicheiro = false, encontrouLDR = false, encontrouRST = false;
 
-    static Team tLDR = new Team(10, 0);
-    static Team tRST = new Team(20, 0);
+    Team tLDR = new Team(10, 0);
+    Team tRST = new Team(20, 0);
 
     static List<Creature> listaCreatures = new ArrayList<>();
     //private HashMap <Integer, Creature> Criaturas = new HashMap<Integer, Creature>();

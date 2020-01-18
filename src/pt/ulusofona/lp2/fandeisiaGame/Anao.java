@@ -110,11 +110,38 @@ public class Anao extends Creature {
     private boolean semObstaculo() {
         int countCreatures = 0;// 4
         int countBuracos = 0;// 5
-        for (int i = 1; i < alcance; i++) { if (orientacao == Orientacao.Norte) { if (mapStartGame[posY - i][posX] == 4) { countCreatures++; } else if (mapStartGame[posY - i][posX] == 5) { countBuracos++; } }if (orientacao == Orientacao.Este) { if (mapStartGame[posY][posX + i] == 4) { countCreatures++; } else if (mapStartGame[posY][posX + i] == 5) { countBuracos++; } }if (orientacao == Orientacao.Sul) { if (mapStartGame[posY + i][posX] == 4) { countCreatures++; } else if (mapStartGame[posY + i][posX] == 5) { countBuracos++; } }if (orientacao == Orientacao.Oeste) { if (mapStartGame[posY][posX - i] == 4) { countCreatures++; } else if (mapStartGame[posY][posX - i] == 5) { countBuracos++;
+        for (int i = 1; i < alcance; i++) {
+            if (orientacao == Orientacao.Norte) {
+                if (mapStartGame[posY - i][posX] == 4) {
+                    countCreatures++;
+                } else if (mapStartGame[posY - i][posX] == 5) {
+                    countBuracos++;
+                }
+            }
+            if (orientacao == Orientacao.Este) {
+                if (mapStartGame[posY][posX + i] == 4) {
+                    countCreatures++;
+                } else if (mapStartGame[posY][posX + i] == 5) {
+                    countBuracos++;
+                }
+            }
+            if (orientacao == Orientacao.Sul) {
+                if (mapStartGame[posY + i][posX] == 4) {
+                    countCreatures++;
+                } else if (mapStartGame[posY + i][posX] == 5) {
+                    countBuracos++;
+                }
+            }
+            if (orientacao == Orientacao.Oeste) {
+                if (mapStartGame[posY][posX - i] == 4) {
+                    countCreatures++;
+                } else if (mapStartGame[posY][posX - i] == 5) {
+                    countBuracos++;
                 }
             }
         }
-        if (countBuracos > 0 || countCreatures > 0) { return false;
+        if (countBuracos > 0 || countCreatures > 0) {
+            return false;
         }
         return true;
     }
@@ -122,20 +149,20 @@ public class Anao extends Creature {
     @Override //Done--------------
     public void somaQtdCreatura() {
 
-        if(countTipoAnao == -1){
-           countTipoAnao += 2;
-        }else{
+        if (countTipoAnao == -1) {
+            countTipoAnao += 2;
+        } else {
             countTipoAnao++;
         }
     }
 
     @Override //Done--------------
-    public int  getQtdCreatura() {
+    public int getQtdCreatura() {
         return countTipoAnao;
     }
 
     @Override //Done--------------
-    public int  getPontosPorCreatura() {
+    public int getPontosPorCreatura() {
         return pontosPorTipoAnao;
     }
 }
