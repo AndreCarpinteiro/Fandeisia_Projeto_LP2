@@ -27,7 +27,7 @@ public class FandeisiaGameManager {
     static Team tRST = new Team(20, 0);
 
     static List<Creature> listaCreatures = new ArrayList<>();
-    private HashMap <Integer, Creature> Criaturas = new HashMap<Integer, Creature>();
+    //private HashMap <Integer, Creature> Criaturas = new HashMap<Integer, Creature>();
     private List<Tesouro> listaTreasures = new ArrayList<>();
     private List<Buraco> listaHoles = new ArrayList<>();
 
