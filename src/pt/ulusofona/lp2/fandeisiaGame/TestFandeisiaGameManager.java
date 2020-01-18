@@ -4,6 +4,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
@@ -852,17 +853,36 @@ public class TestFandeisiaGameManager {
     @Test
     public void test29Estatisticas() throws InsufficientCoinsException {//Done-------------
         FandeisiaGameManager gameManager = new FandeisiaGameManager();
-        String[] conteudoMundo = new String[8];
+        String[] conteudoMundo = new String[27];
         conteudoMundo[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
-        conteudoMundo[1] = "id: 2, type: Humano, teamId: 10, x: 3, y: 3, orientation: Oeste";
-        conteudoMundo[2] = "id: 3, type: Anão, teamId: 10, x: 3, y: 0, orientation: Sul";
-        conteudoMundo[3] = "id: 4, type: Anão, teamId: 20, x: 0, y: 3, orientation: Norte";
-        conteudoMundo[4] = "id: -1, type: bronze, x: 1, y: 0";
-        conteudoMundo[5] = "id: -2, type: silver, x: 2, y: 3";
-        conteudoMundo[6] = "id: -3, type: gold, x: 3, y: 1";
-        conteudoMundo[7] = "id: -4, type: bronze, x: 0, y: 2";
+        conteudoMundo[1] = "id: 2, type: Anão, teamId: 10, x: 0, y: 1, orientation: Este";
+        conteudoMundo[2] = "id: 3, type: Anão, teamId: 10, x: 0, y: 2, orientation: Este";
+        conteudoMundo[3] = "id: 4, type: Humano, teamId: 10, x: 0, y: 3, orientation: Este";
+        conteudoMundo[4] = "id: 5, type: Humano, teamId: 20, x: 0, y: 4, orientation: Este";
+        conteudoMundo[5] = "id: 6, type: Humano, teamId: 20, x: 0, y: 5, orientation: Este";
+        conteudoMundo[6] = "id: 7, type: Gigante, teamId: 20, x: 0, y: 6, orientation: Este";
+        conteudoMundo[7] = "id: 8, type: Gigante, teamId: 20, x: 0, y: 7, orientation: Este";
+        conteudoMundo[8] = "id: 9, type: Gigante, teamId: 20, x: 0, y: 8, orientation: Este";
+        conteudoMundo[9] = "id: -1, type: bronze, x: 1, y: 0";
+        conteudoMundo[10] = "id: -2, type: silver, x: 1, y: 1";
+        conteudoMundo[11] = "id: -3, type: gold, x: 1, y: 2";
+        conteudoMundo[12] = "id: -4, type: bronze, x: 2, y: 3";
+        conteudoMundo[13] = "id: -5, type: gold, x: 2, y: 4";
+        conteudoMundo[14] = "id: -6, type: bronze, x: 2, y: 5";
+        conteudoMundo[15] = "id: -7, type: silver, x: 3, y: 6";
+        conteudoMundo[16] = "id: -8, type: silver, x: 3, y: 7";
+        conteudoMundo[17] = "id: -9, type: bronze, x: 3, y: 8";
+        conteudoMundo[18] = "id: -1, type: bronze, x: 1, y: 0";
+        conteudoMundo[19] = "id: -2, type: silver, x: 1, y: 1";
+        conteudoMundo[20] = "id: -3, type: gold, x: 1, y: 2";
+        conteudoMundo[21] = "id: -4, type: bronze, x: 2, y: 3";
+        conteudoMundo[22] = "id: -5, type: gold, x: 2, y: 4";
+        conteudoMundo[23] = "id: -6, type: bronze, x: 2, y: 5";
+        conteudoMundo[24] = "id: -7, type: silver, x: 3, y: 6";
+        conteudoMundo[25] = "id: -8, type: silver, x: 3, y: 7";
+        conteudoMundo[26] = "id: -9, type: bronze, x: 3, y: 8";
 
-        gameManager.startGame(conteudoMundo, 4, 4);
+        gameManager.startGame(conteudoMundo, 9, 9);
 
         gameManager.processTurn();
 
@@ -874,21 +894,16 @@ public class TestFandeisiaGameManager {
             }
             System.out.println();
         }
-        //Verifica orientações
-        assertEquals(Creature.Orientacao.Este, gameManager.getCreatures().get(0).getOrientacao());
-        assertEquals(Creature.Orientacao.Oeste, listaCreatures.get(1).getOrientacao());
-        assertEquals(Creature.Orientacao.Sul, listaCreatures.get(2).getOrientacao());
-        assertEquals(Creature.Orientacao.Norte, listaCreatures.get(3).getOrientacao());
 
-        //Verifica possições
-        assertEquals(1, gameManager.getElementId(1, 0));
-        assertEquals(2, gameManager.getElementId(2, 3));
-        assertEquals(3, gameManager.getElementId(3, 1));
-        assertEquals(4, gameManager.getElementId(0, 2));
-        System.out.println(listaCreatures.get(0).getPontos());
-        assertEquals(1, listaCreatures.get(0).getBronze());
-        assertEquals(1, listaCreatures.get(1).getPrata());
-        assertEquals(1, listaCreatures.get(2).getOuro());
-        assertEquals(1, listaCreatures.get(3).getBronze());
+        System.out.println();
+        Map<String, List<String>> mapaTest = gameManager.getStatistics();
+        for (String s1 : mapaTest.keySet()){
+            List<String> listaTest = mapaTest.get(s1);
+            for (String s2 :listaTest){
+                System.out.println(s2);
+            }
+            System.out.println();
+        }
+
     }
 }

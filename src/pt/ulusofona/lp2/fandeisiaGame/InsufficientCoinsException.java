@@ -5,15 +5,15 @@ public class InsufficientCoinsException extends Exception {
     String mensagem;
     Team tLDR;//todo dar como parametro no gmamanager
     Team tRST;
-    InsufficientCoinsException(Team tLDR ,Team tRST,String mensagem){
+    InsufficientCoinsException(Team tLDR ,Team tRST){
         this.tLDR = tLDR;
         this.tRST = tRST;
-        this.mensagem = mensagem;
+ //       this.mensagem = mensagem;
     }
 
-    public String getMensagem() {
-        return mensagem;
-    }
+   // public String getMensagem() {
+      //  return mensagem;
+    //}
 
     public boolean teamRequiresMoreCoins(int teamId) {
 

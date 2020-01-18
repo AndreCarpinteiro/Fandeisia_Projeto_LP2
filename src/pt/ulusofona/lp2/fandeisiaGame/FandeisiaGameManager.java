@@ -226,6 +226,8 @@ public class FandeisiaGameManager {
 
         //Atualizar plafond
 
+        tLDR.setCusto(0);
+        tRST.setCusto(0);
         //Validar plafond
         for (Creature creature : listaCreatures) {
             if (creature.idEquipa == 10) {
@@ -237,13 +239,13 @@ public class FandeisiaGameManager {
 
             if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
                 System.out.println("1");
-                throw new InsufficientCoinsException(tLDR,tRST,"Ambos os exércitos não respeitam o plafond");
-            }else if (tLDR.getCusto() > tLDR.getPlafond()) {
+                throw new InsufficientCoinsException(tLDR,tRST);
+            } if (tLDR.getCusto() > tLDR.getPlafond()) {
                 System.out.println("2");
-                throw new InsufficientCoinsException(tLDR,tRST,"O exército LDR(User) não respeita o plafond");
-            }else if (tRST.getCusto() > tRST.getPlafond()) {
+                throw new InsufficientCoinsException(tLDR,tRST);
+            } if (tRST.getCusto() > tRST.getPlafond()) {
                 System.out.println("3");
-                throw new InsufficientCoinsException(tLDR,tRST,"O exército RST(Computador) não respeita o plafond");
+                throw new InsufficientCoinsException(tLDR,tRST);
             }
 
 
@@ -1209,7 +1211,7 @@ public class FandeisiaGameManager {
                 .limit(3)
                 .map(creature -> creature.getId() + ":" + creature.getKms())
                 .collect(Collectors.toList());
-        mapa.put("os3MaisViajadas",lista4);
+        mapa.put("as3MaisViajadas",lista4);
 
         //tiposDeCriaturaESeusTesouros
         List<String> lista5 = listaCreatures.stream()

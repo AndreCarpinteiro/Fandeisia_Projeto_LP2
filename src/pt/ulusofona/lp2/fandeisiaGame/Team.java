@@ -63,4 +63,8 @@ public class Team {
     public int getCusto(){
         return custo;
     }
+
+    public void setCusto(int custo){
+        this.custo = custo;
+    }
 }
