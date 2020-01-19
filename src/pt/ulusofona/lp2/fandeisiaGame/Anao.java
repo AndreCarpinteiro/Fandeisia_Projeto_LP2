@@ -160,4 +160,9 @@ public class Anao extends Creature {
     public int getCapturasPorCreatura() {
         return capturasPorTipoAnao;
     }
+
+    @Override //Done--------------
+    public int setQtdCreatura() {
+        return countTipoAnao = 0;
+    }
 }

@@ -282,4 +282,9 @@ public class Elfo extends Creature {
     public int getCapturasPorCreatura() {
         return capturasPorTipoElfo;
     }
+
+    @Override //Done--------------
+    public int setQtdCreatura() {
+        return countTipoElfo = 0;
+    }
 }

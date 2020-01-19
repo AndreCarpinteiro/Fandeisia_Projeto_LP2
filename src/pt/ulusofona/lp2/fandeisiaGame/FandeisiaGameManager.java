@@ -63,7 +63,7 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] contents, int rows, int colums) throws
-            InsufficientCoinsException{
+            InsufficientCoinsException {
 
         listaCreatures.clear();
         listaTreasures.clear();
@@ -79,7 +79,7 @@ public class FandeisiaGameManager {
 
 
         String typeTemp = "";
-        int xTemp = 0, yTemp = 0, idTemp = 0;
+        int xTemp = 0, yTemp = 0, idTemp = 0, entrou = 0;
         int teamIdTemp = 0, ouro = 0, prata = 0, bronze = 0, pontosTemp = 0;
         String orientTemp = "Norte";
         String[] dados;
@@ -136,11 +136,11 @@ public class FandeisiaGameManager {
                 if (typeTemp.equals("Humano")) {
                     if (!carregouFicheiro) {
                         Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                       humano.somaQtdCreatura();
+                        humano.somaQtdCreatura();
                         listaCreatures.add(humano);
                     } else {
                         Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
-                       humano.somaQtdCreatura();
+                        humano.somaQtdCreatura();
                         listaCreatures.add(humano);
                     }
                 }
@@ -245,16 +245,24 @@ public class FandeisiaGameManager {
             }
         }
 
-            if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
-                System.out.println("1");
-                throw new InsufficientCoinsException(tLDR,tRST);
-            } if (tLDR.getCusto() > tLDR.getPlafond()) {
-                System.out.println("2");
-                throw new InsufficientCoinsException(tLDR,tRST);
-            } if (tRST.getCusto() > tRST.getPlafond()) {
-                System.out.println("3");
-                throw new InsufficientCoinsException(tLDR,tRST);
+        if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
+            for (Creature listaCreature : listaCreatures) {
+                listaCreature.setQtdCreatura();
             }
+            throw new InsufficientCoinsException(tLDR, tRST);
+        }
+        if (tLDR.getCusto() > tLDR.getPlafond()) {
+            for (Creature listaCreature : listaCreatures) {
+                listaCreature.setQtdCreatura();
+            }
+            throw new InsufficientCoinsException(tLDR, tRST);
+        }
+        if (tRST.getCusto() > tRST.getPlafond()) {
+            for (Creature listaCreature : listaCreatures) {
+                listaCreature.setQtdCreatura();
+            }
+            throw new InsufficientCoinsException(tLDR, tRST);
+        }
 
 
         tLDR.decrementaPlafond(tLDR.getCusto()); //Atualiza plafond
@@ -276,12 +284,11 @@ public class FandeisiaGameManager {
             if (teamId == 10) { //Acho que funciona, no debug está bem
                 tLDR.setEstado(true);
                 tRST.setEstado(false);
-            } else if(teamId == 20){
+            } else if (teamId == 20) {
                 tLDR.setEstado(false);
                 tRST.setEstado(true);
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("setInitialTeam recebeu uma equipa inválida ou não recebeu de todo um valor teamId");
         }
 
@@ -302,7 +309,6 @@ public class FandeisiaGameManager {
                     tesouroEmpurra = mapStartGame[creature.getPosY() - 1][creature.getPosX()];
                     creature.setPosY(creature.getPosY() - 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
-                    creature.somaFeitico();
                     creature.maisUmKm();
                     break;
                 case EmpurraParaEste:
@@ -310,7 +316,6 @@ public class FandeisiaGameManager {
                     tesouroEmpurra = mapStartGame[creature.getPosY()][creature.getPosX() + 1];
                     creature.setPosX(creature.getPosX() + 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
-                    creature.somaFeitico();
                     creature.maisUmKm();
                     break;
                 case EmpurraParaSul:
@@ -318,7 +323,6 @@ public class FandeisiaGameManager {
                     tesouroEmpurra = mapStartGame[creature.getPosY() + 1][creature.getPosX()];
                     creature.setPosY(creature.getPosY() + 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
-                    creature.somaFeitico();
                     creature.maisUmKm();
                     break;
                 case EmpurraParaOeste:
@@ -326,28 +330,22 @@ public class FandeisiaGameManager {
                     tesouroEmpurra = mapStartGame[creature.getPosY()][creature.getPosX() - 1];
                     creature.setPosX(creature.getPosX() - 1);
                     mapStartGame[creature.getPosY()][creature.getPosX()] = 4;
-                    creature.somaFeitico();
                     creature.maisUmKm();
                     break;
                 case ReduzAlcance:
                     creature.setAlcance(1);
-                    creature.somaFeitico();
                     break;
                 case DuplicaAlcance:
                     creature.setAlcance(creature.getAlcance() * 2);
-                    creature.somaFeitico();
                     break;
                 case Congela:
                     creature.setcongeladoNesteTurno(true);
-                    creature.somaFeitico();
                     break;
                 case Congela4Ever:
                     creature.setCongelado4Ever(true);
-                    creature.somaFeitico();
                     break;
                 case Descongela:
                     creature.setCongelado4Ever(false);
-                    creature.somaFeitico();
                     break;
                 case SemFeitico://nao faz nada
                     break;
@@ -593,6 +591,7 @@ public class FandeisiaGameManager {
                             tRST.setPlafond(plafond - custo);
                         }
                         creature.setFeitico(spellName);
+                        creature.somaFeitico();
                         return true;
                     } else if (spellName.equals("Congela") && creature.getFeiticoEnum().toString().equals("Congela4Ever")) {
                         return false;
@@ -619,6 +618,7 @@ public class FandeisiaGameManager {
                                                     creature.setFeitico("ReduzAlcance");
                                                 }
                                             }
+                                            creature.somaFeitico();
                                             return true;
                                         }
                                     }
@@ -641,6 +641,7 @@ public class FandeisiaGameManager {
                                                     creature.setFeitico("ReduzAlcance");
                                                 }
                                             }
+                                            creature.somaFeitico();
                                             return true;
                                         }
                                     }
@@ -663,6 +664,7 @@ public class FandeisiaGameManager {
                                                     creature.setFeitico("ReduzAlcance");
                                                 }
                                             }
+                                            creature.somaFeitico();
                                             return true;
                                         }
 
@@ -686,9 +688,9 @@ public class FandeisiaGameManager {
                                                     creature.setFeitico("ReduzAlcance");
                                                 }
                                             }
+                                            creature.somaFeitico();
                                             return true;
                                         }
-
                                     }
                                     return false;
                                 //break;
@@ -707,6 +709,7 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
@@ -724,10 +727,10 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
-
                                             return false;
                                         case Sul:
                                             condicao = true;
@@ -742,6 +745,7 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
@@ -760,6 +764,7 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
@@ -778,6 +783,7 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
@@ -791,10 +797,10 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
-
 
                                             break;
                                         case Este:
@@ -806,6 +812,7 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
@@ -820,6 +827,7 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
@@ -834,6 +842,7 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
@@ -848,6 +857,7 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
@@ -862,6 +872,7 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
@@ -876,6 +887,7 @@ public class FandeisiaGameManager {
                                                         tRST.setPlafond(plafond - custo);
                                                     }
                                                     creature.setFeitico(spellName);
+                                                    creature.somaFeitico();
                                                     return true;
                                                 }
                                             }
@@ -889,6 +901,7 @@ public class FandeisiaGameManager {
                                         tRST.setPlafond(plafond - custo);
                                     }
                                     creature.setFeitico(spellName);
+                                    creature.somaFeitico();
                                     return true;
                                 case "Congela4Ever":
                                     if (getCurrentTeamId() == tLDR.getId()) {
@@ -897,6 +910,7 @@ public class FandeisiaGameManager {
                                         tRST.setPlafond(plafond - custo);
                                     }
                                     creature.setFeitico(spellName);
+                                    creature.somaFeitico();
                                     return true;
                             }
 
@@ -1186,16 +1200,16 @@ public class FandeisiaGameManager {
         return 0;
     }
 
-    public Map<String, List<String>> getStatistics(){
+    public Map<String, List<String>> getStatistics() {
         Map<String, List<String>> mapa = new HashMap<String, List<String>>();
 
         //as3MaisCarregadas
         List<String> lista1 = listaCreatures.stream()
-                .sorted((creature1,creature2) -> creature2.getQtdTesouros() - creature1.getQtdTesouros())
-                .map(creature -> creature.getId() + ":" +creature.getQtdTesouros())
+                .sorted((creature1, creature2) -> creature2.getQtdTesouros() - creature1.getQtdTesouros())
+                .map(creature -> creature.getId() + ":" + creature.getQtdTesouros())
                 .limit(3)
                 .collect(Collectors.toList());
-        mapa.put("as3MaisCarregadas",lista1);
+        mapa.put("as3MaisCarregadas", lista1);
 
         //as5MaisRicas
         List<String> lista2 = listaCreatures.stream()
@@ -1203,23 +1217,23 @@ public class FandeisiaGameManager {
                 .limit(5)
                 .map(creature -> creature.getId() + ":" + creature.getPontos() + ":" + creature.getQtdTesouros())
                 .collect(Collectors.toList());
-        mapa.put("as5MaisRicas",lista2);
+        mapa.put("as5MaisRicas", lista2);
 
         //osAlvosFavoritos
         List<String> lista3 = listaCreatures.stream()
                 .sorted((x1, x2) -> x2.getCountFeitico() - x1.getCountFeitico())
-                .map(x -> x.getId() + ":" + x.getIdEquipa() + ":" + x.getCountFeitico())
                 .limit(3)
+                .map(x -> x.getId() + ":" + x.getIdEquipa() + ":" + x.getCountFeitico())
                 .collect(Collectors.toList());
-        mapa.put("osAlvosFavoritos",lista3);
+        mapa.put("osAlvosFavoritos", lista3);
 
         //os3MaisViajadas
         List<String> lista4 = listaCreatures.stream()
-                .sorted((creature1,creature2) -> creature1.getKms() - creature2.getKms())
+                .sorted((creature1, creature2) -> creature1.getKms() - creature2.getKms())
                 .limit(3)
                 .map(creature -> creature.getId() + ":" + creature.getKms())
                 .collect(Collectors.toList());
-        mapa.put("as3MaisViajadas",lista4);
+        mapa.put("as3MaisViajadas", lista4);
 
         //tiposDeCriaturaESeusTesouros
         List<String> lista5 = listaCreatures.stream()
@@ -1231,7 +1245,7 @@ public class FandeisiaGameManager {
         tiposEmFalta.stream()
                 .forEach(x -> lista5.add(x + ":0" + ":-1"));
 
-        mapa.put("tiposDeCriaturaESeusTesouros",lista5);
+        mapa.put("tiposDeCriaturaESeusTesouros", lista5);
 
         return mapa;
     }

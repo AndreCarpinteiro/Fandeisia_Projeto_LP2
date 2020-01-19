@@ -193,6 +193,8 @@ public abstract class Creature {
 
     public abstract int getCapturasPorCreatura();
 
+    public abstract int setQtdCreatura();
+
     public void addKms(){
         kms += alcance;
     }

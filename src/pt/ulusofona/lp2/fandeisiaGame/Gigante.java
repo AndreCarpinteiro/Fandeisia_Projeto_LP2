@@ -194,4 +194,9 @@ public class Gigante extends Creature {
     public int getCapturasPorCreatura() {
         return capturasPorTipoGigante;
     }
+
+    @Override //Done--------------
+    public int setQtdCreatura() {
+        return countTipoGigante = 0;
+    }
 }
