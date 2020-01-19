@@ -4,8 +4,8 @@ import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
 
 public class Dragao extends Creature {
 
-    static int countTipoDragao = -1;
-    static int pontosPorTipoDragao = 0;
+    static int countTipoDragao = 0;
+    static int capturasPorTipoDragao = 0;
 
     Dragao(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         super(id, idEquipa, tipo, posX, posY, orient);
@@ -33,7 +33,7 @@ public class Dragao extends Creature {
                     if (mapa[posY - alcance][posX] == 1 || mapa[posY - alcance][posX] == 2 || mapa[posY - alcance][posX] == 3) {
                         encontrou = mapa[posY - alcance][posX];
                         calcTrofeus(encontrou);
-                        pontosPorTipoDragao++;
+                        capturasPorTipoDragao++;
                     }
                     mapa[posY][posX] = 0;
                     posY -= alcance;
@@ -52,7 +52,7 @@ public class Dragao extends Creature {
                     if (mapa[posY - alcance][posX + alcance] == 1 || mapa[posY - alcance][posX + alcance] == 2 || mapa[posY - alcance][posX + alcance] == 3) {
                         encontrou = mapa[posY - alcance][posX + alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoDragao++;
+                        capturasPorTipoDragao++;
                     }
                     mapa[posY][posX] = 0;
                     posY -= alcance;
@@ -73,7 +73,7 @@ public class Dragao extends Creature {
                     if (mapa[posY][posX + alcance] == 1 || mapa[posY][posX + alcance] == 2 || mapa[posY][posX + alcance] == 3) {
                         encontrou = mapa[posY][posX + 3];
                         calcTrofeus(encontrou);
-                        pontosPorTipoDragao++;
+                        capturasPorTipoDragao++;
                     }
                     mapa[posY][posX] = 0;
                     posX += alcance;
@@ -93,7 +93,7 @@ public class Dragao extends Creature {
                     if (mapa[posY + alcance][posX + alcance] == 1 || mapa[posY + alcance][posX + alcance] == 2 || mapa[posY + alcance][posX + alcance] == 3) {
                         encontrou = mapa[posY + 3][posX + 3];
                         calcTrofeus(encontrou);
-                        pontosPorTipoDragao++;
+                        capturasPorTipoDragao++;
                     }
                     mapa[posY][posX] = 0;
                     posX += alcance;
@@ -114,7 +114,7 @@ public class Dragao extends Creature {
                     if (mapa[posY + alcance][posX] == 1 || mapa[posY + alcance][posX] == 2 || mapa[posY + alcance][posX] == 3) {
                         encontrou = mapa[posY + alcance][posX];
                         calcTrofeus(encontrou);
-                        pontosPorTipoDragao++;
+                        capturasPorTipoDragao++;
 
                     }
                     mapa[posY][posX] = 0;
@@ -135,7 +135,7 @@ public class Dragao extends Creature {
                     if (mapa[posY + alcance][posX - alcance] == 1 || mapa[posY + alcance][posX - alcance] == 2 || mapa[posY + alcance][posX - alcance] == 3) {
                         encontrou = mapa[posY + alcance][posX - alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoDragao++;
+                        capturasPorTipoDragao++;
                     }
                     mapa[posY][posX] = 0;
                     posY += alcance;
@@ -156,7 +156,7 @@ public class Dragao extends Creature {
                     if (mapa[posY][posX - alcance] == 1 || mapa[posY][posX - alcance] == 2 || mapa[posY][posX - alcance] == 3) {
                         encontrou = mapa[posY][posX - alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoDragao++;
+                        capturasPorTipoDragao++;
                     }
                     mapa[posY][posX] = 0;
                     posX -= alcance;
@@ -176,7 +176,7 @@ public class Dragao extends Creature {
                     if (mapa[posY - alcance][posX - alcance] == 1 || mapa[posY - alcance][posX - alcance] == 2 || mapa[posY - alcance][posX - alcance] == 3) {
                         encontrou = mapa[posY - alcance][posX - alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoDragao++;
+                        capturasPorTipoDragao++;
                     }
                     mapa[posY][posX] = 0;
                     posX -= alcance;
@@ -266,12 +266,7 @@ public class Dragao extends Creature {
 
     @Override //Done--------------
     public void somaQtdCreatura() {
-
-        if(countTipoDragao == -1){
-            countTipoDragao += 2;
-        }else{
-            countTipoDragao++;
-        }
+        countTipoDragao++;
     }
 
     @Override //Done--------------
@@ -281,6 +276,6 @@ public class Dragao extends Creature {
 
     @Override //Done--------------
     public int getCapturasPorCreatura() {
-        return pontosPorTipoDragao;
+        return capturasPorTipoDragao;
     }
 }

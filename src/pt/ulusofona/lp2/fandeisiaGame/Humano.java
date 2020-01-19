@@ -4,8 +4,8 @@ import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
 
 public class Humano extends Creature {
 
-    static int countTipoHumano = -1;
-    static int pontosPorTipoHumano = 0;
+    static int countTipoHumano = 0;
+    static int capturasPorTipoHumano = 0;
 
     Humano(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         super(id, idEquipa, tipo, posX, posY, orient);
@@ -32,7 +32,7 @@ public class Humano extends Creature {
                     if (mapa[posY - alcance][posX] == 1 || mapa[posY - alcance][posX] == 2 || mapa[posY - alcance][posX] == 3) {
                         encontrou = mapa[posY - alcance][posX];
                         calcTrofeus(encontrou);
-                        pontosPorTipoHumano++;
+                        capturasPorTipoHumano++;
                     }
                     mapa[posY][posX] = 0;
                     posY -= alcance;
@@ -52,7 +52,7 @@ public class Humano extends Creature {
                     if (mapa[posY][posX + alcance] == 1 || mapa[posY][posX + alcance] == 2 || mapa[posY][posX + alcance] == 3) {
                         encontrou = mapa[posY][posX + alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoHumano++;
+                        capturasPorTipoHumano++;
                     }
                     mapa[posY][posX] = 0;
                     posX += alcance;
@@ -72,7 +72,7 @@ public class Humano extends Creature {
                     if (mapa[posY + alcance][posX] == 1 || mapa[posY + alcance][posX] == 2 || mapa[posY + alcance][posX] == 3) {
                         encontrou = mapa[posY + alcance][posX];
                         calcTrofeus(encontrou);
-                        pontosPorTipoHumano++;
+                        capturasPorTipoHumano++;
                     }
                     mapa[posY][posX] = 0;
                     posY += alcance;
@@ -92,7 +92,7 @@ public class Humano extends Creature {
                     if (mapa[posY][posX - alcance] == 1 || mapa[posY][posX - alcance] == 2 || mapa[posY][posX - alcance] == 3) {
                         encontrou = mapa[posY][posX - alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoHumano++;
+                        capturasPorTipoHumano++;
                     }
                     mapa[posY][posX] = 0;
                     posX -= alcance;
@@ -154,12 +154,7 @@ public class Humano extends Creature {
 
     @Override //Done--------------
     public void somaQtdCreatura() {
-
-        if(countTipoHumano == -1){
-            countTipoHumano += 2;
-        }else{
-            countTipoHumano++;
-        }
+        countTipoHumano++;
     }
 
     @Override //Done--------------
@@ -169,6 +164,6 @@ public class Humano extends Creature {
 
     @Override //Done--------------
     public int getCapturasPorCreatura() {
-        return pontosPorTipoHumano;
+        return capturasPorTipoHumano;
     }
 }

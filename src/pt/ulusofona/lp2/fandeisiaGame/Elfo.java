@@ -4,8 +4,8 @@ import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
 
 public class Elfo extends Creature {
 
-    static int countTipoElfo = -1;
-    static int pontosPorTipoElfo = 0;
+    static int countTipoElfo = 0;
+    static int capturasPorTipoElfo = 0;
 
 
     Elfo(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
@@ -35,7 +35,7 @@ public class Elfo extends Creature {
                     if (mapa[posY - alcance][posX] == 1 || mapa[posY - alcance][posX] == 2 || mapa[posY - alcance][posX] == 3) {
                         encontrou = mapa[posY - alcance][posX];
                         calcTrofeus(encontrou);
-                        pontosPorTipoElfo++;
+                        capturasPorTipoElfo++;
                     }
                     mapa[posY][posX] = 0;
                     posY -= alcance;
@@ -55,7 +55,7 @@ public class Elfo extends Creature {
                     if (mapa[posY - alcance][posX + alcance] == 1 || mapa[posY - alcance][posX + alcance] == 2 || mapa[posY - alcance][posX + alcance] == 3) {
                         encontrou = mapa[posY - alcance][posX + alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoElfo++;
+                        capturasPorTipoElfo++;
                     }
                     mapa[posY][posX] = 0;
                     posY -= alcance;
@@ -76,7 +76,7 @@ public class Elfo extends Creature {
                     if (mapa[posY][posX + alcance] == 1 || mapa[posY][posX + alcance] == 2 || mapa[posY][posX + alcance] == 3) {
                         encontrou = mapa[posY][posX + alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoElfo++;
+                        capturasPorTipoElfo++;
                     }
                     mapa[posY][posX] = 0;
                     posX += alcance;
@@ -96,7 +96,7 @@ public class Elfo extends Creature {
                     if (mapa[posY + alcance][posX + alcance] == 1 || mapa[posY + alcance][posX + alcance] == 2 || mapa[posY + alcance][posX + alcance] == 3) {
                         encontrou = mapa[posY + alcance][posX + alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoElfo++;
+                        capturasPorTipoElfo++;
                     }
                     mapa[posY][posX] = 0;
                     posX += alcance;
@@ -117,7 +117,7 @@ public class Elfo extends Creature {
                     if (mapa[posY + alcance][posX] == 1 || mapa[posY + alcance][posX] == 2 || mapa[posY + alcance][posX] == 3) {
                         encontrou = mapa[posY + alcance][posX];
                         calcTrofeus(encontrou);
-                        pontosPorTipoElfo++;
+                        capturasPorTipoElfo++;
                     }
                     mapa[posY][posX] = 0;
                     posY += alcance;
@@ -137,7 +137,7 @@ public class Elfo extends Creature {
                     if (mapa[posY + alcance][posX - alcance] == 1 || mapa[posY + alcance][posX - alcance] == 2 || mapa[posY + alcance][posX - alcance] == 3) {
                         encontrou = mapa[posY + alcance][posX - alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoElfo++;
+                        capturasPorTipoElfo++;
                     }
                     mapa[posY][posX] = 0;
                     posY += alcance;
@@ -158,7 +158,7 @@ public class Elfo extends Creature {
                     if (mapa[posY][posX - alcance] == 1 || mapa[posY][posX - alcance] == 2 || mapa[posY][posX - alcance] == 3) {
                         encontrou = mapa[posY][posX - alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoElfo++;
+                        capturasPorTipoElfo++;
                     }
                     mapa[posY][posX] = 0;
                     posX -= alcance;
@@ -178,7 +178,7 @@ public class Elfo extends Creature {
                     if (mapa[posY - alcance][posX - alcance] == 1 || mapa[posY - alcance][posX - alcance] == 2 || mapa[posY - alcance][posX - alcance] == 3) {
                         encontrou = mapa[posY - alcance][posX - alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoElfo++;
+                        capturasPorTipoElfo++;
                     }
                     mapa[posY][posX] = 0;
                     posX -= alcance;
@@ -269,12 +269,7 @@ public class Elfo extends Creature {
 
     @Override //Done--------------
     public void somaQtdCreatura() {
-
-        if(countTipoElfo == -1){
-            countTipoElfo += 2;
-        }else{
-            countTipoElfo++;
-        }
+        countTipoElfo++;
     }
 
     @Override //Done--------------
@@ -285,6 +280,6 @@ public class Elfo extends Creature {
 
     @Override //Done--------------
     public int getCapturasPorCreatura() {
-        return pontosPorTipoElfo;
+        return capturasPorTipoElfo;
     }
 }

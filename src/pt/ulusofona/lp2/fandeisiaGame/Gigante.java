@@ -5,8 +5,8 @@ import static pt.ulusofona.lp2.fandeisiaGame.FandeisiaGameManager.mapStartGame;
 
 public class Gigante extends Creature {
 
-    static int countTipoGigante = -1;
-    static int pontosPorTipoGigante = 0;
+    static int countTipoGigante = 0;
+    static int capturasPorTipoGigante = 0;
 
     Gigante(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         super(id, idEquipa, tipo, posX, posY, orient);
@@ -33,7 +33,7 @@ public class Gigante extends Creature {
                     if (mapa[posY - alcance][posX] == 1 || mapa[posY - alcance][posX] == 2 || mapa[posY - alcance][posX] == 3) {
                         encontrou = mapa[posY - alcance][posX];
                         calcTrofeus(encontrou);
-                        pontosPorTipoGigante++;
+                        capturasPorTipoGigante++;
                     }
                     mapa[posY][posX] = 0;
                     posY -= alcance;
@@ -53,7 +53,7 @@ public class Gigante extends Creature {
                     if (mapa[posY][posX + alcance] == 1 || mapa[posY][posX + alcance] == 2 || mapa[posY][posX + alcance] == 3) {
                         encontrou = mapa[posY][posX + alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoGigante++;
+                        capturasPorTipoGigante++;
                     }
                     mapa[posY][posX] = 0;
                     posX += alcance;
@@ -73,7 +73,7 @@ public class Gigante extends Creature {
                     if (mapa[posY + alcance][posX] == 1 || mapa[posY + alcance][posX] == 2 || mapa[posY + alcance][posX] == 3) {
                         encontrou = mapa[posY + alcance][posX];
                         calcTrofeus(encontrou);
-                        pontosPorTipoGigante++;
+                        capturasPorTipoGigante++;
                     }
                     mapa[posY][posX] = 0;
                     posY += alcance;
@@ -93,7 +93,7 @@ public class Gigante extends Creature {
                     if (mapa[posY][posX - alcance] == 1 || mapa[posY][posX - alcance] == 2 || mapa[posY][posX - alcance] == 3) {
                         encontrou = mapa[posY][posX - alcance];
                         calcTrofeus(encontrou);
-                        pontosPorTipoGigante++;
+                        capturasPorTipoGigante++;
                     }
                     mapa[posY][posX] = 0;
                     posX -= alcance;
@@ -182,12 +182,7 @@ public class Gigante extends Creature {
 
     @Override //Done--------------
     public void somaQtdCreatura() {
-
-        if(countTipoGigante == -1){
-            countTipoGigante += 2;
-        }else{
-            countTipoGigante++;
-        }
+        countTipoGigante++;
     }
 
     @Override //Done--------------
@@ -197,6 +192,6 @@ public class Gigante extends Creature {
 
     @Override //Done--------------
     public int getCapturasPorCreatura() {
-        return pontosPorTipoGigante;
+        return capturasPorTipoGigante;
     }
 }

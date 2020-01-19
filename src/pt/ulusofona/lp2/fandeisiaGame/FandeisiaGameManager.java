@@ -1229,7 +1229,7 @@ public class FandeisiaGameManager {
                 .collect(Collectors.toList());
 
         tiposEmFalta.stream()
-                .forEach(x -> lista5.add(x + ":-1"));
+                .forEach(x -> lista5.add(x + ":0" + ":-1"));
 
         mapa.put("tiposDeCriaturaESeusTesouros",lista5);
 
