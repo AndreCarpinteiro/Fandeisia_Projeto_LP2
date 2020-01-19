@@ -22,6 +22,7 @@ public class FandeisiaGameManager {
     private int turnosSemTesouro = 0;
     private int pontuacaoTotalEmJogo = 0;
     private boolean carregouFicheiro = false, encontrouLDR = false, encontrouRST = false;
+    ArrayList<String> tiposEmFalta = new ArrayList<>();
 
     Team tLDR = new Team(10, 0);
     Team tRST = new Team(20, 0);
@@ -66,6 +67,11 @@ public class FandeisiaGameManager {
 
         listaCreatures.clear();
         listaTreasures.clear();
+        tiposEmFalta.add("Dragão");
+        tiposEmFalta.add("Anão");
+        tiposEmFalta.add("Humano");
+        tiposEmFalta.add("Elfo");
+        tiposEmFalta.add("Gigante");
 
         countTurnos = 0;
         mapStartGame = new int[rows][colums];//vamos usar isto nas outras funcoes
@@ -162,6 +168,8 @@ public class FandeisiaGameManager {
                 }
                 mapStartGame[yTemp][xTemp] = 4;
                 //mapa.put(mapStartGame[yTemp][xTemp], typeTemp);
+
+                tiposEmFalta.remove(typeTemp);
             }
             if (!elemento.contains("orientation") && (elemento.contains("silver") || elemento.contains("gold") || elemento.contains("bronze"))) {
                 dados = elemento.split(",");
@@ -1199,7 +1207,7 @@ public class FandeisiaGameManager {
 
         //osAlvosFavoritos
         List<String> lista3 = listaCreatures.stream()
-                .sorted((x1, x2) -> x1.getCountFeitico() - x2.getCountFeitico())
+                .sorted((x1, x2) -> x2.getCountFeitico() - x1.getCountFeitico())
                 .map(x -> x.getId() + ":" + x.getIdEquipa() + ":" + x.getCountFeitico())
                 .limit(3)
                 .collect(Collectors.toList());
@@ -1214,16 +1222,13 @@ public class FandeisiaGameManager {
         mapa.put("as3MaisViajadas",lista4);
 
         //tiposDeCriaturaESeusTesouros
-        String[] tipos = {"Anão", "Dragão", "Elfo", "Gigante", "Humano"};
-
-        List<String> tiposDaLista = listaCreatures.stream()
-                .map(x -> x.getTipo())
-                .collect(Collectors.toList());
-
         List<String> lista5 = listaCreatures.stream()
                 .sorted(Comparator.comparingInt(Creature::getPontosPorCreatura).reversed().thenComparing(Creature::getQtdCreatura))
                 .map(x -> x.getTipo() + ":" + x.getQtdCreatura() + ":" + x.getQtdTesouros())
                 .collect(Collectors.toList());
+
+        tiposEmFalta.stream()
+                .forEach(x -> lista5.add(x + "-1"));
 
 
         mapa.put("tiposDeCriaturaESeusTesouros",lista5);
