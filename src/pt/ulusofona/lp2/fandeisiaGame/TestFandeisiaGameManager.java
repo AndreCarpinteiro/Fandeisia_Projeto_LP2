@@ -886,6 +886,8 @@ public class TestFandeisiaGameManager {
 
         gameManager.processTurn();
 
+        gameManager.processTurn();
+
         List<Creature> listaCreatures = gameManager.getCreatures();
 
         for (int i = 0; i < gameManager.mapStartGame.length; i++) {
@@ -897,13 +899,40 @@ public class TestFandeisiaGameManager {
 
         System.out.println();
         Map<String, List<String>> mapaTest = gameManager.getStatistics();
-        for (String s1 : mapaTest.keySet()){
-            List<String> listaTest = mapaTest.get(s1);
-            for (String s2 :listaTest){
-                System.out.println(s2);
+        for (int i = 0;i < mapaTest.size();i++){
+            if(i==0){
+                List<String> listaTest = mapaTest.get("as3MaisCarregadas");
+                System.out.println("as3MaisCarregadas");
+                for (String s2 : listaTest){
+                    System.out.println(s2);
+                }
+            }else if(i==1){
+                List<String> listaTest = mapaTest.get("as5MaisRicas");
+                System.out.println("as5MaisRicas");
+                for (String s2 : listaTest){
+                    System.out.println(s2);
+                }
+            }else if (i == 2){
+                List<String> listaTest = mapaTest.get("osAlvosFavoritos");
+                System.out.println("osAlvosFavoritos");
+                for (String s2 : listaTest){
+                    System.out.println(s2);
+                }
+            }else if (i == 3){
+                List<String> listaTest = mapaTest.get("as3MaisViajadas");
+                System.out.println("as3MaisViajadas");
+                for (String s2 : listaTest){
+                    System.out.println(s2);
+                }
+            }else{
+                List<String> listaTest = mapaTest.get("tiposDeCriaturaESeusTesouros");
+                System.out.println("tiposDeCriaturaESeusTesouros");
+                for (String s2 : listaTest){
+                    System.out.println(s2);
+                }
             }
+
             System.out.println();
         }
-
     }
 }
