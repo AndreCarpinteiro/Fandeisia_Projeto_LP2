@@ -1223,8 +1223,8 @@ public class FandeisiaGameManager {
 
         //tiposDeCriaturaESeusTesouros
         List<String> lista5 = listaCreatures.stream()
-                .sorted(Comparator.comparingInt(Creature::getPontosPorCreatura).reversed().thenComparing(Creature::getQtdCreatura))
-                .map(x -> x.getTipo() + ":" + x.getQtdCreatura() + ":" + x.getPontosPorCreatura())
+                .sorted(Comparator.comparingInt(Creature::getCapturasPorCreatura).reversed().thenComparing(Creature::getQtdCreatura))
+                .map(x -> x.getTipo() + ":" + x.getQtdCreatura() + ":" + x.getCapturasPorCreatura())
                 .distinct()
                 .collect(Collectors.toList());
 

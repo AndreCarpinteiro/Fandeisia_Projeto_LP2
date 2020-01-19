@@ -162,7 +162,7 @@ public class Anao extends Creature {
     }
 
     @Override //Done--------------
-    public int getPontosPorCreatura() {
+    public int getCapturasPorCreatura() {
         return pontosPorTipoAnao;
     }
 }

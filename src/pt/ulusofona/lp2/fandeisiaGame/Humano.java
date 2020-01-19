@@ -168,7 +168,7 @@ public class Humano extends Creature {
     }
 
     @Override //Done--------------
-    public int getPontosPorCreatura() {
+    public int getCapturasPorCreatura() {
         return pontosPorTipoHumano;
     }
 }

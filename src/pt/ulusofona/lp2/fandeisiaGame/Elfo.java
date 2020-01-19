@@ -284,7 +284,7 @@ public class Elfo extends Creature {
 
 
     @Override //Done--------------
-    public int getPontosPorCreatura() {
+    public int getCapturasPorCreatura() {
         return pontosPorTipoElfo;
     }
 }

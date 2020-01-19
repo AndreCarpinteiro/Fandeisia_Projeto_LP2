@@ -191,7 +191,7 @@ public abstract class Creature {
 
     public abstract int getQtdCreatura();
 
-    public abstract int getPontosPorCreatura();
+    public abstract int getCapturasPorCreatura();
 
     public void addKms(){
         kms += alcance;

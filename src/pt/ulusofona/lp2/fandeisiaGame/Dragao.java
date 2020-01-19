@@ -280,7 +280,7 @@ public class Dragao extends Creature {
     }
 
     @Override //Done--------------
-    public int getPontosPorCreatura() {
+    public int getCapturasPorCreatura() {
         return pontosPorTipoDragao;
     }
 }
