@@ -1199,7 +1199,7 @@ public class FandeisiaGameManager {
 
         //osAlvosFavoritos
         List<String> lista3 = listaCreatures.stream()
-                .sorted((x1, x2) -> x2.getCountFeitico() - x1.getCountFeitico())
+                .sorted((x1, x2) -> x1.getCountFeitico() - x2.getCountFeitico())
                 .map(x -> x.getId() + ":" + x.getIdEquipa() + ":" + x.getCountFeitico())
                 .limit(3)
                 .collect(Collectors.toList());
@@ -1207,17 +1207,24 @@ public class FandeisiaGameManager {
 
         //os3MaisViajadas
         List<String> lista4 = listaCreatures.stream()
-                .sorted((creature1,creature2) -> creature2.getKms() - creature1.getKms())
+                .sorted((creature1,creature2) -> creature1.getKms() - creature2.getKms())
                 .limit(3)
                 .map(creature -> creature.getId() + ":" + creature.getKms())
                 .collect(Collectors.toList());
         mapa.put("as3MaisViajadas",lista4);
 
         //tiposDeCriaturaESeusTesouros
+        String[] tipos = {"Anão", "Dragão", "Elfo", "Gigante", "Humano"};
+
+        List<String> tiposDaLista = listaCreatures.stream()
+                .map(x -> x.getTipo())
+                .collect(Collectors.toList());
+
         List<String> lista5 = listaCreatures.stream()
                 .sorted(Comparator.comparingInt(Creature::getPontosPorCreatura).reversed().thenComparing(Creature::getQtdCreatura))
                 .map(x -> x.getTipo() + ":" + x.getQtdCreatura() + ":" + x.getQtdTesouros())
                 .collect(Collectors.toList());
+
 
         mapa.put("tiposDeCriaturaESeusTesouros",lista5);
 
