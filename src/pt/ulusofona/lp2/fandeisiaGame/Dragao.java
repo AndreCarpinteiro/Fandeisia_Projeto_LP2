@@ -280,7 +280,12 @@ public class Dragao extends Creature {
     }
 
     @Override //Done--------------
-    public int setQtdCreatura() {
-        return countTipoDragao = 0;
+    public void setQtdCreatura() {
+         countTipoDragao = 0;
+    }
+
+    @Override //Done--------------
+    public void setCapturaPorCreatura() {
+        capturasPorTipoDragao = 0;
     }
 }

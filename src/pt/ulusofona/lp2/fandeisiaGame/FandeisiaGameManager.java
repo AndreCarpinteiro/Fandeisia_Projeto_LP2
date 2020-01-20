@@ -1,18 +1,8 @@
-
 package pt.ulusofona.lp2.fandeisiaGame;
-
-//import com.sun.org.apache.bcel.internal.generic.RET;
-
 import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static pt.ulusofona.lp2.fandeisiaGame.Anao.capturasPorTipoAnao;
-import static pt.ulusofona.lp2.fandeisiaGame.Dragao.capturasPorTipoDragao;
-import static pt.ulusofona.lp2.fandeisiaGame.Gigante.capturasPorTipoGigante;
-import static pt.ulusofona.lp2.fandeisiaGame.Humano.capturasPorTipoHumano;
-import static pt.ulusofona.lp2.fandeisiaGame.Elfo.capturasPorTipoElfo;
 
 public class FandeisiaGameManager {
 
@@ -71,19 +61,20 @@ public class FandeisiaGameManager {
     public void startGame(String[] contents, int rows, int colums) throws
             InsufficientCoinsException {
 
+        for (Creature listaCreature : listaCreatures) {
+            listaCreature.setQtdCreatura();
+            listaCreature.setCapturaPorCreatura();
+        }
+
         listaCreatures.clear();
         listaTreasures.clear();
+        listaHoles.clear();
         tiposEmFalta.clear();
         tiposEmFalta.add("Dragão");
         tiposEmFalta.add("Anão");
         tiposEmFalta.add("Humano");
         tiposEmFalta.add("Elfo");
         tiposEmFalta.add("Gigante");
-        capturasPorTipoAnao = 0;
-        capturasPorTipoDragao = 0;
-        capturasPorTipoGigante = 0;
-        capturasPorTipoHumano = 0;
-        capturasPorTipoElfo = 0;
 
         countTurnos = 0;
         mapStartGame = new int[rows][colums];//vamos usar isto nas outras funcoes
@@ -93,10 +84,6 @@ public class FandeisiaGameManager {
         int teamIdTemp = 0, ouro = 0, prata = 0, bronze = 0, pontosTemp = 0;
         String orientTemp = "Norte";
         String[] dados;
-
-        for (Creature listaCreature : listaCreatures) {
-            listaCreature.setQtdCreatura();
-        }
 
         //Dissecação do parametro "content" para objetos creatures e treasures----
         for (String elemento : contents) {
@@ -181,8 +168,6 @@ public class FandeisiaGameManager {
                     }
                 }
                 mapStartGame[yTemp][xTemp] = 4;
-                //mapa.put(mapStartGame[yTemp][xTemp], typeTemp);
-
                 tiposEmFalta.remove(typeTemp);
             }
             if (!elemento.contains("orientation") && (elemento.contains("silver") || elemento.contains("gold") || elemento.contains("bronze"))) {
@@ -260,24 +245,12 @@ public class FandeisiaGameManager {
         }
 
         if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
-            tiposEmFalta.clear();
-            for (Creature listaCreature : listaCreatures) {
-                listaCreature.setQtdCreatura();
-            }
             throw new InsufficientCoinsException(tLDR, tRST);
         }
         if (tLDR.getCusto() > tLDR.getPlafond()) {
-            tiposEmFalta.clear();
-            for (Creature listaCreature : listaCreatures) {
-                listaCreature.setQtdCreatura();
-            }
             throw new InsufficientCoinsException(tLDR, tRST);
         }
         if (tRST.getCusto() > tRST.getPlafond()) {
-            tiposEmFalta.clear();
-            for (Creature listaCreature : listaCreatures) {
-                listaCreature.setQtdCreatura();
-            }
             throw new InsufficientCoinsException(tLDR, tRST);
         }
 
@@ -291,6 +264,10 @@ public class FandeisiaGameManager {
                 System.out.print(mapStartGame[i][j]);
             }
             System.out.println();
+        }
+
+        for (Creature listaCreature : listaCreatures) {
+            listaCreature.somaQtdCreatura();
         }
         //return 0; //Tudo válido
     }
@@ -462,10 +439,6 @@ public class FandeisiaGameManager {
         int bronze; //= 0;
         String tipo; //= "";
         int pontos; //= 0;
-
-        for (Creature listaCreature : listaCreatures) {
-            listaCreature.somaQtdCreatura();
-        }
 
         resultado.add("Welcome to FANDEISIA");
 

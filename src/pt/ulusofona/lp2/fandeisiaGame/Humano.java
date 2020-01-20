@@ -168,7 +168,12 @@ public class Humano extends Creature {
     }
 
     @Override //Done--------------
-    public int setQtdCreatura() {
-        return countTipoHumano = 0;
+    public void setQtdCreatura() {
+         countTipoHumano = 0;
+    }
+
+    @Override //Done--------------
+    public void setCapturaPorCreatura() {
+        capturasPorTipoHumano = 0;
     }
 }

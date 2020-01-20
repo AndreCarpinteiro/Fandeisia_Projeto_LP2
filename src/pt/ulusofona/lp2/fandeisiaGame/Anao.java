@@ -162,7 +162,12 @@ public class Anao extends Creature {
     }
 
     @Override //Done--------------
-    public int setQtdCreatura() {
-        return countTipoAnao = 0;
+    public void setQtdCreatura() {
+         countTipoAnao = 0;
+    }
+
+    @Override //Done--------------
+    public void setCapturaPorCreatura() {
+         capturasPorTipoAnao = 0;
     }
 }
