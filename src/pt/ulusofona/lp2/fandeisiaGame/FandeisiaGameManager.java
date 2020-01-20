@@ -116,55 +116,55 @@ public class FandeisiaGameManager {
                 if (typeTemp.equals("Anão")) {
                     if (!carregouFicheiro) {
                         Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                        anao.somaQtdCreatura();
+                    //    anao.somaQtdCreatura();
                         listaCreatures.add(anao);
                     } else {
                         Anao anao = new Anao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, bronze, prata, pontosTemp);
-                        anao.somaQtdCreatura();
+                      //  anao.somaQtdCreatura();
                         listaCreatures.add(anao);
                     }
                 }
                 if (typeTemp.equals("Dragão")) {
                     if (!carregouFicheiro) {
                         Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                        dragao.somaQtdCreatura();
+                       // dragao.somaQtdCreatura();
                         listaCreatures.add(dragao);
                     } else {
                         Dragao dragao = new Dragao(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, bronze, prata, pontosTemp);
-                        dragao.somaQtdCreatura();
+                      //  dragao.somaQtdCreatura();
                         listaCreatures.add(dragao);
                     }
                 }
                 if (typeTemp.equals("Humano")) {
                     if (!carregouFicheiro) {
                         Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                        humano.somaQtdCreatura();
+                      //  humano.somaQtdCreatura();
                         listaCreatures.add(humano);
                     } else {
                         Humano humano = new Humano(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
-                        humano.somaQtdCreatura();
+                      //  humano.somaQtdCreatura();
                         listaCreatures.add(humano);
                     }
                 }
                 if (typeTemp.equals("Elfo")) {
                     if (!carregouFicheiro) {
                         Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                        elfo.somaQtdCreatura();
+                     //   elfo.somaQtdCreatura();
                         listaCreatures.add(elfo);
                     } else {
                         Elfo elfo = new Elfo(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
-                        elfo.somaQtdCreatura();
+                     //   elfo.somaQtdCreatura();
                         listaCreatures.add(elfo);
                     }
                 }
                 if (typeTemp.equals("Gigante")) {
                     if (!carregouFicheiro) {
                         Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp));
-                        gigante.somaQtdCreatura();
+                      //  gigante.somaQtdCreatura();
                         listaCreatures.add(gigante);
                     } else {
                         Gigante gigante = new Gigante(idTemp, teamIdTemp, typeTemp, xTemp, yTemp, Creature.Orientacao.valueOf(orientTemp), ouro, prata, bronze, pontosTemp);
-                        gigante.somaQtdCreatura();
+                      //  gigante.somaQtdCreatura();
                         listaCreatures.add(gigante);
                     }
                 }
@@ -248,21 +248,21 @@ public class FandeisiaGameManager {
         }
 
         if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
-            for (Creature listaCreature : listaCreatures) {
+       /*     for (Creature listaCreature : listaCreatures) {
                 listaCreature.setQtdCreatura();
-            }
+            }*/
             throw new InsufficientCoinsException(tLDR, tRST);
         }
         if (tLDR.getCusto() > tLDR.getPlafond()) {
-            for (Creature listaCreature : listaCreatures) {
+          /*  for (Creature listaCreature : listaCreatures) {
                 listaCreature.setQtdCreatura();
-            }
+            }*/
             throw new InsufficientCoinsException(tLDR, tRST);
         }
         if (tRST.getCusto() > tRST.getPlafond()) {
-            for (Creature listaCreature : listaCreatures) {
+          /*  for (Creature listaCreature : listaCreatures) {
                 listaCreature.setQtdCreatura();
-            }
+            }*/
             throw new InsufficientCoinsException(tLDR, tRST);
         }
 
@@ -276,6 +276,10 @@ public class FandeisiaGameManager {
                 System.out.print(mapStartGame[i][j]);
             }
             System.out.println();
+        }
+
+        for (Creature listaCreature : listaCreatures) {
+            listaCreature.somaQtdCreatura();
         }
 
         //return 0; //Tudo válido
