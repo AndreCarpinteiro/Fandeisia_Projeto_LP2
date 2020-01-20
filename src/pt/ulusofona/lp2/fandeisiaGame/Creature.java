@@ -27,7 +27,6 @@ public abstract class Creature {
     boolean congeladoNesteTurno = false;
     int countFeitico;
 
-
     public Creature(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         this.id = id;
         this.idEquipa = idEquipa;

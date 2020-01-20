@@ -75,16 +75,18 @@ public class FandeisiaGameManager {
 
         countTurnos = 0;
         mapStartGame = new int[rows][colums];//vamos usar isto nas outras funcoes
-        List<Creature> tempCreature = new ArrayList<>();
-
 
         String typeTemp = "";
         int xTemp = 0, yTemp = 0, idTemp = 0, entrou = 0;
         int teamIdTemp = 0, ouro = 0, prata = 0, bronze = 0, pontosTemp = 0;
         String orientTemp = "Norte";
         String[] dados;
-        //Dissecação do parametro "content" para objetos creatures e treasures----
 
+        for (Creature listaCreature : listaCreatures) {
+            listaCreature.setQtdCreatura();
+        }
+
+        //Dissecação do parametro "content" para objetos creatures e treasures----
         for (String elemento : contents) {
             if (elemento.contains("Anão") || elemento.contains("Dragão") || elemento.contains("Gigante") || elemento.contains("Elfo") || elemento.contains("Humano")) {
                 dados = elemento.split(",");

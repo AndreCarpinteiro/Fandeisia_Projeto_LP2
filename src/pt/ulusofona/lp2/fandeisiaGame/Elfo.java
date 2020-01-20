@@ -7,7 +7,6 @@ public class Elfo extends Creature {
     static int countTipoElfo = 0;
     static int capturasPorTipoElfo = 0;
 
-
     Elfo(int id, int idEquipa, String tipo, int posX, int posY, Orientacao orient) {
         super(id, idEquipa, tipo, posX, posY, orient);
         this.custo = 5;
