@@ -73,6 +73,7 @@ public class FandeisiaGameManager {
 
         listaCreatures.clear();
         listaTreasures.clear();
+        tiposEmFalta.clear();
         tiposEmFalta.add("Dragão");
         tiposEmFalta.add("Anão");
         tiposEmFalta.add("Humano");
