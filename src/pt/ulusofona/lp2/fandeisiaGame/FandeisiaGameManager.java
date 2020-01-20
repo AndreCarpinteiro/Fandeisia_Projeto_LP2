@@ -8,6 +8,12 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static pt.ulusofona.lp2.fandeisiaGame.Anao.capturasPorTipoAnao;
+import static pt.ulusofona.lp2.fandeisiaGame.Dragao.capturasPorTipoDragao;
+import static pt.ulusofona.lp2.fandeisiaGame.Gigante.capturasPorTipoGigante;
+import static pt.ulusofona.lp2.fandeisiaGame.Humano.capturasPorTipoHumano;
+import static pt.ulusofona.lp2.fandeisiaGame.Elfo.capturasPorTipoElfo;
+
 public class FandeisiaGameManager {
 
     static int[][] mapStartGame;
@@ -72,6 +78,11 @@ public class FandeisiaGameManager {
         tiposEmFalta.add("Humano");
         tiposEmFalta.add("Elfo");
         tiposEmFalta.add("Gigante");
+        capturasPorTipoAnao = 0;
+        capturasPorTipoDragao = 0;
+        capturasPorTipoGigante = 0;
+        capturasPorTipoHumano = 0;
+        capturasPorTipoElfo = 0;
 
         countTurnos = 0;
         mapStartGame = new int[rows][colums];//vamos usar isto nas outras funcoes
@@ -248,21 +259,21 @@ public class FandeisiaGameManager {
         }
 
         if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
-       /*     for (Creature listaCreature : listaCreatures) {
+            for (Creature listaCreature : listaCreatures) {
                 listaCreature.setQtdCreatura();
-            }*/
+            }
             throw new InsufficientCoinsException(tLDR, tRST);
         }
         if (tLDR.getCusto() > tLDR.getPlafond()) {
-          /*  for (Creature listaCreature : listaCreatures) {
+            for (Creature listaCreature : listaCreatures) {
                 listaCreature.setQtdCreatura();
-            }*/
+            }
             throw new InsufficientCoinsException(tLDR, tRST);
         }
         if (tRST.getCusto() > tRST.getPlafond()) {
-          /*  for (Creature listaCreature : listaCreatures) {
+            for (Creature listaCreature : listaCreatures) {
                 listaCreature.setQtdCreatura();
-            }*/
+            }
             throw new InsufficientCoinsException(tLDR, tRST);
         }
 
@@ -277,11 +288,6 @@ public class FandeisiaGameManager {
             }
             System.out.println();
         }
-
-        for (Creature listaCreature : listaCreatures) {
-            listaCreature.somaQtdCreatura();
-        }
-
         //return 0; //Tudo válido
     }
 
@@ -452,6 +458,10 @@ public class FandeisiaGameManager {
         int bronze; //= 0;
         String tipo; //= "";
         int pontos; //= 0;
+
+        for (Creature listaCreature : listaCreatures) {
+            listaCreature.somaQtdCreatura();
+        }
 
         resultado.add("Welcome to FANDEISIA");
 
