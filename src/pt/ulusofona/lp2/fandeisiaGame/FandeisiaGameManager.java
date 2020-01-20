@@ -259,18 +259,21 @@ public class FandeisiaGameManager {
         }
 
         if (tLDR.getCusto() > tLDR.getPlafond() && tRST.getCusto() > tRST.getPlafond()) {
+            tiposEmFalta.clear();
             for (Creature listaCreature : listaCreatures) {
                 listaCreature.setQtdCreatura();
             }
             throw new InsufficientCoinsException(tLDR, tRST);
         }
         if (tLDR.getCusto() > tLDR.getPlafond()) {
+            tiposEmFalta.clear();
             for (Creature listaCreature : listaCreatures) {
                 listaCreature.setQtdCreatura();
             }
             throw new InsufficientCoinsException(tLDR, tRST);
         }
         if (tRST.getCusto() > tRST.getPlafond()) {
+            tiposEmFalta.clear();
             for (Creature listaCreature : listaCreatures) {
                 listaCreature.setQtdCreatura();
             }
